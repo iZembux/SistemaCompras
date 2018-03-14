@@ -1,7 +1,5 @@
 <%-- 
-    Document   : registration
-    Created on : Feb 28, 2018, 9:14:05 AM
-    Author     : user
+    Crea una nueva requisicion y un nuevo registro qn la tabla req_prod con status 3
 --%>
 
 <%@ page import ="java.sql.*" %>
@@ -46,6 +44,7 @@
     Statement st = con.createStatement();
     ResultSet rs;
     
+    //Pregunta si es una requisicion nueva (1) o si es continuacion de otra (0)
     if (nuevaRequisicion == 1) {
         st.executeUpdate("insert into requisiciones(id_requisicion, id_usuario, fecha) "
                 + "values ('" + idRequisicion + "','" + idUsuario + "',CURDATE())");
@@ -56,10 +55,11 @@
         idRequisicion = rs.getInt("id");
     }
     
-    int i = st.executeUpdate("insert into req_prod(id_reqprod, id_producto, id_cotizacion, id_status, cantidad, descripcion, justificacion) "
+    //Inserta el producto en la ultima requisicion creada
+    int i = st.executeUpdate("insert into req_prod(id_requisicion, id_producto, id_cotizacion, id_status, cantidad, descripcion, justificacion) "
             + "values ('" + idRequisicion + "','" + idProducto + "','" + idCotizacion + "','" + idStatus + "','" + cantidad + "','" + descripcion + "','" + justificacion + "')");
     if (i > 0) {
-        response.sendRedirect("insertarProductoCont.jsp");
+        response.sendRedirect("insertaProductoContinuacion.jsp");
     } else {
         response.sendRedirect("index.jsp");
     }

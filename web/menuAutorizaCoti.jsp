@@ -1,3 +1,6 @@
+<%-- 
+    Muestra las requisiciones disponibles para la autorizacion del gerente Administrativo
+--%>
 
 <%@page import="controller.Consultas"%>
 <%@page import="java.util.ArrayList"%>
@@ -5,14 +8,9 @@
 <%
     int idCotizacion = 0;
     int idRequiSeleccionada = 0;
-    int autorizacion = 0;
 
     try {
         idRequiSeleccionada = Integer.parseInt(request.getParameter("idRequi"));
-    } catch (Exception e) {
-    }
-    try {
-        autorizacion = Integer.parseInt(request.getParameter("autorizacion"));
     } catch (Exception e) {
     }
 %>
@@ -41,6 +39,7 @@
                         <th scope="col">Producto</th>
                         <th scope="col">Cantidad</th>
                         <th scope="col">Marca</th>
+                        <th scope="col">Fecha</th>
                         <th scope="col">Detalle</th>
                         <th scope="col"></th>
                     </tr>
@@ -50,26 +49,29 @@
                         int idRequi;
                         int cantidadRequi;
                         String producto;
+                        String marca;
                         String fecha;
 
                         ArrayList<RequisicionProducto> arrayRequis = new ArrayList<RequisicionProducto>();
                         Consultas obj = new Consultas();
-                        arrayRequis = obj.consultarRequiGerente(idCotizacion);
+                        arrayRequis = obj.consultarRequiGerenteAdmin(idCotizacion);
 
                         if (arrayRequis.size() > 0) {
                             for (int i = 0; i < arrayRequis.size(); i++) {
                                 idRequi = arrayRequis.get(i).getIdRequisicion();
                                 cantidadRequi = arrayRequis.get(i).getCantidad();
-                                producto = arrayRequis.get(i).getSolicitante();
+                                producto = arrayRequis.get(i).getProducto();
+                                marca = arrayRequis.get(i).getMarca();
                                 fecha = arrayRequis.get(i).getFecha();
                     %>
                     <tr>
                         <td><%=idRequi%></td>
                         <td><%=producto%></td>
                         <td><%=cantidadRequi%></td>
+                        <td><%=marca%></td>
                         <td><%=fecha%></td>
                         <td>
-                            <form action="navAutorizaCoti.jsp" method="post">
+                            <form action="" method="post">
                                 <input type="hidden" name="idRequi" value="<%=idRequi%>" >
                                 <button type="submit" class="btn btn-primary btn-sm">Cotizaciones</button>
                             </form>
@@ -83,9 +85,6 @@
                         }%>
                 </tbody>
             </table>
-            <jsp:include page="frag/modalAutorizaCoti.jsp">
-                <jsp:param name="idRequi" value="<%=idRequiSeleccionada%>" /> 
-            </jsp:include>
         </div>
 
         <jsp:include page="frag/footer.jsp" />

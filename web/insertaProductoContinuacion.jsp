@@ -1,3 +1,9 @@
+<%-- 
+    Cuando se inserta un producto pregunta si se desea solicitar otro producto en
+    la misma requisicion (nuevaRequisicion = 0).
+    Si no se desea solicitar mas, se redirige a la pagina de seguimiento.
+--%>
+
 <!DOCTYPE html>
 
 <html>

@@ -7,7 +7,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.RequisicionProducto"%>
 <%
-    int id_usuario = 1;
+    int id_categoria = 8;
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -15,60 +15,58 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <title>Seguimiento</title>
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <title>Autorizar</title>
     </head>
     <body>
 
         <jsp:include page="frag/mainNavbar.jsp">
             <jsp:param name="rol" value="4" />  
-            <jsp:param name="depto" value="3" />
+            <jsp:param name="depto" value="5" />
         </jsp:include>
-
 
         <div class="container my-5">
             <div class="page-header">
-                <h3>Seguimiento de Solicitudes</h3>
+                <h3>Requisiciones Disponibles</h3>
             </div>
-            <table class="table table-hover table-striped">
+            <table class="table table-striped table-hover">
                 <thead>
                     <tr>
-                        <th scope="col">No. Requisicion</th>
                         <th scope="col">Producto</th>
+                        <th scope="col">Marca</th>
                         <th scope="col">Cantidad</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Avance</th>
-                        <th scope="col">Fecha de Solicitud</th>
+                        <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
                     <%
-                        int idRequi;
                         int cantidadRequi;
+                        int idProducto;
                         String producto;
-                        String status;
-                        String porcentaje;
-                        String fecha;
+                        String marca;
 
                         ArrayList<RequisicionProducto> arrayRequis = new ArrayList<RequisicionProducto>();
                         Consultas obj = new Consultas();
-                        arrayRequis = obj.consultarStatusProducto(id_usuario);
+                        arrayRequis = obj.consultarCompras(id_categoria,5);
 
                         if (arrayRequis.size() > 0) {
                             for (int i = 0; i < arrayRequis.size(); i++) {
-                                idRequi = arrayRequis.get(i).getIdRequisicion();
-                                producto = arrayRequis.get(i).getProducto();
+                                idProducto = arrayRequis.get(i).getIdProducto();
                                 cantidadRequi = arrayRequis.get(i).getCantidad();
-                                status = arrayRequis.get(i).getDescripcion();
-                                porcentaje = arrayRequis.get(i).getPorcentaje();
-                                fecha = arrayRequis.get(i).getFecha();
+                                producto = arrayRequis.get(i).getProducto();
+                                marca = arrayRequis.get(i).getMarca();
                     %>
                     <tr>
-                        <th><%=idRequi%></th>
                         <td><%=producto%></td>
-                        <td><%=cantidadRequi%></td>
-                        <td><%=status%></td>
-                        <td><%=porcentaje%></td>
-                        <td><%=fecha%></td>
+                        <td><%=marca%></td>
+                        <td><%=cantidadRequi%></td> 
+                        <td>
+                            <form action="actualiza2.jsp" method="post">
+                                <input type="hidden" class="hidden" name="nuevoStatus" value="5" >
+                                <input type="hidden" class="hidden" name="idProducto" value="<%=idProducto%>" >
+                                <button type="submit" class="btn btn-primary btn-sm">Hacer Cotizacion</button>
+                            </form>
+                        </td>
                     </tr>
                     <% }
                         }%>
@@ -77,6 +75,8 @@
         </div>
 
         <jsp:include page="frag/footer.jsp" />
+
+        
 
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

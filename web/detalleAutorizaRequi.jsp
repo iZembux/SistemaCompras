@@ -1,9 +1,17 @@
+<%-- 
+    Muestra las requisiciones disponibles para la autorizacion del gerente por cada requisicion
+    status = 3
+--%>
 
 <%@page import="controller.Consultas"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.RequisicionProducto"%>
 <%
-    int departamento = 1;
+    int idRequi = 0;
+    try {
+        idRequi = Integer.parseInt(request.getParameter("idRequi"));
+    } catch (Exception e) {
+    }
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -11,79 +19,81 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <title>Historial</title>
+        <title>Autorizar</title>
     </head>
     <body>
 
         <jsp:include page="frag/mainNavbar.jsp">
-            <jsp:param name="rol" value="4" />  
-            <jsp:param name="depto" value="3" />
+            <jsp:param name="rol" value="3" />  
+            <jsp:param name="depto" value="5" />
         </jsp:include>
 
-
         <div class="container my-5">
-            <div class="page-header">
-                <h3>Historial de Autorizaciones</h3>
-            </div>
+            <form action="menuAutorizaRequi.jsp" method="post">
+                <button type="submit" class="btn btn-primary btn-sm ml-auto">Regresar</button>
+            </form>
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
-                        <th scope="col">No</th>
-                        <th scope="col">Solicitante</th>
                         <th scope="col">Producto</th>
                         <th scope="col">Marca</th>
                         <th scope="col">Cantidad</th>
-                        <th scope="col">Justificacion</th>
+                        <th scope="col">Justificación</th>
                         <th scope="col">Descripcion</th>
-                        <th scope="col">Fecha</th>
-                        <th scope="col">Status</th>
+                        <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <%
-                        int idRequi;
+                    <%                //Consulta por idRequi seleccionada
+                        int idReqProd;
                         int cantidad;
-                        String solicitante;
                         String producto;
                         String marca;
                         String justificacion;
                         String descripcion;
-                        String fecha;
-                        String status;
 
                         ArrayList<RequisicionProducto> arrayRequis = new ArrayList<RequisicionProducto>();
                         Consultas obj = new Consultas();
-                        arrayRequis = obj.consultarHistorialGerente(departamento);
+                        arrayRequis = obj.consultarDetalleRequiGerente(idRequi);
 
                         if (arrayRequis.size() > 0) {
                             for (int i = 0; i < arrayRequis.size(); i++) {
-                                idRequi = arrayRequis.get(i).getIdRequisicion();
-                                solicitante = arrayRequis.get(i).getSolicitante();
+                                idReqProd = arrayRequis.get(i).getIdReqProd();
+                                cantidad = arrayRequis.get(i).getCantidad();
                                 producto = arrayRequis.get(i).getProducto();
                                 marca = arrayRequis.get(i).getMarca();
                                 justificacion = arrayRequis.get(i).getJustificacion();
                                 descripcion = arrayRequis.get(i).getDescripcion();
-                                cantidad = arrayRequis.get(i).getCantidad();
-                                status = arrayRequis.get(i).getStatus();
-                                fecha = arrayRequis.get(i).getFecha();
                     %>
                     <tr>
-                        <td><%=idRequi%></td>
-                        <td><%=solicitante%></td>
                         <td><%=producto%></td>
                         <td><%=marca%></td>
                         <td><%=cantidad%></td>
                         <td><%=justificacion%></td>
                         <td><%=descripcion%></td>
-                        <td><%=fecha%></td>
-                        <td><b><%=status%></b></td>
+                        <td>
+                            <div class="row">
+                                <form action="actualizaGerente.jsp" method="post">
+                                    <input type="hidden" class="hidden" name="idReqProd" value="<%=idReqProd%>" >
+                                    <input type="hidden" class="hidden" name="nuevoStatus" value="4" >
+                                    <button type="submit" class="btn btn-success btn-sm">Autorizar</button>
+                                </form>
+                                <form action="actualizaGerente.jsp" method="post">
+                                    <input type="hidden" class="hidden" name="idReqProd" value="<%=idReqProd%>" >
+                                    <input type="hidden" class="hidden" name="nuevoStatus" value="13" >
+                                    <button type="submit" class="btn btn-danger btn-sm">Rechazar</button>
+                                </form>
+                            </div>
+                        </td>
                     </tr>
                     <% }
                         }%>
                 </tbody>
             </table>
-        </div>
+            <div class="row">
 
+            </div>
+        </div>
         <jsp:include page="frag/footer.jsp" />
 
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

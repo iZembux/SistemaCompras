@@ -2,9 +2,12 @@
 package model;
 
 public class RequisicionProducto {
+    private int idReqProd;
     private int idRequisicion;
+    private int idProducto;
     private int idCotizacion;
     private int idStatus;
+    private int idDepto;
     private int cantidad;
     private String producto;
     private String marca;
@@ -181,6 +184,48 @@ public class RequisicionProducto {
      */
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    /**
+     * @return the idReqProd
+     */
+    public int getIdReqProd() {
+        return idReqProd;
+    }
+
+    /**
+     * @param idReqProd the idReqProd to set
+     */
+    public void setIdReqProd(int idReqProd) {
+        this.idReqProd = idReqProd;
+    }
+
+    /**
+     * @return the idDepto
+     */
+    public int getIdDepto() {
+        return idDepto;
+    }
+
+    /**
+     * @param idDepto the idDepto to set
+     */
+    public void setIdDepto(int idDepto) {
+        this.idDepto = idDepto;
+    }
+
+    /**
+     * @return the idProducto
+     */
+    public int getIdProducto() {
+        return idProducto;
+    }
+
+    /**
+     * @param idProducto the idProducto to set
+     */
+    public void setIdProducto(int idProducto) {
+        this.idProducto = idProducto;
     }
 
     
