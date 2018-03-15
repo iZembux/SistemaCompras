@@ -61,7 +61,7 @@
                         <td><%=marca%></td>
                         <td><%=cantidadRequi%></td> 
                         <td>
-                            <form action="actualiza2.jsp" method="post">
+                            <form action="formCotizacion.jsp" method="post">
                                 <input type="hidden" class="hidden" name="nuevoStatus" value="5" >
                                 <input type="hidden" class="hidden" name="idProducto" value="<%=idProducto%>" >
                                 <button type="submit" class="btn btn-primary btn-sm">Hacer Cotizacion</button>
@@ -75,8 +75,6 @@
         </div>
 
         <jsp:include page="frag/footer.jsp" />
-
-        
 
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

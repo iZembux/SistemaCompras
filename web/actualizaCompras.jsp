@@ -20,6 +20,6 @@
     ResultSet rs;
 
     int i = st.executeUpdate("UPDATE req_prod SET id_status = " + nuevoStatus + " WHERE id_producto = " + idProducto + " AND id_status = 4;");
-    response.sendRedirect("menuRequisiciones.jsp");
+    response.sendRedirect("menuComprasRequisiciones.jsp");
 
 %>

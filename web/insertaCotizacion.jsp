@@ -6,45 +6,50 @@
 
 <%@ page import ="java.sql.*" %>
 <%
-    int nuevaRequisicion = 1;
-    int idUsuario = 0;
-    int idRequisicion = 0;
-    int idCotizacion = 0;
-    int idStatus = 3;
-    int idProducto = 0;
     int cantidad = 0;
-    String descripcion = null;
-    String justificacion = null;
+    int credito = 0;
+    int entrega = 0;
+    double precio = 0;
+    double iva = 0;
+    double descuento = 0;
+    double anticipo = 0;
     
+
     try {
-        idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
+        cantidad = Integer.parseInt(request.getParameter("cantidad"));
     } catch (Exception e) {
     }
     try {
-        idProducto = Integer.parseInt(request.getParameter("modelo"));
+        credito = Integer.parseInt(request.getParameter("credito"));
     } catch (Exception e) {
     }
-    
+    try {
+        entrega = Integer.parseInt(request.getParameter("entrega"));
+    } catch (Exception e) {
+    }
+    try {
+        precio = Double.parseDouble(request.getParameter("precio")); 
+    } catch (Exception e) {
+    }
+    try {
+        iva = Double.parseDouble(request.getParameter("iva")); 
+    } catch (Exception e) {
+    }
+    try {
+        descuento = Double.parseDouble(request.getParameter("descuento")); 
+    } catch (Exception e) {
+    }
+    try {
+        anticipo = Double.parseDouble(request.getParameter("anticipo")); 
+    } catch (Exception e) {
+    }
+
     Class.forName("com.mysql.jdbc.Driver");
     Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/scompras", "root", "stmsc0nt");
     Statement st = con.createStatement();
     ResultSet rs;
-    
-    if (nuevaRequisicion == 1) {
-        st.executeUpdate("insert into requisiciones(id_requisicion, id_usuario, fecha) "
-                + "values ('" + idRequisicion + "','" + idUsuario + "',CURDATE())");
-    }
-    
-    rs = st.executeQuery("SELECT  max(id_requisicion) as id from requisiciones where id_usuario = "+idUsuario+";"); 
-    if (rs.next()) {
-        idRequisicion = rs.getInt("id");
-    }
-    
-    int i = st.executeUpdate("insert into req_prod(id_requisicion, id_producto, id_cotizacion, id_status, cantidad, descripcion, justificacion) "
-            + "values ('" + idRequisicion + "','" + idProducto + "','" + idCotizacion + "','" + idStatus + "','" + cantidad + "','" + descripcion + "','" + justificacion + "')");
-    if (i > 0) {
-        response.sendRedirect("insertarProductoCont.jsp");
-    } else {
-        response.sendRedirect("index.jsp");
-    }
+
+    st.executeUpdate("");
+    response.sendRedirect("insertarProductoCont.jsp");
+
 %>
