@@ -2,6 +2,7 @@
     Crea una nueva requisicion y un nuevo registro qn la tabla req_prod con status 3
 --%>
 
+<%@page import="controller.Mail"%>
 <%@ page import ="java.sql.*" %>
 <%
     int nuevaRequisicion = 1;
@@ -13,6 +14,8 @@
     int cantidad = 0;
     String descripcion = null;
     String justificacion = null;
+    
+    Mail objMail = new Mail();
     
     try {
         idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
@@ -48,6 +51,9 @@
     if (nuevaRequisicion == 1) {
         st.executeUpdate("insert into requisiciones(id_requisicion, id_usuario, fecha) "
                 + "values ('" + idRequisicion + "','" + idUsuario + "',CURDATE())");
+        
+        //Envia correo al gerente del area
+        objMail.enviarCorreo("diego.torres@continental.com.mx", "Diego", "Torres", "Tiene una nueva requisicion por revisar");
     }
     
     rs = st.executeQuery("SELECT  max(id_requisicion) as id from requisiciones where id_usuario = "+idUsuario+";"); 

@@ -1,6 +1,5 @@
 <%-- 
-    Muestra las requisiciones que ya han sido aprobadas por los gerentes
-    status = 4
+    Muestra las cotizaciones que se han hecho de los proveedores disponibles por categoria de producto
 --%>
 <%@page import="controller.Consultas"%>
 <%@page import="java.util.ArrayList"%>
@@ -26,7 +25,7 @@
 
         <div class="container my-5">
             <div class="page-header">
-                <h3>Requisiciones Disponibles</h3>
+                <h3>Cotizaciones Ganadoras</h3>
             </div>
             <table class="table table-striped table-hover">
                 <thead>
@@ -47,7 +46,7 @@
 
                         ArrayList<RequisicionProducto> arrayRequis = new ArrayList<RequisicionProducto>();
                         Consultas obj = new Consultas();
-                        arrayRequis = obj.consultarCompras(id_categoria,4); 
+                        arrayRequis = obj.consultarCompras(id_categoria,5);
 
                         if (arrayRequis.size() > 0) {
                             for (int i = 0; i < arrayRequis.size(); i++) {
@@ -61,18 +60,14 @@
                         <td><%=marca%></td>
                         <td><%=cantidadRequi%></td> 
                         <td>
-                            <form action="actualizaCompras.jsp" method="post">
+                            <form action="detalleCotizacionCompras.jsp" method="post">
                                 <input type="hidden" class="hidden" name="nuevoStatus" value="5" >
                                 <input type="hidden" class="hidden" name="idProducto" value="<%=idProducto%>" >
-                                <button type="submit" class="btn btn-primary btn-sm">Solicitar Cotizaciones</button>
+                                <button type="submit" class="btn btn-primary btn-sm">Ver Detalle</button>
                             </form>
                         </td>
                         <td>
-                            <form action="detalleRequisicionCompras.jsp" method="post">
-                                <input type="hidden" class="hidden" name="idCategoria" value="8" >
-                                <input type="hidden" class="hidden" name="idProducto" value="<%=idProducto%>" >
-                                <button type="submit" class="btn btn-primary btn-sm">Detalle</button>
-                            </form>
+                            <button type="button" class="btn btn-primary btn-sm">Orden de Compra</button>
                         </td>
                     </tr>
                     <% }

@@ -76,6 +76,7 @@
                         --%>
                     </tbody>
                 </table>
+                    <button type="submit" class="btn btn-primary btn-sm">Generar Cuadro Comparativo</button>
             </div>
         </div>
 
