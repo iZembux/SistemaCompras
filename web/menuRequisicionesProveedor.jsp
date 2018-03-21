@@ -3,11 +3,13 @@
     Created on : Mar 5, 2018, 7:55:17 AM
     Author     : user
 --%>
+<%@page import="model.CotizacionRequisicion"%>
 <%@page import="controller.Consultas"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.RequisicionProducto"%>
 <%
-    int id_categoria = 8;
+    int idCategoria = 8;
+    int idUsuario = 6;
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -42,12 +44,14 @@
                     <%
                         int cantidadRequi;
                         int idProducto;
+                        int idReqCoti;
+                        int status;
                         String producto;
                         String marca;
 
                         ArrayList<RequisicionProducto> arrayRequis = new ArrayList<RequisicionProducto>();
                         Consultas obj = new Consultas();
-                        arrayRequis = obj.consultarCompras(id_categoria,5);
+                        arrayRequis = obj.consultarComprasProv(idCategoria, "5,6");
 
                         if (arrayRequis.size() > 0) {
                             for (int i = 0; i < arrayRequis.size(); i++) {
@@ -55,17 +59,40 @@
                                 cantidadRequi = arrayRequis.get(i).getCantidad();
                                 producto = arrayRequis.get(i).getProducto();
                                 marca = arrayRequis.get(i).getMarca();
+                                idReqCoti = arrayRequis.get(i).getIdReqCoti();
+                                status = arrayRequis.get(i).getIdStatus();
                     %>
                     <tr>
                         <td><%=producto%></td>
                         <td><%=marca%></td>
                         <td><%=cantidadRequi%></td> 
                         <td>
+                            <% if (status == 5) {%>
                             <form action="formCotizacion.jsp" method="post">
-                                <input type="hidden" class="hidden" name="nuevoStatus" value="5" >
+                                <input type="hidden" class="hidden" name="idUsuario" value="<%=idUsuario%>" >
                                 <input type="hidden" class="hidden" name="idProducto" value="<%=idProducto%>" >
+                                <input type="hidden" class="hidden" name="idReqCoti" value="<%=idReqCoti%>" >
                                 <button type="submit" class="btn btn-primary btn-sm">Hacer Cotizacion</button>
                             </form>
+                            <% } else if (status == 6) {
+                                int idUsuarioP = 0;
+                                ArrayList<CotizacionRequisicion> arrayRequis2 = new ArrayList<CotizacionRequisicion>();
+                                Consultas obj2 = new Consultas();
+                                arrayRequis2 = obj2.consultarProveedorCoti(idReqCoti, idUsuario);
+                                System.out.println(arrayRequis2.size());
+                                if (arrayRequis2.size() > 0) { %>
+
+                            <button type="button" class="btn btn-success btn-sm">Ya haz realizado una cotizacion</button>   
+
+                            <%} else {%>
+                            <form action="formCotizacion.jsp" method="post">
+                                <input type="hidden" class="hidden" name="idUsuario" value="<%=idUsuario%>" >
+                                <input type="hidden" class="hidden" name="idProducto" value="<%=idProducto%>" >
+                                <input type="hidden" class="hidden" name="idReqCoti" value="<%=idReqCoti%>" >
+                                <button type="submit" class="btn btn-primary btn-sm">Hacer Cotizacion</button>
+                            </form>
+                            <% }
+                                }%>
                         </td>
                     </tr>
                     <% }

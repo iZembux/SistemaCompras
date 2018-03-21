@@ -8,6 +8,7 @@
 <%
     int idProducto = 0;
     int nuevoStatus = 5;
+    int id_cotizacion = 0;
 
     Mail objMail = new Mail();
 
@@ -22,11 +23,20 @@
     Statement st = con.createStatement();
     ResultSet rs;
 
-    int i = st.executeUpdate("UPDATE req_prod SET id_status = " + nuevoStatus + " WHERE id_producto = " + idProducto + " AND id_status = 4;");
-    //Envia correo a los proveedores disponibles
-    for (int j = 0; j < 1; j++) {
-        objMail.enviarCorreo("diego.torres@continental.com.mx", "Proveedor", "", "Grupo Continental Automotriz ha solicitado una nueva cotizacion, favor de revisarla en el sistema de compras");
+    if (true) {
+        response.sendRedirect("loginProveedor.jsp");
+    } else {
+        rs = st.executeQuery("select max(id_req_coti) as id from req_prod;");
+        if (rs.next()) {
+            id_cotizacion = rs.getInt("id");
+        }
+
+        int i = st.executeUpdate("UPDATE req_prod SET id_status = " + nuevoStatus + ", id_req_coti = " + (id_cotizacion + 1) + " WHERE id_producto = " + idProducto + " AND id_status = 4;");
+        //Envia correo a los proveedores disponibles
+        for (int j = 0; j < 1; j++) {
+            objMail.enviarCorreo("diego.torres@continental.com.mx", "Proveedor", "", "Grupo Continental Automotriz ha solicitado una nueva cotizacion, favor de revisarla en el sistema de compras");
+        }
+        response.sendRedirect("menuComprasRequisiciones.jsp");
     }
-    response.sendRedirect("menuComprasRequisiciones.jsp");
 
 %>

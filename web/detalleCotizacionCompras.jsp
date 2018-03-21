@@ -3,18 +3,23 @@
     status 4
 --%>
 
+<%@page import="model.CotizacionRequisicion"%>
 <%@page import="controller.Consultas"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="model.RequisicionProducto"%>
 <%
     int idCategoria = 0;
     int idProducto = 0;
+    int idReqCoti = 0;
     try {
         idCategoria = Integer.parseInt(request.getParameter("idCategoria"));
     } catch (Exception e) {
     }
     try {
         idProducto = Integer.parseInt(request.getParameter("idProducto"));
+    } catch (Exception e) {
+    }
+    try {
+        idReqCoti = Integer.parseInt(request.getParameter("idReqCoti"));
     } catch (Exception e) {
     }
 %>
@@ -39,6 +44,9 @@
                             <th scope="col">Proveedor</th>
                             <th scope="col">Producto</th>
                             <th scope="col">Cantidad</th>
+                            <th scope="col">Precio Unitario</th>
+                            <th scope="col">Precio Con IVA</th>
+                            <th scope="col">Descuento</th>
                             <th scope="col">Precio Final</th>
                             <th scope="col">Dias de Credito</th>
                             <th scope="col">Tiempo de Entrega</th>
@@ -46,37 +54,52 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <%--
                         <%
-                            int cantidadRequi;
-                            int departamento;
+                            String proveedor;
                             String producto;
-                            String solicitante;
+                            int cantidad;
+                            int precio;
+                            int iva;
+                            int descuento;
+                            int credito;
+                            int entrega;
+                            int anticipo;
 
-                            ArrayList<RequisicionProducto> arrayRequis = new ArrayList<RequisicionProducto>();
+                            ArrayList<CotizacionRequisicion> arrayRequis = new ArrayList<CotizacionRequisicion>();
                             Consultas obj = new Consultas();
-                            arrayRequis = obj.consultarComprasDetalle(idCategoria, idProducto);
+                            arrayRequis = obj.consultarComprasDetalleCoti(idReqCoti);
 
                             if (arrayRequis.size() > 0) {
                                 for (int i = 0; i < arrayRequis.size(); i++) {
-                                    cantidadRequi = arrayRequis.get(i).getCantidad();
+                                    proveedor = arrayRequis.get(i).getProveedor();
                                     producto = arrayRequis.get(i).getProducto();
-                                    solicitante = arrayRequis.get(i).getSolicitante();
-                                    departamento = arrayRequis.get(i).getIdDepto();
-
+                                    cantidad = arrayRequis.get(i).getCantidad();
+                                    precio = arrayRequis.get(i).getPrecio();
+                                    iva = arrayRequis.get(i).getIva();
+                                    descuento = arrayRequis.get(i).getDescuento();
+                                    credito = arrayRequis.get(i).getCredito();
+                                    entrega = arrayRequis.get(i).getEntrega();
+                                    anticipo = arrayRequis.get(i).getAnticipo();
                         %>
                         <tr>
+                            <td><%=proveedor%></td>
                             <td><%=producto%></td>
-                            <td><%=cantidadRequi%></td>
-                            <td><%=solicitante%></td>
-                            <td><%=departamento%></td>
+                            <td><%=cantidad%></td>
+                            <td><%=precio%></td>
+                            <td><%=iva%></td>
+                            <td><%=descuento%> %</td>
+                            <td><%=(iva * cantidad) - descuento%></td>
+                            <td><%=credito%> Dias</td>
+                            <td><%=entrega%> Dias</td>
+                            <td><%=anticipo%> %</td>
                         </tr>
                         <% }
                             }%>
-                        --%>
                     </tbody>
                 </table>
+                <form action="formatos/comparativo.jsp" method="post">
                     <button type="submit" class="btn btn-primary btn-sm">Generar Cuadro Comparativo</button>
+                </form>
             </div>
         </div>
 

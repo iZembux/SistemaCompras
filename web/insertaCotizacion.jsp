@@ -13,8 +13,11 @@
     double iva = 0;
     double descuento = 0;
     double anticipo = 0;
+    int idReqCoti = 0;
+    int nuevoStatus = 6;
+    int idUsuario = 0;
+    int idProducto = 0;
     
-
     try {
         cantidad = Integer.parseInt(request.getParameter("cantidad"));
     } catch (Exception e) {
@@ -43,13 +46,31 @@
         anticipo = Double.parseDouble(request.getParameter("anticipo")); 
     } catch (Exception e) {
     }
+    
+    try {
+        idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
+    } catch (Exception e) {
+    }
 
+    try {
+        idReqCoti = Integer.parseInt(request.getParameter("idReqCoti"));
+    } catch (Exception e) {
+    }
+    
+    try {
+        idProducto = Integer.parseInt(request.getParameter("idProducto"));
+    } catch (Exception e) {
+    }
+    
     Class.forName("com.mysql.jdbc.Driver");
     Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/scompras", "root", "stmsc0nt");
     Statement st = con.createStatement();
     ResultSet rs;
 
-    st.executeUpdate("");
-    response.sendRedirect("insertarProductoCont.jsp");
+    st.executeUpdate("UPDATE req_prod SET id_status = " + nuevoStatus + " where id_req_coti = "+ idReqCoti +"");
+    
+    st.executeUpdate("Insert into cotizacion (id_req_coti, id_proveedor, id_producto, cantidad, precio, iva, diascredito, tiempoentrega, descuento, anticipo) values "
+            + "("+idReqCoti+", "+idUsuario+", "+idProducto+", "+cantidad+","+precio+", "+iva+", "+credito+", "+entrega+", "+descuento+", "+anticipo+")"); 
+    response.sendRedirect("menuRequisicionesProveedor.jsp");
 
 %>

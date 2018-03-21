@@ -13,7 +13,7 @@
     String sucursal = request.getParameter("sucursal");
     
     Class.forName("com.mysql.jdbc.Driver");
-    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/db_compras","root", "stmsc0nt");
+    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/scompras","root", "stmsc0nt");
     Statement st = con.createStatement();
 
     int i = st.executeUpdate("insert into usuarios(nombre, apellido, correo, pass, sucursal, fecha) "

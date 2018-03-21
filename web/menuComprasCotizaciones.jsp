@@ -40,12 +40,13 @@
                     <%
                         int cantidadRequi;
                         int idProducto;
+                        int idReqCoti;
                         String producto;
                         String marca;
 
                         ArrayList<RequisicionProducto> arrayRequis = new ArrayList<RequisicionProducto>();
                         Consultas obj = new Consultas();
-                        arrayRequis = obj.consultarCompras(id_categoria,5);
+                        arrayRequis = obj.consultarCompras(id_categoria,6);
 
                         if (arrayRequis.size() > 0) {
                             for (int i = 0; i < arrayRequis.size(); i++) {
@@ -53,6 +54,7 @@
                                 cantidadRequi = arrayRequis.get(i).getCantidad();
                                 producto = arrayRequis.get(i).getProducto();
                                 marca = arrayRequis.get(i).getMarca();
+                                idReqCoti = arrayRequis.get(i).getIdReqCoti();
                     %>
                     <tr>
                         <td><%=producto%></td>
@@ -60,7 +62,7 @@
                         <td><%=cantidadRequi%></td> 
                         <td>
                             <form action="detalleCotizacionCompras.jsp" method="post">
-                                <input type="hidden" class="hidden" name="nuevoStatus" value="5" >
+                                <input type="hidden" class="hidden" name="idReqCoti" value="<%=idReqCoti%>" >
                                 <input type="hidden" class="hidden" name="idProducto" value="<%=idProducto%>" >
                                 <button type="submit" class="btn btn-primary btn-sm">Ver Cotizaciones</button>
                             </form>

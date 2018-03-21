@@ -5,7 +5,7 @@ public class RequisicionProducto {
     private int idReqProd;
     private int idRequisicion;
     private int idProducto;
-    private int idCotizacion;
+    private int idReqCoti;
     private int idStatus;
     private int idDepto;
     private int cantidad;
@@ -33,17 +33,17 @@ public class RequisicionProducto {
     }
 
     /**
-     * @return the idCotizacion
+     * @return the idReqCoti
      */
-    public int getIdCotizacion() {
-        return idCotizacion;
+    public int getIdReqCoti() {
+        return idReqCoti;
     }
 
     /**
-     * @param idCotizacion the idCotizacion to set
+     * @param idReqCoti the idCotizacion to set
      */
-    public void setIdCotizacion(int idCotizacion) {
-        this.idCotizacion = idCotizacion;
+    public void setIdReqCoti(int idReqCoti) {
+        this.idReqCoti = idReqCoti;
     }
 
     /**
