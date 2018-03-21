@@ -1,13 +1,12 @@
 <%-- 
-    Document   : usuarioSeguimiento
-    Created on : Mar 5, 2018, 7:55:17 AM
-    Author     : user
+    Muestra el historial de requisiciones autorizadas por el gerente
 --%>
+
 <%@page import="controller.Consultas"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.RequisicionProducto"%>
 <%
-    int id_usuario = 1;
+    int departamento = 1;
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -15,7 +14,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <title>Seguimiento</title>
+        <title>Historial</title>
     </head>
     <body>
 
@@ -27,48 +26,60 @@
 
         <div class="container my-5">
             <div class="page-header">
-                <h3>Seguimiento de Solicitudes</h3>
+                <h3>Historial de Autorizaciones</h3>
             </div>
-            <table class="table table-hover table-striped">
+            <table class="table table-striped table-hover">
                 <thead>
                     <tr>
-                        <th scope="col">No. Requisicion</th>
+                        <th scope="col">No</th>
+                        <th scope="col">Solicitante</th>
                         <th scope="col">Producto</th>
+                        <th scope="col">Marca</th>
                         <th scope="col">Cantidad</th>
+                        <th scope="col">Justificacion</th>
+                        <th scope="col">Descripcion</th>
+                        <th scope="col">Fecha</th>
                         <th scope="col">Status</th>
-                        <th scope="col">Avance</th>
-                        <th scope="col">Fecha de Solicitud</th>
                     </tr>
                 </thead>
                 <tbody>
                     <%
                         int idRequi;
-                        int cantidadRequi;
+                        int cantidad;
+                        String solicitante;
                         String producto;
-                        String status;
-                        String porcentaje;
+                        String marca;
+                        String justificacion;
+                        String descripcion;
                         String fecha;
+                        String status;
 
                         ArrayList<RequisicionProducto> arrayRequis = new ArrayList<RequisicionProducto>();
                         Consultas obj = new Consultas();
-                        arrayRequis = obj.consultarStatusProducto(id_usuario);
+                        arrayRequis = obj.consultarHistorialGerente(departamento);
 
                         if (arrayRequis.size() > 0) {
                             for (int i = 0; i < arrayRequis.size(); i++) {
                                 idRequi = arrayRequis.get(i).getIdRequisicion();
+                                solicitante = arrayRequis.get(i).getSolicitante();
                                 producto = arrayRequis.get(i).getProducto();
-                                cantidadRequi = arrayRequis.get(i).getCantidad();
-                                status = arrayRequis.get(i).getDescripcion();
-                                porcentaje = arrayRequis.get(i).getPorcentaje();
+                                marca = arrayRequis.get(i).getMarca();
+                                justificacion = arrayRequis.get(i).getJustificacion();
+                                descripcion = arrayRequis.get(i).getDescripcion();
+                                cantidad = arrayRequis.get(i).getCantidad();
+                                status = arrayRequis.get(i).getStatus();
                                 fecha = arrayRequis.get(i).getFecha();
                     %>
                     <tr>
-                        <th><%=idRequi%></th>
+                        <td><%=idRequi%></td>
+                        <td><%=solicitante%></td>
                         <td><%=producto%></td>
-                        <td><%=cantidadRequi%></td>
-                        <td><%=status%></td>
-                        <td><%=porcentaje%></td>
+                        <td><%=marca%></td>
+                        <td><%=cantidad%></td>
+                        <td><%=justificacion%></td>
+                        <td><%=descripcion%></td>
                         <td><%=fecha%></td>
+                        <td><b><%=status%></b></td>
                     </tr>
                     <% }
                         }%>

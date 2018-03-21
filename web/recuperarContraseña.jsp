@@ -32,11 +32,12 @@
         <!--===============================================================================================-->
         <link rel="stylesheet" type="text/css" href="css/util.css">
         <link rel="stylesheet" type="text/css" href="css/main.css">
+        
     </head>
     <body>
         <div class="container-login100"  style="background-image: url('images/mala-suerte.jpeg');">
             <div class="wrap-login100 p-l-55 p-r-55 p-t-80 p-b-30">
-                <form class="login100-form validate-form" action="Acceso" method="post">
+                <form class="login100-form validate-form" action="index.jsp" method="post">
                     <span class="login100-form-title p-b-37">
                         RECUPERAR CONTRASEÑA
                     </span>
@@ -45,12 +46,17 @@
                         <span class="focus-input100"></span>
                     </div>
                     <div class="container-login100-form-btn">
-                        <button class="login100-form-btn">
+                        <button class="login100-form-btn" onclick="return(swal('Muy Bien!', 'Recibirás un correo en breve!', 'success'));">
                             Enviar
                         </button>
                     </div>
                 </form>
             </div>
         </div>
+        
+        
+        
+        <!-- SCRIPTS -->
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     </body>
 </html>

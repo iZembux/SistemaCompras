@@ -15,7 +15,24 @@
         <title>Regístrate</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
         <link rel="stylesheet" href="css/signup.css">
-        
+        <script>
+                    function validarPassword() {
+                        var espacios = false;
+                        var cont = 0;
+ 
+                       
+                        var p1 = document.getElementById("pass").value;
+                        var p2 = document.getElementById("cpass").value;
+                        if (p1.length == 0 || p2.length == 0) {
+                            alert("OLVIDASTE INGRESAR UNA CONTRASEÑA");
+                    return false;
+                }
+                if (p1 != p2) {
+                    alert("HEY!! TUS CONTRASEÑAS NO COINCIDEN");
+                    return false;
+                }
+            }
+        </script>
     </head>
     <body>
         <!-- multistep form -->
@@ -33,24 +50,6 @@
                 <input type="text" required="required" name="usuario" placeholder="Usuario" />
                 <input type="password" required="required" name="pass" id="pass" placeholder="Contraseña" />
                 <input type="password" required="required" name="cpass" id="cpass" placeholder="Confirma Contraseña"/>
-                <script>
-                    function validarPassword() {
-                        var espacios = false;
-                        var cont = 0;
- 
-                       
-                        var p1 = document.getElementById("pass").value;
-                        var p2 = document.getElementById("cpass").value;
-                        if (p1.length == 0 || p2.length == 0) {
-                            alert("OLVIDASTE INGRESAR UNA CONTRASEÑA");
-                            return false;
-                        }
-                        if (p1 != p2) {
-                            alert("HEY!! TUS CONTRASEÑAS NO COINCIDEN");
-                            return false;
-                        } 
-                    }
-                </script>
                 <input type="button" name="next" class="next action-button" value="Siguiente" onclick="return(validarPassword()); MM_validateForm()"  />
             </fieldset>
             <fieldset>

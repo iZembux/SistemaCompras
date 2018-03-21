@@ -54,7 +54,7 @@ public class Acceso extends HttpServlet {
                 
                 String retorno1 = "";
                 if (password.equals(pass)) {
-                    retorno1 = "/navSolicita.jsp";
+                    retorno1 = "/menuSolicita.jsp";
 
                     sesion.setAttribute("idUsuario", "" + idUsuario);
                     sesion.setAttribute("Bienvenido", "1");

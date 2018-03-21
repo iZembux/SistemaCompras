@@ -25,24 +25,6 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <title>Nueva Requisicion</title>
         <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-
-        <script>
-            $(document).ready(function () {
-                $('#modelo').change(function (event) {
-                    var sports = $("select#modelo").val();
-                    $.get('JsonServlet', {
-                        sportsName: sports
-                    }, function (jsonResponse) {
-
-                        var select = $('#marca');
-                        select.find('option').remove();
-                        $.each(jsonResponse, function (index, value) {
-                            $('<option>').val(value).text(value).appendTo(select);
-                        });
-                    });
-                });
-            });
-        </script>
     </head>
     <body>
 
@@ -66,9 +48,7 @@
                 </div>
             </header>
 
-            <!-- Page Features -->
             <div class="row text-center">
-
                 <div class="col-lg-3 col-md-6 mb-4">
                     <div class="card">
                         <img class="card-img-top" src="img/papeleria.jpg" alt="">
@@ -133,7 +113,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form method="post" action="insertarProducto.jsp">
+                        <form method="post" action="insertaProducto.jsp">
                             <div class="form-group">
                                 <label class="col-sm-1 control-label"></label>
                                 <div class="col-sm-10 input-group">
@@ -149,16 +129,6 @@
                                     </select>
                                 </div>
                             </div>
-                            <!--
-                            <div class="form-group">
-                                <label class="col-sm-1 control-label"></label>
-                                <div class="col-sm-10 input-group">
-                                    <select id="marca" name="marca">
-                                        <option id="marca" name="marca">Selecciona Marca</option>
-                                    </select>
-                                </div>
-                            </div>
-                            -->
                             <div class="form-group">
                                 <label for="cantidad">Cantidad</label>
                                 <input type="number" class="form-control" id="cantidad" name="cantidad">

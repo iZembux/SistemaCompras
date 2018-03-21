@@ -3,24 +3,11 @@
     Created on : Mar 5, 2018, 7:55:17 AM
     Author     : user
 --%>
+<%@page import="controller.Consultas"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.RequisicionProducto"%>
-<%@page import="controller.Consultas"%>
 <%
-    int idUusario = 1;
-    int departamento = 1;
-    int idRequiSeleccionada = 0;
-    int autorizacion = 0;
-
-    try {
-        idRequiSeleccionada = Integer.parseInt(request.getParameter("idRequi"));
-    } catch (Exception e) {
-    }
-    try {
-        autorizacion = Integer.parseInt(request.getParameter("autorizacion"));
-    } catch (Exception e) {
-    }
-
+    int id_categoria = 8;
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -28,6 +15,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
         <title>Autorizar</title>
     </head>
     <body>
@@ -39,44 +27,44 @@
 
         <div class="container my-5">
             <div class="page-header">
-                <h3>Requisiciones por Autorizar</h3>
+                <h3>Requisiciones Disponibles</h3>
             </div>
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
-                        <th scope="col">No.</th>
-                        <th scope="col">Solicitante</th>
-                        <th scope="col">Cantidad de Productos</th>
-                        <th scope="col">Fecha</th>
+                        <th scope="col">Producto</th>
+                        <th scope="col">Marca</th>
+                        <th scope="col">Cantidad</th>
                         <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <%                        int idRequi;
+                    <%
                         int cantidadRequi;
-                        String solicitante;
-                        String fecha;
+                        int idProducto;
+                        String producto;
+                        String marca;
 
                         ArrayList<RequisicionProducto> arrayRequis = new ArrayList<RequisicionProducto>();
                         Consultas obj = new Consultas();
-                        arrayRequis = obj.consultarRequiGerente(departamento);
+                        arrayRequis = obj.consultarCompras(id_categoria,5);
 
                         if (arrayRequis.size() > 0) {
                             for (int i = 0; i < arrayRequis.size(); i++) {
-                                idRequi = arrayRequis.get(i).getIdRequisicion();
+                                idProducto = arrayRequis.get(i).getIdProducto();
                                 cantidadRequi = arrayRequis.get(i).getCantidad();
-                                solicitante = arrayRequis.get(i).getSolicitante();
-                                fecha = arrayRequis.get(i).getFecha();
+                                producto = arrayRequis.get(i).getProducto();
+                                marca = arrayRequis.get(i).getMarca();
                     %>
                     <tr>
-                        <td><%=idRequi%></td>
-                        <td><%=solicitante%></td>
-                        <td><%=cantidadRequi%></td>
-                        <td><%=fecha%></td>
+                        <td><%=producto%></td>
+                        <td><%=marca%></td>
+                        <td><%=cantidadRequi%></td> 
                         <td>
-                            <form action="navAutorizaRequi.jsp" method="post">
-                                <input type="hidden" name="idRequi" value="<%=idRequi%>" >
-                                <button type="submit" class="btn btn-primary btn-sm">Detalle</button>
+                            <form action="formCotizacion.jsp" method="post">
+                                <input type="hidden" class="hidden" name="nuevoStatus" value="5" >
+                                <input type="hidden" class="hidden" name="idProducto" value="<%=idProducto%>" >
+                                <button type="submit" class="btn btn-primary btn-sm">Hacer Cotizacion</button>
                             </form>
                         </td>
                     </tr>
@@ -84,24 +72,6 @@
                         }%>
                 </tbody>
             </table>
-            <nav aria-label="...">
-                <ul class="pagination">
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#" tabindex="-1">Previous</a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item active">
-                        <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">Next</a>
-                    </li>
-                </ul>
-            </nav>
-            <jsp:include page="frag/modalAutorizaRequi.jsp">
-                <jsp:param name="idRequi" value="<%=idRequiSeleccionada%>" /> 
-            </jsp:include>
         </div>
 
         <jsp:include page="frag/footer.jsp" />

@@ -1,3 +1,9 @@
+<%-- 
+    Cuando se inserta un producto pregunta si se desea solicitar otro producto en
+    la misma requisicion (nuevaRequisicion = 0).
+    Si no se desea solicitar mas, se redirige a la pagina de seguimiento.
+--%>
+
 <!DOCTYPE html>
 
 <html>
@@ -25,7 +31,7 @@
                                 <div class="card" style="width: 18rem;">
                                     <img class="card-img-top" src="http://placehold.it/500x325" alt="Card image cap">
                                     <div class="card-body">
-                                        <form action="navSolicita.jsp" method="post">
+                                        <form action="menuSolicita.jsp" method="post">
                                             <input type="hidden" class="form-control" id="nuevaRequisicion" name="nuevaRequisicion" value="0">
                                             <button type="submit" class="btn btn-success btn-sm">Continuar Comprando</button>
                                         </form>
@@ -36,7 +42,7 @@
                                 <div class="card" style="width: 18rem;">
                                     <img class="card-img-top" src="http://placehold.it/500x325" alt="Card image cap">
                                     <div class="card-body">
-                                        <form action="navSeguimiento.jsp" method="post">
+                                        <form action="menuSeguimiento.jsp" method="post">
                                             <button type="submit" class="btn btn-primary btn-sm">Terminar</button>
                                         </form>
                                     </div>

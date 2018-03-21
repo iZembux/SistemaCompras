@@ -60,8 +60,8 @@
                 </form>
                 <br />
                 <form action="Recuperacion" method="post">
-                <div class="text-center">
-                    <a href="recuperarContraseña.jsp" class="txt2 hov1">
+                    <div class="text-center">
+                        <a href="recuperarContraseña.jsp" class="txt2 hov1">
                             ¿Olvidaste tu contraseña?
                         </a>
                     </div>
