@@ -25,7 +25,7 @@
 
         <div class="container my-5">
             <div class="page-header">
-                <h3>Cotizaciones Disponibles</h3>
+                <h3>Cotizaciones Ganadoras</h3>
             </div>
             <table class="table table-striped table-hover">
                 <thead>
@@ -34,19 +34,19 @@
                         <th scope="col">Marca</th>
                         <th scope="col">Cantidad</th>
                         <th scope="col"></th>
+                        <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
                     <%
                         int cantidadRequi;
                         int idProducto;
-                        int idReqCoti;
                         String producto;
                         String marca;
 
                         ArrayList<RequisicionProducto> arrayRequis = new ArrayList<RequisicionProducto>();
                         Consultas obj = new Consultas();
-                        arrayRequis = obj.consultarCompras(id_categoria,6);
+                        arrayRequis = obj.consultarCompras(id_categoria,5);
 
                         if (arrayRequis.size() > 0) {
                             for (int i = 0; i < arrayRequis.size(); i++) {
@@ -54,7 +54,6 @@
                                 cantidadRequi = arrayRequis.get(i).getCantidad();
                                 producto = arrayRequis.get(i).getProducto();
                                 marca = arrayRequis.get(i).getMarca();
-                                idReqCoti = arrayRequis.get(i).getIdReqCoti();
                     %>
                     <tr>
                         <td><%=producto%></td>
@@ -62,10 +61,13 @@
                         <td><%=cantidadRequi%></td> 
                         <td>
                             <form action="detalleCotizacionCompras.jsp" method="post">
-                                <input type="hidden" class="hidden" name="idReqCoti" value="<%=idReqCoti%>" >
+                                <input type="hidden" class="hidden" name="nuevoStatus" value="5" >
                                 <input type="hidden" class="hidden" name="idProducto" value="<%=idProducto%>" >
-                                <button type="submit" class="btn btn-primary btn-sm">Ver Cotizaciones</button>
+                                <button type="submit" class="btn btn-primary btn-sm">Ver Detalle</button>
                             </form>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-primary btn-sm">Orden de Compra</button>
                         </td>
                     </tr>
                     <% }

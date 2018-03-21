@@ -76,11 +76,13 @@
                                 <form action="actualizaGerente.jsp" method="post">
                                     <input type="hidden" class="hidden" name="idReqProd" value="<%=idReqProd%>" >
                                     <input type="hidden" class="hidden" name="nuevoStatus" value="4" >
+                                    <input type="hidden" class="hidden" name="autoriza" value="1" >
                                     <button type="submit" class="btn btn-success btn-sm">Autorizar</button>
                                 </form>
                                 <form action="actualizaGerente.jsp" method="post">
                                     <input type="hidden" class="hidden" name="idReqProd" value="<%=idReqProd%>" >
                                     <input type="hidden" class="hidden" name="nuevoStatus" value="13" >
+                                    <input type="hidden" class="hidden" name="autoriza" value="2" >
                                     <button type="submit" class="btn btn-danger btn-sm">Rechazar</button>
                                 </form>
                             </div>

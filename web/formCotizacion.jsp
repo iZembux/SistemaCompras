@@ -5,6 +5,26 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    int idProducto = 0;
+    int idReqCoti = 0;
+    int idUsuario = 0;
+
+    try {
+        idProducto = Integer.parseInt(request.getParameter("idProducto"));
+    } catch (Exception e) {
+    }
+
+    try {
+        idReqCoti = Integer.parseInt(request.getParameter("idReqCoti"));
+    } catch (Exception e) {
+    }
+
+    try {
+        idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
+    } catch (Exception e) {
+    }
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -30,11 +50,11 @@
                             <input type="number" class="form-control" id="cantidad" name="cantidad">
                         </div>
                         <div for="precio" class="form-group">
-                            <label>Precio</label>
+                            <label>Precio Unitario</label>
                             <input type="text" class="form-control" id="precio" name="precio">
                         </div>
                         <div for="iva" class="form-group">
-                            <label>IVA</label>
+                            <label>Precio con IVA</label>
                             <input type="text" class="form-control" id="iva" name="iva">
                         </div>
                         <div for="credito" class="form-group">
@@ -54,10 +74,11 @@
                             <input type="text" class="form-control" id="anticipo" name="anticipo">
                         </div>
                         <div class="modal-footer">
+                            <input type="hidden" class="hidden" name="idUsuario" value="<%=idUsuario%>" >
+                            <input type="hidden" class="hidden" name="idProducto" value="<%=idProducto%>" >
+                            <input type="hidden" class="hidden" name="idReqCoti" value="<%=idReqCoti%>" >
                             <input type="submit" class="btn btn-primary" value="Aceptar" />
                         </div>
-                        <input type="hidden" class="form-control" id="nuevaRequisicion" name="nuevaRequisicion" value="">
-                        <input type="hidden" class="form-control" id="idUsuario" name="idUsuario" value="">
                     </form>
                 </div>
             </div>

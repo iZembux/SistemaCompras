@@ -1,5 +1,6 @@
 <%-- 
     Muestra las requisiciones que ya han sido aprobadas por los gerentes
+    status = 4
 --%>
 <%@page import="controller.Consultas"%>
 <%@page import="java.util.ArrayList"%>

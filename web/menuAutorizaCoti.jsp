@@ -1,5 +1,8 @@
 <%-- 
-    Muestra las requisiciones disponibles para la autorizacion del gerente Administrativo
+    Muestra las requisiciones disponibles para la autorizacion de: 
+    Gerente Administrativo - Status = 7
+    Director Administrativo - Status = 8
+    Director General - Status = 9
 --%>
 
 <%@page import="controller.Consultas"%>
