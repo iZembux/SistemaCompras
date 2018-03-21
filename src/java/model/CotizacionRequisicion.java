@@ -7,7 +7,11 @@ package model;
 
 public class CotizacionRequisicion {
    private String proveedor;
+   private String solicitante;
    private String producto;
+   private String depto;
+   private String sucursal;
+   private String fecha;
    private int cantidad;
    private int precio;
    private int iva;
@@ -16,6 +20,7 @@ public class CotizacionRequisicion {
    private int entrega;
    private int anticipo;
    private int idP;
+   private int idC;
 
     /**
      * @return the proveedor
@@ -155,5 +160,75 @@ public class CotizacionRequisicion {
      */
     public void setIdP(int idP) {
         this.idP = idP;
+    }
+
+    /**
+     * @return the idC
+     */
+    public int getIdC() {
+        return idC;
+    }
+
+    /**
+     * @param idC the idC to set
+     */
+    public void setIdC(int idC) {
+        this.idC = idC;
+    }
+
+    /**
+     * @return the depto
+     */
+    public String getDepto() {
+        return depto;
+    }
+
+    /**
+     * @param depto the depto to set
+     */
+    public void setDepto(String depto) {
+        this.depto = depto;
+    }
+
+    /**
+     * @return the sucursal
+     */
+    public String getSucursal() {
+        return sucursal;
+    }
+
+    /**
+     * @param sucursal the sucursal to set
+     */
+    public void setSucursal(String sucursal) {
+        this.sucursal = sucursal;
+    }
+
+    /**
+     * @return the fecha
+     */
+    public String getFecha() {
+        return fecha;
+    }
+
+    /**
+     * @param fecha the fecha to set
+     */
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
+
+    /**
+     * @return the solicitante
+     */
+    public String getSolicitante() {
+        return solicitante;
+    }
+
+    /**
+     * @param solicitante the solicitante to set
+     */
+    public void setSolicitante(String solicitante) {
+        this.solicitante = solicitante;
     }
 }
