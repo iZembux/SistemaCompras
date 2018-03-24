@@ -5,6 +5,14 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.RequisicionProducto"%>
 <%
+    HttpSession sesion = request.getSession();
+    String usuarioValidado = (String) sesion.getAttribute("usuarioIngresado");
+    if (usuarioValidado == null) {
+        response.sendRedirect("index.jsp");
+    } else {
+        String idDepto = (String) sesion.getAttribute("departamento"); 
+        String rol = (String) sesion.getAttribute("rol");
+        
     int id_categoria = 8;
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -19,8 +27,8 @@
     <body>
 
         <jsp:include page="frag/mainNavbar.jsp">
-            <jsp:param name="rol" value="4" />  
-            <jsp:param name="depto" value="5" />
+            <jsp:param name="rol" value="<%=rol%>" />  
+            <jsp:param name="depto" value="<%=idDepto%>" />
         </jsp:include>
 
         <div class="container my-5">
@@ -81,3 +89,4 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     </body>
 </html>
+<% }%>

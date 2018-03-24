@@ -5,6 +5,14 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.RequisicionProducto"%>
 <%
+    HttpSession sesion = request.getSession();
+    String usuarioValidado = (String) sesion.getAttribute("usuarioIngresado");
+    if (usuarioValidado == null) {
+        response.sendRedirect("index.jsp");
+    } else {
+        String idDepto = (String) sesion.getAttribute("departamento"); 
+        String rol = (String) sesion.getAttribute("rol");
+        
     int id_categoria = 8;
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -19,13 +27,13 @@
     <body>
 
         <jsp:include page="frag/mainNavbar.jsp">
-            <jsp:param name="rol" value="4" />  
-            <jsp:param name="depto" value="5" />
+            <jsp:param name="rol" value="<%=rol%>" />  
+            <jsp:param name="depto" value="<%=idDepto%>" />
         </jsp:include>
 
         <div class="container my-5">
             <div class="page-header">
-                <h3>Cotizaciones Ganadoras</h3>
+                <h3>Cotizaciones Disponibles</h3>
             </div>
             <table class="table table-striped table-hover">
                 <thead>
@@ -34,19 +42,19 @@
                         <th scope="col">Marca</th>
                         <th scope="col">Cantidad</th>
                         <th scope="col"></th>
-                        <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
                     <%
                         int cantidadRequi;
                         int idProducto;
+                        int idReqCoti;
                         String producto;
                         String marca;
 
                         ArrayList<RequisicionProducto> arrayRequis = new ArrayList<RequisicionProducto>();
                         Consultas obj = new Consultas();
-                        arrayRequis = obj.consultarCompras(id_categoria,5);
+                        arrayRequis = obj.consultarCompras(id_categoria,10);
 
                         if (arrayRequis.size() > 0) {
                             for (int i = 0; i < arrayRequis.size(); i++) {
@@ -54,20 +62,18 @@
                                 cantidadRequi = arrayRequis.get(i).getCantidad();
                                 producto = arrayRequis.get(i).getProducto();
                                 marca = arrayRequis.get(i).getMarca();
+                                idReqCoti = arrayRequis.get(i).getIdReqCoti();
                     %>
                     <tr>
                         <td><%=producto%></td>
                         <td><%=marca%></td>
                         <td><%=cantidadRequi%></td> 
                         <td>
-                            <form action="detalleCotizacionCompras.jsp" method="post">
-                                <input type="hidden" class="hidden" name="nuevoStatus" value="5" >
+                            <form action="formatos/ordenCompra.jsp" method="post">
+                                <input type="hidden" class="hidden" name="idReqCoti" value="<%=idReqCoti%>" >
                                 <input type="hidden" class="hidden" name="idProducto" value="<%=idProducto%>" >
-                                <button type="submit" class="btn btn-primary btn-sm">Ver Detalle</button>
+                                <button type="submit" class="btn btn-primary btn-sm">Ver Orden de Compra</button>
                             </form>
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-primary btn-sm">Orden de Compra</button>
                         </td>
                     </tr>
                     <% }
@@ -83,3 +89,4 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     </body>
 </html>
+<% }%>

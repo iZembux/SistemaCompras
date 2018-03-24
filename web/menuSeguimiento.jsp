@@ -6,7 +6,14 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.RequisicionProducto"%>
 <%
-    int id_usuario = 1;
+    HttpSession sesion = request.getSession();
+    String usuarioValidado = (String) sesion.getAttribute("usuarioIngresado");
+    if (usuarioValidado == null) {
+        response.sendRedirect("index.jsp");
+    } else {
+        String idDepto = (String) sesion.getAttribute("departamento"); 
+        String rol = (String) sesion.getAttribute("rol");
+        String id_usuario = (String) sesion.getAttribute("idUsuario");
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -19,8 +26,8 @@
     <body>
 
         <jsp:include page="frag/mainNavbar.jsp">
-            <jsp:param name="rol" value="4" />  
-            <jsp:param name="depto" value="3" />
+            <jsp:param name="rol" value="<%=rol%>" />  
+            <jsp:param name="depto" value="<%=idDepto%>" />
         </jsp:include>
 
 
@@ -37,6 +44,7 @@
                         <th scope="col">Status</th>
                         <th scope="col">Avance</th>
                         <th scope="col">Fecha de Solicitud</th>
+                        <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -68,6 +76,12 @@
                         <td><%=status%></td>
                         <td><%=porcentaje%></td>
                         <td><%=fecha%></td>
+                        <td>
+                            <form action="formatos/requisicion.jsp" method="post">
+                                <input type="hidden" name="idRequi" value="<%=idRequi%>" >
+                                <button type="submit" class="btn btn-primary btn-sm">Ver Formato</button>
+                            </form>
+                        </td>
                     </tr>
                     <% }
                         }%>
@@ -82,3 +96,4 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     </body>
 </html>
+<% }%>

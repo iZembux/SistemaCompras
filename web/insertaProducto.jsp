@@ -62,7 +62,7 @@
     }
     
     //Inserta el producto en la ultima requisicion creada
-    int i = st.executeUpdate("insert into req_prod(id_requisicion, id_producto, id_cotizacion, id_status, cantidad, descripcion, justificacion) "
+    int i = st.executeUpdate("insert into req_prod(id_requisicion, id_producto, id_req_coti, id_status, cantidad, descripcion, justificacion) "
             + "values ('" + idRequisicion + "','" + idProducto + "','" + idCotizacion + "','" + idStatus + "','" + cantidad + "','" + descripcion + "','" + justificacion + "')");
     if (i > 0) {
         response.sendRedirect("insertaProductoContinuacion.jsp");

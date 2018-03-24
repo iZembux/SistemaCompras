@@ -2,6 +2,7 @@
 <%
     int rol = Integer.parseInt(request.getParameter("rol"));
     int depto = Integer.parseInt(request.getParameter("depto"));
+    
 %>
 <head>
     <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
@@ -16,9 +17,21 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
+            <% if (rol == 1) { %>
+            <a class="nav-link" href="menuSolicita.jsp"> 
+                Solicitar Producto
+            </a>
+            <a class="nav-link" href="menuSeguimiento.jsp"> 
+                Seguimiento de Solicitud
+            </a>
+            <a class="nav-link" href="menuHistorialPedido.jsp"> 
+                Historial de Pedidos
+            </a>
+            <% } else {
+                if (depto == 5) { %>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Requisiciones <span class="badge badge-secondary">9</span>
+                    Requisiciones
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="menuComprasRequisiciones.jsp"> 
@@ -26,26 +39,20 @@
                             <div class="col col-lg-9">
                                 Papeleria 
                             </div>
-                            <div class="col col-lg-3">
-                                <span class="badge badge-dark">4 </span>
-                            </div>   
                         </div>
                     </a>
                 </div>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Cotizaciones <span class="badge badge-secondary">9</span>
+                    Cotizaciones
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="menuComprasCotizaciones.jsp"> 
                         <div class="row">
                             <div class="col col-lg-9">
                                 Papeleria 
-                            </div>
-                            <div class="col col-lg-3">
-                                <span class="badge badge-dark">4 </span>
-                            </div>   
+                            </div> 
                         </div>
                     </a>
                 </div>
@@ -53,6 +60,7 @@
             <a class="nav-link" href="menuComprasOrdenes.jsp"> 
                 Licitaciones Autorizadas
             </a>
+            <% } %>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-shopping-cart"></i> Pedidos
@@ -69,9 +77,10 @@
                     </a>
                 </div>
             </li>
+            <% if (rol == 2 || rol == 3 || rol == 4){ %>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-check-square"></i> Autorizaciones <span class="badge badge-secondary">9</span>
+                    <i class="fas fa-check-square"></i> Autorizaciones
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="menuAutorizaRequi.jsp"> 
@@ -82,9 +91,10 @@
                     </a>
                 </div>
             </li>
+            <% if (rol == 3 || rol == 4) {  %>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-dollar-sign"></i> Cotizaciones <span class="badge badge-secondary">9</span>
+                    <i class="fas fa-dollar-sign"></i> Cotizaciones
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="menuAutorizaCoti.jsp"> 
@@ -94,7 +104,10 @@
                         Historial de Cotizaciones
                     </a>
                 </div>
-            </li>       
+            </li>   
+            <% }
+                    }
+                }%>
             <a class="nav-link" href="menuRequisicionesProveedor.jsp"> 
                 Licitaciones Disponibles
             </a>
@@ -102,6 +115,6 @@
                 Historial
             </a>
         </ul>
-        
+
     </div>
 </nav>

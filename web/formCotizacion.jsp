@@ -6,24 +6,32 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-    int idProducto = 0;
-    int idReqCoti = 0;
-    int idUsuario = 0;
+    HttpSession sesion = request.getSession();
+    String usuarioValidado = (String) sesion.getAttribute("usuarioIngresado");
+    if (usuarioValidado == null) {
+        response.sendRedirect("index.jsp");
+    } else {
+        String idDepto = (String) sesion.getAttribute("departamento"); 
+        String rol = (String) sesion.getAttribute("rol");
+        String idUsuario = (String) sesion.getAttribute("idUsuario");
 
-    try {
-        idProducto = Integer.parseInt(request.getParameter("idProducto"));
-    } catch (Exception e) {
-    }
+        int idProducto = 0;
+        int idReqCoti = 0;
 
-    try {
-        idReqCoti = Integer.parseInt(request.getParameter("idReqCoti"));
-    } catch (Exception e) {
-    }
+        try {
+            idProducto = Integer.parseInt(request.getParameter("idProducto"));
+        } catch (Exception e) {
+        }
 
-    try {
-        idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
-    } catch (Exception e) {
-    }
+        try {
+            idReqCoti = Integer.parseInt(request.getParameter("idReqCoti"));
+        } catch (Exception e) {
+        }
+
+        try {
+            idUsuario = request.getParameter("idUsuario");
+        } catch (Exception e) {
+        }
 %>
 <!DOCTYPE html>
 <html>
@@ -36,8 +44,8 @@
     <body>
 
         <jsp:include page="frag/mainNavbar.jsp">
-            <jsp:param name="rol" value="4" />  
-            <jsp:param name="depto" value="5" />
+            <jsp:param name="rol" value="<%=rol%>" />  
+            <jsp:param name="depto" value="<%=idDepto%>" />
         </jsp:include>
 
         <div class="container">
@@ -90,3 +98,4 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     </body>
 </html>
+<% }%>

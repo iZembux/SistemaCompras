@@ -53,6 +53,8 @@ public class Acceso extends HttpServlet {
                 System.out.println("idusuario" + idUsuario);
                 System.out.println("USUARIO: " + usuario);
                 System.out.println("PASSWORD: " + password);
+                System.out.println("ROL: " + rol);
+                System.out.println("DEPARTAMENTO: " + depto);
                 
                 String retorno1 = "";
                 if (password.equals(pass)) {

@@ -243,6 +243,7 @@ public class UserCompras {
                     objUsuario.setPassword(rs.getString("password"));
                     objUsuario.setId_sucursal(rs.getString("id_sucursal"));
                     objUsuario.setId_departamento(rs.getString("id_departamento"));
+                    objUsuario.setId_rol(rs.getString("id_rol"));
                     Lista.add(objUsuario);
                     objUsuario = null;
                 }
