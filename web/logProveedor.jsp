@@ -31,11 +31,12 @@
     <body>
 
 
-        <div class="container-login100" style="background-image: url('images/usingcredit.jpg');">
+        <div class="container-login100" style="background-image: url('images/dealer.jpg');">
             <div class="wrap-login100 p-l-55 p-r-55 p-t-80 p-b-30">
-                <form class="login100-form validate-form" action="Acceso" method="post">
+                <form class="login100-form validate-form" action="AccesoProveedor" method="post">
                     <span class="login100-form-title p-b-37">
-                        Inicio de Sesión
+                        Inicio de Sesión<br />
+                        Proveedores
                     </span>
                     <div class="wrap-input100 validate-input m-b-20" data-validate="Usuario">
                         <input class="input100" type="text" name="usuario" placeholder="Ingresa Usuario">
@@ -53,28 +54,15 @@
                         </button>
                     </div>
                     <div class="text-center">
-                        <a href="registro.jsp" class="txt2 hov1">
+                        <a href="regProveedor.jsp" class="txt2 hov1">
                             Registrarse
                         </a>
                     </div>
                 </form>
                 <br />
-                    <div class="text-center">
-                        <a href="logProveedor.jsp" class="txt2 hov1">
-                            ¿Eres Proveedor?
-                        </a>
-                    </div>
-                <!--<form action="RegistroProveedor" method="post">
-                    <div class="text-center"><button class="txt2 hov1">
-                        Registro Proveedor
-                    </button></div>
-                </form>-->
             </div>
         </div>
 
-
-
-        <div id="dropDownSelect1"></div>
 
         <!--===============================================================================================-->
         <script src="vendor/jquery/jquery-3.2.1.min.js"></script>

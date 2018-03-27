@@ -6,7 +6,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.RequisicionProducto"%>
 <%
-    int id_usuario = 1;
+    int id_usuario = 2;
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
