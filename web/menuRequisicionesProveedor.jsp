@@ -8,8 +8,15 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.RequisicionProducto"%>
 <%
+    HttpSession sesion = request.getSession();
+    String usuarioValidado = (String) sesion.getAttribute("usuarioIngresado");
+    if (usuarioValidado == null) {
+        response.sendRedirect("index.jsp");
+    } else {
+        String idDepto = (String) sesion.getAttribute("departamento"); 
+        String rol = (String) sesion.getAttribute("rol");
+        String id_usuario = (String) sesion.getAttribute("idUsuario");
     int idCategoria = 8;
-    int idUsuario = 6;
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -23,8 +30,8 @@
     <body>
 
         <jsp:include page="frag/mainNavbar.jsp">
-            <jsp:param name="rol" value="4" />  
-            <jsp:param name="depto" value="5" />
+            <jsp:param name="rol" value="<%=rol%>" />  
+            <jsp:param name="depto" value="<%=idDepto%>" />
         </jsp:include>
 
         <div class="container my-5">
@@ -69,7 +76,7 @@
                         <td>
                             <% if (status == 5) {%>
                             <form action="formCotizacion.jsp" method="post">
-                                <input type="hidden" class="hidden" name="idUsuario" value="<%=idUsuario%>" >
+                                <input type="hidden" class="hidden" name="idUsuario" value="<%=id_usuario%>" >
                                 <input type="hidden" class="hidden" name="idProducto" value="<%=idProducto%>" >
                                 <input type="hidden" class="hidden" name="idReqCoti" value="<%=idReqCoti%>" >
                                 <button type="submit" class="btn btn-primary btn-sm">Hacer Cotizacion</button>
@@ -78,7 +85,7 @@
                                 int idUsuarioP = 0;
                                 ArrayList<CotizacionRequisicion> arrayRequis2 = new ArrayList<CotizacionRequisicion>();
                                 Consultas obj2 = new Consultas();
-                                arrayRequis2 = obj2.consultarProveedorCoti(idReqCoti, idUsuario);
+                                arrayRequis2 = obj2.consultarProveedorCoti(idReqCoti,id_usuario);
                                 System.out.println(arrayRequis2.size());
                                 if (arrayRequis2.size() > 0) { %>
 
@@ -86,7 +93,7 @@
 
                             <%} else {%>
                             <form action="formCotizacion.jsp" method="post">
-                                <input type="hidden" class="hidden" name="idUsuario" value="<%=idUsuario%>" >
+                                <input type="hidden" class="hidden" name="idUsuario" value="<%=id_usuario%>" >
                                 <input type="hidden" class="hidden" name="idProducto" value="<%=idProducto%>" >
                                 <input type="hidden" class="hidden" name="idReqCoti" value="<%=idReqCoti%>" >
                                 <button type="submit" class="btn btn-primary btn-sm">Hacer Cotizacion</button>
@@ -108,3 +115,4 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     </body>
 </html>
+<% }%>

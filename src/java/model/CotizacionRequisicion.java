@@ -21,6 +21,7 @@ public class CotizacionRequisicion {
    private int anticipo;
    private int idP;
    private int idC;
+   private int status;
 
     /**
      * @return the proveedor
@@ -230,5 +231,19 @@ public class CotizacionRequisicion {
      */
     public void setSolicitante(String solicitante) {
         this.solicitante = solicitante;
+    }
+
+    /**
+     * @return the status
+     */
+    public int getStatus() {
+        return status;
+    }
+
+    /**
+     * @param status the status to set
+     */
+    public void setStatus(int status) {
+        this.status = status;
     }
 }

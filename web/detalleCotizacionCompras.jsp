@@ -12,8 +12,8 @@
     if (usuarioValidado == null) {
         response.sendRedirect("index.jsp");
     } else {
-        int idDepto = (int) sesion.getAttribute("departamento");
-        int rol = (int) sesion.getAttribute("rol");
+        String idDepto = (String) sesion.getAttribute("departamento"); 
+        String rol = (String) sesion.getAttribute("rol");
 
         int idCategoria = 0;
         int idProducto = 0;
@@ -56,8 +56,8 @@
     <body>
 
         <jsp:include page="frag/mainNavbar.jsp">
-            <jsp:param name="rol" value="4" />  
-            <jsp:param name="depto" value="5" />
+            <jsp:param name="rol" value="<%=rol%>" />  
+            <jsp:param name="depto" value="<%=idDepto%>" />
         </jsp:include>
 
         <div class="container">
@@ -71,7 +71,6 @@
                                 <th scope="col">Cantidad</th>
                                 <th scope="col">Precio Unitario</th>
                                 <th scope="col">Precio Con IVA</th>
-                                <th scope="col">Descuento</th>
                                 <th scope="col">Precio Final</th>
                                 <th scope="col">Dias de Credito</th>
                                 <th scope="col">Tiempo de Entrega</th>
@@ -86,7 +85,6 @@
                                 int cantidad;
                                 int precio;
                                 int iva;
-                                int descuento;
                                 int credito;
                                 int entrega;
                                 int anticipo;
@@ -104,7 +102,6 @@
                                         cantidad = arrayRequis.get(i).getCantidad();
                                         precio = arrayRequis.get(i).getPrecio();
                                         iva = arrayRequis.get(i).getIva();
-                                        descuento = arrayRequis.get(i).getDescuento();
                                         credito = arrayRequis.get(i).getCredito();
                                         entrega = arrayRequis.get(i).getEntrega();
                                         anticipo = arrayRequis.get(i).getAnticipo();
@@ -115,8 +112,7 @@
                                 <td><%=cantidad%></td>
                                 <td><%=precio%></td>
                                 <td><%=iva%></td>
-                                <td><%=descuento%> %</td>
-                                <td><%=(iva * cantidad) - descuento%></td>
+                                <td><%=(iva * cantidad)%></td>
                                 <td><%=credito%> Dias</td>
                                 <td><%=entrega%> Dias</td>
                                 <td><%=anticipo%> %</td>

@@ -23,7 +23,7 @@
     Statement st = con.createStatement();
     ResultSet rs;
 
-    if (true) {
+    if (false) {
         response.sendRedirect("loginProveedor.jsp");
     } else {
         rs = st.executeQuery("select max(id_req_coti) as id from req_prod;");

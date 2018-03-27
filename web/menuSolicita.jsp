@@ -10,13 +10,21 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%
-    int idUsuario = 1;
-    int nuevaRequisicion = 1;
+    HttpSession sesion = request.getSession();
+    String usuarioValidado = (String) sesion.getAttribute("usuarioIngresado");
+    if (usuarioValidado == null) {
+        response.sendRedirect("index.jsp");
+    } else {
+        String idDepto = (String) sesion.getAttribute("departamento"); 
+        String rol = (String) sesion.getAttribute("rol");
+        String id_usuario = (String) sesion.getAttribute("idUsuario");
+        
+        int nuevaRequisicion = 1;
 
-    try {
-        nuevaRequisicion = Integer.parseInt(request.getParameter("nuevaRequisicion"));
-    } catch (Exception e) {
-    }
+        try {
+            nuevaRequisicion = Integer.parseInt(request.getParameter("nuevaRequisicion"));
+        } catch (Exception e) {
+        }
 %>
 <!DOCTYPE html>
 <html>
@@ -29,8 +37,8 @@
     <body>
 
         <jsp:include page="frag/mainNavbar.jsp">
-            <jsp:param name="rol" value="4" />  
-            <jsp:param name="depto" value="3" />
+            <jsp:param name="rol" value="<%=rol%>" />  
+            <jsp:param name="depto" value="<%=idDepto%>" />
         </jsp:include>
 
         <div class="container">
@@ -145,7 +153,7 @@
                                 <input type="submit" class="btn btn-primary" value="Solicitar" />
                             </div>
                             <input type="hidden" class="form-control" id="nuevaRequisicion" name="nuevaRequisicion" value="<%=nuevaRequisicion%>">
-                            <input type="hidden" class="form-control" id="idUsuario" name="idUsuario" value="<%=idUsuario%>">
+                            <input type="hidden" class="form-control" id="idUsuario" name="idUsuario" value="<%=id_usuario%>">
                         </form>
                     </div>
                 </div>
@@ -177,3 +185,4 @@
 
     </body>
 </html>
+<% }%>
