@@ -4,6 +4,9 @@
     Author     : JefeDesarrollo
 --%>
 
+<%@page import="controller.Consultas"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="model.RequisicionFormato"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
     String sucursal = null;
@@ -15,11 +18,36 @@
     String fecha = null;
     String producto = null;
     String descripcion = null;
-    String marca =  null;
+    String marca = null;
     String modelo = null;
     int cantidad = 0;
+    int idReqProd = 0;
 
-    %>
+    try {
+        idReqProd = Integer.parseInt(request.getParameter("idReqProd"));
+    } catch (Exception e) {
+    }
+
+    ArrayList<RequisicionFormato> arrayRequis = new ArrayList<RequisicionFormato>();
+    Consultas obj = new Consultas();
+    arrayRequis = obj.consultarFormatoRequisicion(idReqProd);
+
+    if (arrayRequis.size() > 0) {
+        sucursal = arrayRequis.get(0).getSucursal();
+        nombre = arrayRequis.get(0).getNombre();
+        apellidoP = arrayRequis.get(0).getApellidoP();
+        apellidoM = arrayRequis.get(0).getApellidoM();
+        departamento = arrayRequis.get(0).getDepartamento();
+        justificacion = arrayRequis.get(0).getJustificacion();
+        fecha = arrayRequis.get(0).getFecha();
+        producto = arrayRequis.get(0).getProducto();
+        cantidad = arrayRequis.get(0).getCantidad();
+        descripcion = arrayRequis.get(0).getDescripcion();
+        marca = arrayRequis.get(0).getMarca();
+        modelo = arrayRequis.get(0).getModelo();
+    }
+
+%>
 <!doctype html>
 <html>
     <head>
@@ -41,7 +69,7 @@
                 <tr style="">
                     <td height="239" colspan="4">
                         <p>Centro de Negocios: <%=sucursal%></p>
-                        <p>Solcitado por: <%=nombre+" "+apellidoM+" "+apellidoP%></p>
+                        <p>Solcitado por: <%=nombre + " " + apellidoM + " " + apellidoP%></p>
                         <p>Departamento: <%=departamento%></p>
                         <p>Encargado de la custodia del Bien:</p>
                         <p>Justificación de la compra: <%=justificacion%></p></td>
@@ -63,13 +91,13 @@
                     <td width="176">OBSERVACIONES</td>
                 </tr>
                 <tr align="center">
-                    <td height="45"><%=cantidad %></td>
-                    <td><%=producto %></td>
-                    <td><%=modelo %></td>
-                    <td><%=marca %></td>
+                    <td height="45"><%=cantidad%></td>
+                    <td><%=producto%></td>
+                    <td><%=modelo%></td>
+                    <td><%=marca%></td>
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
-                    <td><%=descripcion %></td>
+                    <td><%=descripcion%></td>
                 </tr>
                 <tr>
                     <td height="45">&nbsp;</td>

@@ -55,6 +55,7 @@
                         <%
                             int cantidadRequi;
                             int departamento;
+                            int idReqProd;
                             String producto;
                             String solicitante;
 
@@ -64,6 +65,7 @@
 
                             if (arrayRequis.size() > 0) {
                                 for (int i = 0; i < arrayRequis.size(); i++) {
+                                    idReqProd = arrayRequis.get(i).getIdReqProd();
                                     cantidadRequi = arrayRequis.get(i).getCantidad();
                                     producto = arrayRequis.get(i).getProducto();
                                     solicitante = arrayRequis.get(i).getSolicitante();

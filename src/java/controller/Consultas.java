@@ -349,6 +349,7 @@ public class Consultas {
         if (con != null) {
             try {
                 String sql = "SELECT \n"
+                        + "    rp.id_req_prod as REQPROD,\n"
                         + "    rp.id_requisicion AS IDREQUISICION,\n"
                         + "    p.nombre AS PRODUCTO,\n"
                         + "    p.marca AS MARCA,"
@@ -373,6 +374,7 @@ public class Consultas {
                 while (rs.next()) {
                     cont++;
                     RequisicionProducto obj = new RequisicionProducto();
+                    obj.setIdReqProd(rs.getInt("REQPROD"));
                     obj.setIdRequisicion(rs.getInt("IDREQUISICION"));
                     obj.setIdDepto(rs.getInt("DEPTO"));
                     obj.setProducto(rs.getString("PRODUCTO"));
