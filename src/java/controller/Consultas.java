@@ -7,10 +7,18 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import model.CotizacionRequisicion;
 import model.Item;
+import model.RequisicionFormato;
 import model.RequisicionProducto;
 
 public class Consultas {
 
+    /**
+     * Consulta las requisiciones recien creadas (status 3) dependiendo del
+     * departamento al que pertenece el usuario
+     *
+     * @param departamento Indica el departamento del gerente
+     * @return
+     */
     public ArrayList<RequisicionProducto> consultarRequiGerente(String departamento) {
         int cont = 0;
         ArrayList<RequisicionProducto> listaRequi = new ArrayList<RequisicionProducto>();
@@ -206,7 +214,77 @@ public class Consultas {
         return listaRequi;
     }
 
-    public ArrayList<RequisicionProducto> consultarCompras(int departamento, int status) {
+    /**
+     * Consulta las requisiciones aprobadas por el gerente (status 4)
+     * dependiendo de la categoria del producto
+     *
+     * @param id_categoria Indica la categoria a la que pertenecen los producots
+     * solicitados
+     * @param status El status de la requisicion
+     * @return
+     */
+    public ArrayList<RequisicionProducto> consultarCompras(int id_categoria, int status) {
+        int cont = 0;
+        ArrayList<RequisicionProducto> listaRequi = new ArrayList<RequisicionProducto>();
+        PreparedStatement ps;
+        ResultSet rs;
+        Connection con;
+        con = ConexionMySQL.conectar();
+        if (con != null) {
+            try {
+                String sql = "SELECT \n"
+                        + "    rp.id_requisicion AS IDREQUISICION,\n"
+                        + "    rp.id_producto AS IDPRODUCTO,"
+                        + "    p.nombre AS PRODUCTO,\n"
+                        + "    p.marca AS MARCA,"
+                        + "    u.nombre AS SOLICITANTE,\n"
+                        + "    u.id_departamento as DEPTO,\n"
+                        + "    SUM(rp.cantidad) AS CANTIDAD,\n"
+                        + "    r.fecha AS FECHA,\n"
+                        + "    rp.id_req_coti AS COTI\n"
+                        + "FROM\n"
+                        + "    usuario u,\n"
+                        + "    requisiciones r,\n"
+                        + "    req_prod rp,\n"
+                        + "    productos p\n"
+                        + "WHERE\n"
+                        + "    u.id_usuario = r.id_usuario\n"
+                        + "    AND r.id_requisicion = rp.id_requisicion\n"
+                        + "    AND p.id_productos = rp.id_producto\n"
+                        + "    AND rp.id_status = " + status + "\n"
+                        + "    GROUP BY rp.id_producto\n"
+                        + "    ORDER BY rp.id_requisicion;";
+                System.out.println(sql);
+                ps = con.prepareStatement(sql);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    cont++;
+                    RequisicionProducto obj = new RequisicionProducto();
+                    obj.setIdRequisicion(rs.getInt("IDREQUISICION"));
+                    obj.setIdDepto(rs.getInt("DEPTO"));
+                    obj.setIdProducto(rs.getInt("IDPRODUCTO"));
+                    obj.setProducto(rs.getString("PRODUCTO"));
+                    obj.setMarca(rs.getString("MARCA"));
+                    obj.setSolicitante(rs.getString("SOLICITANTE"));
+                    obj.setCantidad(rs.getInt("CANTIDAD"));
+                    obj.setFecha(rs.getString("FECHA"));
+                    obj.setIdReqCoti(rs.getInt("COTI"));
+                    listaRequi.add(obj);
+                }
+            } catch (SQLException ex) {
+                System.out.println("ERROR: " + ex.getMessage());
+            }
+        }
+        return listaRequi;
+    }
+
+    /**
+     * Consulta las requisiciones enviadas por el proveedor (status 11)
+     *
+     * @param status El status de la requisicion
+     * @return
+     */
+    public ArrayList<RequisicionProducto> consultarComprasRecibido(int status) {
         int cont = 0;
         ArrayList<RequisicionProducto> listaRequi = new ArrayList<RequisicionProducto>();
         PreparedStatement ps;
@@ -614,7 +692,7 @@ public class Consultas {
                         + "    AND u.id_departamento = d.id_departamentos\n"
                         + "    AND u.id_sucursal = s.id_sucursales\n"
                         + "    AND p.id_productos = c.id_producto\n"
-                        + "    AND id_cotizacion = "+idCoti+"\n"
+                        + "    AND id_cotizacion = " + idCoti + "\n"
                         + "    group by c.id_cotizacion";
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
@@ -644,12 +722,80 @@ public class Consultas {
         }
         return listaRequi;
     }
-    
+
     /**
-    * Consulta las cotizaciones que fueron seleccionadas por compras para el cuadro comparativo
-    * @param idReqCoti el id que tienen las requisiciones asociadas a una cotizacion
-    * @return ArrayList de cotizaciones
-    */
+     * Consulta la informacion necesaria para llenar el formato de la requisicion
+     * @param idRequProd Id de cada requisicion individual
+     * @return 
+     */
+    public ArrayList<RequisicionFormato> consultarFormatoRequisicion(int idRequProd) {
+        ArrayList<RequisicionFormato> listaRequi = new ArrayList<RequisicionFormato>();
+        PreparedStatement ps;
+        ResultSet rs;
+        Connection con;
+        con = ConexionMySQL.conectar();
+        if (con != null) {
+            try {
+                String sql = "SELECT \n"
+                        + "    s.sucursal,\n"
+                        + "    u.nombre as solicitante,\n"
+                        + "    u.apellido,\n"
+                        + "    u.apellidoM,\n"
+                        + "    d.departamento,\n"
+                        + "    rp.justificacion,\n"
+                        + "    r.fecha,\n"
+                        + "    p.nombre as producto,\n"
+                        + "    rp.cantidad,\n"
+                        + "    rp.descripcion,\n"
+                        + "    p.marca,\n"
+                        + "    p.modelo\n"
+                        + "FROM\n"
+                        + "    sucursales s,\n"
+                        + "    usuario u,\n"
+                        + "    departamentos d,\n"
+                        + "    requisiciones r,\n"
+                        + "    req_prod rp,\n"
+                        + "    productos p\n"
+                        + "WHERE\n"
+                        + "    rp.id_requisicion = r.id_requisicion\n"
+                        + "        AND r.id_usuario = u.id_usuario\n"
+                        + "        AND d.id_departamentos = u.id_departamento\n"
+                        + "        AND s.id_sucursales = u.id_sucursal\n"
+                        + "        AND rp.id_producto = p.id_productos\n"
+                        + "        AND rp.id_req_prod = 1";
+                ps = con.prepareStatement(sql);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    RequisicionFormato obj = new RequisicionFormato();
+                    obj.setSucursal(rs.getString("sucursal"));
+                    obj.setNombre(rs.getString("solicitante"));
+                    obj.setApellidoP(rs.getString("apellido"));
+                    obj.setApellidoM(rs.getString("apellidoM"));
+                    obj.setDepartamento(rs.getString("departamento"));
+                    obj.setJustificacion(rs.getString("justificacion"));
+                    obj.setFecha(rs.getString("fecha"));
+                    obj.setProducto(rs.getString("producto"));
+                    obj.setCantidad(rs.getInt("cantidad"));
+                    obj.setDescripcion(rs.getString("descripcion"));
+                    obj.setMarca(rs.getString("marca"));
+                    obj.setModelo(rs.getString("modelo"));
+                    listaRequi.add(obj);
+                }
+            } catch (SQLException ex) {
+                System.out.println("ERROR: " + ex.getMessage());
+            }
+        }
+        return listaRequi;
+    }
+
+    /**
+     * Consulta las cotizaciones que fueron seleccionadas por compras para el
+     * cuadro comparativo
+     *
+     * @param idReqCoti el id que tienen las requisiciones asociadas a una
+     * cotizacion
+     * @return ArrayList de cotizaciones
+     */
     public ArrayList<CotizacionRequisicion> consultarCotizacionesSeleccionadas(int idReqCoti) {
         ArrayList<CotizacionRequisicion> listaRequi = new ArrayList<CotizacionRequisicion>();
         PreparedStatement ps;
@@ -689,7 +835,7 @@ public class Consultas {
                         + "    AND u.id_departamento = d.id_departamentos\n"
                         + "    AND u.id_sucursal = s.id_sucursales\n"
                         + "    AND p.id_productos = c.id_producto\n"
-                        + "    AND c.id_req_coti = "+idReqCoti+" AND c.id_status_cotizacion >= 1\n"
+                        + "    AND c.id_req_coti = " + idReqCoti + " AND c.id_status_cotizacion >= 1\n"
                         + "    group by c.id_cotizacion";
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();

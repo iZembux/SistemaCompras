@@ -13,10 +13,10 @@
     if (usuarioValidado == null) {
         response.sendRedirect("index.jsp");
     } else {
-        String idDepto = (String) sesion.getAttribute("departamento"); 
+        String idDepto = (String) sesion.getAttribute("departamento");
         String rol = (String) sesion.getAttribute("rol");
         String id_usuario = (String) sesion.getAttribute("idUsuario");
-    int idCategoria = 8;
+        int idCategoria = 8;
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -51,6 +51,7 @@
                     <%
                         int cantidadRequi;
                         int idProducto;
+                        int idRequi;
                         int idReqCoti;
                         int status;
                         String producto;
@@ -58,10 +59,11 @@
 
                         ArrayList<RequisicionProducto> arrayRequis = new ArrayList<RequisicionProducto>();
                         Consultas obj = new Consultas();
-                        arrayRequis = obj.consultarComprasProv(idCategoria, "5,6");
+                        arrayRequis = obj.consultarComprasProv(idCategoria, "5,6,10");
 
                         if (arrayRequis.size() > 0) {
                             for (int i = 0; i < arrayRequis.size(); i++) {
+                                idRequi = arrayRequis.get(i).getIdRequisicion();
                                 idProducto = arrayRequis.get(i).getIdProducto();
                                 cantidadRequi = arrayRequis.get(i).getCantidad();
                                 producto = arrayRequis.get(i).getProducto();
@@ -85,11 +87,11 @@
                                 int idUsuarioP = 0;
                                 ArrayList<CotizacionRequisicion> arrayRequis2 = new ArrayList<CotizacionRequisicion>();
                                 Consultas obj2 = new Consultas();
-                                arrayRequis2 = obj2.consultarProveedorCoti(idReqCoti,id_usuario);
+                                arrayRequis2 = obj2.consultarProveedorCoti(idReqCoti, id_usuario);
                                 System.out.println(arrayRequis2.size());
                                 if (arrayRequis2.size() > 0) { %>
 
-                            <button type="button" class="btn btn-success btn-sm">Ya haz realizado una cotizacion</button>   
+                            <button type="button" class="btn btn-info btn-sm">Ya haz realizado una cotizacion</button>   
 
                             <%} else {%>
                             <form action="formCotizacion.jsp" method="post">
@@ -99,7 +101,33 @@
                                 <button type="submit" class="btn btn-primary btn-sm">Hacer Cotizacion</button>
                             </form>
                             <% }
-                                }%>
+                            } else if (status == 10) {
+                                int idUsuarioP = 0;
+                                ArrayList<CotizacionRequisicion> arrayRequis2 = new ArrayList<CotizacionRequisicion>();
+                                Consultas obj2 = new Consultas();
+                                arrayRequis2 = obj2.consultarProveedorCoti(idReqCoti, id_usuario);
+                                System.out.println(arrayRequis2.size());
+                                if (arrayRequis2.size() > 0) {%>
+
+                            <div class="row">
+                                <button type="button" class="btn btn-success btn-sm">Cotizacion Ganadora</button> 
+                                <form action="formatos/ordenCompra.jsp" method="post">
+                                    <input type="hidden" class="hidden" name="idReqCoti" value="<%=idReqCoti%>" >
+                                    <input type="hidden" class="hidden" name="idProducto" value="<%=idProducto%>" >
+                                    <button type="submit" class="btn btn-primary btn-sm">Ver Orden de Compra</button>
+                                </form>
+                                    <form action="actualizaProveedor.jsp" method="post">
+                                    <input type="hidden" class="hidden" name="idRequi" value="<%=idRequi%>" >
+                                    <input type="hidden" class="hidden" name="nuevoStatus" value="11" >
+                                    <button type="submit" class="btn btn-info btn-sm">Iniciar Envío de Productos</button>
+                                </form>
+                            </div>
+
+                            <%} else {%>
+                            <button type="submit" class="btn btn-primary btn-sm">Cotizacion Perdida</button>
+                            <% }
+                                }
+                            %>
                         </td>
                     </tr>
                     <% }

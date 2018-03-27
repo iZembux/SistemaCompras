@@ -17,7 +17,7 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <% if (rol == 1) { %>
+            <% if (rol == 6) { %>
             <a class="nav-link" href="menuSolicita.jsp"> 
                 Solicitar Producto
             </a>
@@ -59,6 +59,12 @@
             </li>
             <a class="nav-link" href="menuComprasOrdenes.jsp"> 
                 Licitaciones Autorizadas
+            </a>
+            <a class="nav-link" href="menuComprasRecepcion.jsp"> 
+                Recepcion de Productos
+            </a>
+            <a class="nav-link" href="menuComprasEntrega.jsp"> 
+                Entrega de Productos
             </a>
             <% } %>
             <li class="nav-item dropdown">
@@ -108,12 +114,13 @@
             <% }
                     }
                 }%>
+                <%--
             <a class="nav-link" href="menuRequisicionesProveedor.jsp"> 
                 Licitaciones Disponibles
             </a>
             <a class="nav-link" href="menuHistorialProveedor.jsp"> 
                 Historial
-            </a>
+            </a>--%>
         </ul>
 
     </div>

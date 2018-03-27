@@ -12,7 +12,7 @@
     if (usuarioValidado == null) {
         response.sendRedirect("index.jsp");
     } else {
-        String idDepto = (String) sesion.getAttribute("departamento"); 
+        String idDepto = (String) sesion.getAttribute("departamento");
         String rol = (String) sesion.getAttribute("rol");
 
         int idCategoria = 0;
@@ -48,6 +48,7 @@
                             <th scope="col">Cantidad</th>
                             <th scope="col">Solicitante</th>
                             <th scope="col">Departamento</th>
+                            <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -74,6 +75,10 @@
                             <td><%=cantidadRequi%></td>
                             <td><%=solicitante%></td>
                             <td><%=departamento%></td>
+                            <td><form action="formatos/requisicion.jsp" method="post">
+                                    <button type="submit" class="btn btn-success btn-sm">Ver Requisicion</button>
+                                </form>
+                            </td>
                         </tr>
                         <% }
                             }%>

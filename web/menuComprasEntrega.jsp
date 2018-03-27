@@ -33,14 +33,16 @@
 
         <div class="container my-5">
             <div class="page-header">
-                <h3>Cotizaciones Autorizadas</h3>
+                <h3>Recepcion de Productos</h3>
             </div>
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
+                        <th scope="col">Requisicion</th>
                         <th scope="col">Producto</th>
                         <th scope="col">Marca</th>
                         <th scope="col">Cantidad</th>
+                        <th scope="col">Proveedor</th>
                         <th scope="col"></th>
                     </tr>
                 </thead>
@@ -54,7 +56,7 @@
 
                         ArrayList<RequisicionProducto> arrayRequis = new ArrayList<RequisicionProducto>();
                         Consultas obj = new Consultas();
-                        arrayRequis = obj.consultarCompras(id_categoria,10);
+                        arrayRequis = obj.consultarComprasRecibido(12);
 
                         if (arrayRequis.size() > 0) {
                             for (int i = 0; i < arrayRequis.size(); i++) {
@@ -66,13 +68,14 @@
                     %>
                     <tr>
                         <td><%=producto%></td>
+                        <td><%=producto%></td>
                         <td><%=marca%></td>
                         <td><%=cantidadRequi%></td> 
                         <td>
-                            <form action="formatos/ordenCompra.jsp" method="post">
+                            <form action="actualizaRecibido.jsp" method="post">
                                 <input type="hidden" class="hidden" name="idReqCoti" value="<%=idReqCoti%>" >
-                                <input type="hidden" class="hidden" name="idProducto" value="<%=idProducto%>" >
-                                <button type="submit" class="btn btn-primary btn-sm">Ver Orden de Compra</button>
+                                <input type="hidden" class="hidden" name="nuevoStatus" value="13" >
+                                <button type="submit" class="btn btn-success btn-sm">Producto Entregado</button>
                             </form>
                         </td>
                     </tr>
