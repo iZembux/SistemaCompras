@@ -1,7 +1,7 @@
 <%-- 
     Document   : recuperarContraseña
     Created on : 16/03/2018, 04:38:27 PM
-    Author     : aBIMAEL
+    Author     : LuisMtz
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

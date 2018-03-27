@@ -8,13 +8,29 @@
         <servlet-name>SignUp</servlet-name>
         <servlet-class>servlet.SignUp</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RegistroProveedor</servlet-name>
+        <servlet-class>servlet.RegistroProveedor</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AccesoProveedor</servlet-name>
+        <servlet-class>servlet.AccesoProveedor</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Acceso</servlet-name>
         <url-pattern>/Acceso/*</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>AccesoProveedor</servlet-name>
+        <url-pattern>/AccesoProveedor/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>SignUp</servlet-name>
         <url-pattern>/SignUp/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RegistroProveedor</servlet-name>
+        <url-pattern>/RegistroProveedor/*</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

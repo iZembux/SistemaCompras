@@ -124,8 +124,8 @@
                         <form method="post" action="insertaProducto.jsp">
                             <div class="form-group">
                                 <label class="col-sm-1 control-label"></label>
-                                <div class="col-sm-10 input-group">
-                                    <select id="modelo" name="modelo">
+                                <div class="input-group">
+                                    <select id="modelo" name="modelo" class="form-control">
                                         <option>Selecciona Producto</option>
                                         <%
                                             Consultas obj = new Consultas();

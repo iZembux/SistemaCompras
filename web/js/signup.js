@@ -86,4 +86,19 @@ $(".submit").click(function(){
 	return true;
 })
 
-
+function validarPassword() {
+    var espacios = false;
+    var cont = 0;
+    var p1 = document.getElementById("pass").value;
+    var p2 = document.getElementById("cpass").value;
+    if (p1.length == 0 || p2.length == 0) {
+        swal("Opps!", "OLVIDASTE INGRESAR UNA CONTRASEÑA!", "warning");
+        return false;
+    }
+    if (p1 != p2) {
+        swal("Opps!", "TUS CONTRASEÑAS NO COINCIDEN!", "warning");
+        document.getElementById("pass").value = null;
+        document.getElementById("cpass").value = null;
+        return false;
+    }
+}
