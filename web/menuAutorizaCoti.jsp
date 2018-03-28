@@ -72,7 +72,7 @@
                         ArrayList<CotizacionRequisicion> arrayRequis2 = new ArrayList<CotizacionRequisicion>();
                         Consultas obj2 = new Consultas();
 
-                        arrayRequis = obj.consultarCompras(0, status);
+                        arrayRequis = obj.consultarCompras2(0, status);
 
                         if (arrayRequis.size() > 0) {
                             for (int i = 0; i < arrayRequis.size(); i++) {

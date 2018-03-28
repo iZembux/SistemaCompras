@@ -78,6 +78,7 @@
                             <td><%=solicitante%></td>
                             <td><%=departamento%></td>
                             <td><form action="formatos/requisicion.jsp" method="post">
+                                    <input type="hidden" class="hidden" name="idReqProd" value="<%=idReqProd%>" >
                                     <button type="submit" class="btn btn-success btn-sm">Ver Requisicion</button>
                                 </form>
                             </td>

@@ -49,6 +49,7 @@
                 </thead>
                 <tbody>
                     <%
+                        int idReqProd;
                         int idRequi;
                         int cantidadRequi;
                         String producto;
@@ -62,6 +63,7 @@
 
                         if (arrayRequis.size() > 0) {
                             for (int i = 0; i < arrayRequis.size(); i++) {
+                                idReqProd = arrayRequis.get(i).getIdReqProd();
                                 idRequi = arrayRequis.get(i).getIdRequisicion();
                                 producto = arrayRequis.get(i).getProducto();
                                 cantidadRequi = arrayRequis.get(i).getCantidad();
@@ -78,7 +80,7 @@
                         <td><%=fecha%></td>
                         <td>
                             <form action="formatos/requisicion.jsp" method="post">
-                                <input type="hidden" name="idRequi" value="<%=idRequi%>" >
+                                <input type="hidden" name="idReqProd" value="<%=idReqProd%>" >
                                 <button type="submit" class="btn btn-primary btn-sm">Ver Formato</button>
                             </form>
                         </td>

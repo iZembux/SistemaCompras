@@ -13,8 +13,6 @@
     if (usuarioValidado == null) {
         response.sendRedirect("index.jsp");
     } else {
-        String idDepto = (String) sesion.getAttribute("departamento");
-        String rol = (String) sesion.getAttribute("rol");
         String id_usuario = (String) sesion.getAttribute("idUsuario");
         int idCategoria = 8;
 %>
@@ -29,10 +27,7 @@
     </head>
     <body>
 
-        <jsp:include page="frag/mainNavbar.jsp">
-            <jsp:param name="rol" value="<%=rol%>" />  
-            <jsp:param name="depto" value="<%=idDepto%>" />
-        </jsp:include>
+        <jsp:include page="frag/mainNavbarProveedor.jsp"/> 
 
         <div class="container my-5">
             <div class="page-header">
@@ -78,13 +73,12 @@
                         <td>
                             <% if (status == 5) {%>
                             <form action="formCotizacion.jsp" method="post">
-                                <input type="hidden" class="hidden" name="idUsuario" value="<%=id_usuario%>" >
+                                <input type="hidden" class="hidden" name="cantidad" value="<%=cantidadRequi%>" >
                                 <input type="hidden" class="hidden" name="idProducto" value="<%=idProducto%>" >
                                 <input type="hidden" class="hidden" name="idReqCoti" value="<%=idReqCoti%>" >
                                 <button type="submit" class="btn btn-primary btn-sm">Hacer Cotizacion</button>
                             </form>
                             <% } else if (status == 6) {
-                                int idUsuarioP = 0;
                                 ArrayList<CotizacionRequisicion> arrayRequis2 = new ArrayList<CotizacionRequisicion>();
                                 Consultas obj2 = new Consultas();
                                 arrayRequis2 = obj2.consultarProveedorCoti(idReqCoti, id_usuario);
@@ -95,6 +89,7 @@
 
                             <%} else {%>
                             <form action="formCotizacion.jsp" method="post">
+                                <input type="hidden" class="hidden" name="cantidad" value="<%=cantidadRequi%>" >
                                 <input type="hidden" class="hidden" name="idUsuario" value="<%=id_usuario%>" >
                                 <input type="hidden" class="hidden" name="idProducto" value="<%=idProducto%>" >
                                 <input type="hidden" class="hidden" name="idReqCoti" value="<%=idReqCoti%>" >

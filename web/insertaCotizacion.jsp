@@ -35,7 +35,7 @@
     } catch (Exception e) {
     }
     try {
-        iva = Double.parseDouble(request.getParameter("iva")); 
+        iva = precio * 0.16; 
     } catch (Exception e) {
     }
     try {

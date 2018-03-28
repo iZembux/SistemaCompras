@@ -22,10 +22,7 @@
     </head>
     <body>
 
-        <jsp:include page="frag/mainNavbar.jsp">
-            <jsp:param name="rol" value="<%=rol%>" />  
-            <jsp:param name="depto" value="<%=idDepto%>" />
-        </jsp:include>
+        <jsp:include page="frag/mainNavbarProveedor.jsp"/> 
 
         <div class="container my-5">
             <div class="page-header">

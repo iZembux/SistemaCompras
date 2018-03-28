@@ -114,13 +114,6 @@
             <% }
                     }
                 }%>
-                <%--
-            <a class="nav-link" href="menuRequisicionesProveedor.jsp"> 
-                Licitaciones Disponibles
-            </a>
-            <a class="nav-link" href="menuHistorialProveedor.jsp"> 
-                Historial
-            </a>--%>
         </ul>
 
     </div>

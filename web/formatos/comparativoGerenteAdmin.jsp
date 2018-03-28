@@ -14,12 +14,12 @@
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-    String proveedor = null, proveedor2 = null, proveedor3 = null;
-    String producto = null;
-    String solicitante = null;
-    String departamento = null;
-    String sucursal = null;
-    String fecha = null;
+    String proveedor = " ", proveedor2 = " ", proveedor3 = " ";
+    String producto = " ";
+    String solicitante = " ";
+    String departamento = " ";
+    String sucursal = " ";
+    String fecha = " ";
 
     int cantidad = 0, cantidad2 = 0, cantidad3 = 0;
     int precio = 0, precio2 = 0, precio3 = 0;

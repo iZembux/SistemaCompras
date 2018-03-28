@@ -11,12 +11,11 @@
     if (usuarioValidado == null) {
         response.sendRedirect("index.jsp");
     } else {
-        String idDepto = (String) sesion.getAttribute("departamento"); 
-        String rol = (String) sesion.getAttribute("rol");
         String idUsuario = (String) sesion.getAttribute("idUsuario");
 
         int idProducto = 0;
         int idReqCoti = 0;
+        int cantidad = 0;
 
         try {
             idProducto = Integer.parseInt(request.getParameter("idProducto"));
@@ -29,9 +28,10 @@
         }
 
         try {
-            idUsuario = request.getParameter("idUsuario");
+            cantidad = Integer.parseInt(request.getParameter("cantidad"));
         } catch (Exception e) {
         }
+
 %>
 <!DOCTYPE html>
 <html>
@@ -43,10 +43,7 @@
     </head>
     <body>
 
-        <jsp:include page="frag/mainNavbar.jsp">
-            <jsp:param name="rol" value="<%=rol%>" />  
-            <jsp:param name="depto" value="<%=idDepto%>" />
-        </jsp:include>
+        <jsp:include page="frag/mainNavbarProveedor.jsp"/>
 
         <div class="container">
             <div class="card w-50 mx-auto my-5">
@@ -55,30 +52,26 @@
                     <form method="post" action="insertaCotizacion.jsp">
                         <div class="form-group">
                             <label for="cantidad">Cantidad</label>
-                            <input type="number" class="form-control" id="cantidad" name="cantidad">
+                            <input type="number" class="form-control" id="cantidad" name="cantidad" value="<%= cantidad %>">
                         </div>
                         <div for="precio" class="form-group">
                             <label>Precio Unitario</label>
                             <input type="text" class="form-control" id="precio" name="precio">
-                        </div>
-                        <div for="iva" class="form-group">
-                            <label>Precio con IVA</label>
-                            <input type="text" class="form-control" id="iva" name="iva">
                         </div>
                         <div for="credito" class="form-group">
                             <label>Dias de Crédito</label>
                             <input type="text" class="form-control" id="credito" name="credito">
                         </div>
                         <div for="entrega" class="form-group">
-                            <label>Tiempo de Entrega</label>
+                            <label>Tiempo de Entrega (Días)</label>
                             <input type="text" class="form-control" id="entrega" name="entrega">
                         </div>
                         <div for="descuento" class="form-group">
-                            <label>Descuento</label>
+                            <label>% Descuento</label>
                             <input type="text" class="form-control" id="descuento" name="descuento">
                         </div>
                         <div for="anticipo" class="form-group">
-                            <label>Anticipo</label>
+                            <label> % Anticipo</label>
                             <input type="text" class="form-control" id="anticipo" name="anticipo">
                         </div>
                         <div class="modal-footer">
