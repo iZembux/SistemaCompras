@@ -62,7 +62,9 @@
 
         <div class="container">
             <div class="jumbotron">
-                <form action="formatos/comparativo.jsp" method="post" name="formulario" id="formulario" target="_blank">
+                <form action="formatos/comparativo.jsp" method="post" name="formulario" id="formulario">
+                    <h5> Selecciona hasta 3 cotizaciones para generar cuadro comparativo </h5>
+                    <br>
                     <table class="table table-striped table-hover">
                         <thead>
                             <tr>

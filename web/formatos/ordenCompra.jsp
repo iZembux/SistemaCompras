@@ -13,13 +13,13 @@
     String producto = null;
     String descripcion = null;
     String logo = null;
-    int telefonoP = 0;
+    String telefonoP = null;
     int cantidad = 0;
     int descuento = 0;
     int precio = 0;
     int idReqCoti = 0;
-
     int idP = 0;
+
     int idReqProd = 0;
     String usuarioC = null;
 
@@ -33,9 +33,10 @@
     arrayRequis = obj.consultarFormatoOrden(idReqCoti);
 
     if (!arrayRequis.isEmpty()) {
-        sucursal = arrayRequis.get(0).getSucursal();
+        idP = arrayRequis.get(0).getIdP();
+        //sucursal = arrayRequis.get(0).getSucursal();
         rfc = arrayRequis.get(0).getRfc();
-        direccion = arrayRequis.get(0).getDireccion();
+        //direccion = arrayRequis.get(0).getDireccion();
         nombreP = arrayRequis.get(0).getNombreP();
         direccionP = arrayRequis.get(0).getDireccionP();
         fecha = arrayRequis.get(0).getFecha();
@@ -63,12 +64,18 @@
         <title>RequisicionCompra</title>
     </head>
     <body style=" zoom: 85%">
+        <form action="actualizaRecibido.jsp" method="post">
+            <input type="hidden" class="hidden" name="idReqCoti" value="<%=idReqCoti%>" >
+            <input type="hidden" class="hidden" name="nuevoStatus" value="12" >
+            <button type="submit" class="btn btn-success btn-sm">Enviar Orden</button>
+        </form>
+            
         <table width="863" height="1113" border="1" style="border-collapse: collapse" align="center">
             <caption>&nbsp;
             </caption>
             <tbody>
                 <tr>
-                    <th height="96" colspan="7" scope="col"><p><img src="../img/<%=logo %>" alt="" width="295" height="176" align="left"/></p>
+                    <th height="96" colspan="7" scope="col"><p><img src="../img/<%=logo%>" alt="" width="295"  align="left"/></p>
                         <h1 align="center"><%=sucursal%></h1>
                         <h4 align="center">RFC: <%=rfc%></h4>
                         <h4 align="center"><%=direccion%></h4></th>
@@ -93,14 +100,14 @@
                     <td width="120"><strong>Costo Unitario</strong></td>
                     <td width="56"><strong>Importe</strong></td>
                 </tr>
-                <tr style="border: none">
+                <tr style="border: none; text-align: center">
                     <td height="32"><strong></strong><%=cantidad%></td>
                     <td><strong></strong><%=unidadMedida%></td>
                     <td><strong></strong><%=producto%></td>
                     <td><strong></strong><%=descripcion%></td>
                     <td><strong></strong><%=descuento%> %</td>
-                    <td><strong></strong><%=precio%></td>
-                    <td><strong></strong><%=cantidad * precio%></td> 
+                    <td><strong></strong>$<%=precio%></td>
+                    <td><strong></strong>$<%=cantidad * precio%></td> 
                 </tr>
                 <tr style="border: none">
                     <td height="169" colspan="7">&nbsp;</td>
@@ -118,8 +125,8 @@
                         <p><%=(cantidad * precio * (descuento / 100))%></p>
                         <p>0.00</p>
                         <p>&nbsp;</p>
-                        <p><%=(cantidad * precio) + (cantidad * precio * 0.16)%></p>
-                        <p><%=(cantidad * precio) - (cantidad * precio * (descuento / 100))%></p>
+                        <p><%=(cantidad * precio * 0.16)%></p>
+                        <p><%=(cantidad * precio) - (cantidad * precio * (descuento / 100)) + (cantidad * precio * 0.16)%></p>
                         <p>&nbsp;</p></td>
                 </tr>
                 <tr style="border: none">

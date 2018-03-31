@@ -14,7 +14,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-    String proveedor = " ", proveedor2 = " ", proveedor3 = " ";
+    String proveedor = "N/A", proveedor2 = "N/A", proveedor3 = "N/A";
     String producto = " ";
     String solicitante = " ";
     String departamento = " ";
@@ -33,6 +33,7 @@
     int idCotizacionSeleccionada = 0;
     int precioTotal = 0;
     int nuevoStatus = 0;
+    int solicitantes = 0;
 
     try {
         idReqCoti = Integer.parseInt(request.getParameter("idReqCoti"));
@@ -54,6 +55,13 @@
 
     ArrayList<CotizacionRequisicion> arrayRequis = new ArrayList<CotizacionRequisicion>();
     Consultas obj = new Consultas();
+    Consultas obj3 = new Consultas();
+    
+    try {
+        solicitantes = obj3.contarSolicitantesCoti(idCoti.get(0));
+    } catch (Exception e) {
+    }
+    
     try {
         arrayRequis = obj.consultarCotizaciones(idCoti.get(0));
         solicitante = arrayRequis.get(0).getSolicitante();
@@ -174,7 +182,11 @@
                 <tbody>
                     <tr>
                         <td width="10%" style="border: hidden">Solicita:</td>
+                        <% if (solicitantes > 1) { %>
+                        <td width="30%" style="border-top: hidden">Compras</td>
+                        <% } else {%>
                         <td width="30%" style="border-top: hidden"><%=solicitante%></td>
+                        <% } %>
                         <td width="25%" style="border: hidden">&nbsp;</td>
                         <td width="15%" style="border: hidden">Compra General</td>
                         <td width="10%" style=""></td>
@@ -190,7 +202,11 @@
                     </tr>
                     <tr>
                         <td style="border: hidden">Departamento:</td>
+                        <% if (solicitantes > 1) { %>
+                        <td>Compras</td>
+                        <% } else {%>
                         <td><%=departamento%></td>
+                        <% } %>
                         <td style="border: hidden">&nbsp;</td>
                         <td style="border: hidden">&nbsp;</td>
                         <td style="border: hidden">&nbsp;</td>
