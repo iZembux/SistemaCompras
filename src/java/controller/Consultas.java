@@ -678,7 +678,7 @@ public class Consultas {
         con = ConexionMySQL.conectar();
         if (con != null) {
             try {
-                String sql = "select id_productos, nombre, id_categoria, serie, marca, modelo, id_unidadmedida from productos";
+                String sql = "select id_productos, nombre, id_categoria, serie, marca, modelo, id_unidadmedida from productos order by nombre";
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {

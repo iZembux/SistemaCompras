@@ -34,7 +34,7 @@
         int i = st.executeUpdate("UPDATE req_prod SET id_status = " + nuevoStatus + ", id_req_coti = " + (id_cotizacion + 1) + " WHERE id_producto = " + idProducto + " AND id_status = 4;");
         //Envia correo a los proveedores disponibles
         for (int j = 0; j < 1; j++) {
-            objMail.enviarCorreo("diego.torres@continental.com.mx", "Proveedor", "", "Grupo Continental Automotriz ha solicitado una nueva cotizacion, favor de revisarla en el sistema de compras");
+            objMail.enviarCorreo("luis.martinez@continental.com.mx", "Proveedor", "", "Grupo Continental Automotriz ha solicitado una nueva cotizacion, favor de revisarla en el sistema de compras");
         }
         response.sendRedirect("menuComprasRequisiciones.jsp");
     }

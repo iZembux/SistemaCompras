@@ -62,7 +62,7 @@
 
         <div class="container">
             <div class="jumbotron">
-                <form action="formatos/comparativo.jsp" method="post" name="formulario" id="formulario">
+                <form action="formatos/comparativo.jsp" method="post" name="formulario" id="formulario" target="_blank">
                     <table class="table table-striped table-hover">
                         <thead>
                             <tr>

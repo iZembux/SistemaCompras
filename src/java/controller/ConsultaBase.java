@@ -120,4 +120,32 @@ public class ConsultaBase {
         }
         return sucursales;
     }
+    
+    public String obtieneDepartamento(int idDpto){
+        
+        String departamento = "";
+        String sql = "";
+        Connection con = null;
+        ConexionMySQL coneccion = new ConexionMySQL();
+        con = coneccion.conectar();
+        Statement s;
+        ResultSet rs;
+        PreparedStatement ps;
+        if (con != null) {
+            try {
+                sql = "SELECT upper(departamento) as departamento FROM scompras.departamentos WHERE id_departamentos = "+idDpto+";";
+
+                ps = con.prepareStatement(sql);
+                rs = ps.executeQuery();
+
+                while (rs.next()) {
+                    departamento = rs.getString("departamento");
+                }
+                con.close();
+            } catch (Exception e) {
+                System.out.println("QUERY NO EJECUTADO: " + e.getMessage());
+            }
+        }
+        return departamento;
+    }
 }
