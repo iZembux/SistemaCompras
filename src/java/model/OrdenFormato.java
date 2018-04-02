@@ -15,7 +15,8 @@ public class OrdenFormato {
     private String unidadMedida;
     private String producto;
     private String descripcion;
-    private int telefonoP;
+    private String telefonoP;
+    private int idP;
     private int cantidad;
     private int descuento;
     private int precio;
@@ -149,14 +150,14 @@ public class OrdenFormato {
     /**
      * @return the telefonoP
      */
-    public int getTelefonoP() {
+    public String getTelefonoP() {
         return telefonoP;
     }
 
     /**
      * @param telefonoP the telefonoP to set
      */
-    public void setTelefonoP(int telefonoP) {
+    public void setTelefonoP(String telefonoP) {
         this.telefonoP = telefonoP;
     }
 
@@ -200,6 +201,20 @@ public class OrdenFormato {
      */
     public void setPrecio(int precio) {
         this.precio = precio;
+    }
+
+    /**
+     * @return the idP
+     */
+    public int getIdP() {
+        return idP;
+    }
+
+    /**
+     * @param idP the idP to set
+     */
+    public void setIdP(int idP) {
+        this.idP = idP;
     }
     
     
