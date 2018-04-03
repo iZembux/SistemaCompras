@@ -79,7 +79,7 @@
                         <td><%=porcentaje%></td>
                         <td><%=fecha%></td>
                         <td>
-                            <form action="formatos/requisicion.jsp" method="post">
+                            <form action="formatos/requisicion.jsp" method="post" target="_blank">
                                 <input type="hidden" name="idReqProd" value="<%=idReqProd%>" >
                                 <button type="submit" class="btn btn-primary btn-sm">Ver Formato</button>
                             </form>
