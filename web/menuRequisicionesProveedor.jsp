@@ -14,7 +14,7 @@
         response.sendRedirect("index.jsp");
     } else {
         String id_usuario = (String) sesion.getAttribute("idUsuario");
-        int idCategoria = 8;
+        int idCategoria = 1;
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -54,6 +54,11 @@
 
                         ArrayList<RequisicionProducto> arrayRequis = new ArrayList<RequisicionProducto>();
                         Consultas obj = new Consultas();
+                        /*Consulta requisiciones dependiendo de su status 
+                        status 5 - sin ninguna cotizacion
+                        status 6 - con al menus una cotizacion
+                        status 10 - cotizacion autorizada
+                         */
                         arrayRequis = obj.consultarComprasProv(idCategoria, "5,6,10");
 
                         if (arrayRequis.size() > 0) {
@@ -83,10 +88,11 @@
                                 Consultas obj2 = new Consultas();
                                 arrayRequis2 = obj2.consultarProveedorCoti(idReqCoti, id_usuario);
                                 System.out.println(arrayRequis2.size());
+                                /* Consulta si el usuario activo ya realizo una cotizacion,
+                                si es asi, muesta un mensaje, si no, permite hacer una cotizacion
+                                 */
                                 if (arrayRequis2.size() > 0) { %>
-
                             <button type="button" class="btn btn-info btn-sm">Ya haz realizado una cotizacion</button>   
-
                             <%} else {%>
                             <form action="formCotizacion.jsp" method="post">
                                 <input type="hidden" class="hidden" name="cantidad" value="<%=cantidadRequi%>" >
@@ -97,13 +103,12 @@
                             </form>
                             <% }
                             } else if (status == 10) {
-                                int idUsuarioP = 0;
                                 ArrayList<CotizacionRequisicion> arrayRequis2 = new ArrayList<CotizacionRequisicion>();
                                 Consultas obj2 = new Consultas();
                                 arrayRequis2 = obj2.consultarProveedorCoti(idReqCoti, id_usuario);
                                 System.out.println(arrayRequis2.size());
+                                // Consulta si el usuario activo ha ganado la licitacion
                                 if (arrayRequis2.size() > 0) {%>
-
                             <div class="row">
                                 <button type="button" class="btn btn-success btn-sm">Cotizacion Ganadora</button> 
                                 <form action="formatos/ordenCompra.jsp" method="post">
@@ -111,13 +116,12 @@
                                     <input type="hidden" class="hidden" name="idProducto" value="<%=idProducto%>" >
                                     <button type="submit" class="btn btn-primary btn-sm">Ver Orden de Compra</button>
                                 </form>
-                                    <form action="actualizaProveedor.jsp" method="post">
+                                <form action="actualizaProveedor.jsp" method="post">
                                     <input type="hidden" class="hidden" name="idRequi" value="<%=idRequi%>" >
                                     <input type="hidden" class="hidden" name="nuevoStatus" value="11" >
                                     <button type="submit" class="btn btn-info btn-sm">Iniciar Envío de Productos</button>
                                 </form>
                             </div>
-
                             <%} else {%>
                             <button type="submit" class="btn btn-primary btn-sm">Cotizacion Perdida</button>
                             <% }

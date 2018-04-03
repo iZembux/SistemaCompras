@@ -18,6 +18,7 @@
         String idDepto = (String) sesion.getAttribute("departamento"); 
         String rol = (String) sesion.getAttribute("rol");
         String id_usuario = (String) sesion.getAttribute("idUsuario");
+        String nombre = (String) sesion.getAttribute("nombre");
         
         int nuevaRequisicion = 1;
 
@@ -47,7 +48,8 @@
             <header class="jumbotron my-4">
                 <div class="row">
                     <div class="col-lg-7">
-                        <h3 class="display-5">Bienvenido al sistema de compras!</h3>
+                        <h3 class="display-5">Hola <%=nombre%>! </h3>
+                        <h3 class="display-5">Bienvenido al sistema de compras</h3>
                         <p class="lead">Selecciona la caegoria de los productos que deseas solicitar</p>
                     </div>
                     <div class="col-lg-3">
@@ -154,6 +156,7 @@
                             </div>
                             <input type="hidden" class="form-control" id="nuevaRequisicion" name="nuevaRequisicion" value="<%=nuevaRequisicion%>">
                             <input type="hidden" class="form-control" id="idUsuario" name="idUsuario" value="<%=id_usuario%>">
+                            <input type="hidden" class="form-control" id="idDepto" name="idDepto" value="<%=idDepto%>">
                         </form>
                     </div>
                 </div>
@@ -170,7 +173,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        Por el momento éste módulo no se encuentra disponible
+                        Por el momento solo puedes solicitar productos de papeleria.
                     </div>
                 </div>
             </div>

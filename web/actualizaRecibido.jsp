@@ -27,7 +27,7 @@
 
     st.executeUpdate("UPDATE req_prod SET id_status = " + nuevoStatus + " WHERE id_req_coti = " + idReqCoti + ";");
 
-    objMail.enviarCorreo("diego.torres@continental.com.mx", "Diego", "Torres", "El proveedor ha iniciado envio de productos");
+    objMail.enviarCorreo("diego.torres@continental.com.mx", "Diego", "Torres", "Puedes pasar por tu producto");
 
     response.sendRedirect("menuComprasRecepcion.jsp");
 

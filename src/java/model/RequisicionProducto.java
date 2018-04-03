@@ -2,6 +2,7 @@
 package model;
 
 public class RequisicionProducto {
+    private int idSolicita;
     private int idReqProd;
     private int idRequisicion;
     private int idProducto;
@@ -226,6 +227,20 @@ public class RequisicionProducto {
      */
     public void setIdProducto(int idProducto) {
         this.idProducto = idProducto;
+    }
+
+    /**
+     * @return the idSoliita
+     */
+    public int getIdSolicita() {
+        return idSolicita;
+    }
+
+    /**
+     * @param idSolicita the idSoliita to set
+     */
+    public void setIdSolicita(int idSolicita) {
+        this.idSolicita = idSolicita;
     }
 
     

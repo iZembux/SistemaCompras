@@ -149,7 +149,7 @@
                             <input type="hidden" name="precioTotal" value="<%=precioTotal%>">
                             <input type="hidden" name="cotiSelccionada" value="<%=idCotizacionSeleccionada%>">
                             <input type="hidden" class="hidden" name="nuevoStatusCoti" value="5" >
-                            <input type="hidden" class="hidden" name="nuevoStatus" value="13" >
+                            <input type="hidden" class="hidden" name="nuevoStatus" value="14" >
                             <button type="submit" class="btn btn-danger btn-sm">Rechazar</button>
                         </form>
                     </div>

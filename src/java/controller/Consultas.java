@@ -75,6 +75,7 @@ public class Consultas {
         if (con != null) {
             try {
                 String sql = "SELECT \n"
+                        + "    r.id_usuario as IDSOLICITANTE,\n"
                         + "    rp.id_req_prod AS IDREQUISICION,\n"
                         + "    p.nombre AS PRODUCTO,\n"
                         + "    p.marca AS MARCA,\n"
@@ -96,8 +97,8 @@ public class Consultas {
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
-                    cont++;
                     RequisicionProducto obj = new RequisicionProducto();
+                    obj.setIdSolicita(rs.getInt("IDSOLICITANTE"));
                     obj.setIdReqProd(rs.getInt("IDREQUISICION"));
                     obj.setProducto(rs.getString("PRODUCTO"));
                     obj.setMarca(rs.getString("MARCA"));
@@ -252,6 +253,7 @@ public class Consultas {
                         + "    u.id_usuario = r.id_usuario\n"
                         + "    AND r.id_requisicion = rp.id_requisicion\n"
                         + "    AND p.id_productos = rp.id_producto\n"
+                        + "    AND p.id_categoria = " + id_categoria + "\n"
                         + "    AND rp.id_status = " + status + "\n"
                         + "    GROUP BY rp.id_producto\n"
                         + "    ORDER BY rp.id_requisicion;";

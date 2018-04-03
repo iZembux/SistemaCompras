@@ -55,6 +55,7 @@
                     <%                //Consulta por idRequi seleccionada
                         int idReqProd;
                         int cantidad;
+                        int idSolicita;
                         String producto;
                         String marca;
                         String justificacion;
@@ -66,6 +67,7 @@
 
                         if (arrayRequis.size() > 0) {
                             for (int i = 0; i < arrayRequis.size(); i++) {
+                                idSolicita = arrayRequis.get(i).getIdSolicita();
                                 idReqProd = arrayRequis.get(i).getIdReqProd();
                                 cantidad = arrayRequis.get(i).getCantidad();
                                 producto = arrayRequis.get(i).getProducto();
@@ -83,13 +85,15 @@
                             <div class="row">
                                 <form action="actualizaGerente.jsp" method="post">
                                     <input type="hidden" class="hidden" name="idReqProd" value="<%=idReqProd%>" >
+                                    <input type="hidden" class="hidden" name="idSolicita" value="<%=idSolicita%>" > 
                                     <input type="hidden" class="hidden" name="nuevoStatus" value="4" >
                                     <input type="hidden" class="hidden" name="autoriza" value="1" >
                                     <button type="submit" class="btn btn-success btn-sm">Autorizar</button>
                                 </form>
                                 <form action="actualizaGerente.jsp" method="post">
                                     <input type="hidden" class="hidden" name="idReqProd" value="<%=idReqProd%>" >
-                                    <input type="hidden" class="hidden" name="nuevoStatus" value="13" >
+                                    <input type="hidden" class="hidden" name="idSolicita" value="<%=idSolicita%>" >
+                                    <input type="hidden" class="hidden" name="nuevoStatus" value="14" >
                                     <input type="hidden" class="hidden" name="autoriza" value="2" >
                                     <button type="submit" class="btn btn-danger btn-sm">Rechazar</button>
                                 </form>

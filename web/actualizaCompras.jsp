@@ -9,12 +9,16 @@
     int idProducto = 0;
     int nuevoStatus = 5;
     int id_cotizacion = 0;
+    int idCategoria = 0;
 
     Mail objMail = new Mail();
 
     try {
         idProducto = Integer.parseInt(request.getParameter("idProducto"));
-        System.out.println("Compras Cotiza Producto: " + idProducto);
+    } catch (Exception e) {
+    }
+    try {
+        idCategoria = Integer.parseInt(request.getParameter("categoria"));
     } catch (Exception e) {
     }
 
@@ -22,19 +26,30 @@
     Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/scompras", "root", "stmsc0nt");
     Statement st = con.createStatement();
     ResultSet rs;
+    PreparedStatement ps;
 
     if (false) {
         response.sendRedirect("loginProveedor.jsp");
     } else {
+        //Consulta el ultimo id de cotizacion para crear uno nuevo
         rs = st.executeQuery("select max(id_req_coti) as id from req_prod;");
         if (rs.next()) {
             id_cotizacion = rs.getInt("id");
         }
 
-        int i = st.executeUpdate("UPDATE req_prod SET id_status = " + nuevoStatus + ", id_req_coti = " + (id_cotizacion + 1) + " WHERE id_producto = " + idProducto + " AND id_status = 4;");
+        st.executeUpdate("UPDATE req_prod SET id_status = " + nuevoStatus + ",\n"
+                + "id_req_coti = " + (id_cotizacion + 1) + " WHERE id_producto = " + idProducto + "\n"
+                + "AND id_status = 4;");
+
         //Envia correo a los proveedores disponibles
+        String sql2 = "SELECT email FROM scompras.proveedores where giro = "+idCategoria+";"; 
+        ps = con.prepareStatement(sql2);
+        rs = ps.executeQuery();
+        while (rs.next()) {
+            String correo = rs.getString("correo");
+            objMail.enviarCorreo(correo, "Proveedor", "", "Grupo Continental Automotriz ha solicitado una nueva cotizacion, favor de revisarla en el sistema de compras");
+        }
         for (int j = 0; j < 1; j++) {
-            objMail.enviarCorreo("diego.torres@continental.com.mx", "Proveedor", "", "Grupo Continental Automotriz ha solicitado una nueva cotizacion, favor de revisarla en el sistema de compras");
         }
         response.sendRedirect("menuComprasRequisiciones.jsp");
     }

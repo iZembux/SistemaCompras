@@ -49,6 +49,7 @@ public class Acceso extends HttpServlet {
                 String password = ListaUsu.get(0).getPassword();
                 String depto = ListaUsu.get(0).getId_departamento();
                 String rol = ListaUsu.get(0).getId_rol();
+                String nombreU = ListaUsu.get(0).getNombre();
                 /**/
                 System.out.println("idusuario" + idUsuario);
                 System.out.println("USUARIO: " + usuario);
@@ -70,6 +71,8 @@ public class Acceso extends HttpServlet {
                     sesion.setAttribute("idUsuario", "" + idUsuario);
                     sesion.setAttribute("departamento", depto);
                     sesion.setAttribute("rol", rol);
+                    sesion.setAttribute("nombre", nombreU);
+
 
                     dispatcher = getServletContext().getRequestDispatcher(retorno);
                     dispatcher.forward(request, response);
