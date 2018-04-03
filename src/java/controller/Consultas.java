@@ -519,7 +519,7 @@ public class Consultas {
         if (con != null) {
             try {
                 String sql = "SELECT \n"
-                        + "    u.nombre AS PROVEEDOR,\n"
+                        + "    pr.razonsocial AS PROVEEDOR,\n"
                         + "    p.nombre AS PRODUCTO,\n"
                         + "    c.id_proveedor AS IDP,\n"
                         + "    c.cantidad AS CANTIDAD,\n"
@@ -530,14 +530,14 @@ public class Consultas {
                         + "    c.tiempoentrega AS ENTREGA,\n"
                         + "    c.anticipo AS ANTICIPO\n"
                         + "FROM\n"
-                        + "    usuario u,\n"
                         + "    productos p,\n"
-                        + "    cotizacion c\n"
+                        + "    cotizacion c,\n"
+                        + "    proveedores pr\n"
                         + "WHERE\n"
-                        + "    u.id_usuario = c.id_proveedor\n"
-                        + "        AND p.id_productos = c.id_producto\n"
-                        + "        AND c.id_req_coti = " + idReqCoti + "\n"
-                        + "        AND c.id_proveedor = " + idProveedor + ";";
+                        + "		p.id_productos = c.id_producto\n"
+                        + "        AND pr.idproveedor = c.id_proveedor\n"
+                        + "        AND c.id_req_coti = "+idReqCoti+"\n"
+                        + "        AND c.id_proveedor = "+idProveedor+";";
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
@@ -923,7 +923,7 @@ public class Consultas {
                     obj.setTelefonoP(rs.getString("telefono"));
                     obj.setDescuento(rs.getInt("descuento"));
                     obj.setPrecio(rs.getInt("precio"));
-                    
+
                     listaRequi.add(obj);
                 }
             } catch (SQLException ex) {

@@ -46,7 +46,7 @@
         ps = con.prepareStatement(sql2);
         rs = ps.executeQuery();
         while (rs.next()) {
-            String correo = rs.getString("correo");
+            String correo = rs.getString("email");
             objMail.enviarCorreo(correo, "Proveedor", "", "Grupo Continental Automotriz ha solicitado una nueva cotizacion, favor de revisarla en el sistema de compras");
         }
         for (int j = 0; j < 1; j++) {

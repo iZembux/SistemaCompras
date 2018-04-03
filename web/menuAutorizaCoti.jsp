@@ -20,10 +20,10 @@
         String idDepto = (String) sesion.getAttribute("departamento");
         String rol = (String) sesion.getAttribute("rol");
 
-        if (rol.equals("3")) {
+        if (rol.equals("4")) {
             status = 7;
             direccion = "comparativoGerenteAdmin.jsp";
-        } else if (rol.equals("4")) {
+        } else if (rol.equals("5")) {
             status = 8;
             direccion = "comparativoDirectorAdmin.jsp";
         }
