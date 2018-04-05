@@ -393,7 +393,7 @@
         <br>
         <br>
         <form> 
-            <input style="Position:Absolute; left:96%; top:2%; color: #17202A; background-color: #D7DBDD; width:70px; height: 30px; font-size: 12pt;" type='button' onclick='imprimeDiv("imp")' value='Imprimir'  class="oculto"/> 
+            <input style="Position:Absolute; left:83%; top:18%; color: #17202A; background-color: #D7DBDD; width:75px; height: 30px; font-size: 12pt;" type='button' onclick='imprimeDiv("imp")' value='Imprimir'  class="oculto"/> 
         </form> 
     </body>
 </html>
