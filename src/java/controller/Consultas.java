@@ -536,8 +536,8 @@ public class Consultas {
                         + "WHERE\n"
                         + "		p.id_productos = c.id_producto\n"
                         + "        AND pr.idproveedor = c.id_proveedor\n"
-                        + "        AND c.id_req_coti = "+idReqCoti+"\n"
-                        + "        AND c.id_proveedor = "+idProveedor+";";
+                        + "        AND c.id_req_coti = " + idReqCoti + "\n"
+                        + "        AND c.id_proveedor = " + idProveedor + ";";
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
@@ -881,18 +881,20 @@ public class Consultas {
         if (con != null) {
             try {
                 String sql = "SELECT \n"
-                        + "    pr.idproveedor as idP,\n"
-                        + "    pr.razonsocial as nombreP,\n"
-                        + "    pr.direccion as direccionP,\n"
-                        + "    pr.telefono as telefono,\n"
-                        + "    pr.rfc as rfc,\n"
-                        + "    r.fecha as fecha,\n"
-                        + "    rp.cantidad as cantidad,\n"
-                        + "    p.nombre as producto,\n"
-                        + "    um.descripcion as unidadM,\n"
-                        + "    rp.descripcion as descripcion,\n"
-                        + "    c.descuento as descuento,\n"
-                        + "    c.precio as precio,\n"
+                        + "    s.sucursal AS sucursal,\n"
+                        + "    s.direccion AS direccion,\n"
+                        + "    pr.idproveedor AS idP,\n"
+                        + "    pr.razonsocial AS nombreP,\n"
+                        + "    pr.direccion AS direccionP,\n"
+                        + "    pr.telefono AS telefono,\n"
+                        + "    pr.rfc AS rfc,\n"
+                        + "    r.fecha AS fecha,\n"
+                        + "    rp.cantidad AS cantidad,\n"
+                        + "    p.nombre AS producto,\n"
+                        + "    um.descripcion AS unidadM,\n"
+                        + "    rp.descripcion AS descripcion,\n"
+                        + "    c.descuento AS descuento,\n"
+                        + "    c.precio AS precio,\n"
                         + "    c.tiempoentrega\n"
                         + "FROM\n"
                         + "    requisiciones r,\n"
@@ -900,9 +902,13 @@ public class Consultas {
                         + "    cotizacion c,\n"
                         + "    productos p,\n"
                         + "    proveedores pr,\n"
+                        + "    sucursales s,\n"
+                        + "    usuario u,\n"
                         + "    unidadmedida um\n"
                         + "WHERE\n"
                         + "    c.id_proveedor = pr.idproveedor\n"
+                        + "        AND u.id_sucursal = s.id_sucursales\n"
+                        + "        and u.id_usuario = r.id_usuario\n"
                         + "        AND rp.id_req_coti = c.id_req_coti\n"
                         + "        AND r.id_requisicion = rp.id_requisicion\n"
                         + "        AND rp.id_producto = p.id_productos\n"
@@ -914,9 +920,9 @@ public class Consultas {
                 while (rs.next()) {
                     OrdenFormato obj = new OrdenFormato();
                     obj.setIdP(rs.getInt("idP"));
-                    //obj.setSucursal(rs.getString("sucursal"));
+                    obj.setSucursal(rs.getString("sucursal"));
                     obj.setRfc(rs.getString("rfc"));
-                    //obj.setDireccion(rs.getString("direccion"));
+                    obj.setDireccion(rs.getString("direccion"));
                     obj.setNombreP(rs.getString("nombreP"));
                     obj.setDireccionP(rs.getString("direccionP"));
                     obj.setFecha(rs.getString("fecha"));

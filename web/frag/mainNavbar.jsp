@@ -17,7 +17,7 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <% if (rol == 1) { %>
+            <% if (rol == 1 && depto != 7) { %>
             <a class="nav-link" href="menuSolicita.jsp"> 
                 Solicitar Producto
             </a>
@@ -61,10 +61,10 @@
                 Licitaciones Autorizadas
             </a>
             <a class="nav-link" href="menuComprasRecepcion.jsp"> 
-                Recepcion de Productos
+                Recepcion
             </a>
             <a class="nav-link" href="menuComprasEntrega.jsp"> 
-                Entrega de Productos
+                Entrega
             </a>
 
             <li class="nav-item dropdown">
@@ -84,7 +84,9 @@
                 </div>
             </li>
             <% }
-                if (rol == 3 || rol == 4) { %>
+                if (rol == 3 || rol == 4) {                    
+                    if (depto != 7) {
+            %>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-shopping-cart"></i> Pedidos
@@ -101,6 +103,7 @@
                     </a>
                 </div>
             </li>
+            <% } %>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-check-square"></i> Autorizaciones
@@ -131,7 +134,7 @@
             </li>   
 
             <% }
-
+                    
                 }%>
             <a class="nav-link" href="logout.jsp"> 
                 Cerrar Sesión
