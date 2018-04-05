@@ -18,7 +18,9 @@ public class RequisicionFormato {
     private String descripcion = null;
     private String marca = null;
     private String modelo = null;
+    private String empresa = null;
     private int cantidad = 0;
+    private int activo = 0;
 
     /**
      * @return the sucursal
@@ -186,5 +188,33 @@ public class RequisicionFormato {
      */
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
+    }
+
+    /**
+     * @return the empresa
+     */
+    public String getEmpresa() {
+        return empresa;
+    }
+
+    /**
+     * @param empresa the empresa to set
+     */
+    public void setEmpresa(String empresa) {
+        this.empresa = empresa;
+    }
+
+    /**
+     * @return the activo
+     */
+    public int getActivo() {
+        return activo;
+    }
+
+    /**
+     * @param activo the activo to set
+     */
+    public void setActivo(int activo) {
+        this.activo = activo;
     }
 }

@@ -15,11 +15,11 @@
     if (usuarioValidado == null) {
         response.sendRedirect("index.jsp");
     } else {
-        String idDepto = (String) sesion.getAttribute("departamento"); 
+        String idDepto = (String) sesion.getAttribute("departamento");
         String rol = (String) sesion.getAttribute("rol");
         String id_usuario = (String) sesion.getAttribute("idUsuario");
         String nombre = (String) sesion.getAttribute("nombre");
-        
+
         int nuevaRequisicion = 1;
 
         try {
@@ -141,19 +141,37 @@
                             </div>
                             <div class="form-group">
                                 <label for="cantidad">Cantidad</label>
-                                <input type="number" class="form-control" id="cantidad" name="cantidad">
+                                <input type="number" class="form-control" id="cantidad" name="cantidad" required>
                             </div>
                             <div for="descripcion" class="form-group">
-                                <label>Descripcion</label>
+                                <label>Descripcion / Observaciones</label>
                                 <input type="text" class="form-control" id="descripcion" name="descripcion">
                             </div>
                             <div for="justificacion" class="form-group">
                                 <label>Justificacion</label>
-                                <input type="text" class="form-control" id="justificacion" name="justificacion">
+                                <input type="text" class="form-control" id="justificacion" name="justificacion" required>
+                            </div>
+                            <div>
+                                <label class="form-check-label">
+                                    Activo Fijo
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="activo" id="exampleRadios1" value="1" required="true"> 
+                                <label class="form-check-label" for="exampleRadios1">
+                                    Si
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="activo" id="exampleRadios1" value="0" required="true"> 
+                                <label class="form-check-label" for="exampleRadios1">
+                                    No
+                                </label>
                             </div>
                             <div class="modal-footer">
                                 <input type="submit" class="btn btn-primary" value="Solicitar" />
                             </div>
+
                             <input type="hidden" class="form-control" id="nuevaRequisicion" name="nuevaRequisicion" value="<%=nuevaRequisicion%>">
                             <input type="hidden" class="form-control" id="idUsuario" name="idUsuario" value="<%=id_usuario%>">
                             <input type="hidden" class="form-control" id="idDepto" name="idDepto" value="<%=idDepto%>">

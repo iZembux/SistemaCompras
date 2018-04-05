@@ -13,6 +13,7 @@
     int idProducto = 0;
     int cantidad = 0;
     int idDepto = 0;
+    int activo = 0;
     String descripcion = null;
     String justificacion = null;
 
@@ -46,6 +47,10 @@
         idDepto = Integer.parseInt(request.getParameter("idDepto"));
     } catch (Exception e) {
     }
+    try {
+        activo = Integer.parseInt(request.getParameter("activo"));
+    } catch (Exception e) {
+    }
 
     Class.forName("com.mysql.jdbc.Driver");
     Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/scompras", "root", "stmsc0nt");
@@ -77,8 +82,8 @@
     }
 
     //Inserta el producto en la ultima requisicion creada
-    int i = st.executeUpdate("insert into req_prod(id_requisicion, id_producto, id_req_coti, id_status, cantidad, descripcion, justificacion) "
-            + "values ('" + idRequisicion + "','" + idProducto + "','" + idCotizacion + "','" + idStatus + "','" + cantidad + "','" + descripcion + "','" + justificacion + "')");
+    int i = st.executeUpdate("insert into req_prod(id_requisicion, id_producto, id_req_coti, id_status, cantidad, descripcion, justificacion, activo_fijo) "
+            + "values ('" + idRequisicion + "','" + idProducto + "','" + idCotizacion + "','" + idStatus + "','" + cantidad + "','" + descripcion + "','" + justificacion + "','" + activo + "')");
     if (i > 0) {
         response.sendRedirect("insertaProductoContinuacion.jsp");
     } else {
