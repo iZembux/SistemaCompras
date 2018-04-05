@@ -153,7 +153,7 @@
         </div>
         <br>
         <br>
-        <div class="container">
+        <div class="container" id="imp">
             <table width="100%" border="1" style="border-collapse: collapse; text-align: center">
                 <tbody>
                     <tr>
@@ -392,6 +392,8 @@
         </div>
         <br>
         <br>
-
+        <form> 
+            <input style="Position:Absolute; left:96%; top:2%; color: #17202A; background-color: #D7DBDD; width:70px; height: 30px; font-size: 12pt;" type='button' onclick='imprimeDiv("imp")' value='Imprimir'  class="oculto"/> 
+        </form> 
     </body>
 </html>
