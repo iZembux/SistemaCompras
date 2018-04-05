@@ -22,8 +22,11 @@
     String modelo = null;
     String logo = null;
     String empresa = null;
+    String cGeneral = " ";
+    String cActivo = " ";
     int cantidad = 0;
     int idReqProd = 0;
+    int activo = 0;
 
     try {
         idReqProd = Integer.parseInt(request.getParameter("idReqProd"));
@@ -36,6 +39,7 @@
 
     if (arrayRequis.size() > 0) {
         sucursal = arrayRequis.get(0).getSucursal();
+        empresa = arrayRequis.get(0).getEmpresa();
         nombre = arrayRequis.get(0).getNombre();
         apellidoP = arrayRequis.get(0).getApellidoP();
         apellidoM = arrayRequis.get(0).getApellidoM();
@@ -47,15 +51,14 @@
         descripcion = arrayRequis.get(0).getDescripcion();
         marca = arrayRequis.get(0).getMarca();
         modelo = arrayRequis.get(0).getModelo();
+        activo = arrayRequis.get(0).getActivo();
     }
 
-    if (sucursal.contains("Continental")) {
-        logo = "Continental.png";
-        empresa = "Continental";
-    } else if (sucursal.equals("Hyundai Metepec")) {
-        logo = "KoreanMete.png";
+    if (activo == 1) {
+        cActivo = "X";
+    } else if (activo == 0) {
+        cGeneral = "X";
     }
-
 %>
 <!doctype html>
 <html>
@@ -124,8 +127,8 @@
                     <td colspan="1" style="border-left: hidden">
                         <p style="background-color: #CFEFFA"><%=fecha%></p>
                         <p style="background-color: #CFEFFA"><%=empresa%></p>
-                        <p style="background-color: #CFEFFA">&nbsp;</p>
-                        <p style="background-color: #CFEFFA">&nbsp;</p>
+                        <p style="background-color: #CFEFFA"><%=cGeneral%></p>
+                        <p style="background-color: #CFEFFA"><%=cActivo%></p>
                         <p>&nbsp;</p>
                     </td>
                 </tr>

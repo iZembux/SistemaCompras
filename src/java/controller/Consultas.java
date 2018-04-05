@@ -811,6 +811,7 @@ public class Consultas {
             try {
                 String sql = "SELECT \n"
                         + "    s.sucursal,\n"
+                        + "    s.empresa,\n"
                         + "    u.nombre as solicitante,\n"
                         + "    u.apellido,\n"
                         + "    u.apellidoM,\n"
@@ -820,6 +821,7 @@ public class Consultas {
                         + "    p.nombre as producto,\n"
                         + "    rp.cantidad,\n"
                         + "    rp.descripcion,\n"
+                        + "    rp.activo_fijo,\n"
                         + "    p.marca,\n"
                         + "    p.modelo\n"
                         + "FROM\n"
@@ -841,6 +843,7 @@ public class Consultas {
                 while (rs.next()) {
                     RequisicionFormato obj = new RequisicionFormato();
                     obj.setSucursal(rs.getString("sucursal"));
+                    obj.setEmpresa(rs.getString("empresa"));
                     obj.setNombre(rs.getString("solicitante"));
                     obj.setApellidoP(rs.getString("apellido"));
                     obj.setApellidoM(rs.getString("apellidoM"));
@@ -852,6 +855,7 @@ public class Consultas {
                     obj.setDescripcion(rs.getString("descripcion"));
                     obj.setMarca(rs.getString("marca"));
                     obj.setModelo(rs.getString("modelo"));
+                    obj.setActivo(rs.getInt("activo_fijo"));
                     listaRequi.add(obj);
                 }
             } catch (SQLException ex) {
