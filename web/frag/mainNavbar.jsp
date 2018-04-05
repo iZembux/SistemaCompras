@@ -2,7 +2,7 @@
 <%
     int rol = Integer.parseInt(request.getParameter("rol"));
     int depto = Integer.parseInt(request.getParameter("depto"));
-    
+
 %>
 <head>
     <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
@@ -17,7 +17,7 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <% if (rol == 6) { %>
+            <% if (rol == 1) { %>
             <a class="nav-link" href="menuSolicita.jsp"> 
                 Solicitar Producto
             </a>
@@ -66,7 +66,7 @@
             <a class="nav-link" href="menuComprasEntrega.jsp"> 
                 Entrega de Productos
             </a>
-            <% } %>
+
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-shopping-cart"></i> Pedidos
@@ -83,7 +83,24 @@
                     </a>
                 </div>
             </li>
-            <% if (rol == 2 || rol == 3 || rol == 4){ %>
+            <% }
+                if (rol == 3 || rol == 4) { %>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-shopping-cart"></i> Pedidos
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="menuSolicita.jsp"> 
+                        Solicitar Producto
+                    </a>
+                    <a class="dropdown-item" href="menuSeguimiento.jsp"> 
+                        Seguimiento de Solicitud
+                    </a>
+                    <a class="dropdown-item" href="menuHistorialPedido.jsp"> 
+                        Historial de Pedidos
+                    </a>
+                </div>
+            </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-check-square"></i> Autorizaciones
@@ -97,7 +114,8 @@
                     </a>
                 </div>
             </li>
-            <% if (rol == 3 || rol == 4) {  %>
+            <% }
+                if (rol == 4 || rol == 5) {  %>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-dollar-sign"></i> Cotizaciones
@@ -111,9 +129,13 @@
                     </a>
                 </div>
             </li>   
+
             <% }
-                    }
+
                 }%>
+            <a class="nav-link" href="logout.jsp"> 
+                Cerrar Sesión
+            </a>
         </ul>
 
     </div>

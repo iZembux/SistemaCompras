@@ -90,7 +90,7 @@
                         <img class="card-img-top" src="img/mercadotecnia.jpg" alt="">
                         <div class="card-body">
                             <h4 class="card-title">Mercadotecnia</h4>
-                            <p class="card-text">Lonas, Impresoines, Tarjetas, etc.</p>
+                            <p class="card-text">Lonas, Impresiones, Tarjetas, etc.</p>
                         </div>
                         <div class="card-footer">
                             <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#modalError">Solicitar</a>
@@ -103,7 +103,7 @@
                         <img class="card-img-top" src="img/cafeteria.jpg" alt="">
                         <div class="card-body">
                             <h4 class="card-title">Cafetería</h4>
-                            <p class="card-text">Cafe, Galletas, Té, Servilltas, etc.</p>
+                            <p class="card-text">Café, Galletas, Té, Servilletas, etc.</p>
                         </div>
                         <div class="card-footer">
                             <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#modalError">Solicitar</a>
