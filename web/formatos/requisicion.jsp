@@ -22,8 +22,8 @@
     String modelo = null;
     String logo = null;
     String empresa = null;
-    String cGeneral = " ";
-    String cActivo = " ";
+    String cGeneral = "x";
+    String cActivo = "x";
     int cantidad = 0;
     int idReqProd = 0;
     int activo = 0;
@@ -55,9 +55,11 @@
     }
 
     if (activo == 1) {
-        cActivo = "X";
+        cActivo = "x";
+        cGeneral = "&nbsp;";
     } else if (activo == 0) {
-        cGeneral = "X";
+        cActivo = "&nbsp;";
+        cGeneral = "x";
     }
 %>
 <!doctype html>
