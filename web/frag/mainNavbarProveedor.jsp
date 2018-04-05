@@ -18,6 +18,9 @@
             <a class="nav-link" href="menuHistorialProveedor.jsp"> 
                 Historial
             </a>
+            <a class="nav-link" href="logout.jsp"> 
+                Cerrar Sesión
+            </a>
         </ul>
 
     </div>

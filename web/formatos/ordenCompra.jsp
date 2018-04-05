@@ -34,9 +34,9 @@
 
     if (!arrayRequis.isEmpty()) {
         idP = arrayRequis.get(0).getIdP();
-        //sucursal = arrayRequis.get(0).getSucursal();
+        sucursal = arrayRequis.get(0).getSucursal();
         rfc = arrayRequis.get(0).getRfc();
-        //direccion = arrayRequis.get(0).getDireccion();
+        direccion = arrayRequis.get(0).getDireccion();
         nombreP = arrayRequis.get(0).getNombreP();
         direccionP = arrayRequis.get(0).getDireccionP();
         fecha = arrayRequis.get(0).getFecha();
@@ -64,11 +64,13 @@
         <title>RequisicionCompra</title>
     </head>
     <body style=" zoom: 85%">
+        <%--
         <form action="actualizaRecibido.jsp" method="post">
             <input type="hidden" class="hidden" name="idReqCoti" value="<%=idReqCoti%>" >
             <input type="hidden" class="hidden" name="nuevoStatus" value="12" >
             <button type="submit" class="btn btn-success btn-sm">Enviar Orden</button>
         </form>
+        --%>
             
         <table width="863" height="1113" border="1" style="border-collapse: collapse" align="center">
             <caption>&nbsp;
@@ -76,7 +78,7 @@
             <tbody>
                 <tr>
                     <th height="96" colspan="7" scope="col"><p><img src="../img/<%=logo%>" alt="" width="295"  align="left"/></p>
-                        <h1 align="center"><%=sucursal%></h1>
+                        <h2 align="center"><%=sucursal%></h2>
                         <h4 align="center">RFC: <%=rfc%></h4>
                         <h4 align="center"><%=direccion%></h4></th>
                 </tr>
