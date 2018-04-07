@@ -66,6 +66,10 @@
                             <label>Tiempo de Entrega (Días)</label>
                             <input type="text" class="form-control" id="entrega" name="entrega">
                         </div>
+                        <div for="garantia" class="form-group">
+                            <label>Garantía (Días)</label>
+                            <input type="text" class="form-control" id="garantia" name="garantia">
+                        </div>
                         <div for="descuento" class="form-group">
                             <label>% Descuento</label>
                             <input type="text" class="form-control" id="descuento" name="descuento">

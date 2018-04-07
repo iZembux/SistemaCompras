@@ -20,6 +20,8 @@
     String departamento = " ";
     String sucursal = " ";
     String fecha = " ";
+    String cActivo = null;
+    String cGeneral = null;
 
     int cantidad = 0, cantidad2 = 0, cantidad3 = 0;
     int precio = 0, precio2 = 0, precio3 = 0;
@@ -34,6 +36,7 @@
     int precioTotal = 0;
     int nuevoStatus = 0;
     int solicitantes = 0;
+    int activo = 0;
 
     try {
         idReqCoti = Integer.parseInt(request.getParameter("idReqCoti"));
@@ -56,12 +59,12 @@
     ArrayList<CotizacionRequisicion> arrayRequis = new ArrayList<CotizacionRequisicion>();
     Consultas obj = new Consultas();
     Consultas obj3 = new Consultas();
-    
+
     try {
         solicitantes = obj3.contarSolicitantesCoti(idCoti.get(0));
     } catch (Exception e) {
     }
-    
+
     try {
         arrayRequis = obj.consultarCotizaciones(idCoti.get(0));
         solicitante = arrayRequis.get(0).getSolicitante();
@@ -78,6 +81,7 @@
         entrega = arrayRequis.get(0).getEntrega();
         anticipo = arrayRequis.get(0).getAnticipo();
         status = arrayRequis.get(0).getStatus();
+        activo = arrayRequis.get(0).getActivo();
     } catch (Exception e) {
     }
     try {
@@ -105,6 +109,14 @@
         anticipo3 = arrayRequis.get(0).getAnticipo();
         status3 = arrayRequis.get(0).getStatus();
     } catch (Exception e) {
+    }
+
+    if (activo == 1) {
+        cActivo = "X";
+        cGeneral = "&nbsp;";
+    } else if (activo == 0) {
+        cActivo = "&nbsp;";
+        cGeneral = "X";
     }
 %>
 <!doctype html>
@@ -147,6 +159,7 @@
                     %>
                     <div class="row">
                         <form action="../actualizaCotizacion.jsp" method="post">
+                            <input type="hidden" class="hidden" name="redirecciona" value="1" >
                             <input type="hidden" name="precioTotal" value="<%=precioTotal%>">
                             <input type="hidden" name="cotiSelccionada" value="<%=idCotizacionSeleccionada%>">
                             <input type="hidden" class="hidden" name="nuevoStatusCoti" value="3" >
@@ -154,6 +167,7 @@
                             <button type="submit" class="btn btn-success btn-sm">Aceptar</button>
                         </form>
                         <form action="../actualizaCotizacion.jsp" method="post">
+                            <input type="hidden" class="hidden" name="redirecciona" value="1" >
                             <input type="hidden" name="precioTotal" value="<%=precioTotal%>">
                             <input type="hidden" name="cotiSelccionada" value="<%=idCotizacionSeleccionada%>">
                             <input type="hidden" class="hidden" name="nuevoStatusCoti" value="5" >
@@ -186,10 +200,10 @@
                         <td width="30%" style="border-top: hidden">Compras</td>
                         <% } else {%>
                         <td width="30%" style="border-top: hidden"><%=solicitante%></td>
-                        <% } %>
+                        <% }%>
                         <td width="25%" style="border: hidden">&nbsp;</td>
                         <td width="15%" style="border: hidden">Compra General</td>
-                        <td width="10%" style=""></td>
+                        <td width="10%" style="border-top: hidden"><%=cGeneral%></td>
                         <td width="10%" style="border: hidden">&nbsp;</td>
                     </tr>
                     <tr>
@@ -197,7 +211,7 @@
                         <td><%=fecha%></td>
                         <td style="border: hidden">&nbsp;</td>
                         <td style="border: hidden">Activo Fijo</td>
-                        <td style=""></td>
+                        <td style=""><%=cActivo%></td>
                         <td style="border: hidden">&nbsp;</td>
                     </tr>
                     <tr>
@@ -206,10 +220,10 @@
                         <td>Compras</td>
                         <% } else {%>
                         <td><%=departamento%></td>
-                        <% } %>
+                        <% }%>
                         <td style="border: hidden">&nbsp;</td>
                         <td style="border: hidden">&nbsp;</td>
-                        <td style="border: hidden">&nbsp;</td>
+                        <td style="">&nbsp;</td>
                         <td style="border: hidden">&nbsp;</td>
                     </tr>
                     <tr>

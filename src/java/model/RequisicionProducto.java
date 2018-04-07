@@ -18,6 +18,7 @@ public class RequisicionProducto {
     private String justificacion;
     private String porcentaje;
     private String fecha;
+    private String sucursal;
 
     /**
      * @return the idRequisicion
@@ -241,6 +242,20 @@ public class RequisicionProducto {
      */
     public void setIdSolicita(int idSolicita) {
         this.idSolicita = idSolicita;
+    }
+
+    /**
+     * @return the sucursal
+     */
+    public String getSucursal() {
+        return sucursal;
+    }
+
+    /**
+     * @param sucursal the sucursal to set
+     */
+    public void setSucursal(String sucursal) {
+        this.sucursal = sucursal;
     }
 
     

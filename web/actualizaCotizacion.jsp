@@ -9,9 +9,10 @@
     int nuevoStatusRequi = 0;
     int nuevoStatusCoti = 0;
     int idCotizacion = 0;
-    
+    int redirecciona = 0;
+
     Mail objMail = new Mail();
-    
+
     try {
         nuevoStatusRequi = Integer.parseInt(request.getParameter("nuevoStatusRequi"));
     } catch (Exception e) {
@@ -24,13 +25,17 @@
         idCotizacion = Integer.parseInt(request.getParameter("cotiSelccionada"));
     } catch (Exception e) {
     }
-    
+    try {
+        redirecciona = Integer.parseInt(request.getParameter("redirecciona"));
+    } catch (Exception e) {
+    }
+
     Class.forName("com.mysql.jdbc.Driver");
     Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/scompras", "root", "stmsc0nt");
     Statement st = con.createStatement();
     ResultSet rs;
     PreparedStatement ps;
-    
+
     st.executeUpdate("update cotizacion set id_status_cotizacion = " + nuevoStatusCoti + " where id_cotizacion = " + idCotizacion + ";");
     st.executeUpdate("update req_prod rp, cotizacion c set id_status = " + nuevoStatusRequi + " where c.id_req_coti = rp.id_req_coti and c.id_cotizacion = " + idCotizacion + ";");
 
@@ -52,7 +57,11 @@
             //select pr.email from proveedores pr, cotizacion c where c.id_proveedor = pr.idproveedor and c.id_cotizacion = 1;
         }
     }
-    
-    response.sendRedirect("menuComprasRequisiciones.jsp");
-    
+
+    if (redirecciona == 1) {
+        response.sendRedirect("menuAutorizaCoti.jsp");
+    } else {
+        response.sendRedirect("menuComprasRequisiciones.jsp");
+    }
+
 %>

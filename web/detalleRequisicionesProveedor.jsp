@@ -1,21 +1,24 @@
 <%-- 
-    Muestra las requisiciones que ya han sido aprobadas por los gerentes
-    status = 4
+    Document   : usuarioSeguimiento
+    Created on : Mar 5, 2018, 7:55:17 AM
+    Author     : user
 --%>
+<%@page import="model.CotizacionRequisicion"%>
 <%@page import="controller.Consultas"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.RequisicionProducto"%>
 <%
     HttpSession sesion = request.getSession();
     String usuarioValidado = (String) sesion.getAttribute("usuarioIngresado");
+    int idReqCoti = 0;
     if (usuarioValidado == null) {
         response.sendRedirect("index.jsp");
     } else {
-        String idDepto = (String) sesion.getAttribute("departamento"); 
-        String rol = (String) sesion.getAttribute("rol");
-        String usuario = (String) sesion.getAttribute("idUsuario");
-        
-    int id_categoria = 1;
+
+        try {
+            idReqCoti = Integer.parseInt(request.getParameter("idReqCoti"));
+        } catch (Exception e) {
+        }
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -28,10 +31,7 @@
     </head>
     <body>
 
-        <jsp:include page="frag/mainNavbar.jsp">
-            <jsp:param name="rol" value="<%=rol%>" />  
-            <jsp:param name="depto" value="<%=idDepto%>" />
-        </jsp:include>
+        <jsp:include page="frag/mainNavbarProveedor.jsp"/> 
 
         <div class="container my-5">
             <div class="page-header">
@@ -43,49 +43,53 @@
                         <th scope="col">Producto</th>
                         <th scope="col">Marca</th>
                         <th scope="col">Cantidad</th>
-                        <th scope="col"></th>
+                        <th scope="col">Sucursal</th>
                         <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
                     <%
                         int cantidadRequi;
-                        int idProducto;
+                        int idRequi;
                         String producto;
                         String marca;
+                        String sucursal;
 
                         ArrayList<RequisicionProducto> arrayRequis = new ArrayList<RequisicionProducto>();
                         Consultas obj = new Consultas();
-                        arrayRequis = obj.consultarCompras(id_categoria,4); 
+                        arrayRequis = obj.consultarDetalleComprasProv(idReqCoti);
+
                         if (arrayRequis.size() > 0) {
                             for (int i = 0; i < arrayRequis.size(); i++) {
-                                idProducto = arrayRequis.get(i).getIdProducto();
+                                idRequi = arrayRequis.get(i).getIdRequisicion();
                                 cantidadRequi = arrayRequis.get(i).getCantidad();
                                 producto = arrayRequis.get(i).getProducto();
                                 marca = arrayRequis.get(i).getMarca();
+                                idReqCoti = arrayRequis.get(i).getIdReqCoti();
+                                sucursal = arrayRequis.get(i).getSucursal();
                     %>
                     <tr>
                         <td><%=producto%></td>
                         <td><%=marca%></td>
-                        <td><%=cantidadRequi%></td> 
+                        <td><%=cantidadRequi%></td>
+                        <td><%=sucursal%></td> 
                         <td>
-                            <form action="actualizaCompras.jsp" method="post">
-                                <input type="hidden" class="hidden" name="nuevoStatus" value="5" >
-                                <input type="hidden" class="hidden" name="idProducto" value="<%=idProducto%>" >
-                                <input type="hidden" class="hidden" name="categoria" value="<%=id_categoria %>" >
-                                <input type="hidden" class="hidden" name="usuario" value="<%=usuario %>" >
-                                <button type="submit" class="btn btn-primary btn-sm">Solicitar Cotizaciones</button>
-                            </form>
-                        </td>
-                        <td>
-                            <form action="detalleRequisicionCompras.jsp" method="post">
-                                <input type="hidden" class="hidden" name="idCategoria" value="8" >
-                                <input type="hidden" class="hidden" name="idProducto" value="<%=idProducto%>" >
-                                <button type="submit" class="btn btn-primary btn-sm">Detalle</button>
-                            </form>
+
+                            <div class="row">
+                                <form action="formatos/ordenCompra.jsp" method="post">
+                                    <input type="hidden" class="hidden" name="idReqCoti" value="<%=idReqCoti%>" >
+                                    <input type="hidden" class="hidden" name="suc" value="<%=sucursal%>" >
+                                    <button type="submit" class="btn btn-primary btn-sm">Ver Orden de Compra</button>
+                                </form>
+                                <form action="actualizaProveedor.jsp" method="post">
+                                    <input type="hidden" class="hidden" name="idRequi" value="<%=idRequi%>" >
+                                    <input type="hidden" class="hidden" name="nuevoStatus" value="11" >
+                                    <button type="submit" class="btn btn-info btn-sm">Iniciar Envío de Productos</button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
-                    <% }
+                    <%}
                         }%>
                 </tbody>
             </table>

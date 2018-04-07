@@ -20,6 +20,7 @@ public class OrdenFormato {
     private int cantidad;
     private int descuento;
     private int precio;
+    private int diasCredito;
 
     /**
      * @return the sucursal
@@ -215,6 +216,20 @@ public class OrdenFormato {
      */
     public void setIdP(int idP) {
         this.idP = idP;
+    }
+
+    /**
+     * @return the diasCredito
+     */
+    public int getDiasCredito() {
+        return diasCredito;
+    }
+
+    /**
+     * @param diasCredito the diasCredito to set
+     */
+    public void setDiasCredito(int diasCredito) {
+        this.diasCredito = diasCredito;
     }
     
     

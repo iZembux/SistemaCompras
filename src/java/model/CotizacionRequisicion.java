@@ -19,9 +19,11 @@ public class CotizacionRequisicion {
    private int credito;
    private int entrega;
    private int anticipo;
+   private int garantia;
    private int idP;
    private int idC;
    private int status;
+   private int activo;
 
     /**
      * @return the proveedor
@@ -245,5 +247,33 @@ public class CotizacionRequisicion {
      */
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    /**
+     * @return the activo
+     */
+    public int getActivo() {
+        return activo;
+    }
+
+    /**
+     * @param activo the activo to set
+     */
+    public void setActivo(int activo) {
+        this.activo = activo;
+    }
+
+    /**
+     * @return the garantia
+     */
+    public int getGarantia() {
+        return garantia;
+    }
+
+    /**
+     * @param garantia the garantia to set
+     */
+    public void setGarantia(int garantia) {
+        this.garantia = garantia;
     }
 }

@@ -14,9 +14,11 @@
     String descripcion = null;
     String logo = null;
     String telefonoP = null;
+    String suc = null;
     int cantidad = 0;
     int descuento = 0;
     int precio = 0;
+    int credito = 0;
     int idReqCoti = 0;
     int idP = 0;
 
@@ -27,10 +29,15 @@
         idReqCoti = Integer.parseInt(request.getParameter("idReqCoti"));
     } catch (Exception e) {
     }
+    
+    try {
+        suc = request.getParameter("suc");
+    } catch (Exception e) {
+    }
 
     ArrayList<OrdenFormato> arrayRequis = new ArrayList<OrdenFormato>();
     Consultas obj = new Consultas();
-    arrayRequis = obj.consultarFormatoOrden(idReqCoti);
+    arrayRequis = obj.consultarFormatoOrden(idReqCoti,suc);
 
     if (!arrayRequis.isEmpty()) {
         idP = arrayRequis.get(0).getIdP();
@@ -47,6 +54,7 @@
         cantidad = arrayRequis.get(0).getCantidad();
         descuento = arrayRequis.get(0).getDescuento();
         precio = arrayRequis.get(0).getPrecio();
+        credito = arrayRequis.get(0).getDiasCredito();
     }
 
     if (sucursal.contains(" ")) {
@@ -90,8 +98,8 @@
                     <td colspan="3"><p>ORDEN No.: AN00000000157
                         </p>
                         <p><strong>Fecha</strong>: <%=fecha%></p>
-                        <p><strong>Entregar a: </strong></p>
-                        <p>Condiciones de pago: </p></td>
+                        <p><strong>Entregar a:</strong> COMPRAS</p>
+                        <p>Condiciones de pago: <%=credito%> días</p></td>
                 </tr>
                 <tr>
                     <td width="105" height="32"><strong>Cantidad</strong></td>
@@ -115,7 +123,7 @@
                     <td height="169" colspan="7">&nbsp;</td>
                 </tr>
                 <tr style="border: none">
-                    <td height="270" colspan="3"><%=usuarioC%>, COMPRAS, RQ <%=idReqProd%></td>  
+                    <td height="270" colspan="3"></td>  
                     <td colspan="2" align="right"><p><strong>Subtotal</strong></p>
                         <p><strong>Descuento</strong></p>
                         <p><strong>L.E.P.S.</strong></p>

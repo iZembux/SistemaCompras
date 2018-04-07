@@ -110,16 +110,9 @@
                                 // Consulta si el usuario activo ha ganado la licitacion
                                 if (arrayRequis2.size() > 0) {%>
                             <div class="row">
-                                <button type="button" class="btn btn-success btn-sm">Cotizacion Ganadora</button> 
-                                <form action="formatos/ordenCompra.jsp" method="post">
+                                <form action="detalleRequisicionesProveedor.jsp" method="post">
                                     <input type="hidden" class="hidden" name="idReqCoti" value="<%=idReqCoti%>" >
-                                    <input type="hidden" class="hidden" name="idProducto" value="<%=idProducto%>" >
-                                    <button type="submit" class="btn btn-primary btn-sm">Ver Orden de Compra</button>
-                                </form>
-                                <form action="actualizaProveedor.jsp" method="post">
-                                    <input type="hidden" class="hidden" name="idRequi" value="<%=idRequi%>" >
-                                    <input type="hidden" class="hidden" name="nuevoStatus" value="11" >
-                                    <button type="submit" class="btn btn-info btn-sm">Iniciar Envío de Productos</button>
+                                    <button type="submit" class="btn btn-success btn-sm">Cotizacion Ganadora</button>
                                 </form>
                             </div>
                             <%} else {%>

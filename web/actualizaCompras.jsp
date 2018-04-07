@@ -10,6 +10,7 @@
     int nuevoStatus = 5;
     int id_cotizacion = 0;
     int idCategoria = 0;
+    int usuarioC = 0;
 
     Mail objMail = new Mail();
 
@@ -19,6 +20,10 @@
     }
     try {
         idCategoria = Integer.parseInt(request.getParameter("categoria"));
+    } catch (Exception e) {
+    }
+    try {
+        usuarioC = Integer.parseInt(request.getParameter("usuario"));
     } catch (Exception e) {
     }
 
@@ -38,7 +43,7 @@
         }
 
         st.executeUpdate("UPDATE req_prod SET id_status = " + nuevoStatus + ",\n"
-                + "id_req_coti = " + (id_cotizacion + 1) + " WHERE id_producto = " + idProducto + "\n"
+                + "id_req_coti = " + (id_cotizacion + 1) + ", usu_compras = "+usuarioC+" WHERE id_producto = " + idProducto + "\n"
                 + "AND id_status = 4;");
 
         //Envia correo a los proveedores disponibles
