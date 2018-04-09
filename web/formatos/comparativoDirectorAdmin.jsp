@@ -22,18 +22,21 @@
     String fecha = " ";
     String cActivo = null;
     String cGeneral = null;
+    String observaciones = null, observaciones2 = null, observaciones3 = null;
+    String observacionesGanadora = " ";
 
     int cantidad = 0, cantidad2 = 0, cantidad3 = 0;
-    int precio = 0, precio2 = 0, precio3 = 0;
-    int iva = 0, iva2 = 0, iva3 = 0;
+    double precio = 0, precio2 = 0, precio3 = 0;
+    double iva = 0, iva2 = 0, iva3 = 0;
     int credito = 0, credito2 = 0, credito3 = 0;
     int entrega = 0, entrega2 = 0, entrega3 = 0;
     int anticipo = 0, anticipo2 = 0, anticipo3 = 0;
+    int garantia = 0, garantia2 = 0, garantia3 = 0;
     int idCotizacion = 0, idCotizacion2 = 0, idCotizacion3 = 0;
     int status = 0, status2 = 0, status3 = 0;
     int idReqCoti = 0;
     int idCotizacionSeleccionada = 0;
-    int precioTotal = 0;
+    double precioTotal = 0;
     int nuevoStatus = 0;
     int activo = 0;
     int solicitantes = 0;
@@ -82,6 +85,8 @@
         anticipo = arrayRequis.get(0).getAnticipo();
         status = arrayRequis.get(0).getStatus();
         activo = arrayRequis.get(0).getActivo();
+        garantia = arrayRequis.get(0).getGarantia();
+        observaciones = arrayRequis.get(0).getObservaciones();
     } catch (Exception e) {
     }
     try {
@@ -95,6 +100,8 @@
         entrega2 = arrayRequis.get(0).getEntrega();
         anticipo2 = arrayRequis.get(0).getAnticipo();
         status2 = arrayRequis.get(0).getStatus();
+        garantia2 = arrayRequis.get(0).getGarantia();
+        observaciones2 = arrayRequis.get(0).getObservaciones();
     } catch (Exception e) {
     }
     try {
@@ -108,6 +115,8 @@
         entrega3 = arrayRequis.get(0).getEntrega();
         anticipo3 = arrayRequis.get(0).getAnticipo();
         status3 = arrayRequis.get(0).getStatus();
+        garantia3 = arrayRequis.get(0).getGarantia();
+        observaciones3 = arrayRequis.get(0).getObservaciones();
     } catch (Exception e) {
     }
 
@@ -138,16 +147,19 @@
                         if (status == 3) {
                             idCotizacionSeleccionada = idCotizacion;
                             precioTotal = precio * cantidad + iva;
+                            observacionesGanadora = observaciones;
                     %>
                     <h6><strong>Cotizacion 1</strong></h6>
                     <% } else if (status2 == 3) {
                         idCotizacionSeleccionada = idCotizacion2;
                         precioTotal = precio2 * cantidad2 + iva2;
+                        observacionesGanadora = observaciones2;
                     %>
                     <h6><strong>Cotizacion 2</strong></h6>
                     <% } else if (status3 == 3) {
                         idCotizacionSeleccionada = idCotizacion3;
                         precioTotal = precio3 * cantidad3 + iva3;
+                        observacionesGanadora = observaciones3;
                     %>
                     <h6><strong>Cotizacion 3</strong></h6>
                     <% }
@@ -352,31 +364,41 @@
                         <td width="10%">&nbsp;</td>
                         <td width="30%" style="text-align: left">CREDITO EN DIAS</td>
                         <td width="10%">&nbsp;</td>
-                        <td width="10%"><%=credito%></td>
+                        <td width="10%"><%=credito%> Dias</td>
                         <td width="10%">&nbsp;</td>
-                        <td width="10%"><%=credito2%></td>
+                        <td width="10%"><%=credito2%> Dias</td>
                         <td width="10%">&nbsp;</td>
-                        <td width="10%"><%=credito3%></td>
+                        <td width="10%"><%=credito3%> Dias</td>
                     </tr>
                     <tr>
                         <td>&nbsp;</td>
                         <td style="text-align: left">TIEMPO DE ENTREGA</td>
                         <td>&nbsp;</td>
-                        <td><%=entrega%></td>
+                        <td><%=entrega%> Dias</td>
                         <td>&nbsp;</td>
-                        <td><%=entrega2%></td>
+                        <td><%=entrega2%> Dias</td>
                         <td>&nbsp;</td>
-                        <td><%=entrega3%></td>
+                        <td><%=entrega3%> Dias</td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td style="text-align: left">GARANTIA</td>
+                        <td>&nbsp;</td>
+                        <td><%=garantia%> Dias</td>
+                        <td>&nbsp;</td>
+                        <td><%=garantia2%> Dias</td>
+                        <td>&nbsp;</td>
+                        <td><%=garantia3%> Dias</td>
                     </tr>
                     <tr>
                         <td>&nbsp;</td>
                         <td style="text-align: left">ANTICIPO</td>
                         <td>&nbsp;</td>
-                        <td><%=anticipo%></td>
+                        <td><%=anticipo%> %</td>
                         <td>&nbsp;</td>
-                        <td><%=anticipo2%></td>
+                        <td><%=anticipo2%> %</td>
                         <td>&nbsp;</td>
-                        <td><%=anticipo3%></td>
+                        <td><%=anticipo3%> %</td>
                     </tr>
                 </tbody>
             </table>
@@ -388,7 +410,7 @@
                         <td style="border-top: hidden; border-left: hidden; border-right: hidden"><strong>OBSERVACIONES</strong></td>
                     </tr>
                     <tr>
-                        <td>&nbsp;</td>
+                        <td><%= observacionesGanadora %></td> 
                     </tr>
                 </tbody>
             </table>
@@ -420,7 +442,6 @@
                     <tr>
                         <td></td>
                         <td>
-                            Alma Torales
                         </td>
                         <td></td>
                         <td></td>

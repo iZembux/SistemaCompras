@@ -28,6 +28,14 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <title>Autorizar</title>
+        <script>
+            function alerta(){
+                confirm("¿Seguro que desea autorizar esta cotizacion?");
+            }
+            function alerta2(){
+                confirm("¿Seguro que desea rechazar esta cotizacion?");
+            }
+        </script>
     </head>
     <body>
 
@@ -88,14 +96,14 @@
                                     <input type="hidden" class="hidden" name="idSolicita" value="<%=idSolicita%>" > 
                                     <input type="hidden" class="hidden" name="nuevoStatus" value="4" >
                                     <input type="hidden" class="hidden" name="autoriza" value="1" >
-                                    <button type="submit" class="btn btn-success btn-sm">Autorizar</button>
+                                    <button type="submit" class="btn btn-success btn-sm" onclick="alerta()">Autorizar</button>
                                 </form>
                                 <form action="actualizaGerente.jsp" method="post">
                                     <input type="hidden" class="hidden" name="idReqProd" value="<%=idReqProd%>" >
                                     <input type="hidden" class="hidden" name="idSolicita" value="<%=idSolicita%>" >
                                     <input type="hidden" class="hidden" name="nuevoStatus" value="14" >
                                     <input type="hidden" class="hidden" name="autoriza" value="2" >
-                                    <button type="submit" class="btn btn-danger btn-sm">Rechazar</button>
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick="alerta2()">Rechazar</button>
                                 </form>
                             </div>
                         </td>

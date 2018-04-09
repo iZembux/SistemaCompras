@@ -12,7 +12,7 @@
     if (usuarioValidado == null) {
         response.sendRedirect("index.jsp");
     } else {
-        String idDepto = (String) sesion.getAttribute("departamento"); 
+        String idDepto = (String) sesion.getAttribute("departamento");
         String rol = (String) sesion.getAttribute("rol");
 
         int idReqCoti = 0;
@@ -36,7 +36,7 @@
                         alert('No se pueden elegir más de ' + maxi + ' casillas a la vez.');
                         check.checked = false;
                         contador--;
-                    } 
+                    }
                 } else {
                     contador--;
                 }
@@ -76,8 +76,8 @@
                                 String proveedor;
                                 String producto;
                                 int cantidad;
-                                int precio;
-                                int iva;
+                                double precio;
+                                double iva;
                                 int credito;
                                 int entrega;
                                 int anticipo;
@@ -107,7 +107,7 @@
                                 <td><%=cantidad%></td>
                                 <td><%=precio%></td>
                                 <td><%=iva%></td>
-                                <td><%=cantidad*(iva + precio)%></td>
+                                <td><%=cantidad * (iva + precio)%></td>
                                 <td><%=credito%> Dias</td>
                                 <td><%=garantia%> Dias</td>
                                 <td><%=entrega%> Dias</td>
@@ -124,7 +124,26 @@
                                 }%>
                         </tbody>
                     </table>
-                    <button type="submit" class="btn btn-primary btn-sm">Generar Cuadro Comparativo</button>
+                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#observaciones">Continuar</button>
+                    <div class="modal fade" id="observaciones" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Observaciones</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="input-group">
+                                        <textarea class="form-control" aria-label="With textarea" name="observaciones" id="observaciones"></textarea>
+                                    </div>
+                                    <br/>
+                                    <button type="submit" class="btn btn-primary btn-sm">Generar Cuadro Comparativo</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>

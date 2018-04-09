@@ -1,3 +1,4 @@
+<%@page import="model.RequisicionFormato"%>
 <%@page import="controller.Consultas"%>
 <%@page import="model.OrdenFormato"%>
 <%@page import="java.util.ArrayList"%>
@@ -15,9 +16,12 @@
     String logo = null;
     String telefonoP = null;
     String suc = null;
+    String nombreC = null;
+    String apellidoC = null;
+    String apellidoMC = null;
     int cantidad = 0;
     int descuento = 0;
-    int precio = 0;
+    double precio = 0;
     int credito = 0;
     int idReqCoti = 0;
     int idP = 0;
@@ -37,6 +41,7 @@
     }
 
     ArrayList<OrdenFormato> arrayRequis = new ArrayList<OrdenFormato>();
+    ArrayList<RequisicionFormato> arrayRequis2 = new ArrayList<RequisicionFormato>();
     Consultas obj = new Consultas();
     arrayRequis = obj.consultarFormatoOrden(idReqCoti,suc);
 
@@ -58,6 +63,13 @@
         credito = arrayRequis.get(0).getDiasCredito();
         idUsuCompras = arrayRequis.get(0).getUsuCompras();
     }
+    
+    arrayRequis2 = obj.consultarUsuarioCompras(idUsuCompras);
+    if (!arrayRequis.isEmpty()) {
+        nombreC = arrayRequis2.get(0).getNombre();
+        apellidoC = arrayRequis2.get(0).getApellidoP();
+        apellidoMC = arrayRequis2.get(0).getApellidoM();
+    }
 
     if (sucursal.contains(" ")) {
         logo = "Continental.png";
@@ -65,6 +77,7 @@
         logo = "KoreanMete.png";
     }
 
+    
 %>
 <!doctype html>
 <html>
@@ -159,7 +172,7 @@
                         <p>&nbsp;</p>
                         <p>&nbsp;</p>
                         <p>&nbsp;</p>
-                        <p>ELABORÓ: <%=usuarioC%></p></td>
+                        <p>ELABORÓ: <%=nombreC + " " + apellidoC + " " + apellidoMC %></p></td>
                 </tr>
             </tbody>
         </table>

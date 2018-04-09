@@ -557,8 +557,8 @@ public class Consultas {
                     obj.setProducto(rs.getString("PRODUCTO"));
                     obj.setIdP(rs.getInt("IDP"));
                     obj.setCantidad(rs.getInt("CANTIDAD"));
-                    obj.setPrecio(rs.getInt("PRECIO"));
-                    obj.setIva(rs.getInt("IVA"));
+                    obj.setPrecio(rs.getDouble("PRECIO"));
+                    obj.setIva(rs.getDouble("IVA")); 
                     obj.setDescuento(rs.getInt("DESCUENTO"));
                     obj.setCredito(rs.getInt("CREDITO"));
                     obj.setEntrega(rs.getInt("ENTREGA"));
@@ -611,8 +611,8 @@ public class Consultas {
                     obj.setProducto(rs.getString("PRODUCTO"));
                     obj.setIdP(rs.getInt("IDP"));
                     obj.setCantidad(rs.getInt("CANTIDAD"));
-                    obj.setPrecio(rs.getInt("PRECIO"));
-                    obj.setIva(rs.getInt("IVA"));
+                    obj.setPrecio(rs.getDouble("PRECIO"));
+                    obj.setIva(rs.getDouble("IVA"));
                     obj.setDescuento(rs.getInt("DESCUENTO"));
                     obj.setCredito(rs.getInt("CREDITO"));
                     obj.setEntrega(rs.getInt("ENTREGA"));
@@ -871,7 +871,9 @@ public class Consultas {
                         + "    c.diascredito AS CREDITO,\n"
                         + "    c.tiempoentrega AS ENTREGA,\n"
                         + "    c.anticipo AS ANTICIPO,\n"
+                        + "    c.garantia,\n"
                         + "    c.id_status_cotizacion AS STATUS,\n"
+                        + "    c.observaciones,\n"
                         + "    rp.activo_fijo as ACTIVO\n"
                         + "FROM\n"
                         + "    usuario u,\n"
@@ -905,14 +907,16 @@ public class Consultas {
                     obj.setProducto(rs.getString("PRODUCTO"));
                     obj.setIdP(rs.getInt("IDP"));
                     obj.setCantidad(rs.getInt("CANTIDAD"));
-                    obj.setPrecio(rs.getInt("PRECIO"));
-                    obj.setIva(rs.getInt("IVA"));
+                    obj.setPrecio(rs.getDouble("PRECIO"));
+                    obj.setIva(rs.getDouble("IVA"));
                     obj.setDescuento(rs.getInt("DESCUENTO"));
                     obj.setCredito(rs.getInt("CREDITO"));
                     obj.setEntrega(rs.getInt("ENTREGA"));
                     obj.setAnticipo(rs.getInt("ANTICIPO"));
+                    obj.setGarantia(rs.getInt("garantia"));
                     obj.setStatus(rs.getInt("STATUS"));
                     obj.setActivo(rs.getInt("ACTIVO"));
+                     obj.setObservaciones(rs.getString("observaciones"));
                     listaRequi.add(obj);
                 }
             } catch (SQLException ex) {
@@ -1062,7 +1066,7 @@ public class Consultas {
                     obj.setDescripcion(rs.getString("descripcion"));
                     obj.setTelefonoP(rs.getString("telefono"));
                     obj.setDescuento(rs.getInt("descuento"));
-                    obj.setPrecio(rs.getInt("precio"));
+                    obj.setPrecio(rs.getDouble("precio"));
                     obj.setDiasCredito(rs.getInt("diascredito"));
                     obj.setUsuCompras(rs.getInt("usu_compras"));
                     listaRequi.add(obj);
@@ -1136,8 +1140,8 @@ public class Consultas {
                     obj.setProducto(rs.getString("PRODUCTO"));
                     obj.setIdP(rs.getInt("IDP"));
                     obj.setCantidad(rs.getInt("CANTIDAD"));
-                    obj.setPrecio(rs.getInt("PRECIO"));
-                    obj.setIva(rs.getInt("IVA"));
+                    obj.setPrecio(rs.getDouble("PRECIO"));
+                    obj.setIva(rs.getDouble("IVA"));
                     obj.setDescuento(rs.getInt("DESCUENTO"));
                     obj.setCredito(rs.getInt("CREDITO"));
                     obj.setEntrega(rs.getInt("ENTREGA"));
@@ -1186,4 +1190,30 @@ public class Consultas {
         }
         return suma;
     }
+    
+    public ArrayList<RequisicionFormato> consultarUsuarioCompras(int idUsuario) {
+        ArrayList<RequisicionFormato> listaRequi = new ArrayList<RequisicionFormato>();
+        PreparedStatement ps;
+        ResultSet rs;
+        Connection con;
+        con = ConexionMySQL.conectar();
+        if (con != null) {
+            try {
+                String sql = "SELECT nombre, apellido, apellidoM FROM scompras.usuario where id_usuario = "+idUsuario+";";
+                ps = con.prepareStatement(sql);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    RequisicionFormato obj = new RequisicionFormato();
+                    obj.setNombre(rs.getString("nombre"));
+                    obj.setApellidoP(rs.getString("apellido"));
+                    obj.setApellidoM(rs.getString("apellidoM"));
+                    listaRequi.add(obj);
+                }
+            } catch (SQLException ex) {
+                System.out.println("ERROR: " + ex.getMessage());
+            }
+        }
+        return listaRequi;
+    }
+    
 }

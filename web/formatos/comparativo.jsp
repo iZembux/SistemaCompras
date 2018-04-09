@@ -20,13 +20,15 @@
     String fecha = " ";
     String cActivo = null;
     String cGeneral = null;
+    String observaciones = " "; 
 
     int cantidad = 0, cantidad2 = 0, cantidad3 = 0;
-    int precio = 0, precio2 = 0, precio3 = 0;
-    int iva = 0, iva2 = 0, iva3 = 0;
+    double precio = 0, precio2 = 0, precio3 = 0;
+    double iva = 0, iva2 = 0, iva3 = 0;
     int credito = 0, credito2 = 0, credito3 = 0;
     int entrega = 0, entrega2 = 0, entrega3 = 0;
     int anticipo = 0, anticipo2 = 0, anticipo3 = 0;
+    int garantia = 0, garantia2 = 0, garantia3 = 0;
     int idCotizacion = 0, idCotizacion2 = 0, idCotizacion3 = 0;
     int activo = 0;
     int solicitantes = 0;
@@ -50,8 +52,11 @@
 
     ArrayList<CotizacionRequisicion> arrayRequis = new ArrayList<CotizacionRequisicion>();
     Consultas obj = new Consultas();
-
     Consultas obj2 = new Consultas();
+    try {
+        observaciones = request.getParameter("observaciones");
+    } catch (Exception e) {
+    }
     try {
         solicitantes = obj2.contarSolicitantesCoti(idCoti.get(0));
     } catch (Exception e) {
@@ -73,6 +78,7 @@
         entrega = arrayRequis.get(0).getEntrega();
         anticipo = arrayRequis.get(0).getAnticipo();
         activo = arrayRequis.get(0).getActivo();
+        garantia = arrayRequis.get(0).getGarantia();
     } catch (Exception e) {
     }
     try {
@@ -85,6 +91,7 @@
         credito2 = arrayRequis.get(0).getCredito();
         entrega2 = arrayRequis.get(0).getEntrega();
         anticipo2 = arrayRequis.get(0).getAnticipo();
+        garantia2 = arrayRequis.get(0).getGarantia();
     } catch (Exception e) {
     }
     try {
@@ -97,6 +104,7 @@
         credito3 = arrayRequis.get(0).getCredito();
         entrega3 = arrayRequis.get(0).getEntrega();
         anticipo3 = arrayRequis.get(0).getAnticipo();
+        garantia3 = arrayRequis.get(0).getGarantia();
     } catch (Exception e) {
         System.out.println("No hay mas cotizaciones");
     }
@@ -156,6 +164,7 @@
                         </div>
                         <input type="hidden" class="hidden" name="nuevoStatusCoti" value="2" >
                         <input type="hidden" class="hidden" name="nuevoStatusRequi" value="7" >
+                        <input type="hidden" class="hidden" name="observaciones" value="<%= observaciones %>" >
                         <button type="submit" class="btn btn-success btn-sm">Solicitar Autorizaciones</button>
                     </form>
                 </div>
@@ -354,6 +363,16 @@
                     </tr>
                     <tr>
                         <td>&nbsp;</td>
+                        <td style="text-align: left">GARANTIA</td>
+                        <td>&nbsp;</td>
+                        <td><%=garantia%> Dias</td>
+                        <td>&nbsp;</td>
+                        <td><%=garantia2%> Dias</td>
+                        <td>&nbsp;</td>
+                        <td><%=garantia3%> Dias</td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
                         <td style="text-align: left">ANTICIPO</td>
                         <td>&nbsp;</td>
                         <td><%=anticipo%> %</td>
@@ -372,7 +391,7 @@
                         <td style="border-top: hidden; border-left: hidden; border-right: hidden"><strong>OBSERVACIONES</strong></td>
                     </tr>
                     <tr>
-                        <td>&nbsp;</td>
+                        <td><%= observaciones %></td>
                     </tr>
                 </tbody>
             </table>

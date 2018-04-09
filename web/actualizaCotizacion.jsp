@@ -10,6 +10,7 @@
     int nuevoStatusCoti = 0;
     int idCotizacion = 0;
     int redirecciona = 0;
+    String observaciones = null; 
 
     Mail objMail = new Mail();
 
@@ -29,6 +30,10 @@
         redirecciona = Integer.parseInt(request.getParameter("redirecciona"));
     } catch (Exception e) {
     }
+    try {
+        observaciones = request.getParameter("observaciones");
+    } catch (Exception e) {
+    }
 
     Class.forName("com.mysql.jdbc.Driver");
     Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/scompras", "root", "stmsc0nt");
@@ -36,7 +41,7 @@
     ResultSet rs;
     PreparedStatement ps;
 
-    st.executeUpdate("update cotizacion set id_status_cotizacion = " + nuevoStatusCoti + " where id_cotizacion = " + idCotizacion + ";");
+    st.executeUpdate("update cotizacion set id_status_cotizacion = " + nuevoStatusCoti + ", observaciones = '"+observaciones+"' where id_cotizacion = " + idCotizacion + ";");
     st.executeUpdate("update req_prod rp, cotizacion c set id_status = " + nuevoStatusRequi + " where c.id_req_coti = rp.id_req_coti and c.id_cotizacion = " + idCotizacion + ";");
 
     //Depto. Compras

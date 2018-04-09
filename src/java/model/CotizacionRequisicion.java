@@ -12,9 +12,10 @@ public class CotizacionRequisicion {
    private String depto;
    private String sucursal;
    private String fecha;
+   private String observaciones;
    private int cantidad;
-   private int precio;
-   private int iva;
+   private double precio;
+   private double iva;
    private int descuento;
    private int credito;
    private int entrega;
@@ -70,28 +71,28 @@ public class CotizacionRequisicion {
     /**
      * @return the precio
      */
-    public int getPrecio() {
+    public double getPrecio() {
         return precio;
     }
 
     /**
      * @param precio the precio to set
      */
-    public void setPrecio(int precio) {
+    public void setPrecio(double precio) {
         this.precio = precio;
     }
 
     /**
      * @return the iva
      */
-    public int getIva() {
+    public double getIva() {
         return iva;
     }
 
     /**
      * @param iva the iva to set
      */
-    public void setIva(int iva) {
+    public void setIva(double iva) {
         this.iva = iva;
     }
 
@@ -275,5 +276,19 @@ public class CotizacionRequisicion {
      */
     public void setGarantia(int garantia) {
         this.garantia = garantia;
+    }
+
+    /**
+     * @return the observaciones
+     */
+    public String getObservaciones() {
+        return observaciones;
+    }
+
+    /**
+     * @param observaciones the observaciones to set
+     */
+    public void setObservaciones(String observaciones) {
+        this.observaciones = observaciones;
     }
 }
