@@ -15,17 +15,7 @@
         String idDepto = (String) sesion.getAttribute("departamento"); 
         String rol = (String) sesion.getAttribute("rol");
 
-        int idCategoria = 0;
-        int idProducto = 0;
         int idReqCoti = 0;
-        try {
-            idCategoria = Integer.parseInt(request.getParameter("idCategoria"));
-        } catch (Exception e) {
-        }
-        try {
-            idProducto = Integer.parseInt(request.getParameter("idProducto"));
-        } catch (Exception e) {
-        }
         try {
             idReqCoti = Integer.parseInt(request.getParameter("idReqCoti"));
         } catch (Exception e) {
@@ -37,7 +27,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <title>Autorizar</title>
         <script>
-            var maxi = 2;
+            var maxi = 3;
             var contador = 0;
             function validar(check) {
                 if (check.checked === true) {
@@ -46,7 +36,7 @@
                         alert('No se pueden elegir más de ' + maxi + ' casillas a la vez.');
                         check.checked = false;
                         contador--;
-                    }
+                    } 
                 } else {
                     contador--;
                 }
@@ -72,9 +62,10 @@
                                 <th scope="col">Producto</th>
                                 <th scope="col">Cantidad</th>
                                 <th scope="col">Precio Unitario</th>
-                                <th scope="col">Precio Con IVA</th>
+                                <th scope="col">IVA</th>
                                 <th scope="col">Precio Final</th>
                                 <th scope="col">Dias de Credito</th>
+                                <th scope="col">Garantia</th>
                                 <th scope="col">Tiempo de Entrega</th>
                                 <th scope="col">Anticipo</th>
                                 <th scope="col"></th>
@@ -90,6 +81,7 @@
                                 int credito;
                                 int entrega;
                                 int anticipo;
+                                int garantia;
                                 int idCoti;
 
                                 ArrayList<CotizacionRequisicion> arrayRequis = new ArrayList<CotizacionRequisicion>();
@@ -107,6 +99,7 @@
                                         credito = arrayRequis.get(i).getCredito();
                                         entrega = arrayRequis.get(i).getEntrega();
                                         anticipo = arrayRequis.get(i).getAnticipo();
+                                        garantia = arrayRequis.get(i).getGarantia();
                             %>
                             <tr>
                                 <td><%=proveedor%></td>
@@ -114,8 +107,9 @@
                                 <td><%=cantidad%></td>
                                 <td><%=precio%></td>
                                 <td><%=iva%></td>
-                                <td><%=(iva * cantidad)%></td>
+                                <td><%=cantidad*(iva + precio)%></td>
                                 <td><%=credito%> Dias</td>
+                                <td><%=garantia%> Dias</td>
                                 <td><%=entrega%> Dias</td>
                                 <td><%=anticipo%> %</td>
                                 <td>

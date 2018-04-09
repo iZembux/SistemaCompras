@@ -13,11 +13,14 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
     String proveedor = "N/A", proveedor2 = "N/A", proveedor3 = "N/A";
-    String producto = null;
-    String solicitante = null;
-    String departamento = null;
-    String sucursal = null;
-    String fecha = null;
+    String producto = " ";
+    String solicitante = " ";
+    String departamento = " ";
+    String sucursal = " ";
+    String fecha = " ";
+    String cActivo = null;
+    String cGeneral = null;
+
     int cantidad = 0, cantidad2 = 0, cantidad3 = 0;
     int precio = 0, precio2 = 0, precio3 = 0;
     int iva = 0, iva2 = 0, iva3 = 0;
@@ -25,7 +28,7 @@
     int entrega = 0, entrega2 = 0, entrega3 = 0;
     int anticipo = 0, anticipo2 = 0, anticipo3 = 0;
     int idCotizacion = 0, idCotizacion2 = 0, idCotizacion3 = 0;
-    int status = 0;
+    int activo = 0;
     int solicitantes = 0;
 
     ArrayList<Integer> idCoti = new ArrayList<Integer>();
@@ -69,7 +72,7 @@
         credito = arrayRequis.get(0).getCredito();
         entrega = arrayRequis.get(0).getEntrega();
         anticipo = arrayRequis.get(0).getAnticipo();
-        status = arrayRequis.get(0).getStatus();
+        activo = arrayRequis.get(0).getActivo();
     } catch (Exception e) {
     }
     try {
@@ -98,6 +101,13 @@
         System.out.println("No hay mas cotizaciones");
     }
 
+    if (activo == 1) {
+        cActivo = "X";
+        cGeneral = "&nbsp;";
+    } else if (activo == 0) {
+        cActivo = "&nbsp;";
+        cGeneral = "X";
+    }
 %>
 <!doctype html>
 <html>
@@ -108,18 +118,18 @@
         <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
         <script>
             function imprimeDiv(nombreDiv) {
-                var contenido= document.getElementById(nombreDiv).innerHTML;
-                var contenidoOriginal= document.body.innerHTML;
+                var contenido = document.getElementById(nombreDiv).innerHTML;
+                var contenidoOriginal = document.body.innerHTML;
 
                 document.body.innerHTML = contenido;
 
                 window.print();
 
                 document.body.innerHTML = contenidoOriginal;
-        }
+            }
         </script>
     </head>
-    
+
     <body>
         <div class="container">
             <div class="card mx-auto w-50">
@@ -174,10 +184,10 @@
                         <td width="30%" style="border-top: hidden">Compras</td>
                         <% } else {%>
                         <td width="30%" style="border-top: hidden"><%=solicitante%></td>
-                        <% } %>
+                        <% }%>
                         <td width="25%" style="border: hidden">&nbsp;</td>
                         <td width="15%" style="border: hidden">Compra General</td>
-                        <td width="10%" style=""></td>
+                        <td width="10%" style="border-top: hidden"><%=cGeneral%></td>
                         <td width="10%" style="border: hidden">&nbsp;</td>
                     </tr>
                     <tr>
@@ -185,7 +195,7 @@
                         <td><%=fecha%></td>
                         <td style="border: hidden">&nbsp;</td>
                         <td style="border: hidden">Activo Fijo</td>
-                        <td style=""></td>
+                        <td style=""><%=cActivo%></td>
                         <td style="border: hidden">&nbsp;</td>
                     </tr>
                     <tr>
@@ -194,10 +204,10 @@
                         <td>Compras</td>
                         <% } else {%>
                         <td><%=departamento%></td>
-                        <% } %>
+                        <% }%>
                         <td style="border: hidden">&nbsp;</td>
                         <td style="border: hidden">&nbsp;</td>
-                        <td style="border: hidden">&nbsp;</td>
+                        <td style="">&nbsp;</td>
                         <td style="border: hidden">&nbsp;</td>
                     </tr>
                     <tr>

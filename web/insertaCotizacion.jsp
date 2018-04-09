@@ -14,6 +14,7 @@
     int cantidad = 0;
     int credito = 0;
     int entrega = 0;
+    int garantia = 0;
     double precio = 0;
     double iva = 0;
     double descuento = 0;
@@ -33,6 +34,10 @@
     }
     try {
         entrega = Integer.parseInt(request.getParameter("entrega"));
+    } catch (Exception e) {
+    }
+     try {
+        garantia = Integer.parseInt(request.getParameter("garantia"));
     } catch (Exception e) {
     }
     try {
@@ -93,8 +98,8 @@
 
     st.executeUpdate("UPDATE req_prod SET id_status = " + nuevoStatus + " where id_req_coti = "+ idReqCoti +"");
     
-    st.executeUpdate("Insert into cotizacion (id_req_coti, id_proveedor, id_producto, cantidad, precio, iva, diascredito, tiempoentrega, descuento, anticipo) values "
-            + "("+idReqCoti+", "+idUsuario+", "+idProducto+", "+cantidad+","+precio+", "+iva+", "+credito+", "+entrega+", "+descuento+", "+anticipo+")"); 
-    response.sendRedirect("menuRequisicionesProveedor.jsp");
+    st.executeUpdate("Insert into cotizacion (id_req_coti, id_proveedor, id_producto, cantidad, precio, iva, diascredito, tiempoentrega, descuento, anticipo, garantia) values "
+            + "("+idReqCoti+", "+idUsuario+", "+idProducto+", "+cantidad+","+precio+", "+iva+", "+credito+", "+entrega+", "+descuento+", "+anticipo+","+garantia+")"); 
+    response.sendRedirect("menuRequisicionesProveedor.jsp"); 
 
 %>
