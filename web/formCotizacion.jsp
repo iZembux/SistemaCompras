@@ -40,6 +40,13 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="css/style.css">
         <title>Autorizar</title>
+        <script>
+            window.addEventListener("keypress", function(event){
+            if (event.keyCode == 13){
+                event.preventDefault();
+            }
+        }, false);
+        </script>
     </head>
     <body>
 
@@ -49,7 +56,7 @@
             <div class="card w-50 mx-auto my-5">
                 <h5 class="card-header">Cotización</h5>
                 <div class="card-body">
-                    <form method="post" action="insertaCotizacion.jsp">
+                    <form method="post" action="insertaCotizacion.jsp" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="cantidad">Cantidad</label>
                             <input type="number" class="form-control" id="cantidad" name="cantidad" value="<%= cantidad %>">
@@ -73,6 +80,10 @@
                         <div for="anticipo" class="form-group">
                             <label> % Anticipo</label>
                             <input type="text" class="form-control" id="anticipo" name="anticipo">
+                        </div>
+                        <div for="archivo" class="form-group">
+                            <label> Cargar Archivo</label>
+                            <input type="file" class="form-control" id="archivo" name="archivo">
                         </div>
                         <div class="modal-footer">
                             <input type="hidden" class="hidden" name="idUsuario" value="<%=idUsuario%>" >

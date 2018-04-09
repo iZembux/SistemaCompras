@@ -113,3 +113,31 @@ function imprimeDiv(nombreDiv) {
 
      document.body.innerHTML = contenidoOriginal;
 }
+
+
+function enviar(form) {
+    var persona = new FormData(form);
+    var req = ajaxRequest("cargarArchivo.jsp");
+    req.send(persona);
+}
+
+function ajaxRequest(url) {
+    if (window.XMLHttpRequest) {
+        var request = new XMLHttpRequest();
+    } else if (window.ActiveXObject) {
+        var request = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+    request.onload = function (Event) {
+        if (request.status == 200) {
+            var response = JSON.parse(request.responseText);
+            if (response.success) {
+                alert("Persona procesada exitosamente");
+                swal("Genial!", "Persona procesada exitosamente", "success");
+            } else {
+                swal("Opps!", "Algo malo pasó!", "warning");
+            }
+        }
+    };
+
+}
