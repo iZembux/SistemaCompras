@@ -21,6 +21,7 @@
     int credito = 0;
     int idReqCoti = 0;
     int idP = 0;
+    int idUsuCompras = 0;
 
     int idReqProd = 0;
     String usuarioC = null;
@@ -55,6 +56,7 @@
         descuento = arrayRequis.get(0).getDescuento();
         precio = arrayRequis.get(0).getPrecio();
         credito = arrayRequis.get(0).getDiasCredito();
+        idUsuCompras = arrayRequis.get(0).getUsuCompras();
     }
 
     if (sucursal.contains(" ")) {

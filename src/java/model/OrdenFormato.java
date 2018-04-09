@@ -21,6 +21,7 @@ public class OrdenFormato {
     private int descuento;
     private int precio;
     private int diasCredito;
+    private int usuCompras;
 
     /**
      * @return the sucursal
@@ -230,6 +231,20 @@ public class OrdenFormato {
      */
     public void setDiasCredito(int diasCredito) {
         this.diasCredito = diasCredito;
+    }
+
+    /**
+     * @return the usuCompras
+     */
+    public int getUsuCompras() {
+        return usuCompras;
+    }
+
+    /**
+     * @param usuCompras the usuCompras to set
+     */
+    public void setUsuCompras(int usuCompras) {
+        this.usuCompras = usuCompras;
     }
     
     

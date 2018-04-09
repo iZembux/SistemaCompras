@@ -1024,7 +1024,8 @@ public class Consultas {
                         + "    c.descuento AS descuento,\n"
                         + "    c.precio AS precio,\n"
                         + "    c.tiempoentrega,\n"
-                        + "    c.diascredito\n"
+                        + "    c.diascredito,\n"
+                        + "    rp.usu_compras\n"
                         + "FROM\n"
                         + "    requisiciones r,\n"
                         + "    req_prod rp,\n"
@@ -1063,6 +1064,7 @@ public class Consultas {
                     obj.setDescuento(rs.getInt("descuento"));
                     obj.setPrecio(rs.getInt("precio"));
                     obj.setDiasCredito(rs.getInt("diascredito"));
+                    obj.setUsuCompras(rs.getInt("usu_compras"));
                     listaRequi.add(obj);
                 }
             } catch (SQLException ex) {
