@@ -24,11 +24,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="css/style.css">
         <title>Autorizar</title>
-        <script>
-            function alerta(){
-                confirm("¿Seguro que desea enviar esta cotizacion?");
-            }
-        </script>
+        
     </head>
     <body>
 
@@ -86,7 +82,7 @@
                                 <input type="hidden" class="hidden" name="cantidad" value="<%=cantidadRequi%>" >
                                 <input type="hidden" class="hidden" name="idProducto" value="<%=idProducto%>" >
                                 <input type="hidden" class="hidden" name="idReqCoti" value="<%=idReqCoti%>" >
-                                <button type="submit" class="btn btn-primary btn-sm" onclick="alerta()">Hacer Cotizacion</button>
+                                <button type="submit" class="btn btn-primary btn-sm" >Hacer Cotizacion</button>
                             </form>
                             <% } else if (status == 6) {
                                 ArrayList<CotizacionRequisicion> arrayRequis2 = new ArrayList<CotizacionRequisicion>();
@@ -104,7 +100,7 @@
                                 <input type="hidden" class="hidden" name="idUsuario" value="<%=id_usuario%>" >
                                 <input type="hidden" class="hidden" name="idProducto" value="<%=idProducto%>" >
                                 <input type="hidden" class="hidden" name="idReqCoti" value="<%=idReqCoti%>" >
-                                <button type="submit" class="btn btn-primary btn-sm" onclick="alerta()">Hacer Cotizacion</button>
+                                <button type="submit" class="btn btn-primary btn-sm" >Hacer Cotizacion</button>
                             </form>
                             <% }
                             } else if (status == 10) {
@@ -117,7 +113,7 @@
                             <div class="row">
                                 <form action="detalleRequisicionesProveedor.jsp" method="post">
                                     <input type="hidden" class="hidden" name="idReqCoti" value="<%=idReqCoti%>" >
-                                    <button type="submit" class="btn btn-success btn-sm" onclick="alerta()">Cotizacion Ganadora</button>
+                                    <button type="submit" class="btn btn-success btn-sm" >Cotizacion Ganadora</button>
                                 </form>
                             </div>
                             <%} else {%>

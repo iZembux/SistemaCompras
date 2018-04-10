@@ -28,6 +28,11 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="css/style.css">
         <title>Autorizar</title>
+        <script>
+            function alerta(){
+                confirm("¿Enviar este producto?");
+            }
+        </script>
     </head>
     <body>
 
@@ -82,9 +87,9 @@
                                     <button type="submit" class="btn btn-primary btn-sm">Ver Orden de Compra</button>
                                 </form>
                                 <form action="actualizaProveedor.jsp" method="post">
-                                    <input type="hidden" class="hidden" name="idRequi" value="<%=idRequi%>" >
+                                    <input type="hidden" class="hidden" name="idRequi" value="<%=idReqCoti%>" >
                                     <input type="hidden" class="hidden" name="nuevoStatus" value="11" >
-                                    <button type="submit" class="btn btn-info btn-sm">Iniciar Envío de Productos</button>
+                                    <button type="submit" class="btn btn-info btn-sm" onclick="alerta()">Iniciar Envío de Productos</button>
                                 </form>
                             </div>
                         </td>

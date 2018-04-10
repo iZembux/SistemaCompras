@@ -40,6 +40,11 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="css/style.css">
         <title>Autorizar</title>
+        <script>
+            function alerta(){
+                confirm("¿Seguro que desea enviar esta cotizacion?");
+            }
+        </script>
     </head>
     <body>
 
@@ -82,7 +87,7 @@
                             <input type="hidden" class="hidden" name="idUsuario" value="<%=idUsuario%>" >
                             <input type="hidden" class="hidden" name="idProducto" value="<%=idProducto%>" >
                             <input type="hidden" class="hidden" name="idReqCoti" value="<%=idReqCoti%>" >
-                            <input type="submit" class="btn btn-primary" value="Aceptar" />
+                            <input type="submit" class="btn btn-primary" value="Aceptar" onclick="alerta()"/>
                         </div>
                     </form>
                 </div>
