@@ -27,14 +27,10 @@
             /*item.isFormField() false=input file; true=text field*/
             if (! item.isFormField()){
                 /*cual sera la ruta al archivo en el servidor*/
-                File archivo_server = new File("c:/subidos/Huevos_"+item.getName());
+                File archivo_server = new File("c:/subidos/Archivo_"+item.getName());
                 /*y lo escribimos en el servido*/
                 item.write(archivo_server);
-                out.print("Nombre --> " + item.getName() );
-                out.print("<br> Tipo --> " + item.getContentType());
-                out.print("<br> tamaño --> " + (item.getSize()/1240)+ "KB");
-                out.print("<br>");
-                out.println("-----> "+archivo_server.getAbsolutePath());
             }
         }
+        response.sendRedirect("menuRequisicionesProveedor.jsp"); 
 %>

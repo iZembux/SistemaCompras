@@ -46,6 +46,45 @@
                 event.preventDefault();
             }
         }, false);
+    
+        </script>
+        <script type = 'text/javascript'>
+            function nombre_ar(id_archivo) {
+        var archivo = document.getElementById(id_archivo).value;
+
+        if (navigator.userAgent.indexOf('Linux') != -1) {
+            var SO = "Linux";
+        } else if ((navigator.userAgent.indexOf('Win') != -1) && (navigator.userAgent.indexOf('95') != -1)) {
+            var SO = "Win";
+        } else if ((navigator.userAgent.indexOf('Win') != -1) && (navigator.userAgent.indexOf('NT') != -1)) {
+            var SO = "Win";
+        } else if (navigator.userAgent.indexOf('Win') != -1) {
+            var SO = "Win";
+        } else if (navigator.userAgent.indexOf('Mac') != -1) {
+            var SO = "Mac";
+        } else {
+            var SO = "no definido";
+        }
+
+        if (SO = "Win") {
+            var arr_ruta = archivo.split("\\");
+        } else {
+            var arr_ruta = archivo.split("/");
+        }
+
+
+        var nombre_archivo = (arr_ruta[arr_ruta.length - 1]);
+        var ext_validas = /\.(pdf|gif|jpg|png)$/i.test(nombre_archivo);
+        if (!ext_validas) {
+            borrar();
+            alert("Archivo con extensión no válida\nSu archivo: " + nombre_archivo);
+            return false;
+        }
+        }
+        function borrar() {
+            document.getElementById('valor').innerHTML = "";
+            var vacio = document.getElementById('archivo').value = "";
+        }
         </script>
     </head>
     <body>
@@ -56,7 +95,7 @@
             <div class="card w-50 mx-auto my-5">
                 <h5 class="card-header">Cotización</h5>
                 <div class="card-body">
-                    <form method="post" action="insertaCotizacion.jsp" enctype="multipart/form-data">
+                    <form method="post" action="guardarArchivos.jsp" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="cantidad">Cantidad</label>
                             <input type="number" class="form-control" id="cantidad" name="cantidad" value="<%= cantidad %>">
@@ -86,7 +125,7 @@
                             <input type="text" class="form-control" id="anticipo" name="anticipo">
                         </div>
                         <div for="archivo" class="form-group">
-                            <label> Cargar Archivo</label>
+                            <label> Subir Archivo </label>
                             <input type="file" class="form-control" id="archivo" name="archivo">
                         </div>
                         <div class="modal-footer">

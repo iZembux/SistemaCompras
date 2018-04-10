@@ -92,7 +92,13 @@
                                 si es asi, muesta un mensaje, si no, permite hacer una cotizacion
                                  */
                                 if (arrayRequis2.size() > 0) { %>
-                            <button type="button" class="btn btn-info btn-sm">Ya haz realizado una cotizacion</button>   
+                            <button type="button" class="btn btn-info btn-sm">Ya haz realizado una cotizacion</button> 
+                            <!--<form method="post" action="subir.jsp" enctype="multipart/form-data">
+                                <div>
+                                <input type="file" id="archivo" name="archivo" onchange="nombre_ar(this.id);">
+                                <input type="submit" class="btn btn-primary" value="Enviar" />
+                                </div>
+                            </form>-->
                             <%} else {%>
                             <form action="formCotizacion.jsp" method="post">
                                 <input type="hidden" class="hidden" name="cantidad" value="<%=cantidadRequi%>" >
