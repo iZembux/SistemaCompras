@@ -43,16 +43,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>232</td>
-                        <td>3</td>
-                        <td>Cuaderno</td>
-                        <td>Scribe</td>
-                        <td>
-                            <button type="button" class="btn btn-primary">Cotizaciones</button>
-                        </td>
-                        <td><b>Rechazada</b></td>
-                    </tr>
+                    
                 </tbody>
             </table>
         </div>

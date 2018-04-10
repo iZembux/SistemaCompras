@@ -19,7 +19,7 @@ public class OrdenFormato {
     private int idP;
     private int cantidad;
     private int descuento;
-    private int precio;
+    private double precio;
     private int diasCredito;
     private int usuCompras;
 
@@ -194,14 +194,14 @@ public class OrdenFormato {
     /**
      * @return the precio
      */
-    public int getPrecio() {
+    public double getPrecio() {
         return precio;
     }
 
     /**
      * @param precio the precio to set
      */
-    public void setPrecio(int precio) {
+    public void setPrecio(double precio) {
         this.precio = precio;
     }
 

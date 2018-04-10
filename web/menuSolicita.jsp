@@ -141,14 +141,15 @@
                             </div>
                             <div class="form-group">
                                 <label for="cantidad">Cantidad</label>
+                                
                                 <input type="number" class="form-control" id="cantidad" name="cantidad" required>
                             </div>
                             <div for="descripcion" class="form-group">
-                                <label>Descripcion / Observaciones</label>
+                                <label>Descripcion / Observaciones <span class="badge badge-info" data-toggle="tooltip" data-placement="bottom" title="Favor de proporcionar cualquier información, que ayude al que compra y aprueba">?</span> </label>
                                 <input type="text" class="form-control" id="descripcion" name="descripcion">
                             </div>
                             <div for="justificacion" class="form-group">
-                                <label>Justificacion</label>
+                                <label>Motivo de la compra</label>
                                 <input type="text" class="form-control" id="justificacion" name="justificacion" required>
                             </div>
                             <div>
