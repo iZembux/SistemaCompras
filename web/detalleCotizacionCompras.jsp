@@ -9,6 +9,7 @@
 <%
     HttpSession sesion = request.getSession();
     String usuarioValidado = (String) sesion.getAttribute("usuarioIngresado");
+    String ruta = "C:/subidos/PAPEL_OFFICE_TAMANO_CARTA.pdf";
     if (usuarioValidado == null) {
         response.sendRedirect("index.jsp");
     } else {
@@ -42,6 +43,13 @@
                 }
             }
         </script>
+        <SCRIPT LANGUAGE="JavaScript">
+        function leeArchivo() {
+            var nombreArchivo = "PAPEL_OFFICE_TAMANO_CARTA";
+            var URL = "file:///C:/Users/aBIMAEL/Documents/NetBeansProjects/ComprasV2/web/subidos/PAPEL_OFFICE_TAMANO_CARTA.pdf"
+            window.open(URL,"_blank");
+        }
+        </script>
     </head>
     <body>
 
@@ -68,6 +76,7 @@
                                 <th scope="col">Garantia</th>
                                 <th scope="col">Tiempo de Entrega</th>
                                 <th scope="col">Anticipo</th>
+                                <!--<th scope="col">Archivo</th>-->
                                 <th scope="col"></th>
                             </tr>
                         </thead>
@@ -87,6 +96,7 @@
                                 ArrayList<CotizacionRequisicion> arrayRequis = new ArrayList<CotizacionRequisicion>();
                                 Consultas obj = new Consultas();
                                 arrayRequis = obj.consultarComprasDetalleCoti(idReqCoti);
+                                
 
                                 if (arrayRequis.size() > 0) {
                                     for (int i = 0; i < arrayRequis.size(); i++) {
@@ -112,6 +122,7 @@
                                 <td><%=garantia%> Dias</td>
                                 <td><%=entrega%> Dias</td>
                                 <td><%=anticipo%> %</td>
+                                <!--<td><input type="button" onClick="leeArchivo()" value="Ver PDF"></td>-->
                                 <td>
                                     <div class="form-check">
                                         <label>

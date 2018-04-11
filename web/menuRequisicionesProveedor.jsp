@@ -9,6 +9,7 @@
 <%@page import="model.RequisicionProducto"%>
 <%
     HttpSession sesion = request.getSession();
+    String ruta;
     String usuarioValidado = (String) sesion.getAttribute("usuarioIngresado");
     if (usuarioValidado == null) {
         response.sendRedirect("index.jsp");
@@ -56,6 +57,7 @@
                         int status;
                         String producto;
                         String marca;
+                        
 
                         ArrayList<RequisicionProducto> arrayRequis = new ArrayList<RequisicionProducto>();
                         Consultas obj = new Consultas();
@@ -75,6 +77,7 @@
                                 marca = arrayRequis.get(i).getMarca();
                                 idReqCoti = arrayRequis.get(i).getIdReqCoti();
                                 status = arrayRequis.get(i).getIdStatus();
+                                
                     %>
                     <tr>
                         <td><%=producto%></td>
@@ -96,14 +99,13 @@
                                 /* Consulta si el usuario activo ya realizo una cotizacion,
                                 si es asi, muesta un mensaje, si no, permite hacer una cotizacion
                                  */
+                                  ruta = "C:/subidos/PAPEL_OFFICE_TAMANO_CARTA.pdf";
                                 if (arrayRequis2.size() > 0) { %>
                             <button type="button" class="btn btn-info btn-sm">Ya haz realizado una cotizacion</button> 
-                            <!--<form method="post" action="subir.jsp" enctype="multipart/form-data">
-                                <div>
-                                <input type="file" id="archivo" name="archivo" onchange="nombre_ar(this.id);">
-                                <input type="submit" class="btn btn-primary" value="Enviar" />
-                                </div>
-                            </form>-->
+                            
+                            <form action="visor.jsp" method="post" target="_blank">
+                                <button type="submit" action="visor.jsp" value="<%=ruta%>" name="search" class="btn btn-dark btn-sm">Ver PDF</button> 
+                            </form>
                             <%} else {%>
                             <form action="formCotizacion.jsp" method="post">
                                 <input type="hidden" class="hidden" name="cantidad" value="<%=cantidadRequi%>" >

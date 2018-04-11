@@ -29,7 +29,7 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="card" style="width: 18rem;">
-                                    <img class="card-img-top" src="http://placehold.it/500x325" alt="Card image cap">
+                                    <img class="card-img-top" src="https://png.icons8.com/color/500/000000/shopping-cart.png" alt="">
                                     <div class="card-body">
                                         <form action="menuSolicita.jsp" method="post">
                                             <input type="hidden" class="form-control" id="nuevaRequisicion" name="nuevaRequisicion" value="0">
@@ -40,7 +40,7 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="card" style="width: 18rem;">
-                                    <img class="card-img-top" src="http://placehold.it/500x325" alt="Card image cap">
+                                    <img class="card-img-top" src="https://png.icons8.com/ios-glyphs/500/2B908A/cash-register.png" alt="">
                                     <div class="card-body">
                                         <form action="menuSeguimiento.jsp" method="post">
                                             <button type="submit" class="btn btn-primary btn-sm">Terminar</button>
