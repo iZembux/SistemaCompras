@@ -24,7 +24,7 @@
     ResultSet rs;
     PreparedStatement ps;
 
-    st.executeUpdate("UPDATE req_prod SET id_status = " + nuevoStatus + " WHERE id_requisicion = " + idRequi + ";");
+    st.executeUpdate("UPDATE req_prod SET id_status = " + nuevoStatus + " WHERE id_req_coti = " + idRequi + ";");
 
     //Depto. Compras
     String sql2 = "SELECT correo, nombre, apellido FROM scompras.usuario where id_departamento = 7;";

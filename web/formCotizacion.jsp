@@ -41,6 +41,9 @@
         <link rel="stylesheet" type="text/css" href="css/style.css">
         <title>Autorizar</title>
         <script>
+            function alerta(){
+                confirm("¿Seguro que desea enviar esta cotizacion?");
+            }
             window.addEventListener("keypress", function(event){
             if (event.keyCode == 13){
                 event.preventDefault();
@@ -132,7 +135,7 @@
                             <input type="hidden" class="hidden" name="idUsuario" value="<%=idUsuario%>" >
                             <input type="hidden" class="hidden" name="idProducto" value="<%=idProducto%>" >
                             <input type="hidden" class="hidden" name="idReqCoti" value="<%=idReqCoti%>" >
-                            <input type="submit" class="btn btn-primary" value="Aceptar" />
+                            <input type="submit" class="btn btn-primary" value="Aceptar" onclick="alerta()"/>
                         </div>
                     </form>
                 </div>
