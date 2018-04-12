@@ -11,11 +11,21 @@
     if (usuarioValidado == null) {
         response.sendRedirect("index.jsp");
     } else {
-        String idDepto = (String) sesion.getAttribute("departamento"); 
+        String idDepto = (String) sesion.getAttribute("departamento");        
         String rol = (String) sesion.getAttribute("rol");
         String usuario = (String) sesion.getAttribute("idUsuario");
+        String sucursal = (String) sesion.getAttribute("sucursal");
+        String suc = null;
         
-    int id_categoria = 1;
+        if (sucursal.equals("8")) {
+            suc = "1,2,3,4,6,7,8,13,17";
+        } else if (sucursal.equals("9")) {
+            suc = "9,14";
+        } else if (sucursal.equals("10")) {
+            suc = "10,11,15,16,18";
+        }
+        
+        int id_categoria = 1;
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -53,10 +63,10 @@
                         int idProducto;
                         String producto;
                         String marca;
-
+                        
                         ArrayList<RequisicionProducto> arrayRequis = new ArrayList<RequisicionProducto>();
                         Consultas obj = new Consultas();
-                        arrayRequis = obj.consultarCompras(id_categoria,4); 
+                        arrayRequis = obj.consultarCompras(id_categoria, 4,suc);                        
                         if (arrayRequis.size() > 0) {
                             for (int i = 0; i < arrayRequis.size(); i++) {
                                 idProducto = arrayRequis.get(i).getIdProducto();
@@ -72,8 +82,8 @@
                             <form action="actualizaCompras.jsp" method="post">
                                 <input type="hidden" class="hidden" name="nuevoStatus" value="5" >
                                 <input type="hidden" class="hidden" name="idProducto" value="<%=idProducto%>" >
-                                <input type="hidden" class="hidden" name="categoria" value="<%=id_categoria %>" >
-                                <input type="hidden" class="hidden" name="usuario" value="<%=usuario %>" >
+                                <input type="hidden" class="hidden" name="categoria" value="<%=id_categoria%>" >
+                                <input type="hidden" class="hidden" name="usuario" value="<%=usuario%>" >
                                 <button type="submit" class="btn btn-primary btn-sm">Solicitar Cotizaciones</button>
                             </form>
                         </td>

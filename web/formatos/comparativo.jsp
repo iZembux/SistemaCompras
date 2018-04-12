@@ -25,6 +25,7 @@
     int cantidad = 0, cantidad2 = 0, cantidad3 = 0;
     double precio = 0, precio2 = 0, precio3 = 0;
     double iva = 0, iva2 = 0, iva3 = 0;
+    double total = 0, total2 = 0, total3 = 0;
     int credito = 0, credito2 = 0, credito3 = 0;
     int entrega = 0, entrega2 = 0, entrega3 = 0;
     int anticipo = 0, anticipo2 = 0, anticipo3 = 0;
@@ -79,6 +80,7 @@
         anticipo = arrayRequis.get(0).getAnticipo();
         activo = arrayRequis.get(0).getActivo();
         garantia = arrayRequis.get(0).getGarantia();
+        total = ((precio+iva)*cantidad);
     } catch (Exception e) {
     }
     try {
@@ -92,6 +94,7 @@
         entrega2 = arrayRequis.get(0).getEntrega();
         anticipo2 = arrayRequis.get(0).getAnticipo();
         garantia2 = arrayRequis.get(0).getGarantia();
+        total2 = ((precio2+iva2)*cantidad2);
     } catch (Exception e) {
     }
     try {
@@ -105,6 +108,7 @@
         entrega3 = arrayRequis.get(0).getEntrega();
         anticipo3 = arrayRequis.get(0).getAnticipo();
         garantia3 = arrayRequis.get(0).getGarantia();
+        total3 = ((precio3+iva3)*cantidad3);
     } catch (Exception e) {
         System.out.println("No hay mas cotizaciones");
     }
@@ -143,7 +147,7 @@
             <div class="card mx-auto w-50">
                 <h5 class="card-header">Seleccionar Mejor Cotizacion</h5>
                 <div class="card-body" style="text-align: center;">
-                    <form action="../actualizaCotizacion.jsp" method="post">
+                    <form action="../actualizaCotizacionCompras.jsp" method="post">
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="cotiSelccionada" id="exampleRadios1" value="<%=idCotizacion%>" required="true"> 
                             <label class="form-check-label" for="exampleRadios1">
@@ -165,7 +169,11 @@
                         <input type="hidden" class="hidden" name="nuevoStatusCoti" value="2" >
                         <input type="hidden" class="hidden" name="nuevoStatusRequi" value="7" >
                         <input type="hidden" class="hidden" name="observaciones" value="<%= observaciones %>" >
+                        <% if (total < 5000 && total2 < 5000 && total3 < 5000) { %> 
+                        <button type="submit" class="btn btn-success btn-sm">Seleccionar ganadora</button>
+                        <% } else { %>
                         <button type="submit" class="btn btn-success btn-sm">Solicitar Autorizaciones</button>
+                        <% } %>
                     </form>
                 </div>
             </div>

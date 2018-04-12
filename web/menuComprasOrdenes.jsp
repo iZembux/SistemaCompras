@@ -10,10 +10,20 @@
     if (usuarioValidado == null) {
         response.sendRedirect("index.jsp");
     } else {
-        String idDepto = (String) sesion.getAttribute("departamento"); 
+        String idDepto = (String) sesion.getAttribute("departamento");
         String rol = (String) sesion.getAttribute("rol");
-        
-    int id_categoria = 1;
+        String idSucursal = (String) sesion.getAttribute("sucursal");
+        String suc = null;
+
+        if (idSucursal.equals("8")) {
+            suc = "1,2,3,4,6,7,8,13,17";
+        } else if (idSucursal.equals("9")) {
+            suc = "9,14";
+        } else if (idSucursal.equals("10")) {
+            suc = "10,11,15,16,18";
+        }
+
+        int id_categoria = 1;
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -56,7 +66,7 @@
 
                         ArrayList<RequisicionProducto> arrayRequis = new ArrayList<RequisicionProducto>();
                         Consultas obj = new Consultas();
-                        arrayRequis = obj.consultarCompras(id_categoria,10);
+                        arrayRequis = obj.consultarCompras(id_categoria, 10, suc);
 
                         if (arrayRequis.size() > 0) {
                             for (int i = 0; i < arrayRequis.size(); i++) {
