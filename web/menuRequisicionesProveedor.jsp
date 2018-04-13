@@ -11,6 +11,11 @@
     HttpSession sesion = request.getSession();
     String ruta;
     String usuarioValidado = (String) sesion.getAttribute("usuarioIngresado");
+    try{
+        
+    }catch(Exception e){
+        System.out.println("Aún no tengo ruta PDF");
+    }
     if (usuarioValidado == null) {
         response.sendRedirect("index.jsp");
     } else {
