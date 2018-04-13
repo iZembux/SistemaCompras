@@ -14,6 +14,9 @@
     String nombre = null;
     String apellidoP = null;
     String apellidoM = null;
+    String nombreG = null;
+    String apellidoPG = null;
+    String apellidoMG = null;
     String justificacion = null;
     String fecha = null;
     String producto = null;
@@ -27,6 +30,7 @@
     int cantidad = 0;
     int idReqProd = 0;
     int activo = 0;
+    int idGerente = 0;
 
     try {
         idReqProd = Integer.parseInt(request.getParameter("idReqProd"));
@@ -34,6 +38,7 @@
     }
 
     ArrayList<RequisicionFormato> arrayRequis = new ArrayList<RequisicionFormato>();
+    ArrayList<RequisicionFormato> arrayRequis2 = new ArrayList<RequisicionFormato>();
     Consultas obj = new Consultas();
     arrayRequis = obj.consultarFormatoRequisicion(idReqProd);
 
@@ -52,6 +57,14 @@
         marca = arrayRequis.get(0).getMarca();
         modelo = arrayRequis.get(0).getModelo();
         activo = arrayRequis.get(0).getActivo();
+        idGerente = arrayRequis.get(0).getGerente();
+    }
+    
+    arrayRequis2 = obj.consultarUsuario(idGerente);
+    if (!arrayRequis.isEmpty()) {
+        nombreG = arrayRequis2.get(0).getNombre();
+        apellidoPG = arrayRequis2.get(0).getApellidoP();
+        apellidoMG = arrayRequis2.get(0).getApellidoM();
     }
 
     if (activo == 1) {
@@ -195,7 +208,7 @@
                     <th height="94" colspan="2" ><p>Solicitó</p>
                         <p><%=nombre + " " + apellidoP + " " + apellidoM%></p></th>
                     <th colspan="3" style="border-right:solid black 1px"><p>Autorizó</p>
-                        <p>______________________________</p></th>
+                        <p><%=nombreG + " " + apellidoPG + " " + apellidoMG%></p></th>
                     <th colspan="2"><p>Recibo Compras (Nombre y Fecha)</p>
                         <p>______________________________</p></th>
                 </tr>

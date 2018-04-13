@@ -19,6 +19,7 @@
     } else {
         String idDepto = (String) sesion.getAttribute("departamento");
         String rol = (String) sesion.getAttribute("rol");
+        String idUsu = (String) sesion.getAttribute("idUsuario");
 
         if (rol.equals("4")) {
             status = 7;
@@ -61,9 +62,7 @@
                 <tbody>
                     <%
                         int cantidadRequi;
-                        int idProducto;
                         int idReqCoti;
-                        int idCoti = 0;
                         String producto;
                         String marca;
 
@@ -76,15 +75,11 @@
 
                         if (arrayRequis.size() > 0) {
                             for (int i = 0; i < arrayRequis.size(); i++) {
-                                idProducto = arrayRequis.get(i).getIdProducto();
                                 cantidadRequi = arrayRequis.get(i).getCantidad();
                                 producto = arrayRequis.get(i).getProducto();
                                 marca = arrayRequis.get(i).getMarca();
                                 idReqCoti = arrayRequis.get(i).getIdReqCoti();
                                 arrayRequis2 = obj2.consultarComprasDetalleCoti(idReqCoti);
-                                if (arrayRequis2.size() > 0) {
-                                    idCoti = arrayRequis2.get(0).getIdC();
-                                }
                     %>
                     <tr>
                         <td><%=producto%></td>
@@ -93,6 +88,7 @@
                         <td>
                             <form action="formatos/<%=direccion%>" method="post">
                                 <input type="hidden" class="hidden" name="idReqCoti" value="<%=idReqCoti%>" >
+                                <input type="hidden" class="hidden" name="idUsu" value="<%=idUsu%>" >
                                 <button type="submit" class="btn btn-primary btn-sm">Ver Cuadro Comparativo</button>
                             </form>
                         </td>

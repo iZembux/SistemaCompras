@@ -61,7 +61,7 @@
     //Pregunta si es una requisicion nueva (1) o si es continuacion de otra (0)
     if (nuevaRequisicion == 1) {
         st.executeUpdate("insert into requisiciones(id_requisicion, id_usuario, fecha) "
-                + "values ('" + idRequisicion + "','" + idUsuario + "',CURDATE())");
+                + "values ('" + idRequisicion + "','" + idUsuario + "',CURRENT_TIMESTAMP)");
 
         //Envia correo al gerente del area
         String sql = "SELECT correo, nombre, apellido FROM scompras.usuario where id_rol = 3 and id_departamento = " + idDepto + ";";

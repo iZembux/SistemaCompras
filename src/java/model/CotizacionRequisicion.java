@@ -6,25 +6,30 @@
 package model;
 
 public class CotizacionRequisicion {
-   private String proveedor;
-   private String solicitante;
-   private String producto;
-   private String depto;
-   private String sucursal;
-   private String fecha;
-   private String observaciones;
-   private int cantidad;
-   private double precio;
-   private double iva;
-   private int descuento;
-   private int credito;
-   private int entrega;
-   private int anticipo;
-   private int garantia;
-   private int idP;
-   private int idC;
-   private int status;
-   private int activo;
+
+    private String proveedor;
+    private String solicitante;
+    private String producto;
+    private String depto;
+    private String sucursal;
+    private String fecha;
+    private String observaciones;
+    private int cantidad;
+    private double precio;
+    private double iva;
+    private int descuento;
+    private int credito;
+    private int entrega;
+    private int anticipo;
+    private int garantia;
+    private int idP;
+    private int idC;
+    private int status;
+    private int activo;
+    private int idGerenteC = 0;
+    private int idGerenteA = 0;
+    private int idDirectorA = 0;
+    private int idDirectorG = 0;
 
     /**
      * @return the proveedor
@@ -290,5 +295,61 @@ public class CotizacionRequisicion {
      */
     public void setObservaciones(String observaciones) {
         this.observaciones = observaciones;
+    }
+
+    /**
+     * @return the idGerenteC
+     */
+    public int getIdGerenteC() {
+        return idGerenteC;
+    }
+
+    /**
+     * @param idGerenteC the idGerenteC to set
+     */
+    public void setIdGerenteC(int idGerenteC) {
+        this.idGerenteC = idGerenteC;
+    }
+
+    /**
+     * @return the idGerenteA
+     */
+    public int getIdGerenteA() {
+        return idGerenteA;
+    }
+
+    /**
+     * @param idGerenteA the idGerenteA to set
+     */
+    public void setIdGerenteA(int idGerenteA) {
+        this.idGerenteA = idGerenteA;
+    }
+
+    /**
+     * @return the idDirectorA
+     */
+    public int getIdDirectorA() {
+        return idDirectorA;
+    }
+
+    /**
+     * @param idDirectorA the idDirectorA to set
+     */
+    public void setIdDirectorA(int idDirectorA) {
+        this.idDirectorA = idDirectorA;
+    }
+
+    /**
+     * @return the idDirectorG
+     */
+    public int getIdDirectorG() {
+        return idDirectorG;
+    }
+
+    /**
+     * @param idDirectorG the idDirectorG to set
+     */
+    public void setIdDirectorG(int idDirectorG) {
+        this.idDirectorG = idDirectorG;
     }
 }

@@ -73,6 +73,7 @@
                             <form action="detalleCotizacionCompras.jsp" method="post">
                                 <input type="hidden" class="hidden" name="idReqCoti" value="<%=idReqCoti%>" >
                                 <input type="hidden" class="hidden" name="idProducto" value="<%=idProducto%>" >
+                                <input type="hidden" class="hidden" name="idUsu" value="<%=usuario%>" >
                                 <button type="submit" class="btn btn-primary btn-sm">Ver Cotizaciones</button>
                             </form>
                         </td>

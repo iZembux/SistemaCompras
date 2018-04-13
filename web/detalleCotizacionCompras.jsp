@@ -17,8 +17,13 @@
         String rol = (String) sesion.getAttribute("rol");
 
         int idReqCoti = 0;
+        int idUsu = 0;
         try {
             idReqCoti = Integer.parseInt(request.getParameter("idReqCoti"));
+        } catch (Exception e) {
+        }
+        try {
+            idUsu = Integer.parseInt(request.getParameter("idUsu"));
         } catch (Exception e) {
         }
 %>
@@ -150,6 +155,7 @@
                                         <textarea class="form-control" aria-label="With textarea" name="observaciones" id="observaciones"></textarea>
                                     </div>
                                     <br/>
+                                    <input type="hidden" class="hidden" name="idUsu" value="<%=idUsu%>" >
                                     <button type="submit" class="btn btn-primary btn-sm">Generar Cuadro Comparativo</button>
                                 </div>
                             </div>

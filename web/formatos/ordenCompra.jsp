@@ -64,7 +64,7 @@
         idUsuCompras = arrayRequis.get(0).getUsuCompras();
     }
     
-    arrayRequis2 = obj.consultarUsuarioCompras(idUsuCompras);
+    arrayRequis2 = obj.consultarUsuario(idUsuCompras);
     if (!arrayRequis.isEmpty()) {
         nombreC = arrayRequis2.get(0).getNombre();
         apellidoC = arrayRequis2.get(0).getApellidoP();

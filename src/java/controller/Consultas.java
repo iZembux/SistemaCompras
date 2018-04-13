@@ -876,6 +876,9 @@ public class Consultas {
                         + "    c.garantia,\n"
                         + "    c.id_status_cotizacion AS STATUS,\n"
                         + "    c.observaciones,\n"
+                        + "    c.aut_compras,\n"
+                        + "    c.aut_nivel1,\n"
+                        + "    c.aut_nivel2,\n"
                         + "    rp.activo_fijo as ACTIVO\n"
                         + "FROM\n"
                         + "    usuario u,\n"
@@ -919,6 +922,9 @@ public class Consultas {
                     obj.setStatus(rs.getInt("STATUS"));
                     obj.setActivo(rs.getInt("ACTIVO"));
                     obj.setObservaciones(rs.getString("observaciones"));
+                    obj.setIdGerenteC(rs.getInt("aut_compras"));
+                    obj.setIdGerenteA(rs.getInt("aut_nivel1"));
+                    obj.setIdDirectorA(rs.getInt("aut_nivel2"));
                     listaRequi.add(obj);
                 }
             } catch (SQLException ex) {
@@ -956,6 +962,7 @@ public class Consultas {
                         + "    rp.cantidad,\n"
                         + "    rp.descripcion,\n"
                         + "    rp.activo_fijo,\n"
+                        + "    rp.usu_gerente,\n"
                         + "    p.marca,\n"
                         + "    p.modelo\n"
                         + "FROM\n"
@@ -972,6 +979,7 @@ public class Consultas {
                         + "        AND s.id_sucursales = u.id_sucursal\n"
                         + "        AND rp.id_producto = p.id_productos\n"
                         + "        AND rp.id_req_prod = " + idRequProd + "";
+                System.out.println(sql);
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
@@ -990,6 +998,7 @@ public class Consultas {
                     obj.setMarca(rs.getString("marca"));
                     obj.setModelo(rs.getString("modelo"));
                     obj.setActivo(rs.getInt("activo_fijo"));
+                    obj.setGerente(rs.getInt("usu_gerente"));
                     listaRequi.add(obj);
                 }
             } catch (SQLException ex) {
@@ -1193,7 +1202,7 @@ public class Consultas {
         return suma;
     }
 
-    public ArrayList<RequisicionFormato> consultarUsuarioCompras(int idUsuario) {
+    public ArrayList<RequisicionFormato> consultarUsuario(int idUsuario) {
         ArrayList<RequisicionFormato> listaRequi = new ArrayList<RequisicionFormato>();
         PreparedStatement ps;
         ResultSet rs;
@@ -1216,6 +1225,33 @@ public class Consultas {
             }
         }
         return listaRequi;
+    }
+    
+    public String consultarUsuarios(int idUsuario) {
+        String usuario = " ";
+        String nombre;
+        String apellido1;
+        String apellido2;
+        PreparedStatement ps;
+        ResultSet rs;
+        Connection con;
+        con = ConexionMySQL.conectar();
+        if (con != null) {
+            try {
+                String sql = "SELECT nombre, apellido, apellidoM FROM scompras.usuario where id_usuario = " + idUsuario + ";";
+                ps = con.prepareStatement(sql);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    nombre = rs.getString("nombre");
+                    apellido1 = rs.getString("apellido");
+                    apellido2 = rs.getString("apellidoM");
+                    usuario = nombre + " " + apellido1 + " " + apellido2;
+                }
+            } catch (SQLException ex) {
+                System.out.println("ERROR: " + ex.getMessage());
+            }
+        }
+        return usuario;
     }
 
 }

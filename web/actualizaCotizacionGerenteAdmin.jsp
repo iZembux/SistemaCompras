@@ -3,20 +3,14 @@
     status 4 ---> status 5
 --%>
 
-<%@page import="model.CotizacionRequisicion"%>
-<%@page import="controller.Consultas"%>
-<%@page import="java.util.ArrayList"%>
 <%@page import="controller.Mail"%>
 <%@ page import ="java.sql.*" %>
 <%
     int nuevoStatusRequi = 0;
     int nuevoStatusCoti = 0;
     int idCotizacion = 0;
+    int redirecciona = 0;
     int idUsu = 0;
-    double cantidad = 0;
-    double precio = 0;
-    double iva = 0;
-    double total = 0;
     String observaciones = null;
 
     Mail objMail = new Mail();
@@ -34,37 +28,37 @@
     } catch (Exception e) {
     }
     try {
-        idUsu = Integer.parseInt(request.getParameter("idUsu"));
-    } catch (Exception e) {
-    }
-    try {
         observaciones = request.getParameter("observaciones");
     } catch (Exception e) {
     }
-
-    ArrayList<CotizacionRequisicion> arrayRequis = new ArrayList<CotizacionRequisicion>();
-    Consultas obj = new Consultas();
-    arrayRequis = obj.consultarCotizaciones(idCotizacion);
-    if (arrayRequis.size() > 0) {
-        cantidad = arrayRequis.get(0).getCantidad();
-        precio = arrayRequis.get(0).getPrecio();
-        iva = arrayRequis.get(0).getIva();
-        total = ((precio + iva) * cantidad);
-    }
-
-    if (total < 5000) {
-        nuevoStatusRequi = 10;
+    try {
+        idUsu = Integer.parseInt(request.getParameter("idUsu"));
+    } catch (Exception e) {
     }
 
     Class.forName("com.mysql.jdbc.Driver");
     Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/scompras", "root", "stmsc0nt");
     Statement st = con.createStatement();
+    ResultSet rs;
+    PreparedStatement ps;
 
-    st.executeUpdate("update cotizacion set id_status_cotizacion = " + nuevoStatusCoti + ", observaciones = '" + observaciones + "',\n"
-            + "aut_compras = "+idUsu+", fecha_aut_compras = CURRENT_TIMESTAMP where id_cotizacion = " + idCotizacion + ";");
+    //Autorizacion de nivel 1
+    st.executeUpdate("update cotizacion set id_status_cotizacion = " + nuevoStatusCoti + ", observaciones = '" + observaciones + "', aut_nivel1 = " + idUsu + ",fecha_aut_nivel1 = CURRENT_TIMESTAMP\n"
+            + "where id_cotizacion = " + idCotizacion + ";");
     st.executeUpdate("update req_prod rp, cotizacion c set id_status = " + nuevoStatusRequi + " where c.id_req_coti = rp.id_req_coti and c.id_cotizacion = " + idCotizacion + ";");
 
-    //Envia Correo a Gerente Admin
+    //Envia Correo Depto. Compras
+    String sql2 = "SELECT correo, nombre, apellido FROM scompras.usuario where id_departamento = 7;";
+    ps = con.prepareStatement(sql2);
+    rs = ps.executeQuery();
+    while (rs.next()) {
+        String correo = rs.getString("correo");
+        String nombre = rs.getString("nombre");
+        String apellido = rs.getString("apellido");
+        objMail.enviarCorreo(correo, nombre, apellido, "Cotizacion " + idCotizacion + " autorizada por el gerente administrativo");
+    }
     
-    response.sendRedirect("menuComprasCotizaciones.jsp");
+     //Falta correo si es necesario al Director Admin
+     
+    response.sendRedirect("menuAutorizaCoti.jsp");
 %>
