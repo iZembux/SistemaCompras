@@ -152,23 +152,7 @@
                                 <label>Motivo de la compra</label>
                                 <input type="text" class="form-control" id="justificacion" name="justificacion" required>
                             </div>
-                            <div>
-                                <label class="form-check-label">
-                                    Activo Fijo
-                                </label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="activo" id="exampleRadios1" value="1" required="true"> 
-                                <label class="form-check-label" for="exampleRadios1">
-                                    Si
-                                </label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="activo" id="exampleRadios1" value="0" required="true"> 
-                                <label class="form-check-label" for="exampleRadios1">
-                                    No
-                                </label>
-                            </div>
+                            
                             <div class="modal-footer">
                                 <input type="submit" class="btn btn-primary" value="Solicitar" />
                             </div>

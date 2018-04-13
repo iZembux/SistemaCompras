@@ -50,12 +50,14 @@ public class Acceso extends HttpServlet {
                 String depto = ListaUsu.get(0).getId_departamento();
                 String rol = ListaUsu.get(0).getId_rol();
                 String nombreU = ListaUsu.get(0).getNombre();
+                String sucursal = ListaUsu.get(0).getId_sucursal();
                 /**/
-                System.out.println("idusuario" + idUsuario);
+                System.out.println("ID USUARIO: " + idUsuario);
                 System.out.println("USUARIO: " + usuario);
-                System.out.println("PASSWORD: " + password);
+                //System.out.println("PASSWORD: " + password);
                 System.out.println("ROL: " + rol);
                 System.out.println("DEPARTAMENTO: " + depto);
+                System.out.println("SUCURSAL: " + sucursal);
                 
                 String retorno1 = "";
                 if (password.equals(pass)) {
@@ -72,6 +74,7 @@ public class Acceso extends HttpServlet {
                     sesion.setAttribute("departamento", depto);
                     sesion.setAttribute("rol", rol);
                     sesion.setAttribute("nombre", nombreU);
+                    sesion.setAttribute("sucursal", sucursal);
 
 
                     dispatcher = getServletContext().getRequestDispatcher(retorno);
