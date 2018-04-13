@@ -343,11 +343,11 @@
                         <td style="border-left: hidden; border-top: hidden; border-bottom: hidden">&nbsp;</td>
                         <td>TOTAL EN PESOS</td>
                         <td style="border-top: hidden; border-bottom: hidden">&nbsp;</td>
-                        <td>$<%=precio * cantidad + iva%></td>
+                        <td>$<%=(precio + iva) * cantidad%></td>
                         <td style="border-top: hidden; border-bottom: hidden">&nbsp;</td>
-                        <td>$<%=precio2 * cantidad2 + iva2%></td>
+                        <td>$<%=(precio2 + iva2) * cantidad2 %></td>
                         <td style="border-top: hidden; border-bottom: hidden">&nbsp;</td>
-                        <td>$<%=precio3 * cantidad3 + iva3%></td>
+                        <td>$<%=(precio3 + iva3) * cantidad3%></td>
                     </tr>
                 </tbody>
             </table>
