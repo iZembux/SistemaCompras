@@ -5,6 +5,7 @@
  */
 package servlet;
 
+import controller.Mail;
 import java.io.IOException;
 import java.io.PrintWriter;
 import static java.lang.System.out;
@@ -73,6 +74,7 @@ public class RegistroProveedor extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
        Proveedor obProveedor = new Proveedor();
+       Mail obMail = new Mail();
             
             obProveedor.setUsuario(request.getParameter("usuario"));
             obProveedor.setPassword(request.getParameter("pass"));
@@ -92,7 +94,7 @@ public class RegistroProveedor extends HttpServlet {
             boolean status = obProveedor.registraProveedor(obProveedor);
             if (status) {
                 System.out.println("Proveedor Registrado");
-                
+                obMail.enviarCorreo(obProveedor.getCorreo(), obProveedor.getNombre(), obProveedor.getApellidoM(), "Su usuario ha sido creado satisfactoriamente.");
             } else {
                 System.out.println("Proveedor NO registrado");
             }

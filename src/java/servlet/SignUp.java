@@ -5,6 +5,7 @@
  */
 package servlet;
 
+import controller.Mail;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -75,6 +76,7 @@ public class SignUp extends HttpServlet {
             throws ServletException, IOException {
         
         UserCompras obCompras = new UserCompras();
+        Mail obMail = new Mail();
             
             obCompras.setUsuario(request.getParameter("usuario"));
             obCompras.setPassword(request.getParameter("pass"));
@@ -87,6 +89,7 @@ public class SignUp extends HttpServlet {
             boolean status = obCompras.registraUsuario(obCompras);
             if (status) {
                 System.out.println("Usuario registrado");
+                obMail.enviarCorreo(obCompras.getCorreo(), obCompras.getNombre(), obCompras.getApellidoM(), "Su usuario ha sido creado satisfactoriamente.");
             } else {
                 System.out.println("Usuario no registrado");
             }

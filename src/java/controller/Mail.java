@@ -29,7 +29,7 @@ public class Mail {
             try {
                 Address correo = new InternetAddress(para);
                 MimeBodyPart texto = new MimeBodyPart();
-                String mensajeCorreo = "Estimad@ " + nombre + " " + apellido + ", " + mensaje;
+                String mensajeCorreo = "Estimad@ " + nombre + " " + apellido + ",\n " + mensaje + "\n Acceso: http://grupocontinentalautomotriz.com.mx/Compras/";
                 texto.setText(mensajeCorreo);
 
                 MimeMultipart multiParte = new MimeMultipart();

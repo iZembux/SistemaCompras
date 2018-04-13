@@ -88,6 +88,21 @@
             document.getElementById('valor').innerHTML = "";
             var vacio = document.getElementById('archivo').value = "";
         }
+        function verificar() {
+        swal({
+            title: "¿Estás seguro?",
+            text: "Al presionar aceptar estás de acuerdo en que la información proporcionada es verídica y será respetada en la compra!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((willDelete) => {
+            if (willDelete) {
+                swal("Listo! Tu cotización ha sido enviada!", {
+            icon: "success",
+        });
+        });
+        }
         </script>
     </head>
     <body>
@@ -101,48 +116,48 @@
                     <form method="post" action="guardarArchivos.jsp" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="cantidad">Cantidad</label>
-                            <input type="number" class="form-control" id="cantidad" name="cantidad" value="<%= cantidad %>">
+                            <input type="number" class="form-control" id="cantidad" disabled="true" name="cantidad" value="<%= cantidad %>">
                         </div>
                         <div for="precio" class="form-group">
-                            <label>Precio Unitario</label>
-                            <input type="text" class="form-control" id="precio" name="precio">
+                            <label>Precio Unitario Sin IVA</label>
+                            <input type="double" class="form-control" id="precio" required="true" name="precio">
                         </div>
                         <div for="credito" class="form-group">
                             <label>Dias de Crédito</label>
-                            <input type="text" class="form-control" id="credito" name="credito">
+                            <input type="number" class="form-control" id="credito" required="true" name="credito">
                         </div>
                         <div for="entrega" class="form-group">
                             <label>Tiempo de Entrega (Días)</label>
-                            <input type="text" class="form-control" id="entrega" name="entrega">
+                            <input type="number" class="form-control" id="entrega" required="true" name="entrega">
                         </div>
                         <div for="garantia" class="form-group">
                             <label>Garantía (Días)</label>
-                            <input type="text" class="form-control" id="garantia" name="garantia">
+                            <input type="number" class="form-control" id="garantia" required="true" name="garantia">
                         </div>
                         <div for="descuento" class="form-group">
                             <label>% Descuento</label>
-                            <input type="text" class="form-control" id="descuento" name="descuento">
+                            <input type="number" class="form-control" id="descuento"  name="descuento">
                         </div>
                         <div for="anticipo" class="form-group">
                             <label> % Anticipo</label>
-                            <input type="text" class="form-control" id="anticipo" name="anticipo">
+                            <input type="number" class="form-control" id="anticipo"  name="anticipo">
                         </div>
                         <div for="archivo" class="form-group">
                             <label> Subir Archivo </label>
-                            <input type="file" class="form-control" id="archivo" name="archivo">
+                            <input type="file" class="form-control" id="archivo" required="true" name="archivo">
                         </div>
                         <div class="modal-footer">
                             <input type="hidden" class="hidden" name="idUsuario" value="<%=idUsuario%>" >
                             <input type="hidden" class="hidden" name="idProducto" value="<%=idProducto%>" >
                             <input type="hidden" class="hidden" name="idReqCoti" value="<%=idReqCoti%>" >
-                            <input type="submit" class="btn btn-primary" value="Aceptar" onclick="alerta()"/>
+                            <input type="submit" class="btn btn-primary" value="Aceptar" onclick="verificar()"/>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
         <jsp:include page="frag/footer.jsp" />
-
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
