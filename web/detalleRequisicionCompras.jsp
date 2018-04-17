@@ -72,7 +72,6 @@
                                     cantidadRequi = arrayRequis.get(i).getCantidad();
                                     producto = arrayRequis.get(i).getProducto();
                                     solicitante = arrayRequis.get(i).getSolicitante();
-                                    //departamento = arrayRequis.get(i).getIdDepto();
                                     departamento = obCB.obtieneDepartamento(arrayRequis.get(i).getIdDepto());
 
                         %>

@@ -24,6 +24,9 @@
     String cGeneral = null;
     String observaciones = null, observaciones2 = null, observaciones3 = null;
     String observacionesGanadora = " ";
+    String compras = null;
+    String gerenteAdmin = null;
+    String directorAdmin = null;
 
     int cantidad = 0, cantidad2 = 0, cantidad3 = 0;
     double precio = 0, precio2 = 0, precio3 = 0;
@@ -40,9 +43,18 @@
     int nuevoStatus = 0;
     int activo = 0;
     int solicitantes = 0;
+    int idUsu = 0;
+    int idGerenteC = 0, idGerenteC2 = 0, idGerenteC3 = 0;
+    int idGerenteA = 0, idGerenteA2 = 0, idGerenteA3 = 0;
+    int idDirectorA = 0, idDirectorA2 = 0, idDirectorA3 = 0;
+    int idDirectorG = 0;
 
     try {
         idReqCoti = Integer.parseInt(request.getParameter("idReqCoti"));
+    } catch (Exception e) {
+    }
+    try {
+        idUsu = Integer.parseInt(request.getParameter("idUsu"));
     } catch (Exception e) {
     }
 
@@ -87,6 +99,9 @@
         activo = arrayRequis.get(0).getActivo();
         garantia = arrayRequis.get(0).getGarantia();
         observaciones = arrayRequis.get(0).getObservaciones();
+        idGerenteC = arrayRequis.get(0).getIdGerenteC();
+        idGerenteA = arrayRequis.get(0).getIdGerenteA();
+        idDirectorA = arrayRequis.get(0).getIdDirectorA();
     } catch (Exception e) {
     }
     try {
@@ -102,6 +117,9 @@
         status2 = arrayRequis.get(0).getStatus();
         garantia2 = arrayRequis.get(0).getGarantia();
         observaciones2 = arrayRequis.get(0).getObservaciones();
+        idGerenteC2 = arrayRequis.get(0).getIdGerenteC();
+        idGerenteA2 = arrayRequis.get(0).getIdGerenteA();
+        idDirectorA2 = arrayRequis.get(0).getIdDirectorA();
     } catch (Exception e) {
     }
     try {
@@ -117,6 +135,9 @@
         status3 = arrayRequis.get(0).getStatus();
         garantia3 = arrayRequis.get(0).getGarantia();
         observaciones3 = arrayRequis.get(0).getObservaciones();
+        idGerenteC3 = arrayRequis.get(0).getIdGerenteC();
+        idGerenteA3 = arrayRequis.get(0).getIdGerenteA();
+        idDirectorA3 = arrayRequis.get(0).getIdDirectorA();
     } catch (Exception e) {
     }
 
@@ -148,18 +169,27 @@
                             idCotizacionSeleccionada = idCotizacion;
                             precioTotal = precio * cantidad + iva;
                             observacionesGanadora = observaciones;
+                            compras = obj.consultarUsuarios(idGerenteC);
+                            gerenteAdmin = obj.consultarUsuarios(idGerenteA);
+                            directorAdmin = obj.consultarUsuarios(idDirectorA);
                     %>
                     <h6><strong>Cotizacion 1</strong></h6>
                     <% } else if (status2 == 3) {
                         idCotizacionSeleccionada = idCotizacion2;
                         precioTotal = precio2 * cantidad2 + iva2;
                         observacionesGanadora = observaciones2;
+                        compras = obj.consultarUsuarios(idGerenteC2);
+                        gerenteAdmin = obj.consultarUsuarios(idGerenteA2);
+                        directorAdmin = obj.consultarUsuarios(idDirectorA2);
                     %>
                     <h6><strong>Cotizacion 2</strong></h6>
                     <% } else if (status3 == 3) {
                         idCotizacionSeleccionada = idCotizacion3;
                         precioTotal = precio3 * cantidad3 + iva3;
                         observacionesGanadora = observaciones3;
+                        compras = obj.consultarUsuarios(idGerenteC3);
+                        gerenteAdmin = obj.consultarUsuarios(idGerenteA3);
+                        directorAdmin = obj.consultarUsuarios(idDirectorA3);
                     %>
                     <h6><strong>Cotizacion 3</strong></h6>
                     <% }
@@ -170,20 +200,20 @@
                         }
                     %>
                     <div class="row">
-                        <form action="../actualizaCotizacion.jsp" method="post">
-                            <input type="hidden" class="hidden" name="redirecciona" value="1" >
+                        <form action="../actualizaCotizacionDirectorAdmin.jsp" method="post">
                             <input type="hidden" name="precioTotal" value="<%=precioTotal%>">
                             <input type="hidden" name="cotiSelccionada" value="<%=idCotizacionSeleccionada%>">
                             <input type="hidden" class="hidden" name="nuevoStatusCoti" value="4" >
                             <input type="hidden" class="hidden" name="nuevoStatusRequi" value="<%=nuevoStatus%>" >
+                            <input type="hidden" class="hidden" name="idUsu" value="<%=idUsu%>" >
                             <button type="submit" class="btn btn-success btn-sm">Aceptar</button>
                         </form>
-                        <form action="../actualizaCotizacion.jsp" method="post">
-                            <input type="hidden" class="hidden" name="redirecciona" value="1" >
+                        <form action="../actualizaCotizacionDirectorAdmin.jsp" method="post">
                             <input type="hidden" name="precioTotal" value="<%=precioTotal%>">
                             <input type="hidden" name="cotiSelccionada" value="<%=idCotizacionSeleccionada%>">
                             <input type="hidden" class="hidden" name="nuevoStatusCoti" value="5" >
                             <input type="hidden" class="hidden" name="nuevoStatus" value="14" >
+                            <input type="hidden" class="hidden" name="idUsu" value="<%=idUsu%>" >
                             <button type="submit" class="btn btn-danger btn-sm">Rechazar</button>
                         </form>
                     </div>
@@ -348,11 +378,11 @@
                         <td style="border-left: hidden; border-top: hidden; border-bottom: hidden">&nbsp;</td>
                         <td>TOTAL EN PESOS</td>
                         <td style="border-top: hidden; border-bottom: hidden">&nbsp;</td>
-                        <td>$<%=precio * cantidad + iva%></td>
+                        <td>$<%=(precio + iva) * cantidad%></td>
                         <td style="border-top: hidden; border-bottom: hidden">&nbsp;</td>
-                        <td>$<%=precio2 * cantidad2 + iva2%></td>
+                        <td>$<%=(precio2 + iva2) * cantidad2 %></td>
                         <td style="border-top: hidden; border-bottom: hidden">&nbsp;</td>
-                        <td>$<%=precio3 * cantidad3 + iva3%></td>
+                        <td>$<%=(precio3 + iva3) * cantidad3%></td>
                     </tr>
                 </tbody>
             </table>
@@ -410,7 +440,7 @@
                         <td style="border-top: hidden; border-left: hidden; border-right: hidden"><strong>OBSERVACIONES</strong></td>
                     </tr>
                     <tr>
-                        <td><%= observacionesGanadora %></td> 
+                        <td><%= observacionesGanadora%></td> 
                     </tr>
                 </tbody>
             </table>
@@ -429,13 +459,9 @@
                         <td>&nbsp;</td>
                     </tr>
                     <tr>
-                        <td>GERENCIA DE COMPRAS</td>
-                        <td>
-                            <% if (status == 3 || status2 == 3 || status3 == 3) { %>
-                            <i class="fas fa-check"></i>
-                            <% }%>
-                        </td>
-                        <td></td>
+                        <td><%= compras%></td>
+                        <td><%= gerenteAdmin%></td>
+                        <td><%= directorAdmin%></td>
                         <td></td>
                         <td></td>
                     </tr>

@@ -4,6 +4,7 @@
     Author     : JefeDesarrollo
 --%>
 
+<%@page import="model.RequisicionFormato"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.Connection"%>
@@ -20,7 +21,7 @@
     String fecha = " ";
     String cActivo = null;
     String cGeneral = null;
-    String observaciones = " "; 
+    String observaciones = " ";
 
     int cantidad = 0, cantidad2 = 0, cantidad3 = 0;
     double precio = 0, precio2 = 0, precio3 = 0;
@@ -33,6 +34,7 @@
     int idCotizacion = 0, idCotizacion2 = 0, idCotizacion3 = 0;
     int activo = 0;
     int solicitantes = 0;
+    int idUsu = 0;
 
     ArrayList<Integer> idCoti = new ArrayList<Integer>();
 
@@ -62,6 +64,10 @@
         solicitantes = obj2.contarSolicitantesCoti(idCoti.get(0));
     } catch (Exception e) {
     }
+    try {
+        idUsu = Integer.parseInt(request.getParameter("idUsu"));
+    } catch (Exception e) {
+    }
 
     try {
         arrayRequis = obj.consultarCotizaciones(idCoti.get(0));
@@ -80,7 +86,7 @@
         anticipo = arrayRequis.get(0).getAnticipo();
         activo = arrayRequis.get(0).getActivo();
         garantia = arrayRequis.get(0).getGarantia();
-        total = ((precio+iva)*cantidad);
+        total = ((precio + iva) * cantidad);
     } catch (Exception e) {
     }
     try {
@@ -94,7 +100,7 @@
         entrega2 = arrayRequis.get(0).getEntrega();
         anticipo2 = arrayRequis.get(0).getAnticipo();
         garantia2 = arrayRequis.get(0).getGarantia();
-        total2 = ((precio2+iva2)*cantidad2);
+        total2 = ((precio2 + iva2) * cantidad2);
     } catch (Exception e) {
     }
     try {
@@ -108,9 +114,8 @@
         entrega3 = arrayRequis.get(0).getEntrega();
         anticipo3 = arrayRequis.get(0).getAnticipo();
         garantia3 = arrayRequis.get(0).getGarantia();
-        total3 = ((precio3+iva3)*cantidad3);
+        total3 = ((precio3 + iva3) * cantidad3);
     } catch (Exception e) {
-        System.out.println("No hay mas cotizaciones");
     }
 
     if (activo == 1) {
@@ -168,7 +173,8 @@
                         </div>
                         <input type="hidden" class="hidden" name="nuevoStatusCoti" value="2" >
                         <input type="hidden" class="hidden" name="nuevoStatusRequi" value="7" >
-                        <input type="hidden" class="hidden" name="observaciones" value="<%= observaciones %>" >
+                        <input type="hidden" class="hidden" name="observaciones" value="<%= observaciones%>" >
+                        <input type="hidden" class="hidden" name="idUsu" value="<%=idUsu%>" >
                         <% if (total < 5000 && total2 < 5000 && total3 < 5000) { %> 
                         <button type="submit" class="btn btn-success btn-sm">Seleccionar ganadora</button>
                         <% } else { %>
@@ -337,11 +343,11 @@
                         <td style="border-left: hidden; border-top: hidden; border-bottom: hidden">&nbsp;</td>
                         <td>TOTAL EN PESOS</td>
                         <td style="border-top: hidden; border-bottom: hidden">&nbsp;</td>
-                        <td>$<%=precio * cantidad + iva%></td>
+                        <td>$<%=(precio + iva) * cantidad%></td>
                         <td style="border-top: hidden; border-bottom: hidden">&nbsp;</td>
-                        <td>$<%=precio2 * cantidad2 + iva2%></td>
+                        <td>$<%=(precio2 + iva2) * cantidad2 %></td>
                         <td style="border-top: hidden; border-bottom: hidden">&nbsp;</td>
-                        <td>$<%=precio3 * cantidad3 + iva3%></td>
+                        <td>$<%=(precio3 + iva3) * cantidad3%></td>
                     </tr>
                 </tbody>
             </table>
@@ -399,7 +405,7 @@
                         <td style="border-top: hidden; border-left: hidden; border-right: hidden"><strong>OBSERVACIONES</strong></td>
                     </tr>
                     <tr>
-                        <td><%= observaciones %></td>
+                        <td><%= observaciones%></td>
                     </tr>
                 </tbody>
             </table>

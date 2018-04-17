@@ -64,7 +64,7 @@
                         Consultas obj = new Consultas();
                         /*Consulta requisiciones dependiendo de su status 
                         status 5 - sin ninguna cotizacion
-                        status 6 - con al menus una cotizacion
+                        status 6 - con al menos una cotizacion
                         status 10 - cotizacion autorizada
                          */
                         arrayRequis = obj.consultarComprasProv(idCategoria, "5,6,10");

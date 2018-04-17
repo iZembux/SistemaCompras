@@ -21,6 +21,7 @@ public class RequisicionFormato {
     private String empresa = null;
     private int cantidad = 0;
     private int activo = 0;
+    private int gerente = 0;
 
     /**
      * @return the sucursal
@@ -216,5 +217,19 @@ public class RequisicionFormato {
      */
     public void setActivo(int activo) {
         this.activo = activo;
+    }
+
+    /**
+     * @return the gerente
+     */
+    public int getGerente() {
+        return gerente;
+    }
+
+    /**
+     * @param gerente the gerente to set
+     */
+    public void setGerente(int gerente) {
+        this.gerente = gerente;
     }
 }

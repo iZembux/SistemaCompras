@@ -15,6 +15,7 @@
         String idDepto = (String) sesion.getAttribute("departamento"); 
         String rol = (String) sesion.getAttribute("rol");
         String id_usuario = (String) sesion.getAttribute("idUsuario");
+        String sucursal = (String) sesion.getAttribute("idUsuario");
 %>
 <!DOCTYPE html>
 <html>
@@ -54,8 +55,7 @@
 
                         ArrayList<RequisicionProducto> arrayRequis = new ArrayList<RequisicionProducto>();
                         Consultas obj = new Consultas();
-                        arrayRequis = obj.consultarRequiGerente(id_usuario);
-
+                        arrayRequis = obj.consultarRequiGerente(id_usuario, sucursal); 
                         if (arrayRequis.size() > 0) {
                             for (int i = 0; i < 3; i++) {
                                 idRequi = arrayRequis.get(i).getIdRequisicion();

@@ -14,6 +14,7 @@
     } else {
         String idDepto = (String) sesion.getAttribute("departamento"); 
         String rol = (String) sesion.getAttribute("rol");
+        String idUsu = (String) sesion.getAttribute("idUsuario");
         
         int idRequi = 0;
         try {
@@ -30,10 +31,10 @@
         <title>Autorizar</title>
         <script>
             function alerta(){
-                confirm("¿Seguro que desea autorizar esta cotizacion?");
+                confirm("¿Seguro que desea autorizar esta requisicion?");
             }
             function alerta2(){
-                confirm("¿Seguro que desea rechazar esta cotizacion?");
+                confirm("¿Seguro que desea rechazar esta requisicion?");
             }
         </script>
     </head>
@@ -96,6 +97,7 @@
                                     <input type="hidden" class="hidden" name="idSolicita" value="<%=idSolicita%>" > 
                                     <input type="hidden" class="hidden" name="nuevoStatus" value="4" >
                                     <input type="hidden" class="hidden" name="autoriza" value="1" >
+                                    <input type="hidden" class="hidden" name="idUsu" value="<%= idUsu %>" >
                                     <button type="submit" class="btn btn-success btn-sm" onclick="alerta()">Autorizar</button>
                                 </form>
                                 <form action="actualizaGerente.jsp" method="post">
@@ -103,6 +105,7 @@
                                     <input type="hidden" class="hidden" name="idSolicita" value="<%=idSolicita%>" >
                                     <input type="hidden" class="hidden" name="nuevoStatus" value="14" >
                                     <input type="hidden" class="hidden" name="autoriza" value="2" >
+                                    <input type="hidden" class="hidden" name="idUsu" value="<%= idUsu %>" >
                                     <button type="submit" class="btn btn-danger btn-sm" onclick="alerta2()">Rechazar</button>
                                 </form>
                             </div>
