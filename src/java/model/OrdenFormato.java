@@ -16,6 +16,7 @@ public class OrdenFormato {
     private String producto;
     private String descripcion;
     private String telefonoP;
+    private int idCotizacion;
     private int idP;
     private int cantidad;
     private int descuento;
@@ -245,6 +246,20 @@ public class OrdenFormato {
      */
     public void setUsuCompras(int usuCompras) {
         this.usuCompras = usuCompras;
+    }
+
+    /**
+     * @return the idCotizacion
+     */
+    public int getIdCotizacion() {
+        return idCotizacion;
+    }
+
+    /**
+     * @param idCotizacion the idCotizacion to set
+     */
+    public void setIdCotizacion(int idCotizacion) {
+        this.idCotizacion = idCotizacion;
     }
     
     

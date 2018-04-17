@@ -23,12 +23,10 @@
     int descuento = 0;
     double precio = 0;
     int credito = 0;
+    int idCotizacion = 0;
     int idReqCoti = 0;
     int idP = 0;
     int idUsuCompras = 0;
-
-    int idReqProd = 0;
-    String usuarioC = null;
 
     try {
         idReqCoti = Integer.parseInt(request.getParameter("idReqCoti"));
@@ -46,6 +44,7 @@
     arrayRequis = obj.consultarFormatoOrden(idReqCoti,suc);
 
     if (!arrayRequis.isEmpty()) {
+        idCotizacion = arrayRequis.get(0).getIdCotizacion();
         idP = arrayRequis.get(0).getIdP();
         sucursal = arrayRequis.get(0).getSucursal();
         rfc = arrayRequis.get(0).getRfc();
@@ -71,10 +70,24 @@
         apellidoMC = arrayRequis2.get(0).getApellidoM();
     }
 
-    if (sucursal.contains(" ")) {
+    if (sucursal.contains("CONTINENTAL") || sucursal.contains("FIAT TOLUCA") || sucursal.contains("MITSUBISHI TOLUCA")) {
         logo = "Continental.png";
-    } else if (sucursal.equals("Hyundai Metepec")) {
-        logo = "KoreanMete.png";
+    } else if (sucursal.equals("HYUNDAI METEPEC")) {
+        logo = "KoreanMotors.png";
+    } else if (sucursal.equals("HYUNDAI PATRIOTISMO")) {
+        logo = "HyundaiPatriotismo.png";
+    } else if (sucursal.equals("HYUNDAI SANTA FE")) {
+        logo = "HyundaiStafe.png";
+    } else if (sucursal.equals("TOYOTA SANTA FE")) {
+        logo = "Nihon.jpg";
+    } else if (sucursal.equals("TOYOTA PUERTA SANTA FE")) {
+        logo = "PuertaSantaFe.jpg";
+    } else if (sucursal.equals("SAN RAFAEL")) {
+        logo = "SanRafael.png";
+    } else if (sucursal.equals("AUTOPOLANCO")) {
+        logo = "Autopolanco.jpeg";
+    } else if (sucursal.equals("CASOFIN")) {
+        logo = "Casofin.jpg";
     }
 
     
@@ -110,7 +123,7 @@
                         <p><strong><%=nombreP%></strong></p>
                         <p><%=direccionP%></p>
                         <p>Telefono: <%=telefonoP%></p></td>
-                    <td colspan="3"><p>ORDEN No.: AN00000000157
+                    <td colspan="3"><p>ORDEN No.: AN00000000<%= idCotizacion %>
                         </p>
                         <p><strong>Fecha</strong>: <%=fecha%></p>
                         <p><strong>Entregar a:</strong> COMPRAS</p>

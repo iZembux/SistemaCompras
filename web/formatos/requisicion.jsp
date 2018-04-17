@@ -14,9 +14,9 @@
     String nombre = null;
     String apellidoP = null;
     String apellidoM = null;
-    String nombreG = null;
-    String apellidoPG = null;
-    String apellidoMG = null;
+    String nombreG = " ";
+    String apellidoPG = " ";
+    String apellidoMG = " ";
     String justificacion = null;
     String fecha = null;
     String producto = null;
@@ -59,12 +59,16 @@
         activo = arrayRequis.get(0).getActivo();
         idGerente = arrayRequis.get(0).getGerente();
     }
-    
-    arrayRequis2 = obj.consultarUsuario(idGerente);
-    if (!arrayRequis.isEmpty()) {
-        nombreG = arrayRequis2.get(0).getNombre();
-        apellidoPG = arrayRequis2.get(0).getApellidoP();
-        apellidoMG = arrayRequis2.get(0).getApellidoM();
+
+    try {
+        arrayRequis2 = obj.consultarUsuario(idGerente);
+        if (!arrayRequis.isEmpty()) {
+            nombreG = arrayRequis2.get(0).getNombre();
+            apellidoPG = arrayRequis2.get(0).getApellidoP();
+            apellidoMG = arrayRequis2.get(0).getApellidoM();
+        }
+    } catch (Exception e) {
+
     }
 
     if (activo == 1) {

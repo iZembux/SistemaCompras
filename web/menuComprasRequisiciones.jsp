@@ -2,6 +2,7 @@
     Muestra las requisiciones que ya han sido aprobadas por los gerentes
     status = 4
 --%>
+<%@page import="model.Proveedor"%>
 <%@page import="controller.Consultas"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.RequisicionProducto"%>
@@ -11,12 +12,12 @@
     if (usuarioValidado == null) {
         response.sendRedirect("index.jsp");
     } else {
-        String idDepto = (String) sesion.getAttribute("departamento");        
+        String idDepto = (String) sesion.getAttribute("departamento");
         String rol = (String) sesion.getAttribute("rol");
         String usuario = (String) sesion.getAttribute("idUsuario");
         String sucursal = (String) sesion.getAttribute("sucursal");
         String suc = null;
-        
+
         if (sucursal.equals("8")) {
             suc = "1,2,3,4,6,7,8,13,17";
         } else if (sucursal.equals("9")) {
@@ -24,7 +25,7 @@
         } else if (sucursal.equals("10")) {
             suc = "10,11,15,16,18";
         }
-        
+
         int id_categoria = 1;
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -63,10 +64,10 @@
                         int idProducto;
                         String producto;
                         String marca;
-                        
+
                         ArrayList<RequisicionProducto> arrayRequis = new ArrayList<RequisicionProducto>();
                         Consultas obj = new Consultas();
-                        arrayRequis = obj.consultarCompras(id_categoria, 4,suc);                        
+                        arrayRequis = obj.consultarCompras3(id_categoria, 4, suc);
                         if (arrayRequis.size() > 0) {
                             for (int i = 0; i < arrayRequis.size(); i++) {
                                 idProducto = arrayRequis.get(i).getIdProducto();
@@ -84,7 +85,60 @@
                                 <input type="hidden" class="hidden" name="idProducto" value="<%=idProducto%>" >
                                 <input type="hidden" class="hidden" name="categoria" value="<%=id_categoria%>" >
                                 <input type="hidden" class="hidden" name="usuario" value="<%=usuario%>" >
-                                <button type="submit" class="btn btn-primary btn-sm">Solicitar Cotizaciones</button>
+                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalProveedores">Solicitar Cotizaciones</button>
+                                
+                                <div class="modal fade" id="modalProveedores" tabindex="-1" role="dialog" aria-labelledby="modalProveedores" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Detalles de Proveedores</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                    <div class="form-group">
+                                                        <label>Selecciona los proveedores a los que se les enviará una solicitud de cotización</label>
+                                                        <table class="table table-striped table-hover">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Proveedor</th>
+                                                                    <th>Direccion</th>
+                                                                    <th>Telefono</th>
+                                                                    <th>Seleccionar</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <%
+                                                                        Consultas obj2 = new Consultas();
+                                                                        ArrayList<Proveedor> prov = obj2.consultarProveedor(1);
+                                                                        for (int j = 0; j < prov.size(); j++) {
+                                                                    %>
+                                                                    <td><%= prov.get(j).getRazonSocial()%></td>
+                                                                    <td><%= prov.get(j).getDireccion()%></td>
+                                                                    <td><%= prov.get(j).getTelefono()%></td>
+                                                                    <td>
+                                                                        <div class="form-check">
+                                                                            <label>
+                                                                                <input class="form-check-input" type="checkbox" name="checkbox<%=j%>" value="<%= prov.get(j).getIdProveedor()%>">
+                                                                            </label>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                                <% }%> 
+                                                            </tbody>
+                                                        </table>
+
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <input type="hidden" class="hidden" name="numProveedores" value="<%=prov.size()%>" >
+                                                        <input type="submit" class="btn btn-primary" value="Solicitar" />
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </form>
                         </td>
                         <td>
@@ -100,6 +154,8 @@
                 </tbody>
             </table>
         </div>
+
+
 
         <jsp:include page="frag/footer.jsp" />
 
