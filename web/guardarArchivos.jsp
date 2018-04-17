@@ -15,35 +15,34 @@
 
 <%
     int idReqCoti = 0;
-        String prefijo = "Requisicion", extension = "", Ruta = "";
-        int banderaGeneral = 0;
-        String sql = "";
-        int cantidad = 0;
-        int credito = 0;
-        int entrega = 0;
-        int garantia = 0;
-        double precio = 0;
-        double iva = 0;
-        double descuento = 0;
-        double anticipo = 0;
-        int nuevoStatus = 6;
-        int idUsuario = 0;
-        int idProducto = 0;
-        HttpSession sesion = request.getSession();
-        String validarUsuariosesion = (String) sesion.getAttribute("usuarioIngresado");
-        String idUsuariosesion = (String) sesion.getAttribute("idUsuario");
-        int idUsuarioIntsesion = Integer.parseInt(idUsuariosesion);
-        String ruta ="";
-        
-
-
-        
+    int banderaGeneral = 0;
+    String sql = "";
+    int cantidad = 0;
+    int credito = 0;
+    int entrega = 0;
+    int garantia = 0;
+    double precio = 0;
+    double iva = 0;
+    double descuento = 0;
+    double anticipo = 0;
+    int nuevoStatus = 6;
+    int idUsuario = 0;
+    int idProducto = 0;
+    String sqlM = "";
+    HttpSession sesion = request.getSession();
+    String validarUsuariosesion = (String) sesion.getAttribute("usuarioIngresado");
+    String idUsuariosesion = (String) sesion.getAttribute("idUsuario");
+    String prefijo = "Requisicion", extension = "", Ruta = "",ruta ="";
+    int idUsuarioIntsesion = Integer.parseInt(idUsuariosesion);
+    Class.forName("com.mysql.jdbc.Driver");
+    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/scompras", "root", "stmsc0nt");
+    Statement st = con.createStatement();
+    ResultSet rs;
 
         // ----- Variables para for ------//    
         String elemento = "";
         String nombre_archivo = "";
         String nombre_archivo_nuevo = "";
-        
         /*FileItemFactory es una interfaz para crear FileItem*/
         FileItemFactory file_factory = new DiskFileItemFactory();
         /*ServletFileUpload esta clase convierte los input file a FileItem*/
@@ -64,23 +63,16 @@
                  //Metodo para validar extension
                 if (extension.equals("pdf") || extension.equals("")) {
                     banderaGeneral = 1;
-                    System.out.println("Extension correcta");
                 } else {
                     banderaGeneral = 2;   
                 System.out.println("Extension no permitida");
                  }    
                  nombre_archivo = item.getName();
-        System.out.println("Prueba de cadena!!!!!!!!!");
         String str = new String(nombre_archivo);
         int longitudCadena = str.length();
         nombre_archivo_nuevo = str.substring(0, longitudCadena - 4);
-
-        System.out.println("Longitud de caddena " + longitudCadena);
-        System.out.println("La cadena sin extension sera: " + nombre_archivo_nuevo);
-
-
-        File archivo_server = new File("c:/compras/"+ idUsuario +"_" + nombre_archivo_nuevo + "." +  extension);
-        Ruta = archivo_server.getAbsolutePath();
+        File archivo_server = new File("C:/compras/COT_"+nombre_archivo_nuevo +"." +  extension);
+        Ruta = "C:/compras/COT_"+nombre_archivo_nuevo+"." +  extension;
         try {
             if (banderaGeneral == 1) {
                 item.write(archivo_server);
@@ -88,7 +80,7 @@
             /*y lo escribimos en el servido*/
         } catch (Exception e) {
             banderaGeneral = 1;   
-            System.out.println("Ocurrio un error al guardar la imagen  " + e);
+            System.out.println("Ocurrio un error al guardar el archivo" + e);
                 }
             } else {
 
@@ -175,20 +167,19 @@
         }
 
     
-    Class.forName("com.mysql.jdbc.Driver");
-    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/scompras", "root", "stmsc0nt");
-    Statement st = con.createStatement();
-    ResultSet rs;
-
-    st.executeUpdate("UPDATE req_prod SET id_status = " + nuevoStatus + " where id_req_coti = "+ idReqCoti +"");
     
+    
+    // --- Inserta Cotización ---
     sql = "Insert into cotizacion (id_req_coti, id_proveedor, id_producto, cantidad, precio, iva, diascredito, tiempoentrega, descuento, anticipo, garantia, rutaPDF) values "
           + "("+idReqCoti+", "+idUsuario+", "+idProducto+", "+cantidad+","+precio+", "+iva+", "+credito+", "+entrega+", "+descuento+", "+anticipo+","+garantia+",'"+Ruta+"')";
-    System.out.println(sql);
-    
     st.executeUpdate(sql); 
-    
-    
+    // --- Actualiza estatus ---
+    st.executeUpdate("UPDATE req_prod SET id_status = " + nuevoStatus + " where id_req_coti = "+ idReqCoti +"");
+    // --- Inserta Multimedia ---
+    /*
+    sqlM = "Insert into scompras.multimedia (id_coti,id_proveedor,ruta) values ("+idReqCoti+","+idUsuario+",'"+Ruta+"');";
+    st.executeUpdate(sqlM);
+    */
     response.sendRedirect("menuRequisicionesProveedor.jsp"); 
 
 %>

@@ -8,8 +8,9 @@
 <%@page import="java.util.ArrayList"%>
 <%
     HttpSession sesion = request.getSession();
+    Consultas obj2 = new Consultas();
     String usuarioValidado = (String) sesion.getAttribute("usuarioIngresado");
-    String ruta = "C:/subidos/PAPEL_OFFICE_TAMANO_CARTA.pdf";
+    
     if (usuarioValidado == null) {
         response.sendRedirect("index.jsp");
     } else {
@@ -26,6 +27,7 @@
             idUsu = Integer.parseInt(request.getParameter("idUsu"));
         } catch (Exception e) {
         }
+        
 %>
 <html>
     <head>
@@ -34,11 +36,12 @@
         <title>Autorizar</title>
         <script>
             var maxi = 3;
+            var min = 1;
             var contador = 0;
             function validar(check) {
                 if (check.checked === true) {
                     contador++;
-                    if (contador > maxi) {
+                     if (contador > maxi) {
                         alert('No se pueden elegir más de ' + maxi + ' casillas a la vez.');
                         check.checked = false;
                         contador--;
@@ -50,9 +53,8 @@
         </script>
         <SCRIPT LANGUAGE="JavaScript">
         function leeArchivo() {
-            var nombreArchivo = "PAPEL_OFFICE_TAMANO_CARTA";
-            var URL = "file:///C:/Users/aBIMAEL/Documents/NetBeansProjects/ComprasV2/web/subidos/PAPEL_OFFICE_TAMANO_CARTA.pdf"
-            window.open(URL,"_blank");
+            var ruta = "C:/compras/COT_PAPEL.pdf";
+            window.open(ruta,"_blank");
         }
         </script>
     </head>
@@ -115,6 +117,7 @@
                                         entrega = arrayRequis.get(i).getEntrega();
                                         anticipo = arrayRequis.get(i).getAnticipo();
                                         garantia = arrayRequis.get(i).getGarantia();
+                                        String ruta = obj2.consultaArchivo(idReqCoti, idUsu);
                             %>
                             <tr>
                                 <td><%=proveedor%></td>
@@ -127,7 +130,11 @@
                                 <td><%=garantia%> Dias</td>
                                 <td><%=entrega%> Dias</td>
                                 <td><%=anticipo%> %</td>
-                                <!--<td><input type="button" onClick="leeArchivo()" value="Ver PDF"></td>-->
+                                <!--<td><input type="button" onClick="leeArchivo()" value="Ver PDF"></td>
+                                <form action="visor.jsp" method="post" target="_blank">
+                                        <button type="submit" action="visor.jsp" value="C:/compras/COT_PAPEL.pdf" name="search" class="btn btn-dark btn-sm">Ver PDF</button> 
+                                    </form>
+                                -->
                                 <td>
                                     <div class="form-check">
                                         <label>
@@ -164,7 +171,7 @@
                 </form>
             </div>
         </div>
-
+        
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

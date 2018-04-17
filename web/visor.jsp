@@ -4,17 +4,16 @@
     <%@ page import= "java.io.*" %>
     <%
 //CODIGO JSP 
-String documento=request.getParameter("search");
+        String documento = request.getParameter("search");
 
-FileInputStream ficheroInput = new FileInputStream( ""+ documento +"" );
-int tamanoInput = ficheroInput.available();
-byte[] datosPDF = new byte[tamanoInput];
-ficheroInput.read( datosPDF, 0, tamanoInput);
- 
-response.setHeader("Content-disposition","inline; filename=instalacion_tomcat.pdf" );
-response.setContentType("application/pdf");
-response.setContentLength(tamanoInput);
-response.getOutputStream().write(datosPDF);
- 
-ficheroInput.close();
-%>
+        FileInputStream ficheroInput = new FileInputStream("" + documento + "");
+        int tamanoInput = ficheroInput.available();
+        byte[] datosPDF = new byte[tamanoInput];
+        ficheroInput.read(datosPDF, 0, tamanoInput);
+
+        response.setHeader("Content-disposition", "inline; filename=instalacion_tomcat.pdf");
+        response.setContentType("application/pdf");
+        response.setContentLength(tamanoInput);
+        response.getOutputStream().write(datosPDF);
+        ficheroInput.close();
+    %>
