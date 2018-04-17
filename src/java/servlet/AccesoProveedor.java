@@ -47,10 +47,11 @@ public class AccesoProveedor extends HttpServlet {
                 String usuario = ListaUsu.get(0).getNombre();
                 int idUsuario = ListaUsu.get(0).getIdProveedor();
                 String password = ListaUsu.get(0).getPassword();
-                /**/
+                /*
                 System.out.println("idProveedor" + idUsuario);
                 System.out.println("PROVEEDOR: " + usuario);
                 System.out.println("PASSWORD: " + password);
+                */
                 
                 String retorno1 = "";
                 if (password.equals(pass)) {

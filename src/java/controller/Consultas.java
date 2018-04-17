@@ -66,7 +66,7 @@ public class Consultas {
         }
         return listaRequi;
     }
-    
+
     public ArrayList<RequisicionProducto> consultarDetalleRequiGerente(int id_requisicion) {
         int cont = 0;
         ArrayList<RequisicionProducto> listaRequi = new ArrayList<RequisicionProducto>();
@@ -115,7 +115,7 @@ public class Consultas {
         }
         return listaRequi;
     }
-    
+
     public ArrayList<RequisicionProducto> consultarHistorialGerente(String departamento) {
         ArrayList<RequisicionProducto> listaRequi = new ArrayList<RequisicionProducto>();
         PreparedStatement ps;
@@ -169,7 +169,7 @@ public class Consultas {
         }
         return listaRequi;
     }
-    
+
     public ArrayList<RequisicionProducto> consultarRequiGerenteAdmin(int departamento) {
         int cont = 0;
         ArrayList<RequisicionProducto> listaRequi = new ArrayList<RequisicionProducto>();
@@ -262,6 +262,7 @@ public class Consultas {
                         + "    AND rp.id_status = " + status + "\n"
                         + "    GROUP BY rp.id_producto, s.id_sucursales\n"
                         + "    ORDER BY rp.id_requisicion;";
+
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
@@ -285,7 +286,7 @@ public class Consultas {
         }
         return listaRequi;
     }
-    
+
     public ArrayList<RequisicionProducto> consultarCompras3(int id_categoria, int status, String suc) {
         int cont = 0;
         ArrayList<RequisicionProducto> listaRequi = new ArrayList<RequisicionProducto>();
@@ -296,6 +297,7 @@ public class Consultas {
         if (con != null) {
             try {
                 String sql = "SELECT \n"
+                        + "    rp.id_req_prod as IDREQPROD,\n"
                         + "    rp.id_requisicion AS IDREQUISICION,\n"
                         + "    rp.id_producto AS IDPRODUCTO,    p.nombre AS PRODUCTO,\n"
                         + "    p.marca AS MARCA,    u.nombre AS SOLICITANTE,\n"
@@ -326,6 +328,7 @@ public class Consultas {
                 while (rs.next()) {
                     cont++;
                     RequisicionProducto obj = new RequisicionProducto();
+                    obj.setIdReqProd(rs.getInt("IDREQPROD"));
                     obj.setIdRequisicion(rs.getInt("IDREQUISICION"));
                     obj.setIdDepto(rs.getInt("DEPTO"));
                     obj.setIdProducto(rs.getInt("IDPRODUCTO"));
@@ -344,7 +347,7 @@ public class Consultas {
         }
         return listaRequi;
     }
-    
+
     public ArrayList<RequisicionProducto> consultarComprasCotizaciones(int id_categoria, int status, String usuario) {
         int cont = 0;
         ArrayList<RequisicionProducto> listaRequi = new ArrayList<RequisicionProducto>();
@@ -525,7 +528,7 @@ public class Consultas {
         }
         return listaRequi;
     }
-    
+
     public ArrayList<RequisicionProducto> consultarComprasDetalle(int departamento, int idProducto) {
         int cont = 0;
         ArrayList<RequisicionProducto> listaRequi = new ArrayList<RequisicionProducto>();
@@ -577,7 +580,7 @@ public class Consultas {
         }
         return listaRequi;
     }
-    
+
     public ArrayList<CotizacionRequisicion> consultarComprasDetalleCoti(int idReqCoti) {
         int cont = 0;
         ArrayList<CotizacionRequisicion> listaRequi = new ArrayList<CotizacionRequisicion>();
@@ -633,7 +636,7 @@ public class Consultas {
         }
         return listaRequi;
     }
-    
+
     public ArrayList<CotizacionRequisicion> consultarProveedorCoti(int idReqCoti, String idProveedor) {
         int cont = 0;
         ArrayList<CotizacionRequisicion> listaRequi = new ArrayList<CotizacionRequisicion>();
@@ -686,8 +689,8 @@ public class Consultas {
         }
         return listaRequi;
     }
-    
-    public ArrayList<RequisicionProducto> consultarComprasProv(int departamento, String status) {
+
+    public ArrayList<RequisicionProducto> consultarComprasProv(int departamento, String status, String idProv) {
         int cont = 0;
         ArrayList<RequisicionProducto> listaRequi = new ArrayList<RequisicionProducto>();
         PreparedStatement ps;
@@ -698,10 +701,8 @@ public class Consultas {
             try {
                 String sql = "SELECT \n"
                         + "    rp.id_requisicion AS IDREQUISICION,\n"
-                        + "    rp.id_producto AS IDPRODUCTO,"
-                        + "    p.nombre AS PRODUCTO,\n"
-                        + "    p.marca AS MARCA,"
-                        + "    u.nombre AS SOLICITANTE,\n"
+                        + "    rp.id_producto AS IDPRODUCTO,    p.nombre AS PRODUCTO,\n"
+                        + "    p.marca AS MARCA,    u.nombre AS SOLICITANTE,\n"
                         + "    u.id_departamento as DEPTO,\n"
                         + "    SUM(rp.cantidad) AS CANTIDAD,\n"
                         + "    r.fecha AS FECHA,\n"
@@ -711,12 +712,15 @@ public class Consultas {
                         + "    usuario u,\n"
                         + "    requisiciones r,\n"
                         + "    req_prod rp,\n"
-                        + "    productos p\n"
+                        + "    productos p,\n"
+                        + "    proveedores_selec ps\n"
                         + "WHERE\n"
                         + "    u.id_usuario = r.id_usuario\n"
+                        + "    AND rp.id_req_prod = ps.id_req_prod\n"
+                        + "    AND ps.id_proveedor = "+idProv+"\n"
                         + "    AND r.id_requisicion = rp.id_requisicion\n"
                         + "    AND p.id_productos = rp.id_producto\n"
-                        + "    AND rp.id_status in (" + status + ")\n"
+                        + "    AND rp.id_status in ("+status+")\n"
                         + "    GROUP BY rp.id_producto\n"
                         + "    ORDER BY rp.id_requisicion;";
                 ps = con.prepareStatement(sql);
@@ -742,7 +746,7 @@ public class Consultas {
         }
         return listaRequi;
     }
-    
+
     public ArrayList<RequisicionProducto> consultarDetalleComprasProv(int idReqCoti) {
         int cont = 0;
         ArrayList<RequisicionProducto> listaRequi = new ArrayList<RequisicionProducto>();
@@ -779,7 +783,7 @@ public class Consultas {
                         + "    AND rp.id_req_coti = " + idReqCoti + "\n"
                         + "    GROUP BY rp.id_producto, s.id_sucursales\n"
                         + "    ORDER BY rp.id_requisicion;";
-                
+
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
@@ -804,7 +808,7 @@ public class Consultas {
         }
         return listaRequi;
     }
-    
+
     public ArrayList<RequisicionProducto> consultarStatusProducto(String id_usuario) {
         int cont = 0;
         ArrayList<RequisicionProducto> listaRequi = new ArrayList<RequisicionProducto>();
@@ -855,7 +859,7 @@ public class Consultas {
         }
         return listaRequi;
     }
-    
+
     public ArrayList<Item> consultarItems() {
         ArrayList<Item> items = new ArrayList<>();
         PreparedStatement ps;
@@ -875,14 +879,14 @@ public class Consultas {
                     objItem.setMarca(rs.getString("marca"));
                     items.add(objItem);
                 }
-                
+
             } catch (SQLException e) {
                 System.out.println("ERROR 2 AL CONSULTAR ITEMS SQL: " + e.getMessage());
             }
         }
         return items;
     }
-    
+
     public ArrayList<Item> consultarItems2(String nombre) {
         System.out.println("Entree");
         ArrayList<Item> items = new ArrayList<>();
@@ -900,14 +904,14 @@ public class Consultas {
                     objItem.setMarca(rs.getString("marca"));
                     items.add(objItem);
                 }
-                
+
             } catch (SQLException e) {
                 System.out.println("ERROR 2 AL CONSULTAR ITEMS SQL: " + e.getMessage());
             }
         }
         return items;
     }
-    
+
     public ArrayList<Proveedor> consultarProveedor(int giro) {
         ArrayList<Proveedor> proveedor = new ArrayList<>();
         PreparedStatement ps;
@@ -925,7 +929,7 @@ public class Consultas {
                     objProveedor.setRazonSocial(rs.getString("razonsocial"));
                     objProveedor.setDireccion(rs.getString("direccion"));
                     objProveedor.setTelefono(rs.getString("telefono"));
-                    proveedor.add(objProveedor);                    
+                    proveedor.add(objProveedor);
                 }
             } catch (SQLException e) {
                 System.out.println("ERROR 2 AL CONSULTAR PROVEEDORES SQL: " + e.getMessage());
@@ -933,7 +937,7 @@ public class Consultas {
         }
         return proveedor;
     }
-    
+
     public ArrayList<CotizacionRequisicion> consultarCotizaciones(int idCoti) {
         ArrayList<CotizacionRequisicion> listaRequi = new ArrayList<CotizacionRequisicion>();
         PreparedStatement ps;
@@ -1252,7 +1256,7 @@ public class Consultas {
         }
         return listaRequi;
     }
-    
+
     public int contarSolicitantesCoti(int idReqCoti) {
         int suma = 0;
         PreparedStatement ps;
@@ -1280,14 +1284,14 @@ public class Consultas {
                 if (rs.next()) {
                     suma = rs.getInt("SUMA");
                 }
-                
+
             } catch (SQLException e) {
                 System.out.println("ERROR 2 AL CONSULTAR ITEMS SQL: " + e.getMessage());
             }
         }
         return suma;
     }
-    
+
     public ArrayList<RequisicionFormato> consultarUsuario(int idUsuario) {
         ArrayList<RequisicionFormato> listaRequi = new ArrayList<RequisicionFormato>();
         PreparedStatement ps;
@@ -1312,7 +1316,7 @@ public class Consultas {
         }
         return listaRequi;
     }
-    
+
     public String consultarUsuarios(int idUsuario) {
         String usuario = " ";
         String nombre;
@@ -1339,5 +1343,5 @@ public class Consultas {
         }
         return usuario;
     }
-    
+
 }

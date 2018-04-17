@@ -62,6 +62,7 @@
                     <%
                         int cantidadRequi;
                         int idProducto;
+                        int idReqProd;
                         String producto;
                         String marca;
 
@@ -70,6 +71,7 @@
                         arrayRequis = obj.consultarCompras3(id_categoria, 4, suc);
                         if (arrayRequis.size() > 0) {
                             for (int i = 0; i < arrayRequis.size(); i++) {
+                                idReqProd = arrayRequis.get(i).getIdReqProd();
                                 idProducto = arrayRequis.get(i).getIdProducto();
                                 cantidadRequi = arrayRequis.get(i).getCantidad();
                                 producto = arrayRequis.get(i).getProducto();
@@ -85,6 +87,7 @@
                                 <input type="hidden" class="hidden" name="idProducto" value="<%=idProducto%>" >
                                 <input type="hidden" class="hidden" name="categoria" value="<%=id_categoria%>" >
                                 <input type="hidden" class="hidden" name="usuario" value="<%=usuario%>" >
+                                <input type="hidden" class="hidden" name="idReqProd" value="<%=idReqProd%>" >
                                 <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalProveedores">Solicitar Cotizaciones</button>
                                 
                                 <div class="modal fade" id="modalProveedores" tabindex="-1" role="dialog" aria-labelledby="modalProveedores" aria-hidden="true">
