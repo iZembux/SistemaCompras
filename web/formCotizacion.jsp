@@ -102,7 +102,7 @@
             icon: "success",
         });
         });
-        }
+        }}
         </script>
     </head>
     <body>
@@ -119,19 +119,19 @@
                             <input type="number" class="form-control" id="cantidad" disabled="true" name="cantidad" value="<%= cantidad %>">
                         </div>
                         <div for="precio" class="form-group">
-                            <label>Precio Unitario Sin IVA</label>
+                            <label>Precio Unitario Sin IVA <b><FONT COLOR="red" title="Éste campo es obligatorio">*</FONT></b></label>
                             <input type="double" class="form-control" id="precio" required="true" name="precio">
                         </div>
                         <div for="credito" class="form-group">
-                            <label>Dias de Crédito</label>
+                            <label>Dias de Crédito <b><FONT COLOR="red" title="Éste campo es obligatorio">*</FONT></b></label>
                             <input type="number" class="form-control" id="credito" required="true" name="credito">
                         </div>
                         <div for="entrega" class="form-group">
-                            <label>Tiempo de Entrega (Días)</label>
+                            <label>Tiempo de Entrega (Días) <b><FONT COLOR="red" title="Éste campo es obligatorio">*</FONT></b></label>
                             <input type="number" class="form-control" id="entrega" required="true" name="entrega">
                         </div>
                         <div for="garantia" class="form-group">
-                            <label>Garantía (Días)</label>
+                            <label>Garantía (Días) <b><FONT COLOR="red" title="Éste campo es obligatorio">*</FONT></b></label>
                             <input type="number" class="form-control" id="garantia" required="true" name="garantia">
                         </div>
                         <div for="descuento" class="form-group">
@@ -143,7 +143,7 @@
                             <input type="number" class="form-control" id="anticipo"  name="anticipo">
                         </div>
                         <div for="archivo" class="form-group">
-                            <label> Subir Archivo </label>
+                            <label> Subir Archivo <b><FONT COLOR="red" title="Éste campo es obligatorio">*</FONT></b></label>
                             <input type="file" class="form-control" id="archivo" required="true" name="archivo">
                         </div>
                         <div class="modal-footer">

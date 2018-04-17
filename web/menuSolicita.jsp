@@ -125,10 +125,10 @@
                     <div class="modal-body">
                         <form method="post" action="insertaProducto.jsp">
                             <div class="form-group">
-                                <label>Producto <span class="badge badge-info" data-toggle="tooltip" title="Si tu producto no se encuentra en la lista favor de contactar al área de compras.">?</span> </label>
+                                <label>Producto <b><FONT COLOR="red" title="Éste campo es obligatorio">*</FONT> </b><span class="badge badge-info" data-toggle="tooltip" title="Si tu producto no se encuentra en la lista favor de contactar al área de compras.">?</span> </label>
                                 <div class="input-group">
                                     <select id="modelo" name="modelo" class="form-control">
-                                        <option>Selecciona Producto</option>
+                                        <option>Selecciona Producto </option>
                                         <%
                                             Consultas obj = new Consultas();
                                             ArrayList<Item> items = obj.consultarItems();
@@ -140,16 +140,16 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="cantidad">Cantidad</label>
+                                <label for="cantidad">Cantidad <b><FONT COLOR="red" title="Éste campo es obligatorio">*</FONT></b></label>
                                 
                                 <input type="number" class="form-control" id="cantidad" name="cantidad" required>
                             </div>
                             <div for="descripcion" class="form-group">
-                                <label>Descripcion / Observaciones <span class="badge badge-info" data-toggle="tooltip" data-placement="bottom" title="Favor de proporcionar cualquier información, que ayude al que compra y aprueba">?</span> </label>
+                                <label>Descripcion / Observaciones <span class="badge badge-info" data-toggle="tooltip" data-placement="bottom" title="Favor de proporcionar cualquier información que ayude a la aprobación y compra del producto">?</span> </label>
                                 <input type="text" class="form-control" id="descripcion" name="descripcion">
                             </div>
                             <div for="justificacion" class="form-group">
-                                <label>Motivo de la compra</label>
+                                <label>Motivo de la compra <b><FONT COLOR="red" title="Éste campo es obligatorio">*</FONT> </b></label>
                                 <input type="text" class="form-control" id="justificacion" name="justificacion" required>
                             </div>
                             
