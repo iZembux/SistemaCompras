@@ -79,7 +79,7 @@
         System.out.println("La cadena sin extension sera: " + nombre_archivo_nuevo);
 
 
-        File archivo_server = new File("c:/subidos/"+ idUsuario +"_" + nombre_archivo_nuevo + "." +  extension);
+        File archivo_server = new File("c:/compras/"+ idUsuario +"_" + nombre_archivo_nuevo + "." +  extension);
         Ruta = archivo_server.getAbsolutePath();
         try {
             if (banderaGeneral == 1) {
@@ -183,7 +183,7 @@
     st.executeUpdate("UPDATE req_prod SET id_status = " + nuevoStatus + " where id_req_coti = "+ idReqCoti +"");
     
     sql = "Insert into cotizacion (id_req_coti, id_proveedor, id_producto, cantidad, precio, iva, diascredito, tiempoentrega, descuento, anticipo, garantia, rutaPDF) values "
-          + "("+idReqCoti+", "+idUsuario+", "+idProducto+", "+cantidad+","+precio+", "+iva+", "+credito+", "+entrega+", "+descuento+", "+anticipo+","+garantia+",'"+ruta+"')";
+          + "("+idReqCoti+", "+idUsuario+", "+idProducto+", "+cantidad+","+precio+", "+iva+", "+credito+", "+entrega+", "+descuento+", "+anticipo+","+garantia+",'"+Ruta+"')";
     System.out.println(sql);
     
     st.executeUpdate(sql); 

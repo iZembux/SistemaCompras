@@ -100,13 +100,13 @@
                                 /* Consulta si el usuario activo ya realizo una cotizacion,
                                 si es asi, muesta un mensaje, si no, permite hacer una cotizacion
                                  */
-                                  ruta = "C:/subidos/PAPEL_OFFICE_TAMANO_CARTA.pdf";
+                                  ruta = "C:/compras/PAPEL_OFFICE_TAMANO_CARTA.pdf";
                                 if (arrayRequis2.size() > 0) { %>
                             <button type="button" class="btn btn-info btn-sm">Ya haz realizado una cotizacion</button> 
                             
-                            <form action="visor.jsp" method="post" target="_blank">
-                                <button type="submit" action="visor.jsp" value="<%=ruta%>" name="search" class="btn btn-dark btn-sm">Ver PDF</button> 
-                            </form>
+                            <!--<form action="visor.jsp" method="post" target="_blank">
+                                <button type="submit" action="visor.jsp" value="" name="search" class="btn btn-dark btn-sm">Ver PDF</button> 
+                            </form>-->
                             <%} else {%>
                             <form action="formCotizacion.jsp" method="post">
                                 <input type="hidden" class="hidden" name="cantidad" value="<%=cantidadRequi%>" >
