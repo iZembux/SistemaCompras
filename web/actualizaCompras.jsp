@@ -13,6 +13,7 @@
     int idCategoria = 0;
     int usuarioC = 0;
     int numProveedores = 0;
+    int idReqProd = 0;
 
     Mail objMail = new Mail();
 
@@ -30,6 +31,10 @@
     }
     try {
         numProveedores = Integer.parseInt(request.getParameter("numProveedores"));
+    } catch (Exception e) {
+    }
+    try {
+        idReqProd = Integer.parseInt(request.getParameter("idReqProd"));
     } catch (Exception e) {
     }
 
@@ -62,12 +67,13 @@
             }
         }
         for (int i = 0; i < idProv.size(); i++) {
+            Statement st2 = con.createStatement();
+            st.executeUpdate("insert into proveedores_selec (id_req_prod, id_proveedor) values ("+idReqProd+","+idProv.get(i)+")");
             String sql2 = "SELECT email FROM scompras.proveedores where giro = " + idCategoria + " and idproveedor = "+idProv.get(i)+";";
             ps = con.prepareStatement(sql2);
             rs = ps.executeQuery();
             while (rs.next()) {
                 String correo = rs.getString("email");
-                System.out.println("correoooo: " + correo);
                 objMail.enviarCorreo(correo, "Proveedor", "", "Grupo Continental Automotriz ha solicitado una nueva cotizacion, favor de revisarla en el sistema de compras");
             }
         }
