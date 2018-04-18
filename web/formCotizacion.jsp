@@ -116,7 +116,7 @@
                     <form method="post" action="guardarArchivos.jsp" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="cantidad">Cantidad</label>
-                            <input type="number" class="form-control" id="cantidad" disabled="true" name="cantidad" value="<%= cantidad %>">
+                            <input type="number" class="form-control" id="cantidad" name="cantidad" readonly="readonly" value="<%= cantidad %>">
                         </div>
                         <div for="precio" class="form-group">
                             <label>Precio Unitario Sin IVA</label>
