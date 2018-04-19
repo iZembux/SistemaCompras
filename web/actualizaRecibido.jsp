@@ -3,11 +3,16 @@
     status 3 ---> status 4
 --%>
 
+<%@page import="controller.Consultas"%>
 <%@page import="controller.Mail"%>
 <%@ page import ="java.sql.*" %>
 <%
     int idReqCoti = 0;
+    int idReqProd = 0;
+    int idUsu = 0;
     int nuevoStatus = 0;
+    int stock = 0;
+    int entrega = 0;
 
     Mail objMail = new Mail();
 
@@ -16,8 +21,23 @@
     } catch (Exception e) {
     }
     try {
+        idReqProd = Integer.parseInt(request.getParameter("idReqProd"));
+    } catch (Exception e) {
+    }
+    try {
+        idUsu = Integer.parseInt(request.getParameter("idUsu"));
+    } catch (Exception e) {
+    }
+    try {
         nuevoStatus = Integer.parseInt(request.getParameter("nuevoStatus"));
-        System.out.println(nuevoStatus);
+    } catch (Exception e) {
+    }
+    try {
+        stock = Integer.parseInt(request.getParameter("stock"));
+    } catch (Exception e) {
+    }
+    try {
+        entrega = Integer.parseInt(request.getParameter("entrega"));
     } catch (Exception e) {
     }
 
@@ -25,10 +45,25 @@
     Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/scompras", "root", "stmsc0nt");
     Statement st = con.createStatement();
 
-    st.executeUpdate("UPDATE req_prod SET id_status = " + nuevoStatus + " WHERE id_req_coti = " + idReqCoti + ";");
+    if (stock == 1) {
+        st.executeUpdate("UPDATE req_prod SET id_status = " + nuevoStatus + " WHERE id_req_prod = " + idReqProd + ";");
+    } else {
+        st.executeUpdate("UPDATE req_prod SET id_status = " + nuevoStatus + " WHERE id_req_coti = " + idReqCoti + ";");
+    }
 
-    objMail.enviarCorreo("diego.torres@continental.com.mx", "Diego", "Torres", "Puedes pasar por tu producto");
+    Consultas obj = new Consultas();
+    String correo = obj.consultarCorreos(idUsu);
 
-    response.sendRedirect("menuComprasRecepcion.jsp");
+    objMail.enviarCorreo(correo, "Usuario", "", "Puedes pasar por tu producto");
+
+    if (stock == 1) {
+        response.sendRedirect("menuComprasEntrega.jsp");
+    } else {
+        if (entrega == 1) {
+            response.sendRedirect("menuComprasEntrega.jsp");
+        } else {
+            response.sendRedirect("menuComprasRecepcion.jsp");
+        }
+    }
 
 %>

@@ -18,10 +18,13 @@
         String sucursal = (String) sesion.getAttribute("sucursal");
         String suc = null;
 
-        if (sucursal.equals("8")) {
-            suc = "1,2,3,4,6,7,8,13,17";
+        if (sucursal.equals("8") || sucursal.equals("1")) {
+            suc = "1,2,3,4,6,7,8,13";
+            if (rol.equals("3")) {
+                suc = "1,2,3,4,6,7,8,13,9,14,17,10,11,15,16,18";
+            }
         } else if (sucursal.equals("9")) {
-            suc = "9,14";
+            suc = "9,14,17";
         } else if (sucursal.equals("10")) {
             suc = "10,11,15,16,18";
         }
@@ -89,7 +92,7 @@
                                 <input type="hidden" class="hidden" name="usuario" value="<%=usuario%>" >
                                 <input type="hidden" class="hidden" name="idReqProd" value="<%=idReqProd%>" >
                                 <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalProveedores">Solicitar Cotizaciones</button>
-                                
+
                                 <div class="modal fade" id="modalProveedores" tabindex="-1" role="dialog" aria-labelledby="modalProveedores" aria-hidden="true">
                                     <div class="modal-dialog modal-lg" role="document">
                                         <div class="modal-content">
@@ -100,44 +103,44 @@
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                    <div class="form-group">
-                                                        <label>Selecciona los proveedores a los que se les enviará una solicitud de cotización</label>
-                                                        <table class="table table-striped table-hover">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>Proveedor</th>
-                                                                    <th>Direccion</th>
-                                                                    <th>Telefono</th>
-                                                                    <th>Seleccionar</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <tr>
-                                                                    <%
-                                                                        Consultas obj2 = new Consultas();
-                                                                        ArrayList<Proveedor> prov = obj2.consultarProveedor(1);
-                                                                        for (int j = 0; j < prov.size(); j++) {
-                                                                    %>
-                                                                    <td><%= prov.get(j).getRazonSocial()%></td>
-                                                                    <td><%= prov.get(j).getDireccion()%></td>
-                                                                    <td><%= prov.get(j).getTelefono()%></td>
-                                                                    <td>
-                                                                        <div class="form-check">
-                                                                            <label>
-                                                                                <input class="form-check-input" type="checkbox" name="checkbox<%=j%>" value="<%= prov.get(j).getIdProveedor()%>">
-                                                                            </label>
-                                                                        </div>
-                                                                    </td>
-                                                                </tr>
-                                                                <% }%> 
-                                                            </tbody>
-                                                        </table>
+                                                <div class="form-group">
+                                                    <label>Selecciona los proveedores a los que se les enviará una solicitud de cotización</label>
+                                                    <table class="table table-striped table-hover">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Proveedor</th>
+                                                                <th>Direccion</th>
+                                                                <th>Telefono</th>
+                                                                <th>Seleccionar</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <%
+                                                                    Consultas obj2 = new Consultas();
+                                                                    ArrayList<Proveedor> prov = obj2.consultarProveedor(1);
+                                                                    for (int j = 0; j < prov.size(); j++) {
+                                                                %>
+                                                                <td><%= prov.get(j).getRazonSocial()%></td>
+                                                                <td><%= prov.get(j).getDireccion()%></td>
+                                                                <td><%= prov.get(j).getTelefono()%></td>
+                                                                <td>
+                                                                    <div class="form-check">
+                                                                        <label>
+                                                                            <input class="form-check-input" type="checkbox" name="checkbox<%=j%>" value="<%= prov.get(j).getIdProveedor()%>">
+                                                                        </label>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            <% }%> 
+                                                        </tbody>
+                                                    </table>
 
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <input type="hidden" class="hidden" name="numProveedores" value="<%=prov.size()%>" >
-                                                        <input type="submit" class="btn btn-primary" value="Solicitar" />
-                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <input type="hidden" class="hidden" name="numProveedores" value="<%=prov.size()%>" >
+                                                    <input type="submit" class="btn btn-primary" value="Solicitar" />
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

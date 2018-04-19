@@ -22,7 +22,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="css/style.css">
-        <title>Autorizar</title>
+        <title>Entrega</title>
     </head>
     <body>
 
@@ -33,7 +33,7 @@
 
         <div class="container my-5">
             <div class="page-header">
-                <h3>Recepcion de Productos</h3>
+                <h3>Entrega de Productos</h3>
             </div>
             <table class="table table-striped table-hover">
                 <thead>
@@ -75,6 +75,7 @@
                             <form action="actualizaRecibido.jsp" method="post">
                                 <input type="hidden" class="hidden" name="idReqCoti" value="<%=idReqCoti%>" >
                                 <input type="hidden" class="hidden" name="nuevoStatus" value="13" >
+                                <input type="hidden" class="hidden" name="entrega" value="1" >
                                 <button type="submit" class="btn btn-success btn-sm">Producto Entregado</button>
                             </form>
                         </td>

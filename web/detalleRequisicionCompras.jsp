@@ -49,6 +49,7 @@
                             <th scope="col">Cantidad</th>
                             <th scope="col">Solicitante</th>
                             <th scope="col">Departamento</th>
+                            <th scope="col">Sucursal</th>
                             <th scope="col"></th>
                         </tr>
                     </thead>
@@ -57,8 +58,10 @@
                             int cantidadRequi;
                             String departamento;
                             int idReqProd;
+                            int idUsu;
                             String producto;
                             String solicitante;
+                            String sucursal;
 
                             ArrayList<RequisicionProducto> arrayRequis = new ArrayList<RequisicionProducto>();
                             Consultas obj = new Consultas();
@@ -73,6 +76,8 @@
                                     producto = arrayRequis.get(i).getProducto();
                                     solicitante = arrayRequis.get(i).getSolicitante();
                                     departamento = obCB.obtieneDepartamento(arrayRequis.get(i).getIdDepto());
+                                    sucursal = arrayRequis.get(i).getSucursal();
+                                    idUsu = arrayRequis.get(i).getIdSolicita();
 
                         %>
                         <tr>
@@ -80,9 +85,20 @@
                             <td><%=cantidadRequi%></td>
                             <td><%=solicitante%></td>
                             <td><%=departamento%></td>
-                            <td><form action="formatos/requisicion.jsp" method="post" target="_blank">
+                            <td><%=sucursal%></td>
+                            <td>
+                                <form action="actualizaRecibido.jsp" method="post">
+                                    <input type="hidden" class="hidden" name="nuevoStatus" value="12" >
+                                    <input type="hidden" class="hidden" name="idUsu" value="<%=idUsu%>" >
                                     <input type="hidden" class="hidden" name="idReqProd" value="<%=idReqProd%>" >
-                                    <button type="submit" class="btn btn-success btn-sm">Ver Requisicion</button>
+                                    <input type="hidden" class="hidden" name="stock" value="1" >
+                                    <button type="submit" class="btn btn-success btn-sm">Producto en Stock</button>
+                                </form>
+                            </td>
+                            <td>
+                                <form action="formatos/requisicion.jsp" method="post" target="_blank">
+                                    <input type="hidden" class="hidden" name="idReqProd" value="<%=idReqProd%>" >
+                                    <button type="submit" class="btn btn-info btn-sm">Ver Requisicion</button>
                                 </form>
                             </td>
                         </tr>
