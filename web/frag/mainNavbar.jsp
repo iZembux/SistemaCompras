@@ -66,6 +66,19 @@
             <a class="nav-link" href="menuComprasEntrega.jsp"> 
                 Entrega
             </a>
+            <% if (rol == 3) { %>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Administracion
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="menuComprasAdministracion.jsp"> 
+                        Seguimiento de Cotizaciones
+                    </a>
+
+                </div>
+            </li>
+            <% } %>
 
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -84,7 +97,7 @@
                 </div>
             </li>
             <% }
-                if (rol == 3 || rol == 4) {                    
+                if (rol == 3 || rol == 4) {
                     if (depto != 7) {
             %>
             <li class="nav-item dropdown">
@@ -134,7 +147,7 @@
             </li>   
 
             <% }
-                    
+
                 }%>
             <a class="nav-link" href="logout.jsp"> 
                 Cerrar Sesión
