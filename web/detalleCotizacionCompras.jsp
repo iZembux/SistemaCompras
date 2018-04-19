@@ -46,16 +46,15 @@
                         check.checked = false;
                         contador--;
                     }
-                } else {
+                }else {
                     contador--;
                 }
             }
-        </script>
-        <SCRIPT LANGUAGE="JavaScript">
-        function leeArchivo() {
-            var ruta = "C:/compras/COT_PAPEL.pdf";
-            window.open(ruta,"_blank");
-        }
+            function validars() {
+                if (contador < min) {
+                        alert('Debes elegir al menos ' + min + ' casillas.');
+                }
+            }
         </script>
     </head>
     <body>
@@ -83,7 +82,7 @@
                                 <th scope="col">Garantia</th>
                                 <th scope="col">Tiempo de Entrega</th>
                                 <th scope="col">Anticipo</th>
-                                <!----><th scope="col">Archivo</th>
+                                <th scope="col">Archivo</th>
                                 <th scope="col"></th>
                             </tr>
                         </thead>
@@ -143,7 +142,7 @@
                                 }%>
                         </tbody>
                     </table>
-                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#observaciones">Continuar</button>
+                        <button type="button" class="btn btn-primary btn-sm" onclick="validars()" data-toggle="modal" data-target="#observaciones">Continuar</button>
                     <div class="modal fade" id="observaciones" tabindex="-1" role="dialog" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
