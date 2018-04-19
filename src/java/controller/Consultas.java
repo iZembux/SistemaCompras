@@ -1404,5 +1404,26 @@ public class Consultas {
         }
         return ruta;
     }
+    
+    public String consultaArchivoComp(int idReeCoti, int idCotizacion) {
+        String ruta = "";
+        PreparedStatement ps;
+        ResultSet rs;
+        Connection con;
+        con = ConexionMySQL.conectar();
+        if (con != null) {
+            try {
+                String sql = "SELECT RUTAPDF from scompras.cotizacion where id_req_coti = '"+idReeCoti+"' and id_cotizacion = '"+idCotizacion+"';";
+                ps = con.prepareStatement(sql);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    ruta = rs.getString("RUTAPDF");
+                }
+            } catch (SQLException ex) {
+                System.out.println("ERROR: " + ex.getMessage());
+            }
+        }
+        return ruta;
+    }
 
 }

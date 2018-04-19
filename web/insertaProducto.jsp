@@ -4,6 +4,7 @@
 
 <%@page import="controller.Mail"%>
 <%@ page import ="java.sql.*" %>
+<%@page contentType="charset=UTF-8" pageEncoding="UTF-8"%>
 <%
     int nuevaRequisicion = 1;
     int idUsuario = 0;
