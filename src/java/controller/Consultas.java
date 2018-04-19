@@ -1382,5 +1382,27 @@ public class Consultas {
         }
         return correo;
     }
+    
+    public String consultaArchivo(int idReeCoti, int idProv) {
+        String ruta = "";
+        PreparedStatement ps;
+        ResultSet rs;
+        Connection con;
+        con = ConexionMySQL.conectar();
+        if (con != null) {
+            try {
+                //String sql = "SELECT RUTA from scompras.multimedia where id_coti = '"+idReeCoti+"' and id_proveedor = '"+idProv+"';";
+                String sql = "SELECT RUTAPDF from scompras.cotizacion where id_req_coti = '"+idReeCoti+"' and id_proveedor = '"+idProv+"';";
+                ps = con.prepareStatement(sql);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    ruta = rs.getString("RUTAPDF");
+                }
+            } catch (SQLException ex) {
+                System.out.println("ERROR: " + ex.getMessage());
+            }
+        }
+        return ruta;
+    }
 
 }

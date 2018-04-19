@@ -98,7 +98,7 @@
                                 /* Consulta si el usuario activo ya realizo una cotizacion,
                                 si es asi, muesta un mensaje, si no, permite hacer una cotizacion
                                  */
-                                  ruta = "C:/subidos/PAPEL_OFFICE_TAMANO_CARTA.pdf";
+                                  ruta = obj2.consultaArchivo(idReqCoti, Integer.parseInt(id_usuario));
                                 if (arrayRequis2.size() > 0) { %>
                             <button type="button" class="btn btn-info btn-sm">Ya haz realizado una cotizacion</button> 
                             
