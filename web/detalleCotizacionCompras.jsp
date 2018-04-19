@@ -83,7 +83,7 @@
                                 <th scope="col">Garantia</th>
                                 <th scope="col">Tiempo de Entrega</th>
                                 <th scope="col">Anticipo</th>
-                                <!--<th scope="col">Archivo</th>-->
+                                <!----><th scope="col">Archivo</th>
                                 <th scope="col"></th>
                             </tr>
                         </thead>
@@ -117,7 +117,7 @@
                                         entrega = arrayRequis.get(i).getEntrega();
                                         anticipo = arrayRequis.get(i).getAnticipo();
                                         garantia = arrayRequis.get(i).getGarantia();
-                                        String ruta = obj2.consultaArchivo(idReqCoti, idUsu);
+                                        String ruta = obj2.consultaArchivoComp(idReqCoti, idCoti);
                             %>
                             <tr>
                                 <td><%=proveedor%></td>
@@ -130,11 +130,7 @@
                                 <td><%=garantia%> Dias</td>
                                 <td><%=entrega%> Dias</td>
                                 <td><%=anticipo%> %</td>
-                                <!--<td><input type="button" onClick="leeArchivo()" value="Ver PDF"></td>
-                                <form action="visor.jsp" method="post" target="_blank">
-                                        <button type="submit" action="visor.jsp" value="C:/compras/COT_PAPEL.pdf" name="search" class="btn btn-dark btn-sm">Ver PDF</button> 
-                                    </form>
-                                -->
+                                <td><button tarjet onClick="document.formulario.action='visor.jsp'; document.formulario.target='_blank'" value="<%=ruta%>" name="search" class="btn btn-dark btn-sm">Ver PDF</button></td>
                                 <td>
                                     <div class="form-check">
                                         <label>
