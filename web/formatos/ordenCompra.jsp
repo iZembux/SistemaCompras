@@ -100,14 +100,6 @@
         <title>RequisicionCompra</title>
     </head>
     <body style=" zoom: 85%">
-        <%--
-        <form action="actualizaRecibido.jsp" method="post">
-            <input type="hidden" class="hidden" name="idReqCoti" value="<%=idReqCoti%>" >
-            <input type="hidden" class="hidden" name="nuevoStatus" value="12" >
-            <button type="submit" class="btn btn-success btn-sm">Enviar Orden</button>
-        </form>
-        --%>
-            
         <table width="863" height="1113" border="1" style="border-collapse: collapse" align="center">
             <caption>&nbsp;
             </caption>

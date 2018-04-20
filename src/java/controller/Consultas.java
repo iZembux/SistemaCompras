@@ -349,7 +349,6 @@ public class Consultas {
     }
 
     public ArrayList<RequisicionProducto> consultarComprasCotizaciones(int id_categoria, int status, String usuario) {
-        int cont = 0;
         ArrayList<RequisicionProducto> listaRequi = new ArrayList<RequisicionProducto>();
         PreparedStatement ps;
         ResultSet rs;
@@ -379,13 +378,12 @@ public class Consultas {
                         + "    AND p.id_productos = rp.id_producto\n"
                         + "    AND p.id_categoria = " + id_categoria + "\n"
                         + "    AND rp.id_status = " + status + "\n"
-                        + "    AND rp.usu_compras = " + usuario + "\n"
+                        //+ "    AND rp.usu_compras = " + usuario + "\n" Consultar o no por usuario de compras 
                         + "    GROUP BY rp.id_producto, s.id_sucursales\n"
                         + "    ORDER BY rp.id_requisicion;";
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
-                    cont++;
                     RequisicionProducto obj = new RequisicionProducto();
                     obj.setIdRequisicion(rs.getInt("IDREQUISICION"));
                     obj.setIdDepto(rs.getInt("DEPTO"));

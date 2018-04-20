@@ -7,7 +7,7 @@
 <%@page import="controller.Mail"%>
 <%@ page import ="java.sql.*" %>
 <%
-    int idReqCoti = 0;
+    int idReqCoti = 100;
     int idReqProd = 0;
     int idUsu = 0;
     int nuevoStatus = 0;
