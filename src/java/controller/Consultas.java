@@ -45,7 +45,7 @@ public class Consultas {
                         + "    AND r.id_requisicion = rp.id_requisicion\n"
                         + "    AND p.id_productos = rp.id_producto\n"
                         + "    AND u.id_sucursal = " + sucursal + "\n"
-                        + "    AND u.id_departamento = " + departamento + "\n"
+                        + "    AND u.id_departamento in (" + departamento + ")\n"
                         + "    AND rp.id_status = 3\n"
                         + "    GROUP BY rp.id_requisicion\n"
                         + "    ORDER BY rp.id_requisicion;";
