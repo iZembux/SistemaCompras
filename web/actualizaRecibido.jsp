@@ -50,7 +50,7 @@
     Consultas obj = new Consultas();
     String correo = obj.consultarCorreos(idUsu);
 
-    objMail.enviarCorreo(correo, "Usuario", "", "Puedes pasar por tu producto");
+    objMail.enviarCorreo(correo, "Usuario", "", "Puedes pasar por tu producto, Id: "+idReqProd+"");
 
     if (stock == 1) {
         response.sendRedirect("menuComprasEntrega.jsp");
