@@ -1,7 +1,3 @@
-<%-- 
-    Actualiza el status de la requisicion cuando el gerente la autoriza
-    status 3 ---> status 4
---%>
 
 <%@page import="controller.Consultas"%>
 <%@page import="controller.Mail"%>
