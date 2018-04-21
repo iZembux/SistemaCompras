@@ -41,35 +41,39 @@
                         <th scope="col">Requisicion</th>
                         <th scope="col">Producto</th>
                         <th scope="col">Marca</th>
+                        <th scope="col">Solicitante</th>
                         <th scope="col">Cantidad</th>
-                        <th scope="col">Proveedor</th>
+                        <th scope="col"></th>
                         <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
                     <%
                         int cantidadRequi;
-                        int idProducto;
+                        int idReqProd;
                         int idReqCoti;
                         String producto;
                         String marca;
+                        String solicitante;
 
                         ArrayList<RequisicionProducto> arrayRequis = new ArrayList<RequisicionProducto>();
                         Consultas obj = new Consultas();
-                        arrayRequis = obj.consultarComprasRecibido(12);
+                        arrayRequis = obj.consultarComprasEntregado(12);
 
                         if (arrayRequis.size() > 0) {
                             for (int i = 0; i < arrayRequis.size(); i++) {
-                                idProducto = arrayRequis.get(i).getIdProducto();
+                                idReqProd = arrayRequis.get(i).getIdReqProd();
                                 cantidadRequi = arrayRequis.get(i).getCantidad();
                                 producto = arrayRequis.get(i).getProducto();
                                 marca = arrayRequis.get(i).getMarca();
+                                solicitante = arrayRequis.get(i).getSolicitante();
                                 idReqCoti = arrayRequis.get(i).getIdReqCoti();
                     %>
                     <tr>
-                        <td><%=producto%></td>
+                        <td><%=idReqProd%></td>
                         <td><%=producto%></td>
                         <td><%=marca%></td>
+                        <td><%=solicitante%></td>
                         <td><%=cantidadRequi%></td> 
                         <td>
                             <form action="actualizaRecibido.jsp" method="post">
