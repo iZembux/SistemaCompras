@@ -88,7 +88,7 @@
                                 <input type="hidden" class="hidden" name="cantidad" value="<%=cantidadRequi%>" >
                                 <input type="hidden" class="hidden" name="idProducto" value="<%=idProducto%>" >
                                 <input type="hidden" class="hidden" name="idReqCoti" value="<%=idReqCoti%>" >
-                                <button type="submit" class="btn btn-primary btn-sm" >Hacer Cotizacion</button>
+                                <button type="submit" class="btn btn-info btn-sm" >Hacer Cotizacion</button>
                             </form>
                             <% } else if (status == 6) {
                                 ArrayList<CotizacionRequisicion> arrayRequis2 = new ArrayList<CotizacionRequisicion>();
@@ -111,7 +111,7 @@
                                 <input type="hidden" class="hidden" name="idUsuario" value="<%=id_usuario%>" >
                                 <input type="hidden" class="hidden" name="idProducto" value="<%=idProducto%>" >
                                 <input type="hidden" class="hidden" name="idReqCoti" value="<%=idReqCoti%>" >
-                                <button type="submit" class="btn btn-primary btn-sm" >Hacer Cotizacion</button>
+                                <button type="submit" class="btn btn-info btn-sm" >Hacer Cotizacion</button>
                             </form>
                             <% }
                             } else if (status == 10) {

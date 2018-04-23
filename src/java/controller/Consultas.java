@@ -727,6 +727,7 @@ public class Consultas {
                         + "WHERE\n"
                         + "		p.id_productos = c.id_producto\n"
                         + "        AND pr.idproveedor = c.id_proveedor\n"
+                        + "        and c.aut_compras > 0"
                         + "        AND c.id_req_coti = " + idReqCoti + "\n"
                         + "        AND c.id_proveedor = " + idProveedor + ";";
                 ps = con.prepareStatement(sql);
@@ -1210,6 +1211,7 @@ public class Consultas {
                         + "        AND r.id_requisicion = rp.id_requisicion\n"
                         + "        AND rp.id_producto = p.id_productos\n"
                         + "        AND um.id_unidadmedida = p.id_unidadmedida\n"
+                        + "        and aut_compras > 0\n"
                         + "        AND c.id_req_coti = " + idReqCoti + "\n"
                         + "        AND s.sucursal = '" + suc + "'";
                 ps = con.prepareStatement(sql);
