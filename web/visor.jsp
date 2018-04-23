@@ -17,3 +17,9 @@
         response.getOutputStream().write(datosPDF);
         ficheroInput.close();
     %>
+
+<html>
+    <head>
+        <title>Visualizador de Archivos</title>
+    </head>
+</html>
