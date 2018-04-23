@@ -87,13 +87,13 @@
                         <td>
                             <form action="actualizaCompras.jsp" method="post">
                                 <input type="hidden" class="hidden" name="nuevoStatus" value="5" >
-                                <input type="hidden" class="hidden" name="idProducto" value="<%=idProducto%>" >
+                                
                                 <input type="hidden" class="hidden" name="categoria" value="<%=id_categoria%>" >
                                 <input type="hidden" class="hidden" name="usuario" value="<%=usuario%>" >
                                 <input type="hidden" class="hidden" name="idReqProd" value="<%=idReqProd%>" >
-                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalProveedores">Solicitar Cotizaciones</button>
+                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalProveedores<%=i%>">Solicitar Cotizaciones</button>
 
-                                <div class="modal fade" id="modalProveedores" tabindex="-1" role="dialog" aria-labelledby="modalProveedores" aria-hidden="true">
+                                <div class="modal fade" id="modalProveedores<%=i%>" tabindex="-1" role="dialog" aria-labelledby="modalProveedores<%=i%>" aria-hidden="true">
                                     <div class="modal-dialog modal-lg" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -138,6 +138,7 @@
 
                                                 </div>
                                                 <div class="modal-footer">
+                                                    <input type="hidden" class="hidden" name="idProducto" value="<%=arrayRequis.get(i).getIdProducto()%>" >
                                                     <input type="hidden" class="hidden" name="numProveedores" value="<%=prov.size()%>" >
                                                     <input type="submit" class="btn btn-primary" value="Solicitar" />
                                                 </div>
