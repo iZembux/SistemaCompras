@@ -15,6 +15,9 @@
             <a class="nav-link" href="menuRequisicionesProveedor.jsp"> 
                 Licitaciones Disponibles
             </a>
+            <a class="nav-link" href="menuOrdenesProveedor.jsp"> 
+                Ordenes de Compra
+            </a>
             <a class="nav-link" href="menuHistorialProveedor.jsp"> 
                 Historial
             </a>

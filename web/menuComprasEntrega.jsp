@@ -70,7 +70,7 @@
                                 idReqCoti = arrayRequis.get(i).getIdReqCoti();
                     %>
                     <tr>
-                        <td><%=idReqProd%></td>
+                        <td><%=idReqCoti%></td>
                         <td><%=producto%></td>
                         <td><%=marca%></td>
                         <td><%=solicitante%></td>
