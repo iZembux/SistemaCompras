@@ -14,6 +14,7 @@
 
     try {
         idReqCoti = Integer.parseInt(request.getParameter("idReqCoti"));
+        System.out.println("sssssssssssss " + idReqCoti);
     } catch (Exception e) {
     }
     try {
@@ -44,13 +45,17 @@
     if (stock == 1) {
         st.executeUpdate("UPDATE req_prod SET id_status = " + nuevoStatus + " WHERE id_req_prod = " + idReqProd + ";");
     } else {
-        st.executeUpdate("UPDATE req_prod SET id_status = " + nuevoStatus + " WHERE id_req_coti = " + idReqCoti + ";");
+        if (idReqCoti == 0) {
+            objMail.enviarCorreo("diego.torres@continental.com.mx", "", "", "Error al recibir id_req_coti");
+        } else {
+            st.executeUpdate("UPDATE req_prod SET id_status = " + nuevoStatus + " WHERE id_req_coti = " + idReqCoti + ";");
+        }
     }
 
     Consultas obj = new Consultas();
     String correo = obj.consultarCorreos(idUsu);
 
-    objMail.enviarCorreo(correo, "Usuario", "", "Puedes pasar por tu producto, Id: "+idReqProd+"");
+    objMail.enviarCorreo(correo, "Usuario", "", "Puedes pasar por tu producto, Id: " + idReqProd + "");
 
     if (stock == 1) {
         response.sendRedirect("menuComprasEntrega.jsp");

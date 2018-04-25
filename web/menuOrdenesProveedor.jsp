@@ -1,29 +1,22 @@
 <%-- 
-    Muestra las cotizaciones que se han hecho de los proveedores disponibles por categoria de producto
+    Document   : usuarioSeguimiento
+    Created on : Mar 5, 2018, 7:55:17 AM
+    Author     : user
 --%>
+<%@page import="model.OrdenFormato"%>
+<%@page import="model.CotizacionRequisicion"%>
 <%@page import="controller.Consultas"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.RequisicionProducto"%>
 <%
     HttpSession sesion = request.getSession();
     String usuarioValidado = (String) sesion.getAttribute("usuarioIngresado");
+    
     if (usuarioValidado == null) {
         response.sendRedirect("index.jsp");
     } else {
-        String idDepto = (String) sesion.getAttribute("departamento");
-        String rol = (String) sesion.getAttribute("rol");
-        String idSucursal = (String) sesion.getAttribute("sucursal");
-        String suc = null;
-
-        if (idSucursal.equals("8") || idSucursal.equals("1")) {
-            suc = "1,2,3,4,6,7,8,13,17";
-        } else if (idSucursal.equals("9")) {
-            suc = "9,14";
-        } else if (idSucursal.equals("10")) {
-            suc = "10,11,15,16,18";
-        }
-
-        int id_categoria = 1;
+        String id_usuario = (String) sesion.getAttribute("idUsuario");
+        int idCategoria = 1;
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -32,61 +25,53 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="css/style.css">
-        <title>Ordenes de compra</title>
+        <title>Autorizar</title>
+        
     </head>
     <body>
 
-        <jsp:include page="frag/mainNavbar.jsp">
-            <jsp:param name="rol" value="<%=rol%>" />  
-            <jsp:param name="depto" value="<%=idDepto%>" />
-        </jsp:include>
+        <jsp:include page="frag/mainNavbarProveedor.jsp"/> 
 
         <div class="container my-5">
             <div class="page-header">
-                <h3>Cotizaciones Autorizadas</h3>
+                <h3>Ordenes de compra</h3>
             </div>
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
-                        <th scope="col">Producto</th>
-                        <th scope="col">Marca</th>
-                        <th scope="col">Cantidad</th>
+                        <th scope="col">Razon Social</th>
+                        <th scope="col">Cantidad de Productos</th>
                         <th scope="col">Sucursal</th>
                         <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
                     <%
-                        int cantidadRequi;
+                        int cantidad;
                         int idProducto;
                         int idReqCoti;
-                        String producto;
-                        String marca;
+                        int status;
+                        String razonsocial;
                         String sucursal;
+                        
 
-                        ArrayList<RequisicionProducto> arrayRequis = new ArrayList<RequisicionProducto>();
+                        ArrayList<OrdenFormato> arrayRequis = new ArrayList<OrdenFormato>();
                         Consultas obj = new Consultas();
-                        arrayRequis = obj.consultarCompras(id_categoria, 10, suc);
+                        arrayRequis = obj.consultarOrdenesProv(id_usuario);
 
                         if (arrayRequis.size() > 0) {
                             for (int i = 0; i < arrayRequis.size(); i++) {
-                                idProducto = arrayRequis.get(i).getIdProducto();
-                                cantidadRequi = arrayRequis.get(i).getCantidad();
-                                producto = arrayRequis.get(i).getProducto();
-                                marca = arrayRequis.get(i).getMarca();
-                                idReqCoti = arrayRequis.get(i).getIdReqCoti();
+                                razonsocial = arrayRequis.get(i).getNombreP();
+                                cantidad = arrayRequis.get(i).getCantidad();
                                 sucursal = arrayRequis.get(i).getSucursal();
                     %>
                     <tr>
-                        <td><%=producto%></td>
-                        <td><%=marca%></td>
-                        <td><%=cantidadRequi%></td> 
-                        <td><%=sucursal%></td>
+                        <td><%=razonsocial %></td>
+                        <td><%=cantidad %></td>
+                        <td><%=sucursal %></td> 
                         <td>
-                            <form action="formatos/ordenCompra.jsp" method="post">
-                                <input type="hidden" class="hidden" name="idReqCoti" value="<%=idReqCoti%>" >
-                                <input type="hidden" class="hidden" name="suc" value="<%=sucursal%>" >
-                                <button type="submit" class="btn btn-primary btn-sm">Ver Orden de Compra</button>
+                            <form action="formCotizacion.jsp" method="post">
+                                <button type="submit" class="btn btn-info btn-sm" >Ver Orden</button>
                             </form>
                         </td>
                     </tr>

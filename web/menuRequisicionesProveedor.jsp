@@ -88,7 +88,7 @@
                                 <input type="hidden" class="hidden" name="cantidad" value="<%=cantidadRequi%>" >
                                 <input type="hidden" class="hidden" name="idProducto" value="<%=idProducto%>" >
                                 <input type="hidden" class="hidden" name="idReqCoti" value="<%=idReqCoti%>" >
-                                <button type="submit" class="btn btn-primary btn-sm" >Hacer Cotizacion</button>
+                                <button type="submit" class="btn btn-info btn-sm" >Hacer Cotizacion</button>
                             </form>
                             <% } else if (status == 6) {
                                 ArrayList<CotizacionRequisicion> arrayRequis2 = new ArrayList<CotizacionRequisicion>();
@@ -111,13 +111,13 @@
                                 <input type="hidden" class="hidden" name="idUsuario" value="<%=id_usuario%>" >
                                 <input type="hidden" class="hidden" name="idProducto" value="<%=idProducto%>" >
                                 <input type="hidden" class="hidden" name="idReqCoti" value="<%=idReqCoti%>" >
-                                <button type="submit" class="btn btn-primary btn-sm" >Hacer Cotizacion</button>
+                                <button type="submit" class="btn btn-info btn-sm" >Hacer Cotizacion</button>
                             </form>
                             <% }
                             } else if (status == 10) {
                                 ArrayList<CotizacionRequisicion> arrayRequis2 = new ArrayList<CotizacionRequisicion>();
                                 Consultas obj2 = new Consultas();
-                                arrayRequis2 = obj2.consultarProveedorCoti(idReqCoti, id_usuario);
+                                arrayRequis2 = obj2.consultarProveedorCoti2(idReqCoti, id_usuario);
                                 System.out.println(arrayRequis2.size());
                                 // Consulta si el usuario activo ha ganado la licitacion
                                 if (arrayRequis2.size() > 0) {%>

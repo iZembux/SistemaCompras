@@ -57,7 +57,7 @@
             objMail.enviarCorreo(correo, nombre, apellido, "Tu requisicion ha sido aprobada por tu gerente");
         }
         //Depto. Compras
-        String sql2 = "SELECT correo, nombre, apellido FROM scompras.usuario where id_departamento = 7;";
+        /*String sql2 = "SELECT correo, nombre, apellido FROM scompras.usuario where id_departamento = 7;";
         ps = con.prepareStatement(sql2);
         rs = ps.executeQuery();
         while (rs.next()) {
@@ -66,6 +66,7 @@
             String apellido = rs.getString("apellido");
             objMail.enviarCorreo(correo, nombre, apellido, "Hay una nueva requisicion por revisar");
         }
+         */
     } else if (autoriza == 2) {
         //Usuario solicitante
         String sql = "SELECT correo, nombre, apellido FROM scompras.usuario where id_usuario = " + idSolicita + ";";
