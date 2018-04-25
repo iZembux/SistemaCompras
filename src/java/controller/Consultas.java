@@ -44,7 +44,7 @@ public class Consultas {
                         + "    u.id_usuario = r.id_usuario\n"
                         + "    AND r.id_requisicion = rp.id_requisicion\n"
                         + "    AND p.id_productos = rp.id_producto\n"
-                        + "    AND u.id_sucursal = " + sucursal + "\n"
+                        + "    AND u.id_sucursal in (" + sucursal + ")\n"
                         + "    AND u.id_departamento in (" + departamento + ")\n"
                         + "    AND rp.id_status = 3\n"
                         + "    GROUP BY rp.id_requisicion\n"
@@ -702,6 +702,59 @@ public class Consultas {
     }
 
     public ArrayList<CotizacionRequisicion> consultarProveedorCoti(int idReqCoti, String idProveedor) {
+        int cont = 0;
+        ArrayList<CotizacionRequisicion> listaRequi = new ArrayList<CotizacionRequisicion>();
+        PreparedStatement ps;
+        ResultSet rs;
+        Connection con;
+        con = ConexionMySQL.conectar();
+        if (con != null) {
+            try {
+                String sql = "SELECT \n"
+                        + "    pr.razonsocial AS PROVEEDOR,\n"
+                        + "    p.nombre AS PRODUCTO,\n"
+                        + "    c.id_proveedor AS IDP,\n"
+                        + "    c.cantidad AS CANTIDAD,\n"
+                        + "    c.precio AS PRECIO,\n"
+                        + "    c.iva AS IVA,\n"
+                        + "    c.descuento AS DESCUENTO,\n"
+                        + "    c.diascredito AS CREDITO,\n"
+                        + "    c.tiempoentrega AS ENTREGA,\n"
+                        + "    c.anticipo AS ANTICIPO\n"
+                        + "FROM\n"
+                        + "    productos p,\n"
+                        + "    cotizacion c,\n"
+                        + "    proveedores pr\n"
+                        + "WHERE\n"
+                        + "		p.id_productos = c.id_producto\n"
+                        + "        AND pr.idproveedor = c.id_proveedor\n"
+                        + "        AND c.id_req_coti = " + idReqCoti + "\n"
+                        + "        AND c.id_proveedor = " + idProveedor + ";";
+                ps = con.prepareStatement(sql);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    cont++;
+                    CotizacionRequisicion obj = new CotizacionRequisicion();
+                    obj.setProveedor(rs.getString("PROVEEDOR"));
+                    obj.setProducto(rs.getString("PRODUCTO"));
+                    obj.setIdP(rs.getInt("IDP"));
+                    obj.setCantidad(rs.getInt("CANTIDAD"));
+                    obj.setPrecio(rs.getDouble("PRECIO"));
+                    obj.setIva(rs.getDouble("IVA"));
+                    obj.setDescuento(rs.getInt("DESCUENTO"));
+                    obj.setCredito(rs.getInt("CREDITO"));
+                    obj.setEntrega(rs.getInt("ENTREGA"));
+                    obj.setAnticipo(rs.getInt("ANTICIPO"));
+                    listaRequi.add(obj);
+                }
+            } catch (SQLException ex) {
+                System.out.println("ERROR: " + ex.getMessage());
+            }
+        }
+        return listaRequi;
+    }
+    
+    public ArrayList<CotizacionRequisicion> consultarProveedorCoti2(int idReqCoti, String idProveedor) {
         int cont = 0;
         ArrayList<CotizacionRequisicion> listaRequi = new ArrayList<CotizacionRequisicion>();
         PreparedStatement ps;

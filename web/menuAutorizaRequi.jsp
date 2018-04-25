@@ -21,6 +21,16 @@
         if (idUsu.equals("34")) {
             idDepto2 = "8,10,13";
         }
+        if (idUsu.equals("114")) {
+            idDepto2 = "21,26,1,13,18";
+        }
+        if (idUsu.equals("65")) {
+            idDepto2 = "1,6,8,9,13,24,25,26";
+        }
+        
+        if (idUsu.equals("60")) {
+            sucursal = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18";
+        }
 
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

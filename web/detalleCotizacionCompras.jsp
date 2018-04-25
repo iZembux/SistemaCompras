@@ -129,7 +129,7 @@
                                 <td><%=garantia%> Dias</td>
                                 <td><%=entrega%> Dias</td>
                                 <td><%=anticipo%> %</td>
-                                <td><button tarjet onClick="document.formulario.action='visor.jsp'; document.formulario.target='_blank'" value="<%=ruta%>" name="search" class="btn btn-dark btn-sm">Ver PDF</button></td>
+                                <td><button tarjet onClick="document.formulario.action='visor.jsp';" value="<%=ruta%>" name="search" class="btn btn-dark btn-sm">Ver PDF</button></td>
                                 <td>
                                     <div class="form-check">
                                         <label>
