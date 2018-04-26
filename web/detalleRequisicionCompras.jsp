@@ -101,12 +101,14 @@
                                     <button type="submit" class="btn btn-info btn-sm">Ver Requisicion</button>
                                 </form>
                             </td>
+                            <% if (rol.equals("3")) { %>
                             <td>
                                 <form action="eliminaRequisicion.jsp" method="post">
                                     <input type="hidden" class="hidden" name="idReqProd" value="<%=idReqProd%>" >
                                     <button type="submit" class="btn btn-danger btn-sm">Rechazar</button>
                                 </form>
-                            </td>
+                            </td>  
+                            <% } %>
                         </tr>
                         <% }
                             }%>
