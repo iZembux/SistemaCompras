@@ -51,6 +51,7 @@
                         <th scope="col">Producto</th>
                         <th scope="col">Marca</th>
                         <th scope="col">Cantidad</th>
+                        <th scope="col">Proveedor</th>
                         <th scope="col">Sucursal</th>
                         <th scope="col"></th>
                     </tr>
@@ -63,6 +64,7 @@
                         String producto;
                         String marca;
                         String sucursal;
+                        String proveedor;
 
                         ArrayList<RequisicionProducto> arrayRequis = new ArrayList<RequisicionProducto>();
                         Consultas obj = new Consultas();
@@ -76,11 +78,13 @@
                                 marca = arrayRequis.get(i).getMarca();
                                 idReqCoti = arrayRequis.get(i).getIdReqCoti();
                                 sucursal = arrayRequis.get(i).getSucursal();
+                                proveedor = arrayRequis.get(i).getProveedor();
                     %>
                     <tr>
                         <td><%=producto%></td>
                         <td><%=marca%></td>
                         <td><%=cantidadRequi%></td> 
+                        <td><%=proveedor%></td> 
                         <td><%=sucursal%></td>
                         <td>
                             <form action="formatos/ordenCompra.jsp" method="post">

@@ -34,6 +34,7 @@ public class RequisicionProducto {
     private String porcentaje;
     private String fecha;
     private String sucursal;
+    private String proveedor;
 
     /**
      * @return the idRequisicion
@@ -271,6 +272,20 @@ public class RequisicionProducto {
      */
     public void setSucursal(String sucursal) {
         this.sucursal = sucursal;
+    }
+
+    /**
+     * @return the proveedor
+     */
+    public String getProveedor() {
+        return proveedor;
+    }
+
+    /**
+     * @param proveedor the proveedor to set
+     */
+    public void setProveedor(String proveedor) {
+        this.proveedor = proveedor;
     }
 
     

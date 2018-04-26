@@ -1,6 +1,7 @@
 <%-- 
     Muestra las cotizaciones que se han hecho de los proveedores disponibles por categoria de producto
 --%>
+<%@page import="model.CotizacionRequisicion"%>
 <%@page import="controller.Consultas"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.RequisicionProducto"%>
@@ -51,26 +52,28 @@
                         int idProducto;
                         int idReqCoti;
                         String producto;
-                        String marca;
+                        String proveedor;
+                        String compras;
+                        String status;
 
-                        ArrayList<RequisicionProducto> arrayRequis = new ArrayList<RequisicionProducto>();
+                        ArrayList<CotizacionRequisicion> arrayRequis = new ArrayList<CotizacionRequisicion>();
                         Consultas obj = new Consultas();
-                        arrayRequis = obj.consultarComprasRecibido(99);
+                        arrayRequis = obj.consultarComprasAdmin();
 
                         if (arrayRequis.size() > 0) {
                             for (int i = 0; i < arrayRequis.size(); i++) {
-                                idProducto = arrayRequis.get(i).getIdProducto();
-                                cantidadRequi = arrayRequis.get(i).getCantidad();
                                 producto = arrayRequis.get(i).getProducto();
-                                marca = arrayRequis.get(i).getMarca();
-                                idReqCoti = arrayRequis.get(i).getIdReqCoti();
+                                cantidadRequi = arrayRequis.get(i).getCantidad();
+                                proveedor = arrayRequis.get(i).getProveedor();
+                                compras = arrayRequis.get(i).getSolicitante();
+                                status = arrayRequis.get(i).getObservaciones();
                     %>
                     <tr>
                         <td><%=producto%></td>
-                        <td><%=producto%></td>
-                        <td><%=marca%></td>
-                        <td><%=cantidadRequi%></td> 
-                        <td></td>
+                        <td><%=cantidadRequi%></td>
+                        <td><%=proveedor%></td>
+                        <td><%=compras%></td> 
+                        <td><%=status%></td>
                     </tr>
                     <% }
                         }%>
