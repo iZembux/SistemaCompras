@@ -567,7 +567,7 @@ public class Consultas {
                         + "    AND p.id_productos = rp.id_producto\n"
                         + "    AND rp.id_status = " + status + "\n"
                         + "    GROUP BY rp.id_req_prod\n"
-                        + "    ORDER BY rp.id_requisicion;";
+                        + "    ORDER BY rp.id_req_prod;";
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
@@ -585,6 +585,54 @@ public class Consultas {
                     obj.setFecha(rs.getString("FECHA"));
                     obj.setIdReqCoti(rs.getInt("COTI"));
                     obj.setSucursal(rs.getString("SUC"));
+                    listaRequi.add(obj);
+                }
+            } catch (SQLException ex) {
+                System.out.println("ERROR: " + ex.getMessage());
+            }
+        }
+        return listaRequi;
+    }
+
+    public ArrayList<CotizacionRequisicion> consultarComprasAdmin() {
+        ArrayList<CotizacionRequisicion> listaRequi = new ArrayList<CotizacionRequisicion>();
+        PreparedStatement ps;
+        ResultSet rs;
+        Connection con;
+        con = ConexionMySQL.conectar();
+        if (con != null) {
+            try {
+                String sql = "Select\n"
+                        + "pr.nombre as PROD,\n"
+                        + "sum(c.cantidad) as CANT,\n"
+                        + "p.razonsocial as PROV,\n"
+                        + "u.nombre as NOM,\n"
+                        + "u.apellido as AP,\n"
+                        + "s.descripcion as STATUS\n"
+                        + "from \n"
+                        + "productos pr,\n"
+                        + "cotizacion c,\n"
+                        + "proveedores p,\n"
+                        + "usuario u,\n"
+                        + "req_prod rp,\n"
+                        + "status s\n"
+                        + "where\n"
+                        + "pr.id_productos = c.id_producto\n"
+                        + "and p.idproveedor = c.id_proveedor\n"
+                        + "and c.id_req_coti = rp.id_req_coti\n"
+                        + "and rp.id_status = s.id_status\n"
+                        + "and u.id_usuario = c.aut_compras\n"
+                        + "group by pr.nombre, p.razonsocial, u.nombre\n"
+                        + "order by pr.nombre";
+                ps = con.prepareStatement(sql);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    CotizacionRequisicion obj = new CotizacionRequisicion();
+                    obj.setProducto(rs.getString("PROD"));
+                    obj.setCantidad(rs.getInt("CANT"));
+                    obj.setProveedor(rs.getString("PROV"));
+                    obj.setSolicitante(rs.getString("NOM") + " " + rs.getString("AP"));
+                    obj.setObservaciones(rs.getString("STATUS"));
                     listaRequi.add(obj);
                 }
             } catch (SQLException ex) {
@@ -760,7 +808,7 @@ public class Consultas {
         }
         return listaRequi;
     }
-    
+
     public ArrayList<CotizacionRequisicion> consultarProveedorCoti2(int idReqCoti, String idProveedor) {
         int cont = 0;
         ArrayList<CotizacionRequisicion> listaRequi = new ArrayList<CotizacionRequisicion>();
@@ -907,7 +955,7 @@ public class Consultas {
                         + "    AND r.id_requisicion = rp.id_requisicion\n"
                         + "    AND p.id_productos = rp.id_producto\n"
                         + "    AND p.id_categoria = 1\n"
-                        + "    AND pr.idproveedor = "+idProv+"\n"
+                        + "    AND pr.idproveedor = " + idProv + "\n"
                         + "    AND rp.id_status = 10\n"
                         + "    and aut_compras > 0\n"
                         + "    GROUP BY c.id_proveedor, s.id_sucursales;";
@@ -1049,7 +1097,7 @@ public class Consultas {
         con = ConexionMySQL.conectar();
         if (con != null) {
             try {
-                String sql = "select id_productos, nombre, id_categoria, serie, marca, modelo, id_unidadmedida from productos where id_categoria = "+categoria+" order by nombre";
+                String sql = "select id_productos, nombre, id_categoria, serie, marca, modelo, id_unidadmedida from productos where id_categoria = " + categoria + " order by nombre";
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
