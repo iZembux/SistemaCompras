@@ -9,12 +9,13 @@
     int nuevoStatus = 0;
     int stock = 0;
     int entrega = 0;
+    int cantidad = 0;
+    String producto = " ";
 
     Mail objMail = new Mail();
 
     try {
         idReqCoti = Integer.parseInt(request.getParameter("idReqCoti"));
-        System.out.println("sssssssssssss " + idReqCoti);
     } catch (Exception e) {
     }
     try {
@@ -37,25 +38,36 @@
         entrega = Integer.parseInt(request.getParameter("entrega"));
     } catch (Exception e) {
     }
+    try {
+        entrega = Integer.parseInt(request.getParameter("entrega"));
+    } catch (Exception e) {
+    }
+    try {
+        cantidad = Integer.parseInt(request.getParameter("cantidad"));
+    } catch (Exception e) {
+    }
+    try {
+        producto = request.getParameter("producto");
+    } catch (Exception e) {
+    }
 
     Class.forName("com.mysql.jdbc.Driver");
     Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/scompras", "root", "stmsc0nt");
     Statement st = con.createStatement();
 
-    if (stock == 1) {
-        st.executeUpdate("UPDATE req_prod SET id_status = " + nuevoStatus + " WHERE id_req_prod = " + idReqProd + ";");
-    } else {
-        if (idReqCoti == 0) {
-            objMail.enviarCorreo("diego.torres@continental.com.mx", "", "", "Error al recibir id_req_coti");
-        } else {
-            st.executeUpdate("UPDATE req_prod SET id_status = " + nuevoStatus + " WHERE id_req_coti = " + idReqCoti + ";");
-        }
-    }
+    st.executeUpdate("UPDATE req_prod SET id_status = " + nuevoStatus + " WHERE id_req_prod = " + idReqProd + ";");
 
     Consultas obj = new Consultas();
     String correo = obj.consultarCorreos(idUsu);
 
-    objMail.enviarCorreo(correo, "Usuario", "", "Puedes pasar por tu producto, Id: " + idReqProd + "");
+    if (nuevoStatus == 12) {
+        objMail.enviarCorreo(correo, "", "", "Puedes pasar por tu producto,\n"
+                + "Id: " + idReqProd + "\n"
+                + "Producto: " + producto + "\n"        
+                + "Cantidad: " + cantidad +"\n");
+    } else if (nuevoStatus == 13) {
+        objMail.enviarCorreo(correo, "", "", "Requisicion "+idReqProd+" Finalizada");
+    }
 
     if (stock == 1) {
         response.sendRedirect("menuComprasEntrega.jsp");

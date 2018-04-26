@@ -72,7 +72,7 @@
                                 fecha = arrayRequis.get(i).getFecha();
                     %>
                     <tr>
-                        <th><%=idRequi%></th>
+                        <th><%=idReqProd%></th>
                         <td><%=producto%></td>
                         <td><%=cantidadRequi%></td>
                         <td><%=status%></td>

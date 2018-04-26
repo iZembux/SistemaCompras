@@ -70,14 +70,16 @@
                                 idReqCoti = arrayRequis.get(i).getIdReqCoti();
                     %>
                     <tr>
-                        <td><%=idReqCoti%></td>
+                        <td><%=idReqProd%></td>
                         <td><%=producto%></td>
                         <td><%=marca%></td>
                         <td><%=solicitante%></td>
                         <td><%=cantidadRequi%></td> 
                         <td>
                             <form action="actualizaRecibido.jsp" method="post">
-                                <input type="hidden" class="hidden" name="idReqCoti" value="<%=idReqCoti%>" >
+                                <input type="hidden" class="hidden" name="idReqProd" value="<%=idReqProd%>" >
+                                <input type="hidden" class="hidden" name="producto" value="<%=producto%>" >
+                                <input type="hidden" class="hidden" name="cantidad" value="<%=cantidadRequi%>" >
                                 <input type="hidden" class="hidden" name="nuevoStatus" value="13" >
                                 <input type="hidden" class="hidden" name="entrega" value="1" >
                                 <button type="submit" class="btn btn-success btn-sm">Producto Entregado</button>

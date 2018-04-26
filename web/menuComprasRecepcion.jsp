@@ -50,6 +50,7 @@
                         int cantidadRequi;
                         int idProducto;
                         int idReqCoti;
+                        int idReqProd;
                         int idUsu;
                         String producto;
                         String marca;
@@ -63,6 +64,7 @@
                             for (int i = 0; i < arrayRequis.size(); i++) {
                                 idProducto = arrayRequis.get(i).getIdProducto();
                                 cantidadRequi = arrayRequis.get(i).getCantidad();
+                                idReqProd = arrayRequis.get(i).getIdReqProd();
                                 producto = arrayRequis.get(i).getProducto();
                                 marca = arrayRequis.get(i).getMarca();
                                 idReqCoti = arrayRequis.get(i).getIdReqCoti();
@@ -77,7 +79,7 @@
                         <td>
                             <form action="actualizaRecibido.jsp" method="post">
                                 <input type="hidden" class="hidden" name="idUsu" value="<%=idUsu%>" >
-                                <input type="hidden" class="hidden" name="idReqCoti" value="<%=idReqCoti%>" >
+                                <input type="hidden" class="hidden" name="idReqProd" value="<%=idReqProd%>" >
                                 <input type="hidden" class="hidden" name="nuevoStatus" value="12" >
                                 <button type="submit" class="btn btn-success btn-sm">Recibí Producto</button>
                             </form>

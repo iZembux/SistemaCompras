@@ -484,7 +484,8 @@ public class Consultas {
             try {
                 String sql = "SELECT \n"
                         + "    rp.id_requisicion AS IDREQUISICION,\n"
-                        + "    rp.id_producto AS IDPRODUCTO,"
+                        + "    rp.id_producto AS IDPRODUCTO,\n"
+                        + "    rp.id_req_prod AS IDREQPROD,\n"
                         + "    p.nombre AS PRODUCTO,\n"
                         + "    p.marca AS MARCA,\n"
                         + "    u.id_usuario as IDUSU,\n"
@@ -512,6 +513,7 @@ public class Consultas {
                     RequisicionProducto obj = new RequisicionProducto();
                     obj.setIdRequisicion(rs.getInt("IDREQUISICION"));
                     obj.setIdDepto(rs.getInt("DEPTO"));
+                    obj.setIdReqProd(rs.getInt("IDREQPROD"));
                     obj.setIdProducto(rs.getInt("IDPRODUCTO"));
                     obj.setProducto(rs.getString("PRODUCTO"));
                     obj.setMarca(rs.getString("MARCA"));
