@@ -24,7 +24,7 @@
         if (idUsu.equals("114")) {
             idDepto2 = "21,26,1,13,18";
         }
-        if (idUsu.equals("65")) {
+        if (idUsu.equals("65") || idUsu.equals("133")) {
             idDepto2 = "1,6,8,9,13,24,25,26";
         }
         
