@@ -116,7 +116,7 @@ public class Consultas {
         return listaRequi;
     }
 
-    public ArrayList<RequisicionProducto> consultarHistorialGerente(String departamento) {
+    public ArrayList<RequisicionProducto> consultarHistorialGerente(String departamento,String sucursal) {
         ArrayList<RequisicionProducto> listaRequi = new ArrayList<RequisicionProducto>();
         PreparedStatement ps;
         ResultSet rs;
@@ -125,7 +125,7 @@ public class Consultas {
         if (con != null) {
             try {
                 String sql = "SELECT \n"
-                        + "    r.id_requisicion AS REQUISICION,\n"
+                        + "    rp.id_req_prod AS REQUISICION,\n"
                         + "    u.nombre AS SOLICITANTE,\n"
                         + "    p.nombre AS PRODUCTO,\n"
                         + "    rp.cantidad AS CANTIDAD,\n"
@@ -145,9 +145,10 @@ public class Consultas {
                         + "    AND r.id_requisicion = rp.id_requisicion\n"
                         + "    AND p.id_productos = rp.id_producto\n"
                         + "    AND rp.id_status = s.id_status\n"
-                        + "    AND u.id_departamento = " + departamento + "\n"
+                        + "    AND u.id_departamento in (" + departamento + ")\n"
+                        + "    AND u.id_sucursal in (" + sucursal + ")\n"
                         + "    AND rp.id_status > 3\n"
-                        + "ORDER BY rp.id_requisicion;";
+                        + "ORDER BY r.fecha;";
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {

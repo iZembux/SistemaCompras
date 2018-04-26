@@ -11,8 +11,25 @@
     if (usuarioValidado == null) {
         response.sendRedirect("index.jsp");
     } else {
-        String idDepto = (String) sesion.getAttribute("departamento"); 
+        String idDepto = (String) sesion.getAttribute("departamento");
         String rol = (String) sesion.getAttribute("rol");
+        String sucursal = (String) sesion.getAttribute("sucursal");
+
+        String idUsu = (String) sesion.getAttribute("idUsuario");
+        String idDepto2 = idDepto;
+        if (idUsu.equals("34")) {
+            idDepto2 = "8,10,13";
+        }
+        if (idUsu.equals("114")) {
+            idDepto2 = "21,26,1,13,18";
+        }
+        if (idUsu.equals("65") || idUsu.equals("133")) {
+            idDepto2 = "1,6,8,9,13,24,25,26";
+        }
+        
+        if (idUsu.equals("60")) {
+            sucursal = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18";
+        }
 
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -63,7 +80,7 @@
 
                         ArrayList<RequisicionProducto> arrayRequis = new ArrayList<RequisicionProducto>();
                         Consultas obj = new Consultas();
-                        arrayRequis = obj.consultarHistorialGerente(idDepto);
+                        arrayRequis = obj.consultarHistorialGerente(idDepto2, sucursal);
 
                         if (arrayRequis.size() > 0) {
                             for (int i = 0; i < arrayRequis.size(); i++) {
