@@ -508,7 +508,7 @@ public class Consultas {
                         + "    and c.id_proveedor = pr.idproveedor\n"
                         + "    AND r.id_requisicion = rp.id_requisicion\n"
                         + "    AND p.id_productos = rp.id_producto\n"
-                        + "    AND rp.id_status = "+status+"\n"
+                        + "    AND rp.id_status = " + status + "\n"
                         + "    GROUP BY rp.id_producto\n"
                         + "    ORDER BY rp.id_requisicion;";
                 ps = con.prepareStatement(sql);
@@ -627,6 +627,7 @@ public class Consultas {
                         + "and c.id_req_coti = rp.id_req_coti\n"
                         + "and rp.id_status = s.id_status\n"
                         + "and u.id_usuario = c.aut_compras\n"
+                        + "and rp.id_status in (5,6,7,8,9,10,11,12)\n"
                         + "group by pr.nombre, p.razonsocial, u.nombre\n"
                         + "order by pr.nombre";
                 ps = con.prepareStatement(sql);
