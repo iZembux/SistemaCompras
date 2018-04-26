@@ -116,7 +116,7 @@ public class Consultas {
         return listaRequi;
     }
 
-    public ArrayList<RequisicionProducto> consultarHistorialGerente(String departamento,String sucursal) {
+    public ArrayList<RequisicionProducto> consultarHistorialGerente(String departamento, String sucursal) {
         ArrayList<RequisicionProducto> listaRequi = new ArrayList<RequisicionProducto>();
         PreparedStatement ps;
         ResultSet rs;
@@ -246,23 +246,30 @@ public class Consultas {
                         + "    SUM(rp.cantidad) AS CANTIDAD,\n"
                         + "    r.fecha AS FECHA,\n"
                         + "    rp.id_req_coti AS COTI,\n"
-                        + "    s.sucursal AS SUC\n"
+                        + "    s.sucursal AS SUC,\n"
+                        + "    pr.razonsocial as RZ\n"
                         + "FROM\n"
                         + "    usuario u,\n"
                         + "    requisiciones r,\n"
                         + "    req_prod rp,\n"
                         + "    productos p,\n"
-                        + "    sucursales s\n"
+                        + "    sucursales s,\n"
+                        + "    proveedores pr,\n"
+                        + "    cotizacion c\n"
                         + "WHERE\n"
                         + "	u.id_sucursal = s.id_sucursales\n"
+                        + "    AND rp.id_req_coti = c.id_req_coti\n"
+                        + "    AND c.id_proveedor = pr.idproveedor\n"
+                        + "    AND c.aut_compras > 0\n"
                         + "    And u.id_usuario = r.id_usuario\n"
                         + "    AND r.id_requisicion = rp.id_requisicion\n"
                         + "    AND p.id_productos = rp.id_producto\n"
-                        + "    AND u.id_sucursal in (" + sucursal + ")\n"
-                        + "    AND p.id_categoria = " + id_categoria + "\n"
-                        + "    AND rp.id_status = " + status + "\n"
-                        + "    GROUP BY rp.id_producto, s.id_sucursales\n"
-                        + "    ORDER BY rp.id_requisicion;";
+                        + "    AND u.id_sucursal in ("+sucursal+")\n"
+                        + "    AND p.id_categoria = ("+id_categoria+")\n"
+                        + "    AND rp.id_status = "+status+"\n"
+                        + "    GROUP BY rp.id_producto, s.id_sucursales, pr.idproveedor\n"
+                        + "    ORDER BY rp.id_producto;";
+                System.out.println(sql);
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
@@ -278,6 +285,7 @@ public class Consultas {
                     obj.setFecha(rs.getString("FECHA"));
                     obj.setIdReqCoti(rs.getInt("COTI"));
                     obj.setSucursal(rs.getString("SUC"));
+                    obj.setProveedor(rs.getString("RZ"));
                     listaRequi.add(obj);
                 }
             } catch (SQLException ex) {
