@@ -936,7 +936,6 @@ public class Consultas {
     }
     
     public ArrayList<RequisicionProducto> consultarAdministracionRequisiciones() {
-        int cont = 0;
         ArrayList<RequisicionProducto> listaRequi = new ArrayList<RequisicionProducto>();
         PreparedStatement ps;
         ResultSet rs;
@@ -945,7 +944,7 @@ public class Consultas {
         if (con != null) {
             try {
                 String sql = "SELECT \n"
-                        + "r.id_requisicion as REQUISICION,\n"
+                        + "r.id_req_prod as REQUISICION,\n"
                         + "concat(upper(u.nombre),' ',upper(u.apellido)) AS SOLICITANTE,\n"
                         + "d.departamento AS DEPARTAMENTO,\n"
                         + "w.sucursal AS SUCURSAL,\n"
@@ -962,11 +961,10 @@ public class Consultas {
                         + "AND q.id_usuario = u.id_usuario\n"
                         + "AND w.id_sucursales = u.id_sucursal\n"
                         + "AND u.id_departamento = d.id_departamentos\n"
-                        + "ORDER BY s.descripcion, SOLICITANTE;";
+                        + "ORDER BY r.id_req_prod, s.descripcion, SOLICITANTE;";
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
-                    cont++;
                     RequisicionProducto obj = new RequisicionProducto();
                     obj.setIdRequisicion(rs.getInt("REQUISICION"));
                     obj.setSolicitante(rs.getString("SOLICITANTE"));
