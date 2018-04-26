@@ -20,6 +20,10 @@
         <servlet-name>activarUsuario</servlet-name>
         <servlet-class>servlet.activarUsuario</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>visor</servlet-name>
+        <servlet-class>servlet.visor</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Acceso</servlet-name>
         <url-pattern>/Acceso/*</url-pattern>
@@ -39,6 +43,10 @@
     <servlet-mapping>
         <servlet-name>activarUsuario</servlet-name>
         <url-pattern>/activarUsuario</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>visor</servlet-name>
+        <url-pattern>/visor</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

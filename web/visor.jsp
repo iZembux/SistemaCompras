@@ -4,6 +4,7 @@
     <%@ page import= "java.io.*" %>
     <%
 //CODIGO JSP 
+try{
         String documento = request.getParameter("search");
 
         FileInputStream ficheroInput = new FileInputStream("" + documento + "");
@@ -12,14 +13,13 @@
         ficheroInput.read(datosPDF, 0, tamanoInput);
 
         response.setHeader("Content-disposition", "inline; filename=instalacion_tomcat.pdf");
-        response.setContentType("application/pdf");
-        response.setContentLength(tamanoInput);
+        //response.setContentType("application/pdf");
+        //response.setContentLength(tamanoInput);
         response.getOutputStream().write(datosPDF);
         ficheroInput.close();
+}catch(IllegalStateException e){
     %>
-
-<html>
-    <head>
-        <title>Visualizador de Archivos</title>
-    </head>
-</html>
+    alert('Archivo no localizado');
+    <%
+    }
+    %>

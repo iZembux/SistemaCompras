@@ -1041,7 +1041,7 @@ public class Consultas {
         return listaRequi;
     }
 
-    public ArrayList<Item> consultarItems() {
+    public ArrayList<Item> consultarItems(int categoria) {
         ArrayList<Item> items = new ArrayList<>();
         PreparedStatement ps;
         ResultSet rs;
@@ -1049,7 +1049,7 @@ public class Consultas {
         con = ConexionMySQL.conectar();
         if (con != null) {
             try {
-                String sql = "select id_productos, nombre, id_categoria, serie, marca, modelo, id_unidadmedida from productos order by nombre";
+                String sql = "select id_productos, nombre, id_categoria, serie, marca, modelo, id_unidadmedida from productos where id_categoria = "+categoria+" order by nombre";
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
