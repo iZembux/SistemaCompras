@@ -871,6 +871,56 @@ public class Consultas {
         }
         return listaRequi;
     }
+    
+    public ArrayList<RequisicionProducto> consultarAdministracionRequisiciones() {
+        int cont = 0;
+        ArrayList<RequisicionProducto> listaRequi = new ArrayList<RequisicionProducto>();
+        PreparedStatement ps;
+        ResultSet rs;
+        Connection con;
+        con = ConexionMySQL.conectar();
+        if (con != null) {
+            try {
+                String sql = "SELECT \n"
+                        + "r.id_requisicion as REQUISICION,\n"
+                        + "concat(upper(u.nombre),' ',upper(u.apellido)) AS SOLICITANTE,\n"
+                        + "d.departamento AS DEPARTAMENTO,\n"
+                        + "w.sucursal AS SUCURSAL,\n"
+                        + "p.nombre AS PRODUCTO,\n"
+                        + "upper(r.justificacion) AS JUSTIFICACION,\n"
+                        + "s.descripcion AS ESTATUS\n"
+                        + "FROM scompras.req_prod r, scompras.productos p, scompras.status s, \n"
+                        + "scompras.requisiciones q, scompras.usuario u, scompras.sucursales w,\n"
+                        + "scompras.departamentos d\n"
+                        + "WHERE \n"
+                        + "s.id_status = r.id_status\n"
+                        + "AND r.id_requisicion = q.id_requisicion\n"
+                        + "AND p.id_productos = r.id_producto\n"
+                        + "AND q.id_usuario = u.id_usuario\n"
+                        + "AND w.id_sucursales = u.id_sucursal\n"
+                        + "AND u.id_departamento = d.id_departamentos\n"
+                        + "ORDER BY s.descripcion, SOLICITANTE;";
+                ps = con.prepareStatement(sql);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    cont++;
+                    RequisicionProducto obj = new RequisicionProducto();
+                    obj.setIdRequisicion(rs.getInt("REQUISICION"));
+                    obj.setSolicitante(rs.getString("SOLICITANTE"));
+                    obj.setDepartamento(rs.getString("DEPARTAMENTO"));
+                    obj.setSucursal(rs.getString("SUCURSAL"));
+                    obj.setProducto(rs.getString("PRODUCTO"));
+                    obj.setJustificacion(rs.getString("JUSTIFICACION"));
+                    obj.setStatus(rs.getString("ESTATUS"));
+                    
+                    listaRequi.add(obj);
+                }
+            } catch (SQLException ex) {
+                System.out.println("ERROR: " + ex.getMessage());
+            }
+        }
+        return listaRequi;
+    }
 
     /**
      * Consulta las ordenes de compra que el proveedor tiene disponible

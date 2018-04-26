@@ -143,8 +143,8 @@
                             <input type="number" class="form-control" id="anticipo"  name="anticipo">
                         </div>
                         <div for="archivo" class="form-group">
-                            <label> Subir Archivo <b><span class="badge badge-info" data-toggle="tooltip" data-placement="bottom" title="Deberá adjuntar un PDF">?</span><FONT COLOR="red" title="Éste campo es obligatorio">*</FONT></b></label>
-                            <input type="file" class="form-control" id="archivo" required="true" name="archivo">
+                            <label> Subir Archivo <b><span class="badge badge-info" data-toggle="tooltip" data-placement="bottom"  title="Deberá adjuntar un PDF">?</span><FONT COLOR="red" title="Éste campo es obligatorio">*</FONT></b></label>
+                            <input type="file" class="form-control" id="archivo" accept="application/pdf" required="true" name="archivo">
                         </div>
                         <div class="modal-footer">
                             <input type="hidden" class="hidden" name="idUsuario" value="<%=idUsuario%>" >

@@ -72,6 +72,10 @@
                     Administracion
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="menuComprasAdministracionRequisiciones.jsp"> 
+                        Seguimiento de Requisiciones
+                    </a>
+
                     <a class="dropdown-item" href="menuComprasAdministracion.jsp"> 
                         Seguimiento de Cotizaciones
                     </a>

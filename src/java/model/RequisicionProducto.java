@@ -2,6 +2,20 @@
 package model;
 
 public class RequisicionProducto {
+
+    /**
+     * @return the departamento
+     */
+    public String getDepartamento() {
+        return departamento;
+    }
+
+    /**
+     * @param departamento the departamento to set
+     */
+    public void setDepartamento(String departamento) {
+        this.departamento = departamento;
+    }
     private int idSolicita;
     private int idReqProd;
     private int idRequisicion;
@@ -14,6 +28,7 @@ public class RequisicionProducto {
     private String marca;
     private String status;
     private String solicitante;
+    private String departamento;
     private String descripcion;
     private String justificacion;
     private String porcentaje;
