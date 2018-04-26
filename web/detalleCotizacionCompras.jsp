@@ -161,6 +161,7 @@
                                     </div>
                                     <br/>
                                     <input type="hidden" class="hidden" name="idUsu" value="<%=idUsu%>" >
+                                    <input type="hidden" class="hidden" name="tama" value="<%=arrayRequis.size()%>" >
                                     <button type="submit" class="btn btn-primary btn-sm">Generar Cuadro Comparativo</button>
                                 </div>
                             </div>

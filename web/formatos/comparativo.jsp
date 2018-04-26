@@ -35,10 +35,16 @@
     int activo = 0;
     int solicitantes = 0;
     int idUsu = 0;
+    int tama = 0;
 
     ArrayList<Integer> idCoti = new ArrayList<Integer>();
+    
+    try {
+        tama = Integer.parseInt(request.getParameter("tama"));
+    } catch (Exception e) {
+    }
 
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < tama; i++) {
         try {
             int aux = Integer.parseInt(request.getParameter("checkbox" + i));
             idCoti.add(aux);
