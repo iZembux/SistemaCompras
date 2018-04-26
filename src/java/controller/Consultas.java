@@ -548,7 +548,9 @@ public class Consultas {
                         + "    p.marca AS MARCA,\n"
                         + "    u.id_usuario as IDUSU,\n"
                         + "    u.nombre AS SOLICITANTE,\n"
+                        + "    u.apellido as AP,\n"
                         + "    u.id_departamento as DEPTO,\n"
+                        + "    s.sucursal as SUC,\n"
                         + "    SUM(rp.cantidad) AS CANTIDAD,\n"
                         + "    r.fecha AS FECHA,\n"
                         + "    rp.id_req_coti AS COTI\n"
@@ -556,9 +558,11 @@ public class Consultas {
                         + "    usuario u,\n"
                         + "    requisiciones r,\n"
                         + "    req_prod rp,\n"
+                        + "    sucursales s,\n"
                         + "    productos p\n"
                         + "WHERE\n"
                         + "    u.id_usuario = r.id_usuario\n"
+                        + "    AND u.id_sucursal = s.id_sucursales\n"
                         + "    AND r.id_requisicion = rp.id_requisicion\n"
                         + "    AND p.id_productos = rp.id_producto\n"
                         + "    AND rp.id_status = " + status + "\n"
@@ -576,10 +580,11 @@ public class Consultas {
                     obj.setProducto(rs.getString("PRODUCTO"));
                     obj.setMarca(rs.getString("MARCA"));
                     obj.setIdSolicita(rs.getInt("IDUSU"));
-                    obj.setSolicitante(rs.getString("SOLICITANTE"));
+                    obj.setSolicitante(rs.getString("SOLICITANTE") + " " + rs.getString("AP"));
                     obj.setCantidad(rs.getInt("CANTIDAD"));
                     obj.setFecha(rs.getString("FECHA"));
                     obj.setIdReqCoti(rs.getInt("COTI"));
+                    obj.setSucursal(rs.getString("SUC"));
                     listaRequi.add(obj);
                 }
             } catch (SQLException ex) {

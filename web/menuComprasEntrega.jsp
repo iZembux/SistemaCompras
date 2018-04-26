@@ -42,6 +42,7 @@
                         <th scope="col">Producto</th>
                         <th scope="col">Marca</th>
                         <th scope="col">Solicitante</th>
+                        <th scope="col">Sucursal</th>
                         <th scope="col">Cantidad</th>
                         <th scope="col"></th>
                         <th scope="col"></th>
@@ -52,9 +53,11 @@
                         int cantidadRequi;
                         int idReqProd;
                         int idReqCoti;
+                        int idUsu;
                         String producto;
                         String marca;
                         String solicitante;
+                        String sucursal;
 
                         ArrayList<RequisicionProducto> arrayRequis = new ArrayList<RequisicionProducto>();
                         Consultas obj = new Consultas();
@@ -68,18 +71,22 @@
                                 marca = arrayRequis.get(i).getMarca();
                                 solicitante = arrayRequis.get(i).getSolicitante();
                                 idReqCoti = arrayRequis.get(i).getIdReqCoti();
+                                sucursal = arrayRequis.get(i).getSucursal();
+                                idUsu = arrayRequis.get(i).getIdSolicita();
                     %>
                     <tr>
                         <td><%=idReqProd%></td>
                         <td><%=producto%></td>
                         <td><%=marca%></td>
                         <td><%=solicitante%></td>
+                        <td><%=sucursal%></td>
                         <td><%=cantidadRequi%></td> 
                         <td>
                             <form action="actualizaRecibido.jsp" method="post">
                                 <input type="hidden" class="hidden" name="idReqProd" value="<%=idReqProd%>" >
                                 <input type="hidden" class="hidden" name="producto" value="<%=producto%>" >
                                 <input type="hidden" class="hidden" name="cantidad" value="<%=cantidadRequi%>" >
+                                <input type="hidden" class="hidden" name="idUsu" value="<%=idUsu%>" >
                                 <input type="hidden" class="hidden" name="nuevoStatus" value="13" >
                                 <input type="hidden" class="hidden" name="entrega" value="1" >
                                 <button type="submit" class="btn btn-success btn-sm">Producto Entregado</button>

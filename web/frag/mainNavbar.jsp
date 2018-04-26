@@ -24,9 +24,9 @@
             <a class="nav-link" href="menuSeguimiento.jsp"> 
                 Seguimiento de Solicitud
             </a>
-            <a class="nav-link" href="menuHistorialPedido.jsp"> 
+            <!--<a class="nav-link" href="menuHistorialPedido.jsp"> 
                 Historial de Pedidos
-            </a>
+            </a>-->
             <% } else {
                 if (depto == 7) { %>
             <li class="nav-item dropdown">
@@ -91,9 +91,9 @@
                     <a class="dropdown-item" href="menuSeguimiento.jsp"> 
                         Seguimiento de Solicitud
                     </a>
-                    <a class="dropdown-item" href="menuHistorialPedido.jsp"> 
+                    <!--<a class="dropdown-item" href="menuHistorialPedido.jsp"> 
                         Historial de Pedidos
-                    </a>
+                    </a>-->
                 </div>
             </li>
             <% }
