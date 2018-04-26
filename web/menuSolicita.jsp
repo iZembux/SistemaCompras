@@ -131,7 +131,7 @@
                                         <option>Selecciona Producto </option>
                                         <%
                                             Consultas obj = new Consultas();
-                                            ArrayList<Item> items = obj.consultarItems("1");
+                                            ArrayList<Item> items = obj.consultarItems(1);
                                             for (int i = 0; i < items.size(); i++) {
                                         %>
                                         <option value="<%= items.get(i).getId()%>" id="modelo" name="modelo"><%= items.get(i).getNombre()%></option>

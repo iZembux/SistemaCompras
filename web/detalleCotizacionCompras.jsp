@@ -3,13 +3,17 @@
     status 4
 --%>
 
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="model.CotizacionRequisicion"%>
 <%@page import="controller.Consultas"%>
 <%@page import="java.util.ArrayList"%>
+<%@ page trimDirectiveWhitespaces="true" %>
 <%
     HttpSession sesion = request.getSession();
     Consultas obj2 = new Consultas();
     String usuarioValidado = (String) sesion.getAttribute("usuarioIngresado");
+    DecimalFormat formateador = new DecimalFormat("###,###,###.##");
+    
     
     if (usuarioValidado == null) {
         response.sendRedirect("index.jsp");
@@ -64,8 +68,7 @@
             <jsp:param name="depto" value="<%=idDepto%>" />
         </jsp:include>
 
-        <div class="container">
-            <div class="jumbotron">
+        <div class="jumbotron">
                 <form action="formatos/comparativo.jsp" method="post" name="formulario" id="formulario">
                     <h5> Selecciona hasta 3 cotizaciones para generar cuadro comparativo </h5>
                     <br>
@@ -123,13 +126,13 @@
                                 <td><%=producto%></td>
                                 <td><%=cantidad%></td>
                                 <td><%=precio%></td>
-                                <td><%=iva%></td>
-                                <td><%=cantidad * (iva + precio)%></td>
+                                <td><%=formateador.format(iva)%></td>
+                                <td><%=formateador.format(cantidad * (iva + precio))%></td>
                                 <td><%=credito%> Dias</td>
                                 <td><%=garantia%> Dias</td>
                                 <td><%=entrega%> Dias</td>
                                 <td><%=anticipo%> %</td>
-                                <td><button tarjet onClick="document.formulario.action='visor.jsp';" value="<%=ruta%>" name="search" class="btn btn-dark btn-sm">Ver PDF</button></td>
+                                <td><button tarjet onClick="document.formulario.action='visor';" value="<%=ruta%>" name="search" class="btn btn-dark btn-sm">Ver PDF</button></td>
                                 <td>
                                     <div class="form-check">
                                         <label>
@@ -164,7 +167,6 @@
                         </div>
                     </div>
                 </form>
-            </div>
         </div>
         
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
