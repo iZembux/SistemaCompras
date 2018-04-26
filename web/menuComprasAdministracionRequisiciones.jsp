@@ -22,7 +22,13 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="css/style.css">
+        <script type=”text/javascript” src=”js/stacktable.js”></script>
         <title>Administracion</title>
+        <script type=”text/javascript”>
+            $(document).ready(function() {
+            $('#t1').stacktable();
+            });
+        </script>
     </head>
     <body>
 
@@ -35,7 +41,7 @@
             <div class="page-header">
                 <h3>Seguimiento de Cotizaciones</h3>
             </div>
-            <table class="table table-striped table-hover">
+            <table id="t1" class="table table-striped table-hover  stacktable">
                 <thead>
                     <tr>
                         <th scope="col">No</th>
