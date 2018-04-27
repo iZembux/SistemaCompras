@@ -331,7 +331,6 @@ public class Consultas {
                         + "    AND u.id_sucursal in (" + suc + ")\n"
                         + "    GROUP BY rp.id_producto\n"
                         + "    ORDER BY rp.id_requisicion;";
-                System.out.println(sql);
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {

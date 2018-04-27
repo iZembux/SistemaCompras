@@ -58,7 +58,6 @@
                         <th scope="col">Marca</th>
                         <th scope="col">Cantidad</th>
                         <th scope="col"></th>
-                        <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -84,70 +83,7 @@
                         <td><%=producto%></td>
                         <td><%=marca%></td>
                         <td><%=cantidadRequi%></td> 
-                        <td>
-                            <form action="actualizaCompras.jsp" method="post">
-                                <input type="hidden" class="hidden" name="nuevoStatus" value="5" >
-                                
-                                <input type="hidden" class="hidden" name="categoria" value="<%=id_categoria%>" >
-                                <input type="hidden" class="hidden" name="usuario" value="<%=usuario%>" >
-                                <input type="hidden" class="hidden" name="idReqProd" value="<%=idReqProd%>" >
-                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalProveedores<%=i%>">Solicitar Cotizaciones</button>
-
-                                <div class="modal fade" id="modalProveedores<%=i%>" tabindex="-1" role="dialog" aria-labelledby="modalProveedores<%=i%>" aria-hidden="true">
-                                    <div class="modal-dialog modal-lg" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Detalles de Proveedores</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="form-group">
-                                                    <label>Selecciona los proveedores a los que se les enviará una solicitud de cotización</label>
-                                                    <table class="table table-striped table-hover">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Proveedor</th>
-                                                                <th>Direccion</th>
-                                                                <th>Telefono</th>
-                                                                <th>Seleccionar</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <%
-                                                                    Consultas obj2 = new Consultas();
-                                                                    ArrayList<Proveedor> prov = obj2.consultarProveedor(1);
-                                                                    for (int j = 0; j < prov.size(); j++) {
-                                                                %>
-                                                                <td><%= prov.get(j).getRazonSocial()%></td>
-                                                                <td><%= prov.get(j).getDireccion()%></td>
-                                                                <td><%= prov.get(j).getTelefono()%></td>
-                                                                <td>
-                                                                    <div class="form-check">
-                                                                        <label>
-                                                                            <input class="form-check-input" type="checkbox" name="checkbox<%=j%>" value="<%= prov.get(j).getIdProveedor()%>">
-                                                                        </label>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <% }%> 
-                                                        </tbody>
-                                                    </table>
-
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <input type="hidden" class="hidden" name="idProducto" value="<%=arrayRequis.get(i).getIdProducto()%>" >
-                                                    <input type="hidden" class="hidden" name="numProveedores" value="<%=prov.size()%>" >
-                                                    <input type="submit" class="btn btn-primary" value="Solicitar" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </td>
+                        
                         <td>
                             <form action="detalleRequisicionCompras.jsp" method="post">
                                 <input type="hidden" class="hidden" name="idCategoria" value="8" >
