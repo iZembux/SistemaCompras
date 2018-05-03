@@ -176,7 +176,7 @@
 
                                     </div>
                                     <div class="modal-footer">
-                                        <input type="hidden" class="hidden" name="idProducto" value="" >
+                                        <input type="hidden" class="hidden" name="idProducto" value="<%= idProducto %>" >
                                         <input type="hidden" class="hidden" name="numProveedores" value="<%=prov.size()%>" >
                                         <input type="submit" class="btn btn-primary" value="Solicitar" />
                                     </div>
