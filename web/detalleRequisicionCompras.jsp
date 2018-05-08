@@ -94,6 +94,8 @@
                                 <input type="hidden" class="hidden" name="nuevoStatus" value="12" >
                                 <input type="hidden" class="hidden" name="idUsu" value="<%=idUsu%>" >
                                 <input type="hidden" class="hidden" name="idReqProd" value="<%=idReqProd%>" >
+                                <input type="hidden" class="hidden" name="producto" value="<%=producto%>" >
+                                <input type="hidden" class="hidden" name="cantidad" value="<%=cantidadRequi%>" >
                                 <input type="hidden" class="hidden" name="stock" value="1" >
                                 <button type="submit" class="btn btn-success btn-sm">Producto en Stock</button>
                             </form>
