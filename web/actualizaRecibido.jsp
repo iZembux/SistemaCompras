@@ -11,6 +11,7 @@
     int entrega = 0;
     int cantidad = 0;
     String producto = " ";
+    String solicitante = " ";
 
     Mail objMail = new Mail();
 
@@ -39,11 +40,11 @@
     } catch (Exception e) {
     }
     try {
-        entrega = Integer.parseInt(request.getParameter("entrega"));
+        cantidad = Integer.parseInt(request.getParameter("cantidad"));
     } catch (Exception e) {
     }
     try {
-        cantidad = Integer.parseInt(request.getParameter("cantidad"));
+        producto = request.getParameter("producto");
     } catch (Exception e) {
     }
     try {
