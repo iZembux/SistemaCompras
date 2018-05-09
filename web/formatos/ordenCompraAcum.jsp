@@ -16,7 +16,6 @@
     String descripcion = " ";
     String logo = null;
     String telefonoP = null;
-    String suc = null;
     String nombreC = null;
     String apellidoC = null;
     String apellidoMC = null;
@@ -25,26 +24,40 @@
     double precio = 0;
     int credito = 0;
     int idCotizacion = 0;
-    int idReqCoti = 0;
     int idP = 0;
+    int idDep = 0;
     int idUsuCompras = 0;
+    double subtotal = 0;
+
+    int idProv = 0;
+    int categoria = 0;
+    int idSuc = 0;
 
     try {
-        idReqCoti = Integer.parseInt(request.getParameter("idReqCoti"));
+        categoria = Integer.parseInt(request.getParameter("categoria"));
     } catch (Exception e) {
     }
-    
     try {
-        suc = request.getParameter("suc");
+        idProv = Integer.parseInt(request.getParameter("proveedor"));
+    } catch (Exception e) {
+    }
+    try {
+        idSuc = Integer.parseInt(request.getParameter("suc"));
+    } catch (Exception e) {
+    }
+    try {
+        idDep = Integer.parseInt(request.getParameter("dep"));
     } catch (Exception e) {
     }
 
     ArrayList<OrdenFormato> arrayRequis = new ArrayList<OrdenFormato>();
     ArrayList<RequisicionFormato> arrayRequis2 = new ArrayList<RequisicionFormato>();
+    ArrayList<OrdenFormato> arrayRequis3 = new ArrayList<OrdenFormato>();
     Consultas obj = new Consultas();
-    arrayRequis = obj.consultarFormatoOrden(idReqCoti,suc);
     DecimalFormat formateador = new DecimalFormat("###,###,###.##");
+    
 
+    arrayRequis = obj.consultarOrdenesProvAcum(idProv, idSuc, categoria, idDep);
     if (!arrayRequis.isEmpty()) {
         idCotizacion = arrayRequis.get(0).getIdCotizacion();
         idP = arrayRequis.get(0).getIdP();
@@ -54,17 +67,11 @@
         nombreP = arrayRequis.get(0).getNombreP();
         direccionP = arrayRequis.get(0).getDireccionP();
         fecha = arrayRequis.get(0).getFecha();
-        unidadMedida = arrayRequis.get(0).getUnidadMedida();
-        producto = arrayRequis.get(0).getProducto();
-        //descripcion = arrayRequis.get(0).getDescripcion();
         telefonoP = arrayRequis.get(0).getTelefonoP();
-        cantidad = arrayRequis.get(0).getCantidad();
-        descuento = arrayRequis.get(0).getDescuento();
-        precio = arrayRequis.get(0).getPrecio();
         credito = arrayRequis.get(0).getDiasCredito();
         idUsuCompras = arrayRequis.get(0).getUsuCompras();
     }
-    
+
     arrayRequis2 = obj.consultarUsuario(idUsuCompras);
     if (!arrayRequis.isEmpty()) {
         nombreC = arrayRequis2.get(0).getNombre();
@@ -92,7 +99,7 @@
         logo = "Casofin.jpg";
     }
 
-    
+
 %>
 <!doctype html>
 <html>
@@ -117,7 +124,7 @@
                         <p><strong><%=nombreP%></strong></p>
                         <p><%=direccionP%></p>
                         <p>Telefono: <%=telefonoP%></p></td>
-                    <td colspan="3"><p>ORDEN No.: AN00000000<%= idCotizacion %>
+                    <td colspan="3"><p>ORDEN No.: AN00000000<%= idCotizacion%>
                         </p>
                         <p><strong>Fecha</strong>: <%=fecha%></p>
                         <p><strong>Entregar a:</strong> COMPRAS</p>
@@ -132,6 +139,19 @@
                     <td width="120"><strong>Costo Unitario</strong></td>
                     <td width="56"><strong>Importe</strong></td>
                 </tr>
+                <% arrayRequis3 = obj.consultarOrdenesProvAcum(idProv, idSuc, categoria, idDep);
+                System.out.println(arrayRequis3.size());
+                    if (arrayRequis3.size() > 0) {
+                        for (int i = 0; i < arrayRequis3.size(); i++) {
+                            cantidad = arrayRequis.get(i).getCantidad();
+                            unidadMedida = arrayRequis.get(i).getUnidadMedida();
+                            producto = arrayRequis.get(i).getProducto();
+                            //descripcion = arrayRequis.get(i).getDescripcion();
+                            descuento = arrayRequis.get(i).getDescuento();
+                            precio = arrayRequis.get(i).getPrecio();
+                            subtotal += (cantidad * precio);
+
+                %>
                 <tr style="border: none; text-align: center">
                     <td height="32"><strong></strong><%=cantidad%></td>
                     <td><strong></strong><%=unidadMedida%></td>
@@ -141,6 +161,9 @@
                     <td><strong></strong>$<%=precio%></td>
                     <td><strong></strong>$<%=cantidad * precio%></td> 
                 </tr>
+                <% }
+                    }
+                %>
                 <tr style="border: none">
                     <td height="169" colspan="7">&nbsp;</td>
                 </tr>
@@ -153,12 +176,12 @@
                         <p><strong>I.V.A</strong></p>
                         <p><strong>Total</strong></p>
                         <p>&nbsp;</p></td>
-                    <td colspan="2" align="right"><p><%=(cantidad * precio) - (cantidad * precio * (descuento / 100))%></p>
-                        <p><%=(cantidad * precio * (descuento / 100))%></p>
+                    <td colspan="2" align="right"><p><%=formateador.format((subtotal) - (subtotal * (descuento / 100)))%></p>
+                        <p><%=formateador.format((cantidad * precio * (descuento / 100)))%></p>
                         <p>0.00</p>
                         <p>&nbsp;</p>
-                        <p><%=formateador.format(cantidad * precio * 0.16)%></p>
-                        <p><%=formateador.format((cantidad * precio) - (cantidad * precio * (descuento / 100)) + (cantidad * precio * 0.16))%></p>
+                        <p><%=formateador.format(subtotal * 0.16)%></p>
+                        <p><%=formateador.format((subtotal) - (subtotal * (descuento / 100)) + (subtotal * 0.16))%></p>
                         <p>&nbsp;</p></td>
                 </tr>
                 <tr style="border: none">
@@ -179,7 +202,7 @@
                         <p>&nbsp;</p>
                         <p>&nbsp;</p>
                         <p>&nbsp;</p>
-                        <p>ELABORÓ: <%=nombreC + " " + apellidoC + " " + apellidoMC %></p></td>
+                        <p>ELABORÓ: <%=nombreC + " " + apellidoC + " " + apellidoMC%></p></td>
                 </tr>
             </tbody>
         </table>

@@ -11,9 +11,9 @@
     HttpSession sesion = request.getSession();
     String ruta;
     String usuarioValidado = (String) sesion.getAttribute("usuarioIngresado");
-    try{
-        
-    }catch(Exception e){
+    try {
+
+    } catch (Exception e) {
         System.out.println("Aún no tengo ruta PDF");
     }
     if (usuarioValidado == null) {
@@ -30,7 +30,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="css/style.css">
         <title>Autorizar</title>
-        
+
     </head>
     <body>
 
@@ -57,7 +57,6 @@
                         int status;
                         String producto;
                         String marca;
-                        
 
                         ArrayList<RequisicionProducto> arrayRequis = new ArrayList<RequisicionProducto>();
                         Consultas obj = new Consultas();
@@ -66,7 +65,7 @@
                         status 6 - con al menos una cotizacion
                         status 10 - cotizacion autorizada
                          */
-                        arrayRequis = obj.consultarComprasProv(idCategoria, "5,6,10",id_usuario);
+                        arrayRequis = obj.consultarComprasProv(idCategoria, "5,6", id_usuario);
 
                         if (arrayRequis.size() > 0) {
                             for (int i = 0; i < arrayRequis.size(); i++) {
@@ -76,7 +75,7 @@
                                 marca = arrayRequis.get(i).getMarca();
                                 idReqCoti = arrayRequis.get(i).getIdReqCoti();
                                 status = arrayRequis.get(i).getIdStatus();
-                                
+
                     %>
                     <tr>
                         <td><%=producto%></td>
@@ -84,6 +83,7 @@
                         <td><%=cantidadRequi%></td> 
                         <td>
                             <% if (status == 5) {%>
+
                             <form action="formCotizacion.jsp" method="post">
                                 <input type="hidden" class="hidden" name="cantidad" value="<%=cantidadRequi%>" >
                                 <input type="hidden" class="hidden" name="idProducto" value="<%=idProducto%>" >
@@ -98,13 +98,14 @@
                                 /* Consulta si el usuario activo ya realizo una cotizacion,
                                 si es asi, muesta un mensaje, si no, permite hacer una cotizacion
                                  */
-                                  ruta = obj2.consultaArchivo(idReqCoti, Integer.parseInt(id_usuario));
-                                if (arrayRequis2.size() > 0) { %>
-                            <button type="button" class="btn btn-info btn-sm">Ya haz realizado una cotizacion</button> 
-                            
-                            <form action="visor.jsp" method="post" target="_blank">
-                                <button type="submit" action="visor.jsp" value="<%=ruta%>" name="search" class="btn btn-dark btn-sm">Ver PDF</button> 
-                            </form>
+                                ruta = obj2.consultaArchivo(idReqCoti, Integer.parseInt(id_usuario));
+                                if (arrayRequis2.size() > 0) {%>
+                            <div class="row">
+                                <button type="button" class="btn btn-success btn-sm">Cotizacion Realizada</button> 
+                                <form action="visor.jsp" method="post" target="_blank">
+                                    <button type="submit" action="visor.jsp" value="<%=ruta%>" name="search" class="btn btn-dark btn-sm">Ver PDF</button> 
+                                </form>
+                            </div>
                             <%} else {%>
                             <form action="formCotizacion.jsp" method="post">
                                 <input type="hidden" class="hidden" name="cantidad" value="<%=cantidadRequi%>" >
@@ -114,27 +115,11 @@
                                 <button type="submit" class="btn btn-info btn-sm" >Hacer Cotizacion</button>
                             </form>
                             <% }
-                            } else if (status == 10) {
-                                ArrayList<CotizacionRequisicion> arrayRequis2 = new ArrayList<CotizacionRequisicion>();
-                                Consultas obj2 = new Consultas();
-                                arrayRequis2 = obj2.consultarProveedorCoti2(idReqCoti, id_usuario);
-                                System.out.println(arrayRequis2.size());
-                                // Consulta si el usuario activo ha ganado la licitacion
-                                if (arrayRequis2.size() > 0) {%>
-                            <div class="row">
-                                <form action="detalleRequisicionesProveedor.jsp" method="post">
-                                    <input type="hidden" class="hidden" name="idReqCoti" value="<%=idReqCoti%>" >
-                                    <button type="submit" class="btn btn-success btn-sm" >Cotizacion Ganadora</button>
-                                </form>
-                            </div>
-                            <%} else {%>
-                            <button type="submit" class="btn btn-primary btn-sm">Cotizacion Perdida</button>
-                            <% }
-                                }
                             %>
                         </td>
                     </tr>
                     <% }
+                            }
                         }%>
                 </tbody>
             </table>

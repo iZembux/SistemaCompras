@@ -61,10 +61,11 @@
     Statement st = con.createStatement();
 
     st.executeUpdate("update cotizacion set id_status_cotizacion = " + nuevoStatusCoti + ", observaciones = '" + observaciones + "',\n"
-            + "aut_compras = "+idUsu+", fecha_aut_compras = CURRENT_TIMESTAMP where id_cotizacion = " + idCotizacion + ";");
-    st.executeUpdate("update req_prod rp, cotizacion c set id_status = " + nuevoStatusRequi + " where c.id_req_coti = rp.id_req_coti and c.id_cotizacion = " + idCotizacion + ";");
+            + "aut_compras = " + idUsu + ", fecha_aut_compras = CURRENT_TIMESTAMP where id_cotizacion = " + idCotizacion + ";");
+    st.executeUpdate("update req_prod rp, cotizacion c set id_status = " + nuevoStatusRequi + ", id_cot_ganadora = " + idCotizacion + " where c.id_req_coti = rp.id_req_coti and c.id_cotizacion = " + idCotizacion + ";");
 
     //Envia Correo a Gerente Admin
+    
     
     response.sendRedirect("menuComprasCotizaciones.jsp");
 %>

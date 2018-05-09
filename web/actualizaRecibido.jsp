@@ -3,7 +3,6 @@
 <%@page import="controller.Mail"%>
 <%@ page import ="java.sql.*" %>
 <%
-    int idReqCoti = -1;
     int idReqProd = 0;
     int idUsu = 0;
     int nuevoStatus = 0;
@@ -11,14 +10,9 @@
     int entrega = 0;
     int cantidad = 0;
     String producto = " ";
-    String solicitante = " ";
 
     Mail objMail = new Mail();
 
-    try {
-        idReqCoti = Integer.parseInt(request.getParameter("idReqCoti"));
-    } catch (Exception e) {
-    }
     try {
         idReqProd = Integer.parseInt(request.getParameter("idReqProd"));
     } catch (Exception e) {
@@ -41,10 +35,6 @@
     }
     try {
         cantidad = Integer.parseInt(request.getParameter("cantidad"));
-    } catch (Exception e) {
-    }
-    try {
-        producto = request.getParameter("producto");
     } catch (Exception e) {
     }
     try {

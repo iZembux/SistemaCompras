@@ -57,9 +57,19 @@
                     </a>
                 </div>
             </li>
-            <a class="nav-link" href="menuComprasOrdenes.jsp"> 
-                Cot. Autorizadas
-            </a>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Cot. Autorizadas
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="menuComprasOrdenes.jsp"> 
+                        Ver Cotizaciones
+                    </a>
+                    <a class="dropdown-item" href="menuComprasOrdenesHistorial.jsp"> 
+                        Historial Ordenes
+                    </a>
+                </div>
+            </li>
             <a class="nav-link" href="menuComprasRecepcion.jsp"> 
                 Recepcion
             </a>
