@@ -114,7 +114,6 @@
                     <td width="56"><strong>Importe</strong></td>
                 </tr>
                 <% arrayRequis3 = obj.consultarOrdenesFinal(idOrden);
-                System.out.println(arrayRequis3.size());
                     if (arrayRequis3.size() > 0) {
                         for (int i = 0; i < arrayRequis3.size(); i++) {
                             cantidad = arrayRequis.get(i).getCantidad();

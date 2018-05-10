@@ -1219,7 +1219,7 @@ public class Consultas {
                         + "    c.precio AS precio,\n"
                         + "    c.tiempoentrega,\n"
                         + "    c.diascredito,\n"
-                        + "    rp.usu_compras\n,"
+                        + "    rp.usu_compras,\n"
                         + "    u.id_departamento,\n"
                         + "    d.departamento\n"
                         + "FROM\n"
