@@ -17,6 +17,7 @@
     String logo = null;
     String telefonoP = null;
     String nombreC = null;
+    String depto = null;
     int cantidad = 0;
     int descuento = 0;
     double precio = 0;
@@ -50,6 +51,7 @@
         fecha = arrayRequis.get(0).getFecha();
         telefonoP = arrayRequis.get(0).getTelefonoP();
         nombreC = arrayRequis.get(0).getCompras();
+        depto = arrayRequis.get(0).getDepto();
     }
 
 
@@ -140,7 +142,7 @@
                     <td height="169" colspan="7">&nbsp;</td>
                 </tr>
                 <tr style="border: none">
-                    <td height="270" colspan="3"></td>  
+                    <td height="270" colspan="3"><strong>Departamento Solicitante:</strong> <%=depto%></td>  
                     <td colspan="2" align="right"><p><strong>Subtotal</strong></p>
                         <p><strong>Descuento</strong></p>
                         <p><strong>L.E.P.S.</strong></p>
