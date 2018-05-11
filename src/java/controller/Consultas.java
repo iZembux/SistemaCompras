@@ -388,7 +388,7 @@ public class Consultas {
                         + "    AND p.id_categoria = " + id_categoria + "\n"
                         + "    AND rp.id_status = " + status + "\n"
                         //+ "    AND rp.usu_compras = " + usuario + "\n" Consultar o no por usuario de compras 
-                        + "    GROUP BY rp.id_producto, s.id_sucursales\n"
+                        + "    GROUP BY rp.id_producto\n"
                         + "    ORDER BY rp.id_requisicion;";
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
@@ -918,6 +918,7 @@ public class Consultas {
                         + "    AND rp.id_status in (" + status + ")\n"
                         + "    GROUP BY rp.id_producto\n"
                         + "    ORDER BY rp.id_requisicion;";
+                System.out.println(sql);
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
