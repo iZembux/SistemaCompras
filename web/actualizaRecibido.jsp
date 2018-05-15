@@ -52,7 +52,7 @@
     String correo = obj.consultarCorreos(idUsu);
 
     if (nuevoStatus == 12) {
-        objMail.enviarCorreo(correo, "", "", "Puedes pasar por tu producto,\n"
+        objMail.enviarCorreo(correo, "", "", "Tu producto está en el área de compras, puedes pasar a recogerlo EL PROXIMO DIA LUNES\n"
                 + "Id: " + idReqProd + "\n"
                 + "Producto: " + producto + "\n"        
                 + "Cantidad: " + cantidad +"\n");
