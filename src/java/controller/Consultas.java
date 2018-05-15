@@ -49,7 +49,6 @@ public class Consultas {
                         + "    AND rp.id_status = 3\n"
                         + "    GROUP BY rp.id_requisicion\n"
                         + "    ORDER BY rp.id_requisicion;";
-                System.out.println(sql);
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
@@ -270,7 +269,6 @@ public class Consultas {
                         + "    AND rp.id_status = " + status + "\n"
                         + "    GROUP BY rp.id_producto, s.id_sucursales, pr.idproveedor\n"
                         + "    ORDER BY rp.id_producto;";
-                System.out.println(sql);
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
@@ -918,7 +916,6 @@ public class Consultas {
                         + "    AND rp.id_status in (" + status + ")\n"
                         + "    GROUP BY rp.id_producto\n"
                         + "    ORDER BY rp.id_requisicion;";
-                System.out.println(sql);
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
@@ -1722,7 +1719,6 @@ public class Consultas {
                         + "        AND c.id_req_coti = " + idReqCoti + "\n"
                         + "        AND s.sucursal = '" + suc + "'";
 
-                System.out.println(sql);
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
