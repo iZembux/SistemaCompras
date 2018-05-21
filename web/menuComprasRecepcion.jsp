@@ -36,6 +36,7 @@
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
+                        <th scope="col">Orden</th>
                         <th scope="col">Producto</th>
                         <th scope="col">Marca</th>
                         <th scope="col">Cantidad</th>
@@ -49,6 +50,7 @@
                         int cantidadRequi;
                         int idReqProd;
                         int idUsu;
+                        int idOrden;
                         String producto;
                         String marca;
                         String proveedor;
@@ -67,8 +69,10 @@
                                 proveedor = arrayRequis.get(i).getSolicitante();
                                 idUsu = arrayRequis.get(i).getIdSolicita();
                                 solicitante = arrayRequis.get(i).getDescripcion();
+                                idOrden = arrayRequis.get(i).getIdOrden();
                     %>
                     <tr>
+                        <td><%=idOrden%></td>
                         <td><%=producto%></td>
                         <td><%=marca%></td>
                         <td><%=cantidadRequi%></td> 
