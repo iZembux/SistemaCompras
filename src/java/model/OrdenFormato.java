@@ -26,6 +26,7 @@ public class OrdenFormato {
     private int diasCredito;
     private int usuCompras;
     private int idDepto;
+    private int idOrden;
 
     /**
      * @return the sucursal
@@ -305,6 +306,20 @@ public class OrdenFormato {
      */
     public void setCompras(String compras) {
         this.compras = compras;
+    }
+
+    /**
+     * @return the idOrden
+     */
+    public int getIdOrden() {
+        return idOrden;
+    }
+
+    /**
+     * @param idOrden the idOrden to set
+     */
+    public void setIdOrden(int idOrden) {
+        this.idOrden = idOrden;
     }
     
     
