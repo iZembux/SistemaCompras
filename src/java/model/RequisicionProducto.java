@@ -24,6 +24,7 @@ public class RequisicionProducto {
     private int idStatus;
     private int idDepto;
     private int cantidad;
+    private int idOrden;
     private String producto;
     private String marca;
     private String status;
@@ -286,6 +287,20 @@ public class RequisicionProducto {
      */
     public void setProveedor(String proveedor) {
         this.proveedor = proveedor;
+    }
+
+    /**
+     * @return the idOrden
+     */
+    public int getIdOrden() {
+        return idOrden;
+    }
+
+    /**
+     * @param idOrden the idOrden to set
+     */
+    public void setIdOrden(int idOrden) {
+        this.idOrden = idOrden;
     }
 
     

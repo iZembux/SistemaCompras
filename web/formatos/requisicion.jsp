@@ -19,6 +19,7 @@
     String apellidoMG = " ";
     String justificacion = null;
     String fecha = null;
+    String fechaAut = null;
     String producto = null;
     String descripcion = null;
     String marca = null;
@@ -51,6 +52,7 @@
         departamento = arrayRequis.get(0).getDepartamento();
         justificacion = arrayRequis.get(0).getJustificacion();
         fecha = arrayRequis.get(0).getFecha();
+        fechaAut = arrayRequis.get(0).getFechaAut();
         producto = arrayRequis.get(0).getProducto();
         cantidad = arrayRequis.get(0).getCantidad();
         descripcion = arrayRequis.get(0).getDescripcion();
@@ -131,24 +133,24 @@
                     </td>
                     <td height="120" colspan="2" style="border-left: hidden">
                         <p style="background-color: #CFEFFA"> <%= " " + sucursal%></p>
-                        <p style="background-color: #CFEFFA"> <%= " " + nombre + " " + apellidoP + " " + apellidoM%></p>
-                        <p style="background-color: #CFEFFA"> <%= " " + departamento%></p>
-                        <p style="background-color: #CFEFFA"> <%= " " + nombre + " " + apellidoP + " " + apellidoM%></p>
-                        <p style="background-color: #CFEFFA"> <%= " " + justificacion%></p>
+                        <p style="background-color: #CFEFFA"> <%= " " + nombre.toUpperCase() + " " + apellidoP.toUpperCase() + " " + apellidoM.toUpperCase() %></p>
+                        <p style="background-color: #CFEFFA"> <%= " " + departamento.toUpperCase() %></p>
+                        <p style="background-color: #CFEFFA"> <%= " " + nombre.toUpperCase() + " " + apellidoP.toUpperCase() + " " + apellidoM.toUpperCase() %></p>
+                        <p style="background-color: #CFEFFA"> <%= " " + justificacion.toUpperCase() %></p>
                     </td>
                     <td colspan="2" style="text-align: right; border-right: hidden">
-                        <p>Fecha:</p>
+                        <p>Fecha de Solicitud:</p>
+                        <p>Fecha de Autorizacion:</p>
                         <p>Empresa: </p>
                         <p>Compra General:</p>
                         <p>Activo Fijo:</p>
-                        <p>&nbsp;</p>
                     </td>
                     <td colspan="1" style="border-left: hidden">
                         <p style="background-color: #CFEFFA"><%=fecha%></p>
+                        <p style="background-color: #CFEFFA"><%=fechaAut%></p>
                         <p style="background-color: #CFEFFA"><%=empresa%></p>
                         <p style="background-color: #CFEFFA"><%=cGeneral%></p>
                         <p style="background-color: #CFEFFA"><%=cActivo%></p>
-                        <p>&nbsp;</p>
                     </td>
                 </tr>
             </tbody>
@@ -172,7 +174,7 @@
                     <td><%=marca%></td>
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
-                    <td><%=descripcion%></td>
+                    <td><%=descripcion.toUpperCase() %></td>
                 </tr>
                 <tr>
                     <td height="45">&nbsp;</td>

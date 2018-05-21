@@ -490,6 +490,7 @@ public class Consultas {
         if (con != null) {
             try {
                 String sql = "SELECT \n"
+                        + "    c.id_orden as orden,\n"
                         + "    rp.id_requisicion AS IDREQUISICION,\n"
                         + "    rp.id_producto AS IDPRODUCTO,\n"
                         + "    rp.id_req_prod AS IDREQPROD,\n"
@@ -541,6 +542,7 @@ public class Consultas {
                     obj.setFecha(rs.getString("FECHA"));
                     obj.setIdReqCoti(rs.getInt("COTI"));
                     obj.setSucursal(rs.getString("suc"));
+                    obj.setIdOrden(rs.getInt("orden"));
                     listaRequi.add(obj);
                 }
             } catch (SQLException ex) {
@@ -1124,7 +1126,7 @@ public class Consultas {
                     obj.setCantidad(rs.getInt("cant"));
                     obj.setSucursal(rs.getString("razonSocialSucursal"));
                     obj.setDepto(rs.getString("departamento"));
-                    obj.setIdP(rs.getInt("idCotizacionOrden"));
+                    obj.setIdOrden(rs.getInt("idCotizacionOrden"));
                     obj.setFecha(rs.getString("fechaOrden"));
                     listaRequi.add(obj);
                 }
@@ -1615,6 +1617,7 @@ public class Consultas {
                         + "    d.departamento,\n"
                         + "    rp.justificacion,\n"
                         + "    r.fecha,\n"
+                        + "    rp.fecha_usu_gerente,\n"
                         + "    p.nombre as producto,\n"
                         + "    rp.cantidad,\n"
                         + "    rp.descripcion,\n"
@@ -1648,6 +1651,7 @@ public class Consultas {
                     obj.setDepartamento(rs.getString("departamento"));
                     obj.setJustificacion(rs.getString("justificacion"));
                     obj.setFecha(rs.getString("fecha"));
+                    obj.setFechaAut(rs.getString("fecha_usu_gerente"));
                     obj.setProducto(rs.getString("producto"));
                     obj.setCantidad(rs.getInt("cantidad"));
                     obj.setDescripcion(rs.getString("descripcion"));
