@@ -44,6 +44,7 @@
                 <thead>
                     <tr>
                         <th scope="col">Producto</th>
+                        <th scope="col">SKU</th>
                         <th scope="col">Marca</th>
                         <th scope="col">Cantidad</th>
                         <th scope="col"></th>
@@ -55,6 +56,7 @@
                         int idProducto;
                         int idReqCoti;
                         int status;
+                        int sku;
                         String producto;
                         String marca;
 
@@ -75,10 +77,12 @@
                                 marca = arrayRequis.get(i).getMarca();
                                 idReqCoti = arrayRequis.get(i).getIdReqCoti();
                                 status = arrayRequis.get(i).getIdStatus();
+                                sku = arrayRequis.get(i).getSku();
 
                     %>
                     <tr>
                         <td><%=producto%></td>
+                        <td><%=sku%></td>
                         <td><%=marca%></td>
                         <td><%=cantidadRequi%></td> 
                         <td>

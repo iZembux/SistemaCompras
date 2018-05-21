@@ -25,6 +25,7 @@ public class RequisicionProducto {
     private int idDepto;
     private int cantidad;
     private int idOrden;
+    private int sku;
     private String producto;
     private String marca;
     private String status;
@@ -301,6 +302,20 @@ public class RequisicionProducto {
      */
     public void setIdOrden(int idOrden) {
         this.idOrden = idOrden;
+    }
+
+    /**
+     * @return the sku
+     */
+    public int getSku() {
+        return sku;
+    }
+
+    /**
+     * @param sku the sku to set
+     */
+    public void setSku(int sku) {
+        this.sku = sku;
     }
 
     

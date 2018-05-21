@@ -681,6 +681,7 @@ public class Consultas {
                         + "    u.id_usuario AS IDUSU,\n"
                         + "    u.nombre AS SOLICITANTE,\n"
                         + "    u.id_departamento as DEPTO,\n"
+                        + "    u.apellido as AP,\n"
                         + "    rp.cantidad AS CANTIDAD,\n"
                         + "    r.fecha AS FECHA,\n"
                         + "    s.sucursal\n"
@@ -709,7 +710,7 @@ public class Consultas {
                     obj.setProducto(rs.getString("PRODUCTO"));
                     obj.setMarca(rs.getString("MARCA"));
                     obj.setIdSolicita(rs.getInt("IDUSU"));
-                    obj.setSolicitante(rs.getString("SOLICITANTE"));
+                    obj.setSolicitante(rs.getString("SOLICITANTE") + " " + rs.getString("AP"));
                     obj.setCantidad(rs.getInt("CANTIDAD"));
                     obj.setFecha(rs.getString("FECHA"));
                     obj.setSucursal(rs.getString("sucursal"));
@@ -898,6 +899,7 @@ public class Consultas {
                         + "    rp.id_requisicion AS IDREQUISICION,\n"
                         + "    rp.id_producto AS IDPRODUCTO,    p.nombre AS PRODUCTO,\n"
                         + "    p.marca AS MARCA,    u.nombre AS SOLICITANTE,\n"
+                        + "    p.sku as SKU,\n"
                         + "    u.id_departamento as DEPTO,\n"
                         + "    SUM(rp.cantidad) AS CANTIDAD,\n"
                         + "    r.fecha AS FECHA,\n"
@@ -924,6 +926,7 @@ public class Consultas {
                     cont++;
                     RequisicionProducto obj = new RequisicionProducto();
                     obj.setIdRequisicion(rs.getInt("IDREQUISICION"));
+                    obj.setSku(rs.getInt("SKU"));
                     obj.setIdDepto(rs.getInt("DEPTO"));
                     obj.setIdProducto(rs.getInt("IDPRODUCTO"));
                     obj.setProducto(rs.getString("PRODUCTO"));

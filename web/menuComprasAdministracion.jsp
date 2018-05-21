@@ -72,8 +72,8 @@
                         <td><%=producto%></td>
                         <td><%=cantidadRequi%></td>
                         <td><%=proveedor%></td>
-                        <td><%=compras%></td> 
-                        <td><%=status%></td>
+                        <td><%=compras.toUpperCase() %></td> 
+                        <td><%=status.toUpperCase() %></td>
                     </tr>
                     <% }
                         }%>

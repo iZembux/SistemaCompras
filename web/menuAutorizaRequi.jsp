@@ -113,7 +113,7 @@
                     %>
                     <tr>
                         <td><%=idRequi%></td>
-                        <td><%=solicitante%></td>
+                        <td><%=solicitante.toUpperCase() %></td>
                         <td><%=cantidadRequi%></td>
                         <td><%=fecha%></td>
                         <td>
