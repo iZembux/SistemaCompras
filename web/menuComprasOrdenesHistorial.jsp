@@ -44,6 +44,7 @@
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
+                        <th scope="col">Orden</th>
                         <th scope="col">Proveedor</th>
                         <th scope="col">Productos</th>
                         <th scope="col">Sucursal</th>
@@ -55,7 +56,7 @@
                 <tbody>
                     <%
                         int cantidad;
-                        int idP;
+                        int idOrden;
                         String razonsocial;
                         String sucursal;
                         String depto;
@@ -67,7 +68,7 @@
 
                         if (arrayRequis.size() > 0) {
                             for (int i = 0; i < arrayRequis.size(); i++) {
-                                idP = arrayRequis.get(i).getIdP();
+                                idOrden = arrayRequis.get(i).getIdOrden();
                                 razonsocial = arrayRequis.get(i).getNombreP();
                                 cantidad = arrayRequis.get(i).getCantidad();
                                 sucursal = arrayRequis.get(i).getSucursal();
@@ -75,6 +76,7 @@
                                 fecha = arrayRequis.get(i).getFecha();
                     %>
                     <tr>
+                        <td><%=idOrden%></td>
                         <td><%=razonsocial%></td>
                         <td><%=cantidad%></td>
                         <td><%=sucursal%></td> 
@@ -83,7 +85,7 @@
                         <td>
                             <div class="row">
                                 <form action="formatos/ordenCompraAcumFinal.jsp" method="post">
-                                    <input type="hidden" name="idOrden" value="<%=idP%>" >
+                                    <input type="hidden" name="idOrden" value="<%=idOrden%>" >
                                     <button type="submit" class="btn btn-info btn-sm" >Ver Orden</button>
                                 </form>
                             </div>
