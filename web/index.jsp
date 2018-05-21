@@ -4,15 +4,11 @@
     
     int banderaregistro = 0;
     int login = 0;
+    String usr = "";
     String loginS = "";
-
-        try {
-            banderaregistro = Integer.parseInt(request.getParameter("registro"));
-        } catch (Exception e) {
-            System.out.println("Catch de banderaregistro " + banderaregistro);
-        }
         try {
             loginS = (String) sesion.getAttribute("login");
+            usr = (String) sesion.getAttribute("USUARIO");
             login = Integer.parseInt(loginS);
         } catch (Exception e) {
         }
@@ -50,8 +46,6 @@
             var l = <%=login%>;
             if ( l == 1) {
                     alert('Datos de acceso incorrectos');
-            }else{
-                alert('Bienvenido: '+<%%>)
             }
         </script>
 
