@@ -50,6 +50,7 @@
                         <th scope="col">Sucursal</th>
                         <th scope="col">Producto</th>
                         <th scope="col">Estatus</th>
+                        <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -82,6 +83,12 @@
                         <td><%=sucursal%></td> 
                         <td><%=producto%></td>
                         <td><%=status%></td>
+                        <td>
+                            <form action="formatos/requisicion.jsp" method="post" target="_blank">
+                                <input type="hidden" class="hidden" name="idReqProd" value="<%=noRequi%>" >
+                                <button type="submit" class="btn btn-info btn-sm">Ver Requisicion</button>
+                            </form>
+                        </td>
                     </tr>
                     <% }
                         }%>

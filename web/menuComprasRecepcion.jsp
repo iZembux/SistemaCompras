@@ -10,10 +10,8 @@
     if (usuarioValidado == null) {
         response.sendRedirect("index.jsp");
     } else {
-        String idDepto = (String) sesion.getAttribute("departamento"); 
+        String idDepto = (String) sesion.getAttribute("departamento");
         String rol = (String) sesion.getAttribute("rol");
-        
-    int id_categoria = 1;
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -38,23 +36,25 @@
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
+                        <th scope="col">Orden</th>
                         <th scope="col">Producto</th>
                         <th scope="col">Marca</th>
                         <th scope="col">Cantidad</th>
                         <th scope="col">Proveedor</th>
+                        <th scope="col">Solicitante</th>
                         <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
                     <%
                         int cantidadRequi;
-                        int idProducto;
-                        int idReqCoti;
                         int idReqProd;
                         int idUsu;
+                        int idOrden;
                         String producto;
                         String marca;
                         String proveedor;
+                        String solicitante;
 
                         ArrayList<RequisicionProducto> arrayRequis = new ArrayList<RequisicionProducto>();
                         Consultas obj = new Consultas();
@@ -62,27 +62,29 @@
 
                         if (arrayRequis.size() > 0) {
                             for (int i = 0; i < arrayRequis.size(); i++) {
-                                idProducto = arrayRequis.get(i).getIdProducto();
                                 cantidadRequi = arrayRequis.get(i).getCantidad();
                                 idReqProd = arrayRequis.get(i).getIdReqProd();
                                 producto = arrayRequis.get(i).getProducto();
                                 marca = arrayRequis.get(i).getMarca();
-                                idReqCoti = arrayRequis.get(i).getIdReqCoti();
                                 proveedor = arrayRequis.get(i).getSolicitante();
                                 idUsu = arrayRequis.get(i).getIdSolicita();
+                                solicitante = arrayRequis.get(i).getDescripcion();
+                                idOrden = arrayRequis.get(i).getIdOrden();
                     %>
                     <tr>
+                        <td><%=idOrden%></td>
                         <td><%=producto%></td>
                         <td><%=marca%></td>
                         <td><%=cantidadRequi%></td> 
                         <td><%=proveedor%></td> 
+                        <td><%=solicitante.toUpperCase() %></td> 
                         <td>
                             <form action="actualizaRecibido.jsp" method="post">
                                 <input type="hidden" class="hidden" name="idUsu" value="<%=idUsu%>" >
                                 <input type="hidden" class="hidden" name="idReqProd" value="<%=idReqProd%>" >
-                                <input type="hidden" class="hidden" name="nuevoStatus" value="12" >
-                                <button type="submit" class="btn btn-success btn-sm">Recibí Producto</button>
-                            </form>
+                                    <input type="hidden" class="hidden" name="nuevoStatus" value="12" >
+                                    <button type="submit" class="btn btn-success btn-sm">Recibí Producto</button>
+                                </form>
                         </td>
                     </tr>
                     <% }

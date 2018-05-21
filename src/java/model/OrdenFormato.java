@@ -16,6 +16,8 @@ public class OrdenFormato {
     private String producto;
     private String descripcion;
     private String telefonoP;
+    private String depto;
+    private String compras;
     private int idCotizacion;
     private int idP;
     private int cantidad;
@@ -23,6 +25,8 @@ public class OrdenFormato {
     private double precio;
     private int diasCredito;
     private int usuCompras;
+    private int idDepto;
+    private int idOrden;
 
     /**
      * @return the sucursal
@@ -260,6 +264,62 @@ public class OrdenFormato {
      */
     public void setIdCotizacion(int idCotizacion) {
         this.idCotizacion = idCotizacion;
+    }
+
+    /**
+     * @return the idDepto
+     */
+    public int getIdDepto() {
+        return idDepto;
+    }
+
+    /**
+     * @param idDepto the idDepto to set
+     */
+    public void setIdDepto(int idDepto) {
+        this.idDepto = idDepto;
+    }
+
+    /**
+     * @return the depto
+     */
+    public String getDepto() {
+        return depto;
+    }
+
+    /**
+     * @param depto the depto to set
+     */
+    public void setDepto(String depto) {
+        this.depto = depto;
+    }
+
+    /**
+     * @return the compras
+     */
+    public String getCompras() {
+        return compras;
+    }
+
+    /**
+     * @param compras the compras to set
+     */
+    public void setCompras(String compras) {
+        this.compras = compras;
+    }
+
+    /**
+     * @return the idOrden
+     */
+    public int getIdOrden() {
+        return idOrden;
+    }
+
+    /**
+     * @param idOrden the idOrden to set
+     */
+    public void setIdOrden(int idOrden) {
+        this.idOrden = idOrden;
     }
     
     

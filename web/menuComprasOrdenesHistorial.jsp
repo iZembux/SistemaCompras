@@ -3,6 +3,7 @@
     Created on : Mar 5, 2018, 7:55:17 AM
     Author     : user
 --%>
+<%@page import="model.OrdenFormato"%>
 <%@page import="model.CotizacionRequisicion"%>
 <%@page import="controller.Consultas"%>
 <%@page import="java.util.ArrayList"%>
@@ -10,15 +11,14 @@
 <%
     HttpSession sesion = request.getSession();
     String usuarioValidado = (String) sesion.getAttribute("usuarioIngresado");
-    int idReqCoti = 0;
+
     if (usuarioValidado == null) {
         response.sendRedirect("index.jsp");
     } else {
-
-        try {
-            idReqCoti = Integer.parseInt(request.getParameter("idReqCoti"));
-        } catch (Exception e) {
-        }
+        String idDepto = (String) sesion.getAttribute("departamento");
+        String rol = (String) sesion.getAttribute("rol");
+        String id_usuario = (String) sesion.getAttribute("idUsuario");
+        int idCategoria = 1;
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -28,73 +28,70 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="css/style.css">
         <title>Autorizar</title>
-        <script>
-            function alerta(){
-                confirm("¿Enviar este producto?");
-            }
-        </script>
+
     </head>
     <body>
 
-        <jsp:include page="frag/mainNavbarProveedor.jsp"/> 
+        <jsp:include page="frag/mainNavbar.jsp">
+            <jsp:param name="rol" value="<%=rol%>" />  
+            <jsp:param name="depto" value="<%=idDepto%>" />
+        </jsp:include>
 
         <div class="container my-5">
             <div class="page-header">
-                <h3>Requisiciones Disponibles</h3>
+                <h3>Ordenes de compra</h3>
             </div>
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
-                        <th scope="col">Producto</th>
-                        <th scope="col">Marca</th>
-                        <th scope="col">Cantidad</th>
+                        <th scope="col">Orden</th>
+                        <th scope="col">Proveedor</th>
+                        <th scope="col">Productos</th>
                         <th scope="col">Sucursal</th>
+                        <th scope="col">Departamento</th>
+                        <th scope="col">Fecha</th>
                         <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
                     <%
-                        int cantidadRequi;
-                        int idRequi;
-                        String producto;
-                        String marca;
+                        int cantidad;
+                        int idOrden;
+                        String razonsocial;
                         String sucursal;
+                        String depto;
+                        String fecha;
 
-                        ArrayList<RequisicionProducto> arrayRequis = new ArrayList<RequisicionProducto>();
+                        ArrayList<OrdenFormato> arrayRequis = new ArrayList<OrdenFormato>();
                         Consultas obj = new Consultas();
-                        arrayRequis = obj.consultarDetalleComprasProv(idReqCoti);
+                        arrayRequis = obj.consultarOrdenesProvComprasHist();
 
                         if (arrayRequis.size() > 0) {
                             for (int i = 0; i < arrayRequis.size(); i++) {
-                                idRequi = arrayRequis.get(i).getIdRequisicion();
-                                cantidadRequi = arrayRequis.get(i).getCantidad();
-                                producto = arrayRequis.get(i).getProducto();
-                                marca = arrayRequis.get(i).getMarca();
-                                idReqCoti = arrayRequis.get(i).getIdReqCoti();
+                                idOrden = arrayRequis.get(i).getIdOrden();
+                                razonsocial = arrayRequis.get(i).getNombreP();
+                                cantidad = arrayRequis.get(i).getCantidad();
                                 sucursal = arrayRequis.get(i).getSucursal();
+                                depto = arrayRequis.get(i).getDepto();
+                                fecha = arrayRequis.get(i).getFecha();
                     %>
                     <tr>
-                        <td><%=producto%></td>
-                        <td><%=marca%></td>
-                        <td><%=cantidadRequi%></td>
+                        <td><%=idOrden%></td>
+                        <td><%=razonsocial%></td>
+                        <td><%=cantidad%></td>
                         <td><%=sucursal%></td> 
+                        <td><%=depto%></td> 
+                        <td><%=fecha%></td> 
                         <td>
-
                             <div class="row">
-                                <form action="formatos/ordenCompra.jsp" method="post">
-                                    <input type="hidden" class="hidden" name="idReqCoti" value="<%=idReqCoti%>" >
-                                    <input type="hidden" class="hidden" name="suc" value="<%=sucursal%>" >
-                                    <button type="submit" class="btn btn-primary btn-sm">Ver Orden de Compra</button>
-                                </form>
-                                <form action="actualizaProveedor.jsp" method="post">
-                                    <input type="hidden" class="hidden" name="idRequi" value="<%=idReqCoti%>" >
-                                    <input type="hidden" class="hidden" name="nuevoStatus" value="11" >
-                                    <button type="submit" class="btn btn-info btn-sm" onclick="alerta()">Iniciar Envío de Productos</button>
+                                <form action="formatos/ordenCompraAcumFinal.jsp" method="post">
+                                    <input type="hidden" name="idOrden" value="<%=idOrden%>" >
+                                    <button type="submit" class="btn btn-info btn-sm" >Ver Orden</button>
                                 </form>
                             </div>
                         </td>
                     </tr>
-                    <%}
+                    <% }
                         }%>
                 </tbody>
             </table>

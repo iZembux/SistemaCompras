@@ -3,7 +3,6 @@
 <%@page import="controller.Mail"%>
 <%@ page import ="java.sql.*" %>
 <%
-    int idReqCoti = -1;
     int idReqProd = 0;
     int idUsu = 0;
     int nuevoStatus = 0;
@@ -14,10 +13,6 @@
 
     Mail objMail = new Mail();
 
-    try {
-        idReqCoti = Integer.parseInt(request.getParameter("idReqCoti"));
-    } catch (Exception e) {
-    }
     try {
         idReqProd = Integer.parseInt(request.getParameter("idReqProd"));
     } catch (Exception e) {
@@ -32,10 +27,6 @@
     }
     try {
         stock = Integer.parseInt(request.getParameter("stock"));
-    } catch (Exception e) {
-    }
-    try {
-        entrega = Integer.parseInt(request.getParameter("entrega"));
     } catch (Exception e) {
     }
     try {
@@ -61,7 +52,7 @@
     String correo = obj.consultarCorreos(idUsu);
 
     if (nuevoStatus == 12) {
-        objMail.enviarCorreo(correo, "", "", "Puedes pasar por tu producto,\n"
+        objMail.enviarCorreo(correo, "", "", "Tu producto está en el área de compras, puedes pasar a recogerlo EL PROXIMO DIA LUNES\n"
                 + "Id: " + idReqProd + "\n"
                 + "Producto: " + producto + "\n"        
                 + "Cantidad: " + cantidad +"\n");

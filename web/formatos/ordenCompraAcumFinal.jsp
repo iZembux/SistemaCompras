@@ -16,35 +16,30 @@
     String descripcion = " ";
     String logo = null;
     String telefonoP = null;
-    String suc = null;
     String nombreC = null;
-    String apellidoC = null;
-    String apellidoMC = null;
+    String depto = null;
     int cantidad = 0;
     int descuento = 0;
     double precio = 0;
-    int credito = 0;
     int idCotizacion = 0;
-    int idReqCoti = 0;
     int idP = 0;
-    int idUsuCompras = 0;
+    double subtotal = 0;
+
+    int idOrden = 0;
 
     try {
-        idReqCoti = Integer.parseInt(request.getParameter("idReqCoti"));
+        idOrden = Integer.parseInt(request.getParameter("idOrden"));
     } catch (Exception e) {
     }
     
-    try {
-        suc = request.getParameter("suc");
-    } catch (Exception e) {
-    }
-
     ArrayList<OrdenFormato> arrayRequis = new ArrayList<OrdenFormato>();
     ArrayList<RequisicionFormato> arrayRequis2 = new ArrayList<RequisicionFormato>();
+    ArrayList<OrdenFormato> arrayRequis3 = new ArrayList<OrdenFormato>();
     Consultas obj = new Consultas();
-    arrayRequis = obj.consultarFormatoOrden(idReqCoti,suc);
     DecimalFormat formateador = new DecimalFormat("###,###,###.##");
+    
 
+    arrayRequis = obj.consultarOrdenesFinal(idOrden);
     if (!arrayRequis.isEmpty()) {
         idCotizacion = arrayRequis.get(0).getIdCotizacion();
         idP = arrayRequis.get(0).getIdP();
@@ -54,23 +49,11 @@
         nombreP = arrayRequis.get(0).getNombreP();
         direccionP = arrayRequis.get(0).getDireccionP();
         fecha = arrayRequis.get(0).getFecha();
-        unidadMedida = arrayRequis.get(0).getUnidadMedida();
-        producto = arrayRequis.get(0).getProducto();
-        //descripcion = arrayRequis.get(0).getDescripcion();
         telefonoP = arrayRequis.get(0).getTelefonoP();
-        cantidad = arrayRequis.get(0).getCantidad();
-        descuento = arrayRequis.get(0).getDescuento();
-        precio = arrayRequis.get(0).getPrecio();
-        credito = arrayRequis.get(0).getDiasCredito();
-        idUsuCompras = arrayRequis.get(0).getUsuCompras();
+        nombreC = arrayRequis.get(0).getCompras();
+        depto = arrayRequis.get(0).getDepto();
     }
-    
-    arrayRequis2 = obj.consultarUsuario(idUsuCompras);
-    if (!arrayRequis.isEmpty()) {
-        nombreC = arrayRequis2.get(0).getNombre();
-        apellidoC = arrayRequis2.get(0).getApellidoP();
-        apellidoMC = arrayRequis2.get(0).getApellidoM();
-    }
+
 
     if (sucursal.contains("CONTINENTAL") || sucursal.contains("FIAT TOLUCA") || sucursal.contains("MITSUBISHI TOLUCA")) {
         logo = "Continental.png";
@@ -92,7 +75,7 @@
         logo = "Casofin.jpg";
     }
 
-    
+
 %>
 <!doctype html>
 <html>
@@ -117,7 +100,7 @@
                         <p><strong><%=nombreP%></strong></p>
                         <p><%=direccionP%></p>
                         <p>Telefono: <%=telefonoP%></p></td>
-                    <td colspan="3"><p>ORDEN No.: AN00000000<%= idCotizacion %>
+                    <td colspan="3"><p>ORDEN No.: AN00000000<%= idCotizacion%>
                         </p>
                         <p><strong>Fecha</strong>: <%=fecha%></p>
                         <p><strong>Entregar a:</strong> COMPRAS</p>
@@ -132,6 +115,17 @@
                     <td width="120"><strong>Costo Unitario</strong></td>
                     <td width="56"><strong>Importe</strong></td>
                 </tr>
+                <% arrayRequis3 = obj.consultarOrdenesFinal(idOrden);
+                    if (arrayRequis3.size() > 0) {
+                        for (int i = 0; i < arrayRequis3.size(); i++) {
+                            cantidad = arrayRequis.get(i).getCantidad();
+                            unidadMedida = arrayRequis.get(i).getUnidadMedida();
+                            producto = arrayRequis.get(i).getProducto();
+                            descuento = arrayRequis.get(i).getDescuento();
+                            precio = arrayRequis.get(i).getPrecio();
+                            subtotal += (cantidad * precio);
+
+                %>
                 <tr style="border: none; text-align: center">
                     <td height="32"><strong></strong><%=cantidad%></td>
                     <td><strong></strong><%=unidadMedida%></td>
@@ -141,11 +135,14 @@
                     <td><strong></strong>$<%=precio%></td>
                     <td><strong></strong>$<%=cantidad * precio%></td> 
                 </tr>
+                <% }
+                    }
+                %>
                 <tr style="border: none">
                     <td height="169" colspan="7">&nbsp;</td>
                 </tr>
                 <tr style="border: none">
-                    <td height="270" colspan="3"></td>  
+                    <td height="270" colspan="3"><strong>Departamento Solicitante:</strong> <%=depto%></td>  
                     <td colspan="2" align="right"><p><strong>Subtotal</strong></p>
                         <p><strong>Descuento</strong></p>
                         <p><strong>L.E.P.S.</strong></p>
@@ -153,12 +150,12 @@
                         <p><strong>I.V.A</strong></p>
                         <p><strong>Total</strong></p>
                         <p>&nbsp;</p></td>
-                    <td colspan="2" align="right"><p><%=(cantidad * precio) - (cantidad * precio * (descuento / 100))%></p>
-                        <p><%=(cantidad * precio * (descuento / 100))%></p>
+                    <td colspan="2" align="right"><p><%=formateador.format((subtotal) - (subtotal * (descuento / 100)))%></p>
+                        <p><%=formateador.format((cantidad * precio * (descuento / 100)))%></p>
                         <p>0.00</p>
                         <p>&nbsp;</p>
-                        <p><%=formateador.format(cantidad * precio * 0.16)%></p>
-                        <p><%=formateador.format((cantidad * precio) - (cantidad * precio * (descuento / 100)) + (cantidad * precio * 0.16))%></p>
+                        <p><%=formateador.format(subtotal * 0.16)%></p>
+                        <p><%=formateador.format((subtotal) - (subtotal * (descuento / 100)) + (subtotal * 0.16))%></p>
                         <p>&nbsp;</p></td>
                 </tr>
                 <tr style="border: none">
@@ -179,7 +176,7 @@
                         <p>&nbsp;</p>
                         <p>&nbsp;</p>
                         <p>&nbsp;</p>
-                        <p>ELABORÓ: <%=nombreC + " " + apellidoC + " " + apellidoMC %></p></td>
+                        <p>ELABORÓ: <%=nombreC%></p></td>
                 </tr>
             </tbody>
         </table>

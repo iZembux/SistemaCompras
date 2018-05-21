@@ -14,6 +14,7 @@ public class RequisicionFormato {
     private String apellidoM = null;
     private String justificacion = null;
     private String fecha = null;
+    private String fechaAut = null;
     private String producto = null;
     private String descripcion = null;
     private String marca = null;
@@ -231,5 +232,19 @@ public class RequisicionFormato {
      */
     public void setGerente(int gerente) {
         this.gerente = gerente;
+    }
+
+    /**
+     * @return the fechaAut
+     */
+    public String getFechaAut() {
+        return fechaAut;
+    }
+
+    /**
+     * @param fechaAut the fechaAut to set
+     */
+    public void setFechaAut(String fechaAut) {
+        this.fechaAut = fechaAut;
     }
 }

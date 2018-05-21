@@ -15,6 +15,7 @@
     int cantidad = 0;
     int idDepto = 0;
     int activo = 0;
+    int sucursal = 0;
     String descripcion = null;
     String justificacion = null;
 
@@ -52,6 +53,10 @@
         activo = Integer.parseInt(request.getParameter("activo"));
     } catch (Exception e) {
     }
+    try {
+        sucursal = Integer.parseInt(request.getParameter("sucursal"));
+    } catch (Exception e) {
+    }
 
     Class.forName("com.mysql.jdbc.Driver");
     Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/scompras", "root", "stmsc0nt");
@@ -65,7 +70,7 @@
                 + "values ('" + idRequisicion + "','" + idUsuario + "',CURRENT_TIMESTAMP)");
 
         //Envia correo al gerente del area
-        String sql = "SELECT correo, nombre, apellido FROM scompras.usuario where id_rol = 3 and id_departamento = " + idDepto + ";";
+        String sql = "SELECT correo, nombre, apellido FROM scompras.usuario where id_rol = 3 and id_departamento = " + idDepto + " and id_sucursal = "+sucursal+";"; 
         ps = con.prepareStatement(sql);
         rs = ps.executeQuery();
         if (rs.next()) {
