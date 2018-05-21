@@ -899,6 +899,7 @@ public class Consultas {
                         + "    rp.id_requisicion AS IDREQUISICION,\n"
                         + "    rp.id_producto AS IDPRODUCTO,    p.nombre AS PRODUCTO,\n"
                         + "    p.marca AS MARCA,    u.nombre AS SOLICITANTE,\n"
+                        + "    p.sku as SKU,\n"
                         + "    u.id_departamento as DEPTO,\n"
                         + "    SUM(rp.cantidad) AS CANTIDAD,\n"
                         + "    r.fecha AS FECHA,\n"
@@ -925,6 +926,7 @@ public class Consultas {
                     cont++;
                     RequisicionProducto obj = new RequisicionProducto();
                     obj.setIdRequisicion(rs.getInt("IDREQUISICION"));
+                    obj.setSku(rs.getInt("SKU"));
                     obj.setIdDepto(rs.getInt("DEPTO"));
                     obj.setIdProducto(rs.getInt("IDPRODUCTO"));
                     obj.setProducto(rs.getString("PRODUCTO"));
