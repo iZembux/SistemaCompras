@@ -19,6 +19,7 @@
         String rol = (String) sesion.getAttribute("rol");
         String id_usuario = (String) sesion.getAttribute("idUsuario");
         String nombre = (String) sesion.getAttribute("nombre");
+        String sucursal = (String) sesion.getAttribute("sucursal");
 
         int nuevaRequisicion = 1;
 
@@ -160,6 +161,7 @@
                             <input type="hidden" class="form-control" id="nuevaRequisicion" name="nuevaRequisicion" value="<%=nuevaRequisicion%>">
                             <input type="hidden" class="form-control" id="idUsuario" name="idUsuario" value="<%=id_usuario%>">
                             <input type="hidden" class="form-control" id="idDepto" name="idDepto" value="<%=idDepto%>">
+                            <input type="hidden" class="form-control" id="idDepto" name="sucursal" value="<%=sucursal%>">
                         </form>
                     </div>
                 </div>
