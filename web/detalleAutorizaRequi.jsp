@@ -88,8 +88,8 @@
                         <td><%=producto%></td>
                         <td><%=marca%></td>
                         <td><%=cantidad%></td>
-                        <td><%=justificacion%></td>
-                        <td><%=descripcion%></td>
+                        <td><%=justificacion.toUpperCase() %></td>
+                        <td><%=descripcion.toUpperCase() %></td>
                         <td>
                             <div class="row">
                                 <form action="actualizaGerente.jsp" method="post">

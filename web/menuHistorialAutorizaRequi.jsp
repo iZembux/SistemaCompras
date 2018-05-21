@@ -17,7 +17,7 @@
 
         String idUsu = (String) sesion.getAttribute("idUsuario");
         String idDepto2 = idDepto;
-        if (idUsu.equals("34")) {
+       if (idUsu.equals("34")) {
             idDepto2 = "8,10,13";
         }
         if (idUsu.equals("114")) {
@@ -27,8 +27,38 @@
             idDepto2 = "1,6,8,9,13,24,25,26";
         }
         
-        if (idUsu.equals("60")) {
+        if (idUsu.equals("14")) {
+            idDepto2 = "1,24,6";
+        }
+		if (idUsu.equals("4")) {
+            idDepto2 = "7,28";
+        }
+        if (idUsu.equals("88")) {
+            idDepto2 = "8,10,13";
+        }
+		if (idUsu.equals("181")) {
+            idDepto2 = "1,14";
+        }
+		if (idUsu.equals("153")) {
+            idDepto2 = "3,21";
+			sucursal = "1,2,3,4,6,7";
+        }
+		if (idUsu.equals("173")||idUsu.equals("167")) {
+            idDepto2 = "1,10,12,26";
+        }
+        if (idUsu.equals("57")) {
+            idDepto2 = "18,19,21";
+			sucursal = "8";
+        }
+        
+        if (idUsu.equals("60") || idUsu.equals("4")) {
             sucursal = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18";
+        }
+		if (idUsu.equals("100")) {
+            sucursal = "1,6";
+        }
+        if (idUsu.equals("126")) {
+            sucursal = "9,14";
         }
 
 %>
@@ -96,14 +126,14 @@
                     %>
                     <tr>
                         <td><%=idRequi%></td>
-                        <td><%=solicitante%></td>
+                        <td><%=solicitante.toUpperCase() %></td>
                         <td><%=producto%></td>
                         <td><%=marca%></td>
                         <td><%=cantidad%></td>
-                        <td><%=justificacion%></td>
-                        <td><%=descripcion%></td>
+                        <td><%=justificacion.toUpperCase() %></td>
+                        <td><%=descripcion.toUpperCase() %></td>
                         <td><%=fecha%></td>
-                        <td><b><%=status%></b></td>
+                        <td><b><%=status.toUpperCase() %></b></td>
                     </tr>
                     <% }
                         }%>

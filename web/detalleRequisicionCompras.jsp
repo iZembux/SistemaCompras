@@ -86,7 +86,7 @@
                     <tr>
                         <td><%=producto%></td>
                         <td><%=cantidadRequi%></td>
-                        <td><%=solicitante%></td>
+                        <td><%=solicitante.toUpperCase() %></td>
                         <td><%=departamento%></td>
                         <td><%=sucursal%></td>
                         <td>

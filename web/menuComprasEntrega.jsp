@@ -78,7 +78,7 @@
                         <td><%=idReqProd%></td>
                         <td><%=producto%></td>
                         <td><%=marca%></td>
-                        <td><%=solicitante%></td>
+                        <td><%=solicitante.toUpperCase() %></td>
                         <td><%=sucursal%></td>
                         <td><%=cantidadRequi%></td> 
                         <td>

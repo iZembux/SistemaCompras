@@ -79,10 +79,10 @@
                     <tr>
                         <td><%=noRequi%></td>
                         <td><%=solicitante%></td>
-                        <td><%=departamento%></td>
+                        <td><%=departamento.toUpperCase() %></td>
                         <td><%=sucursal%></td> 
                         <td><%=producto%></td>
-                        <td><%=status%></td>
+                        <td><%=status.toUpperCase() %></td>
                         <td>
                             <form action="formatos/requisicion.jsp" method="post" target="_blank">
                                 <input type="hidden" class="hidden" name="idReqProd" value="<%=noRequi%>" >
