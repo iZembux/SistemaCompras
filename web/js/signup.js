@@ -103,6 +103,10 @@ function validarPassword() {
     }
 }
 
+function contraseñaIncorrecta() {
+   swal("Opps!", "Tus datos no son correctos!", "warning");
+}
+
 function imprimeDiv(nombreDiv) {
      var contenido= document.getElementById(nombreDiv).innerHTML;
      var contenidoOriginal= document.body.innerHTML;

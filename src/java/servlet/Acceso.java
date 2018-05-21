@@ -38,6 +38,7 @@ public class Acceso extends HttpServlet {
             String nombre = request.getParameter("usuario");
             String pass = request.getParameter("pass");
             String mensaje = "", retorno;
+            int login =0;
             UserCompras objUsuario = new UserCompras();
             RequestDispatcher dispatcher;
             ArrayList<UserCompras> ListaUsu = objUsuario.validarUsuario(nombre);
@@ -51,6 +52,7 @@ public class Acceso extends HttpServlet {
                 String rol = ListaUsu.get(0).getId_rol();
                 String nombreU = ListaUsu.get(0).getNombre();
                 String sucursal = ListaUsu.get(0).getId_sucursal();
+                
                 /**/
                 System.out.println("ID USUARIO: " + idUsuario);
                 System.out.println("USUARIO: " + usuario);
@@ -81,8 +83,10 @@ public class Acceso extends HttpServlet {
                     dispatcher.forward(request, response);
 
                 } else {
+                    login = 1;
                     mensaje += "Password Incorrecto, favor de rectificar";
                     retorno = "/index.jsp";
+                    sesion.setAttribute("login", "" + login);
                     sesion.setAttribute("mensaje", mensaje);
                     dispatcher = getServletContext().getRequestDispatcher(retorno);
                     dispatcher.forward(request, response);

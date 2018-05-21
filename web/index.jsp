@@ -1,4 +1,22 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    HttpSession sesion = request.getSession();
+    
+    int banderaregistro = 0;
+    int login = 0;
+    String loginS = "";
+
+        try {
+            banderaregistro = Integer.parseInt(request.getParameter("registro"));
+        } catch (Exception e) {
+            System.out.println("Catch de banderaregistro " + banderaregistro);
+        }
+        try {
+            loginS = (String) sesion.getAttribute("login");
+            login = Integer.parseInt(loginS);
+        } catch (Exception e) {
+        }
+%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -27,6 +45,16 @@
         <link rel="stylesheet" type="text/css" href="css/util.css">
         <link rel="stylesheet" type="text/css" href="css/main.css">
         <!--===============================================================================================-->
+
+        <script type="text/javascript">
+            var l = <%=login%>;
+            if ( l == 1) {
+                    alert('Datos de acceso incorrectos');
+            }else{
+                alert('Bienvenido: '+<%%>)
+            }
+        </script>
+
     </head>
     <body>
 
@@ -72,8 +100,6 @@
             </div>
         </div>
 
-
-
         <div id="dropDownSelect1"></div>
 
         <!--===============================================================================================-->
@@ -92,6 +118,8 @@
         <script src="vendor/countdowntime/countdowntime.js"></script>
         <!--===============================================================================================-->
         <script src="js/main.js"></script>
+         <!--===============================================================================================-->
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     </body>
 </html>
