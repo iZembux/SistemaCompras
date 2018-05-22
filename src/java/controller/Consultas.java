@@ -1140,6 +1140,37 @@ public class Consultas {
         return listaRequi;
     }
 
+    public ArrayList<OrdenFormato> consultarOrdenesProvContabilidad(String razon) {
+        ArrayList<OrdenFormato> listaRequi = new ArrayList<OrdenFormato>();
+        PreparedStatement ps;
+        ResultSet rs;
+        Connection con;
+        con = ConexionMySQL.conectar();
+        if (con != null) {
+            try {
+                String sql = "SELECT id_sucursales, razonSocialProveedor, sum(cantidadProducto) as cant, razonSocialSucursal, departamento,\n"
+                        + "idCotizacionOrden, fechaOrden FROM scompras.ordenes_compra, sucursales where sucursal = razonSocialSucursal\n"
+                        + "and id_sucursales in ("+razon+")\n"
+                        + "group by idCotizacionOrden order by fechaOrden desc;";
+                ps = con.prepareStatement(sql);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    OrdenFormato obj = new OrdenFormato();
+                    obj.setNombreP(rs.getString("razonSocialProveedor"));
+                    obj.setCantidad(rs.getInt("cant"));
+                    obj.setSucursal(rs.getString("razonSocialSucursal"));
+                    obj.setDepto(rs.getString("departamento"));
+                    obj.setIdOrden(rs.getInt("idCotizacionOrden"));
+                    obj.setFecha(rs.getString("fechaOrden"));
+                    listaRequi.add(obj);
+                }
+            } catch (SQLException ex) {
+                System.out.println("ERROR: " + ex.getMessage());
+            }
+        }
+        return listaRequi;
+    }
+
     public ArrayList<OrdenFormato> consultarOrdenesProvHist(String proveedor) {
         ArrayList<OrdenFormato> listaRequi = new ArrayList<OrdenFormato>();
         PreparedStatement ps;
