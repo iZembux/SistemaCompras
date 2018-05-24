@@ -132,8 +132,8 @@
                     <td><strong></strong><%=producto%></td>
                     <td><strong></strong><%=descripcion%></td>
                     <td><strong></strong><%=descuento%> %</td>
-                    <td><strong></strong>$<%=precio%></td>
-                    <td><strong></strong>$<%=cantidad * precio%></td> 
+                    <td><strong></strong>$<%=formateador.format(precio)%></td>
+                    <td><strong></strong>$<%=formateador.format(cantidad * precio)%></td> 
                 </tr>
                 <% }
                     }
