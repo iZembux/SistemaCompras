@@ -114,6 +114,7 @@
             </div>
         </div>
 
+        <!--MODAL PAPELERIA-->
         <div class="modal fade" id="modalPapeleria" tabindex="-1" role="dialog" aria-labelledby="modalPapeleria" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -142,7 +143,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="cantidad">Cantidad <b><FONT COLOR="red" title="Éste campo es obligatorio">*</FONT></b></label>
-                                
+
                                 <input type="number" class="form-control" id="cantidad" name="cantidad" required>
                             </div>
                             <div for="descripcion" class="form-group">
@@ -153,7 +154,115 @@
                                 <label>Motivo de la compra <b><FONT COLOR="red" title="Éste campo es obligatorio">*</FONT> </b></label>
                                 <input type="text" class="form-control" id="justificacion" name="justificacion" required>
                             </div>
-                            
+
+                            <div class="modal-footer">
+                                <input type="submit" class="btn btn-primary" value="Solicitar" />
+                            </div>
+
+                            <input type="hidden" class="form-control" id="nuevaRequisicion" name="nuevaRequisicion" value="<%=nuevaRequisicion%>">
+                            <input type="hidden" class="form-control" id="idUsuario" name="idUsuario" value="<%=id_usuario%>">
+                            <input type="hidden" class="form-control" id="idDepto" name="idDepto" value="<%=idDepto%>">
+                            <input type="hidden" class="form-control" id="idDepto" name="sucursal" value="<%=sucursal%>">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--MODAL TECNOLOGIA-->
+        <div class="modal fade" id="modalTecnologia" tabindex="-1" role="dialog" aria-labelledby="modalTecnologia" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Detalles del Producto</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post" action="insertaProducto.jsp">
+                            <div class="form-group">
+                                <label>Producto <b><FONT COLOR="red" title="Éste campo es obligatorio">*</FONT> </b><span class="badge badge-info" data-toggle="tooltip" title="Si tu producto no se encuentra en la lista favor de contactar al área de compras.">?</span> </label>
+                                <div class="input-group">
+                                    <select id="modelo" name="modelo" class="form-control">
+                                        <option>Selecciona Producto </option>
+                                        <%
+                                            ArrayList<Item> items2 = obj.consultarItems(2);
+                                            for (int i = 0; i < items2.size(); i++) {
+                                        %>
+                                        <option value="<%= items2.get(i).getId()%>" id="modelo" name="modelo"><%= items2.get(i).getNombre()%></option>
+                                        <% }%> 
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="cantidad">Cantidad <b><FONT COLOR="red" title="Éste campo es obligatorio">*</FONT></b></label>
+
+                                <input type="number" class="form-control" id="cantidad" name="cantidad" required>
+                            </div>
+                            <div for="descripcion" class="form-group">
+                                <label>Descripcion / Observaciones <span class="badge badge-info" data-toggle="tooltip" data-placement="bottom" title="Favor de proporcionar cualquier información que ayude a la aprobación y compra del producto">?</span> </label>
+                                <input type="text" class="form-control" id="descripcion" name="descripcion">
+                            </div>
+                            <div for="justificacion" class="form-group">
+                                <label>Motivo de la compra <b><FONT COLOR="red" title="Éste campo es obligatorio">*</FONT> </b></label>
+                                <input type="text" class="form-control" id="justificacion" name="justificacion" required>
+                            </div>
+
+                            <div class="modal-footer">
+                                <input type="submit" class="btn btn-primary" value="Solicitar" />
+                            </div>
+
+                            <input type="hidden" class="form-control" id="nuevaRequisicion" name="nuevaRequisicion" value="<%=nuevaRequisicion%>">
+                            <input type="hidden" class="form-control" id="idUsuario" name="idUsuario" value="<%=id_usuario%>">
+                            <input type="hidden" class="form-control" id="idDepto" name="idDepto" value="<%=idDepto%>">
+                            <input type="hidden" class="form-control" id="idDepto" name="sucursal" value="<%=sucursal%>">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+                        
+        <!--MODAL CAFETERIA-->
+        <div class="modal fade" id="modalCafeteria" tabindex="-1" role="dialog" aria-labelledby="modalCafeteria" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Detalles del Producto</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post" action="insertaProducto.jsp">
+                            <div class="form-group">
+                                <label>Producto <b><FONT COLOR="red" title="Éste campo es obligatorio">*</FONT> </b><span class="badge badge-info" data-toggle="tooltip" title="Si tu producto no se encuentra en la lista favor de contactar al área de compras.">?</span> </label>
+                                <div class="input-group">
+                                    <select id="modelo" name="modelo" class="form-control">
+                                        <option>Selecciona Producto </option>
+                                        <%
+                                            ArrayList<Item> items3 = obj.consultarItems(4);
+                                            for (int i = 0; i < items3.size(); i++) {
+                                        %>
+                                        <option value="<%= items3.get(i).getId()%>" id="modelo" name="modelo"><%= items3.get(i).getNombre()%></option>
+                                        <% }%> 
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="cantidad">Cantidad <b><FONT COLOR="red" title="Éste campo es obligatorio">*</FONT></b></label>
+
+                                <input type="number" class="form-control" id="cantidad" name="cantidad" required>
+                            </div>
+                            <div for="descripcion" class="form-group">
+                                <label>Descripcion / Observaciones <span class="badge badge-info" data-toggle="tooltip" data-placement="bottom" title="Favor de proporcionar cualquier información que ayude a la aprobación y compra del producto">?</span> </label>
+                                <input type="text" class="form-control" id="descripcion" name="descripcion">
+                            </div>
+                            <div for="justificacion" class="form-group">
+                                <label>Motivo de la compra <b><FONT COLOR="red" title="Éste campo es obligatorio">*</FONT> </b></label>
+                                <input type="text" class="form-control" id="justificacion" name="justificacion" required>
+                            </div>
+
                             <div class="modal-footer">
                                 <input type="submit" class="btn btn-primary" value="Solicitar" />
                             </div>
