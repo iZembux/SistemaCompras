@@ -3,19 +3,6 @@ package model;
 
 public class RequisicionProducto {
 
-    /**
-     * @return the departamento
-     */
-    public String getDepartamento() {
-        return departamento;
-    }
-
-    /**
-     * @param departamento the departamento to set
-     */
-    public void setDepartamento(String departamento) {
-        this.departamento = departamento;
-    }
     private int idSolicita;
     private int idReqProd;
     private int idRequisicion;
@@ -37,6 +24,7 @@ public class RequisicionProducto {
     private String fecha;
     private String sucursal;
     private String proveedor;
+    private String rutaFactura;
 
     /**
      * @return the idRequisicion
@@ -316,6 +304,35 @@ public class RequisicionProducto {
      */
     public void setSku(int sku) {
         this.sku = sku;
+    }
+    
+    
+    /**
+     * @return the rutaFactura
+     */
+    public String getRutaFactura() {
+        return rutaFactura;
+    }
+
+    /**
+     * @param rutaFactura the rutaFactura to set
+     */
+    public void setRutaFactura(String rutaFactura) {
+        this.rutaFactura = rutaFactura;
+    }
+
+    /**
+     * @return the departamento
+     */
+    public String getDepartamento() {
+        return departamento;
+    }
+
+    /**
+     * @param departamento the departamento to set
+     */
+    public void setDepartamento(String departamento) {
+        this.departamento = departamento;
     }
 
     

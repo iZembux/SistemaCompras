@@ -1177,7 +1177,7 @@ public class Consultas {
         con = ConexionMySQL.conectar();
         if (con != null) {
             try {
-                String sql = "select rp.id_req_prod as req, rp.id_status as status from req_prod rp, cotizacion c, ordenes_compra o\n"
+                String sql = "select rp.id_req_prod as req, rp.id_status as status, o.rutaFactura from req_prod rp, cotizacion c, ordenes_compra o\n"
                         + "where rp.id_cot_ganadora = c.id_cotizacion\n"
                         + "and c.id_orden = o.idOrden\n"
                         + "and o.idOrden = " + orden + ";";
@@ -1187,6 +1187,7 @@ public class Consultas {
                     RequisicionProducto obj = new RequisicionProducto();
                     obj.setIdStatus(rs.getInt("status"));
                     obj.setIdReqProd(rs.getInt("req"));
+                    obj.setRutaFactura(rs.getString("rutaFactura"));
                     listaRequi.add(obj);
                 }
             } catch (SQLException ex) {
@@ -1997,4 +1998,25 @@ public class Consultas {
         return ruta;
     }
 
+    
+    public String consultaRutaFactura(int idOrden) {
+        String ruta = "";
+        PreparedStatement ps;
+        ResultSet rs;
+        Connection con;
+        con = ConexionMySQL.conectar();
+        if (con != null) {
+            try {
+                String sql = "select rutaFactura from scompras.ordenes_compra WHERE idCotizacionOrden = '"+idOrden+"'";
+                ps = con.prepareStatement(sql);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    ruta = rs.getString("rutaFactura");
+                }
+            } catch (SQLException ex) {
+                System.out.println("ERROR: " + ex.getMessage());
+            }
+        }
+        return ruta;
+    }
 }
