@@ -385,7 +385,7 @@ public class Consultas {
                         + "    AND p.id_productos = rp.id_producto\n"
                         + "    AND p.id_categoria = " + id_categoria + "\n"
                         + "    AND rp.id_status = " + status + "\n"
-                        //+ "    AND rp.usu_compras = " + usuario + "\n" Consultar o no por usuario de compras 
+                        + "    AND rp.usu_compras in (" + usuario + ")\n" 
                         + "    GROUP BY rp.id_producto\n"
                         + "    ORDER BY rp.id_requisicion;";
                 ps = con.prepareStatement(sql);
@@ -664,7 +664,7 @@ public class Consultas {
         return listaRequi;
     }
 
-    public ArrayList<RequisicionProducto> consultarComprasDetalle(int departamento, int idProducto) {
+    public ArrayList<RequisicionProducto> consultarComprasDetalle(int categoria, int idProducto) {
         int cont = 0;
         ArrayList<RequisicionProducto> listaRequi = new ArrayList<RequisicionProducto>();
         PreparedStatement ps;
@@ -1050,7 +1050,7 @@ public class Consultas {
         return listaRequi;
     }
 
-    public ArrayList<OrdenFormato> consultarOrdenesProvCompras() {
+    public ArrayList<OrdenFormato> consultarOrdenesProvCompras(String sucursal) {
         ArrayList<OrdenFormato> listaRequi = new ArrayList<OrdenFormato>();
         PreparedStatement ps;
         ResultSet rs;
@@ -1084,6 +1084,7 @@ public class Consultas {
                         + "    AND r.id_requisicion = rp.id_requisicion\n"
                         + "    AND p.id_productos = rp.id_producto\n"
                         + "    AND u.id_departamento = d.id_departamentos\n"
+                        + "    AND u.id_sucursal in ("+sucursal+")\n"
                         + "    AND p.id_categoria = 1\n"
                         + "    AND rp.id_status = 10\n"
                         + "    and aut_compras > 0\n"
@@ -1111,7 +1112,7 @@ public class Consultas {
         return listaRequi;
     }
 
-    public ArrayList<OrdenFormato> consultarOrdenesProvComprasHist() {
+    public ArrayList<OrdenFormato> consultarOrdenesProvComprasHist(String suc) {
         ArrayList<OrdenFormato> listaRequi = new ArrayList<OrdenFormato>();
         PreparedStatement ps;
         ResultSet rs;
@@ -1120,7 +1121,7 @@ public class Consultas {
         if (con != null) {
             try {
                 String sql = "SELECT razonSocialProveedor, sum(cantidadProducto) as cant, razonSocialSucursal, departamento,"
-                        + " idCotizacionOrden, fechaOrden FROM scompras.ordenes_compra group by idCotizacionOrden order by fechaOrden desc;";
+                        + " idCotizacionOrden, fechaOrden FROM scompras.ordenes_compra where idSucursal in ("+suc+") group by idCotizacionOrden order by fechaOrden desc;";
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
@@ -1246,6 +1247,7 @@ public class Consultas {
                         + "    c.fecha_aut_compras AS fecha,\n"
                         + "    rp.cantidad AS cantidad,\n"
                         + "    p.nombre AS producto,\n"
+                        + "    p.sku AS sku,\n"
                         + "    um.descripcion AS unidadM,\n"
                         + "    rp.descripcion AS descripcion,\n"
                         + "    c.id_cotizacion,\n"
@@ -1255,6 +1257,7 @@ public class Consultas {
                         + "    c.diascredito,\n"
                         + "    rp.usu_compras,\n"
                         + "    u.id_departamento,\n"
+                        + "    s.id_sucursales,\n"
                         + "    d.departamento\n"
                         + "FROM\n"
                         + "    usuario u,\n"
@@ -1304,6 +1307,8 @@ public class Consultas {
                     obj.setDiasCredito(rs.getInt("diascredito"));
                     obj.setUsuCompras(rs.getInt("usu_compras"));
                     obj.setDepto(rs.getString("departamento"));
+                    obj.setIdSucursal(rs.getInt("id_sucursales"));
+                    obj.setSku(rs.getString("sku"));
                     listaRequi.add(obj);
                 }
             } catch (SQLException ex) {
@@ -1342,6 +1347,7 @@ public class Consultas {
                     obj.setPrecio(rs.getDouble("costoUnitarioCotizacion"));
                     obj.setCompras(rs.getString("nombreCompras"));
                     obj.setDepto(rs.getString("departamento"));
+                    obj.setSku(rs.getString("sku")); 
                     listaRequi.add(obj);
                 }
             } catch (SQLException ex) {
