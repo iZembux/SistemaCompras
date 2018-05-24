@@ -18,6 +18,7 @@
     String telefonoP = null;
     String nombreC = null;
     String depto = null;
+    String sku = null;
     int cantidad = 0;
     int descuento = 0;
     double precio = 0;
@@ -110,7 +111,7 @@
                     <td width="105" height="32"><strong>Cantidad</strong></td>
                     <td width="52"><strong>U/M</strong></td>
                     <td width="281"><strong>Producto</strong></td>
-                    <td width="82"><strong>Descripción</strong></td>
+                    <td width="82"><strong>SKU</strong></td>
                     <td width="121" height="32"><strong>% Desc.</strong></td>
                     <td width="120"><strong>Costo Unitario</strong></td>
                     <td width="56"><strong>Importe</strong></td>
@@ -118,19 +119,20 @@
                 <% arrayRequis3 = obj.consultarOrdenesFinal(idOrden);
                     if (arrayRequis3.size() > 0) {
                         for (int i = 0; i < arrayRequis3.size(); i++) {
-                            cantidad = arrayRequis.get(i).getCantidad();
-                            unidadMedida = arrayRequis.get(i).getUnidadMedida();
-                            producto = arrayRequis.get(i).getProducto();
-                            descuento = arrayRequis.get(i).getDescuento();
-                            precio = arrayRequis.get(i).getPrecio();
+                            cantidad = arrayRequis3.get(i).getCantidad();
+                            unidadMedida = arrayRequis3.get(i).getUnidadMedida();
+                            producto = arrayRequis3.get(i).getProducto();
+                            descuento = arrayRequis3.get(i).getDescuento();
+                            precio = arrayRequis3.get(i).getPrecio();
                             subtotal += (cantidad * precio);
+                            sku = arrayRequis3.get(i).getSku();
 
                 %>
                 <tr style="border: none; text-align: center">
                     <td height="32"><strong></strong><%=cantidad%></td>
                     <td><strong></strong><%=unidadMedida%></td>
                     <td><strong></strong><%=producto%></td>
-                    <td><strong></strong><%=descripcion%></td>
+                    <td><strong></strong><%=sku%></td>
                     <td><strong></strong><%=descuento%> %</td>
                     <td><strong></strong>$<%=formateador.format(precio)%></td>
                     <td><strong></strong>$<%=formateador.format(cantidad * precio)%></td> 
