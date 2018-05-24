@@ -13,6 +13,11 @@
         String idDepto = (String) sesion.getAttribute("departamento"); 
         String rol = (String) sesion.getAttribute("rol");
         String usuario = (String) sesion.getAttribute("idUsuario");
+        String usu = null;
+        usu = usuario;
+        if (usuario.equals("4")) {
+                usu = "4,25,83";
+            }
         
     int id_categoria = 1;
 %>
@@ -55,7 +60,7 @@
 
                         ArrayList<RequisicionProducto> arrayRequis = new ArrayList<RequisicionProducto>();
                         Consultas obj = new Consultas();
-                        arrayRequis = obj.consultarComprasCotizaciones(id_categoria,6,usuario);
+                        arrayRequis = obj.consultarComprasCotizaciones(id_categoria,6,usu);
 
                         if (arrayRequis.size() > 0) {
                             for (int i = 0; i < arrayRequis.size(); i++) {
