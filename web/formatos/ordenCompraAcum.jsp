@@ -19,6 +19,7 @@
     String nombreC = null;
     String apellidoC = null;
     String apellidoMC = null;
+    String depto = " ";
     int cantidad = 0;
     int descuento = 0;
     double precio = 0;
@@ -70,6 +71,7 @@
         telefonoP = arrayRequis.get(0).getTelefonoP();
         credito = arrayRequis.get(0).getDiasCredito();
         idUsuCompras = arrayRequis.get(0).getUsuCompras();
+        depto = arrayRequis.get(0).getDepto();
     }
 
     arrayRequis2 = obj.consultarUsuario(idUsuCompras);
@@ -158,8 +160,8 @@
                     <td><strong></strong><%=producto%></td>
                     <td><strong></strong><%=descripcion%></td>
                     <td><strong></strong><%=descuento%> %</td>
-                    <td><strong></strong>$<%=precio%></td>
-                    <td><strong></strong>$<%=cantidad * precio%></td> 
+                    <td><strong></strong>$<%=formateador.format(precio)%></td>
+                    <td><strong></strong>$<%=formateador.format(cantidad * precio)%></td> 
                 </tr>
                 <% }
                     }
@@ -168,7 +170,7 @@
                     <td height="169" colspan="7">&nbsp;</td>
                 </tr>
                 <tr style="border: none">
-                    <td height="270" colspan="3"></td>  
+                    <td height="270" colspan="3"><strong>Departamento Solicitante:</strong> <%=depto%></td>  
                     <td colspan="2" align="right"><p><strong>Subtotal</strong></p>
                         <p><strong>Descuento</strong></p>
                         <p><strong>L.E.P.S.</strong></p>
