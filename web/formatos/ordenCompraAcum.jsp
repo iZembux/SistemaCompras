@@ -19,6 +19,8 @@
     String nombreC = null;
     String apellidoC = null;
     String apellidoMC = null;
+    String depto = " ";
+    String sku;
     int cantidad = 0;
     int descuento = 0;
     double precio = 0;
@@ -70,6 +72,7 @@
         telefonoP = arrayRequis.get(0).getTelefonoP();
         credito = arrayRequis.get(0).getDiasCredito();
         idUsuCompras = arrayRequis.get(0).getUsuCompras();
+        depto = arrayRequis.get(0).getDepto();
     }
 
     arrayRequis2 = obj.consultarUsuario(idUsuCompras);
@@ -134,32 +137,32 @@
                     <td width="105" height="32"><strong>Cantidad</strong></td>
                     <td width="52"><strong>U/M</strong></td>
                     <td width="281"><strong>Producto</strong></td>
-                    <td width="82"><strong>Descripción</strong></td>
+                    <td width="82"><strong>SKU</strong></td>
                     <td width="121" height="32"><strong>% Desc.</strong></td>
                     <td width="120"><strong>Costo Unitario</strong></td>
                     <td width="56"><strong>Importe</strong></td>
                 </tr>
                 <% arrayRequis3 = obj.consultarOrdenesProvAcum(idProv, idSuc, categoria, idDep);
-                System.out.println(arrayRequis3.size());
                     if (arrayRequis3.size() > 0) {
                         for (int i = 0; i < arrayRequis3.size(); i++) {
-                            cantidad = arrayRequis.get(i).getCantidad();
-                            unidadMedida = arrayRequis.get(i).getUnidadMedida();
-                            producto = arrayRequis.get(i).getProducto();
+                            cantidad = arrayRequis3.get(i).getCantidad();
+                            unidadMedida = arrayRequis3.get(i).getUnidadMedida();
+                            producto = arrayRequis3.get(i).getProducto();
                             //descripcion = arrayRequis.get(i).getDescripcion();
-                            descuento = arrayRequis.get(i).getDescuento();
-                            precio = arrayRequis.get(i).getPrecio();
+                            descuento = arrayRequis3.get(i).getDescuento();
+                            precio = arrayRequis3.get(i).getPrecio();
                             subtotal += (cantidad * precio);
+                            sku = arrayRequis3.get(i).getSku();
 
                 %>
                 <tr style="border: none; text-align: center">
                     <td height="32"><strong></strong><%=cantidad%></td>
                     <td><strong></strong><%=unidadMedida%></td>
                     <td><strong></strong><%=producto%></td>
-                    <td><strong></strong><%=descripcion%></td>
+                    <td><strong></strong><%=sku%></td>
                     <td><strong></strong><%=descuento%> %</td>
-                    <td><strong></strong>$<%=precio%></td>
-                    <td><strong></strong>$<%=cantidad * precio%></td> 
+                    <td><strong></strong>$<%=formateador.format(precio)%></td>
+                    <td><strong></strong>$<%=formateador.format(cantidad * precio)%></td> 
                 </tr>
                 <% }
                     }
@@ -168,7 +171,7 @@
                     <td height="169" colspan="7">&nbsp;</td>
                 </tr>
                 <tr style="border: none">
-                    <td height="270" colspan="3"></td>  
+                    <td height="270" colspan="3"><strong>Departamento Solicitante:</strong> <%=depto%></td>  
                     <td colspan="2" align="right"><p><strong>Subtotal</strong></p>
                         <p><strong>Descuento</strong></p>
                         <p><strong>L.E.P.S.</strong></p>

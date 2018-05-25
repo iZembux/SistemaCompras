@@ -20,6 +20,9 @@
        if (idUsu.equals("34")) {
             idDepto2 = "8,10,13";
         }
+		if (idUsu.equals("210")) {
+            idDepto2 = "1,8,10,13";
+        }
         if (idUsu.equals("114")) {
             idDepto2 = "21,26,1,13,18";
         }
@@ -35,6 +38,7 @@
         }
         if (idUsu.equals("88")) {
             idDepto2 = "8,10,13";
+			sucursal = "10,18";
         }
 		if (idUsu.equals("181")) {
             idDepto2 = "1,14";
@@ -59,6 +63,12 @@
         }
         if (idUsu.equals("126")) {
             sucursal = "9,14";
+        }
+		if (idUsu.equals("127")) {
+            sucursal = "1,9,10,11";
+        }
+		if (idUsu.equals("138")) {
+            sucursal = "1,9,10,11";
         }
 
 %>

@@ -15,18 +15,16 @@
         String idDepto = (String) sesion.getAttribute("departamento");
         String rol = (String) sesion.getAttribute("rol");
         String usuario = (String) sesion.getAttribute("idUsuario");
-        String sucursal = (String) sesion.getAttribute("sucursal");
         String suc = null;
 
-        if (sucursal.equals("8") || sucursal.equals("1")) {
-            suc = "1,2,3,4,6,7,8,13";
-            if (rol.equals("3")) {
-                suc = "1,2,3,4,6,7,8,13,9,14,17,10,11,15,16,18";
-            }
-        } else if (sucursal.equals("9")) {
-            suc = "9,14,17";
-        } else if (sucursal.equals("10")) {
+        if (usuario.equals("83")) {       //Valeria
+            suc = "1,2,3,4,6,7,8";
+        } else if (usuario.equals("4")) { //Veronica
+            suc = "1,2,3,4,6,7,8,13,9,14,17,10,11,15,16,18";
+        } else if (usuario.equals("25")) { //Angelica
             suc = "10,11,15,16,18";
+        } else if (usuario.equals("0")) { //Roberto *Pendiente
+            suc = "9,13,14,17";
         }
 
         int id_categoria = 1;
@@ -38,7 +36,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="css/style.css">
-        <title>Autorizar</title>
+        <title>Requisiciones</title>
     </head>
     <body>
 
@@ -83,7 +81,7 @@
                         <td><%=producto%></td>
                         <td><%=marca%></td>
                         <td><%=cantidadRequi%></td> 
-                        
+
                         <td>
                             <form action="detalleRequisicionCompras.jsp" method="post">
                                 <input type="hidden" class="hidden" name="idCategoria" value="8" >

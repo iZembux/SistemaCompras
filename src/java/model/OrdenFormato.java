@@ -18,6 +18,7 @@ public class OrdenFormato {
     private String telefonoP;
     private String depto;
     private String compras;
+    private String sku;
     private int idCotizacion;
     private int idP;
     private int cantidad;
@@ -27,6 +28,7 @@ public class OrdenFormato {
     private int usuCompras;
     private int idDepto;
     private int idOrden;
+    private int idSucursal;
 
     /**
      * @return the sucursal
@@ -320,6 +322,34 @@ public class OrdenFormato {
      */
     public void setIdOrden(int idOrden) {
         this.idOrden = idOrden;
+    }
+
+    /**
+     * @return the sku
+     */
+    public String getSku() {
+        return sku;
+    }
+
+    /**
+     * @param sku the sku to set
+     */
+    public void setSku(String sku) {
+        this.sku = sku;
+    }
+
+    /**
+     * @return the idSucursal
+     */
+    public int getIdSucursal() {
+        return idSucursal;
+    }
+
+    /**
+     * @param idSucursal the idSucursal to set
+     */
+    public void setIdSucursal(int idSucursal) {
+        this.idSucursal = idSucursal;
     }
     
     

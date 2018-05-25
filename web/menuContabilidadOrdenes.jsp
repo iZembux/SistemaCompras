@@ -17,18 +17,7 @@
     } else {
         String idDepto = (String) sesion.getAttribute("departamento");
         String rol = (String) sesion.getAttribute("rol");
-        String usuario = (String) sesion.getAttribute("idUsuario");
-        String suc = null;
-        
-         if (usuario.equals("83")) {       //Valeria
-            suc = "1,2,3,4,6,7,8";
-        } else if (usuario.equals("4")) { //Veronica
-            suc = "1,2,3,4,6,7,8,13,9,14,17,10,11,15,16,18";
-        } else if (usuario.equals("25")) { //Angelica
-            suc = "10,11,15,16,18";
-        } else if (usuario.equals("0")) { //Roberto *Pendiente
-            suc = "9,13,14,17";
-        }
+        String sucursal = (String) sesion.getAttribute("sucursal");
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -37,7 +26,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="css/style.css">
-        <title>Historial de Ordenes</title>
+        <title>Contabilidad</title>
 
     </head>
     <body>
@@ -60,8 +49,7 @@
                         <th scope="col">Sucursal</th>
                         <th scope="col">Departamento</th>
                         <th scope="col">Fecha</th>
-                        <th scope="col">Orden</th>
-                        <th scope="col">Factura</th>
+                        <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -69,60 +57,38 @@
                         int cantidad;
                         int idOrden;
                         String razonsocial;
-                        String sucursal;
+                        String sucursal2;
                         String depto;
                         String fecha;
-                        String rutaFactura;
 
                         ArrayList<OrdenFormato> arrayRequis = new ArrayList<OrdenFormato>();
                         Consultas obj = new Consultas();
-                        arrayRequis = obj.consultarOrdenesProvComprasHist(suc); 
+                        arrayRequis = obj.consultarOrdenesProvContabilidad(sucursal);
 
                         if (arrayRequis.size() > 0) {
                             for (int i = 0; i < arrayRequis.size(); i++) {
                                 idOrden = arrayRequis.get(i).getIdOrden();
                                 razonsocial = arrayRequis.get(i).getNombreP();
                                 cantidad = arrayRequis.get(i).getCantidad();
-                                sucursal = arrayRequis.get(i).getSucursal();
+                                sucursal2 = arrayRequis.get(i).getSucursal();
                                 depto = arrayRequis.get(i).getDepto();
                                 fecha = arrayRequis.get(i).getFecha();
-                                rutaFactura = obj.consultaRutaFactura(idOrden);
                     %>
                     <tr>
                         <td><%=idOrden%></td>
                         <td><%=razonsocial%></td>
                         <td><%=cantidad%></td>
-                        <td><%=sucursal%></td> 
+                        <td><%=sucursal2%></td> 
                         <td><%=depto%></td> 
-                        <td><%=fecha%></td>
+                        <td><%=fecha%></td> 
                         <td>
                             <div class="row">
-                                <form action="formatos/ordenCompraAcumFinal.jsp" method="post" target="_blank">
+                                <form action="formatos/ordenCompraAcumFinal.jsp" method="post">
                                     <input type="hidden" name="idOrden" value="<%=idOrden%>" >
                                     <button type="submit" class="btn btn-info btn-sm" >Ver Orden</button>
                                 </form>
                             </div>
                         </td>
-                        <%
-                            if (rutaFactura != null) {
-                        %>
-                        <td>
-                            <div class="row">
-                                <form name="abreFactura" action="visor" method="POST" target="_blank">
-                                    <input type="hidden" name="search" id="search" value="<%=rutaFactura%>" >
-                                    <button type="submit" class="btn btn-dark btn-sm" >Ver Factura</button>
-                                </form>
-                            </div>
-                        </td>
-                        <%
-                        } else {
-                        %>
-                        <td>
-                            <div class="row">
-                                <button type="submit" class="btn btn-dark btn-sm" disabled="true">No disponible</button>
-                            </div>
-                        </td>
-                        <%}%>
                     </tr>
                     <% }
                         }%>

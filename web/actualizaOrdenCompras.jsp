@@ -18,6 +18,7 @@
     String telefonoP = null;
     String nombreC = null;
     String departamento = null;
+    String sku;
     int descuento = 0;
     double precio = 0;
     int idCotizacion = 0;
@@ -25,6 +26,7 @@
     double subtotal = 0;
     int idOrden = 0;
     int idC = 0;
+    int idSucursal;
 
     int categoria = 0;
     int proveedor = 0;
@@ -83,12 +85,14 @@
             idC = arrayRequis.get(i).getUsuCompras();
             subtotal += (cantidad * precio);
             departamento = arrayRequis.get(i).getDepto();
-            
-            String usu = obj.consultarUsuarios(idC);
+            idSucursal = arrayRequis.get(i).getIdSucursal();
+            sku = arrayRequis.get(i).getSku();
 
+            String usu = obj.consultarUsuarios(idC);
+            System.out.println("RAZON: "+sucursal+" SKU: "+sku);
             st.executeUpdate("update cotizacion set id_orden = " + idOrden + " where id_cotizacion = " + idCotizacion + "");
-            st.executeUpdate("insert into ordenes_compra values (default,CURRENT_TIMESTAMP,'" + sucursal + "','" + rfc + "','" + direccion + "','" + idP + "','" + nombreP + "',"
-                    + "'" + direccionP + "','" + telefonoP + "','" + cantidad + "','" + unidadMedida + "','" + producto + "','" + descuento + "','" + precio + "','" + subtotal + "','" + usu + "',"
+            st.executeUpdate("insert into ordenes_compra values (default,CURRENT_TIMESTAMP,'" + idSucursal + "','" + sucursal + "','" + rfc + "','" + direccion + "','" + idP + "','" + nombreP + "',"
+                    + "'" + direccionP + "','" + telefonoP + "','" + cantidad + "','" + unidadMedida + "','" + producto + "','" + sku + "','" + descuento + "','" + precio + "','" + subtotal + "','" + usu + "',"
                     + "'" + idOrden + "','" + departamento + "')");
         }
     }
