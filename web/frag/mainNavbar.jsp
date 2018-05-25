@@ -163,11 +163,10 @@
             <% }
 
                 }
-                if (depto == 10) {  %>
+                if (depto == 31) {  %>
             <a class="nav-link" href="menuContabilidadOrdenes.jsp"> 
                 Ordenes de Compra
             </a>
-
             <% }%>
             <a class="nav-link" href="logout.jsp"> 
                 Cerrar Sesión

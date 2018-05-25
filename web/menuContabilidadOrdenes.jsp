@@ -60,6 +60,7 @@
                         String sucursal2;
                         String depto;
                         String fecha;
+                        String rutaFactura;
 
                         ArrayList<OrdenFormato> arrayRequis = new ArrayList<OrdenFormato>();
                         Consultas obj = new Consultas();
@@ -73,6 +74,7 @@
                                 sucursal2 = arrayRequis.get(i).getSucursal();
                                 depto = arrayRequis.get(i).getDepto();
                                 fecha = arrayRequis.get(i).getFecha();
+                                rutaFactura = obj.consultaRutaFactura(idOrden);
                     %>
                     <tr>
                         <td><%=idOrden%></td>
@@ -83,12 +85,32 @@
                         <td><%=fecha%></td> 
                         <td>
                             <div class="row">
-                                <form action="formatos/ordenCompraAcumFinal.jsp" method="post">
+                                <form action="formatos/ordenCompraAcumFinal.jsp" method="post" target="_blank">
                                     <input type="hidden" name="idOrden" value="<%=idOrden%>" >
                                     <button type="submit" class="btn btn-info btn-sm" >Ver Orden</button>
                                 </form>
                             </div>
                         </td>
+                        <%
+                            if (rutaFactura != null) {
+                        %>
+                        <td>
+                            <div class="row">
+                                <form name="abreFactura" action="visor" method="POST" target="_blank">
+                                    <input type="hidden" name="search" id="search" value="<%=rutaFactura%>" >
+                                    <button type="submit" class="btn btn-dark btn-sm" >Ver Factura</button>
+                                </form>
+                            </div>
+                        </td>
+                        <%
+                        } else {
+                        %>
+                        <td>
+                            <div class="row">
+                                <button type="submit" class="btn btn-dark btn-sm" disabled="true">No disponible</button>
+                            </div>
+                        </td>
+                        <%}%>
                     </tr>
                     <% }
                         }%>
