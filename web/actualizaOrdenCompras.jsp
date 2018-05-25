@@ -89,11 +89,11 @@
             sku = arrayRequis.get(i).getSku();
 
             String usu = obj.consultarUsuarios(idC);
-            System.out.println("RAZON: "+sucursal+" SKU: "+sku);
+            System.out.println("RAZON: "+idSucursal+" SKU: "+sku);
             st.executeUpdate("update cotizacion set id_orden = " + idOrden + " where id_cotizacion = " + idCotizacion + "");
             st.executeUpdate("insert into ordenes_compra values (default,CURRENT_TIMESTAMP,'" + idSucursal + "','" + sucursal + "','" + rfc + "','" + direccion + "','" + idP + "','" + nombreP + "',"
                     + "'" + direccionP + "','" + telefonoP + "','" + cantidad + "','" + unidadMedida + "','" + producto + "','" + sku + "','" + descuento + "','" + precio + "','" + subtotal + "','" + usu + "',"
-                    + "'" + idOrden + "','" + departamento + "')");
+                    + "'" + idOrden + "','" + departamento + "',default)");
         }
     }
 
