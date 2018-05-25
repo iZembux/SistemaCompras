@@ -31,11 +31,13 @@
 
     try {
         idReqCoti = Integer.parseInt(request.getParameter("idReqCoti"));
+        System.out.println("cot " + idReqCoti); 
     } catch (Exception e) {
     }
     
     try {
         suc = request.getParameter("suc");
+        System.out.println("suc " + suc);
     } catch (Exception e) {
     }
 
@@ -72,7 +74,7 @@
         apellidoMC = arrayRequis2.get(0).getApellidoM();
     }
 
-    if (sucursal.contains("CONTINENTAL") || sucursal.contains("FIAT TOLUCA") || sucursal.contains("MITSUBISHI TOLUCA")) {
+    if (sucursal.contains("CONTINENTAL") || sucursal.contains("FIAT TOLUCA")) {
         logo = "Continental.png";
     } else if (sucursal.equals("HYUNDAI METEPEC")) {
         logo = "KoreanMotors.png";
@@ -90,6 +92,8 @@
         logo = "Autopolanco.jpeg";
     } else if (sucursal.equals("CASOFIN")) {
         logo = "Casofin.jpg";
+    } else if (sucursal.equals("MITSUBISHI TOLUCA")) {
+        logo = "Mitsuautos.png";
     }
 
     
