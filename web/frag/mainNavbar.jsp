@@ -34,13 +34,22 @@
                     Requisiciones
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="menuComprasRequisiciones.jsp"> 
+                    <a class="dropdown-item" href="menuComprasRequisiciones.jsp?categoria=1"> 
                         <div class="row">
                             <div class="col col-lg-9">
                                 Papeleria 
                             </div>
                         </div>
                     </a>
+                    <%--
+                    <a class="dropdown-item" href="menuComprasRequisiciones.jsp?categoria=4"> 
+                        <div class="row">
+                            <div class="col col-lg-9">
+                                Cafetería  
+                            </div>
+                        </div>
+                    </a>
+                    --%>
                 </div>
             </li>
             <li class="nav-item dropdown">
@@ -48,13 +57,22 @@
                     Cot. Disponibles
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="menuComprasCotizaciones.jsp"> 
+                    <a class="dropdown-item" href="menuComprasCotizaciones.jsp?categoria=1"> 
                         <div class="row">
                             <div class="col col-lg-9">
                                 Papeleria 
                             </div> 
                         </div>
                     </a>
+                    <%--
+                    <a class="dropdown-item" href="menuComprasCotizaciones.jsp?categoria=4"> 
+                        <div class="row">
+                            <div class="col col-lg-9">
+                                Cafetería 
+                            </div> 
+                        </div>
+                    </a>
+                    --%>
                 </div>
             </li>
             <li class="nav-item dropdown">
@@ -62,14 +80,14 @@
                     Cot. Autorizadas
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="menuComprasOrdenes.jsp"> 
+                    <a class="dropdown-item" href="menuComprasOrdenes.jsp?categoria=1"> 
                         Ver Cotizaciones
                     </a>
                     <a class="dropdown-item" href="menuComprasOrdenesHistorial.jsp"> 
                         Historial Ordenes
                     </a>
                 </div>
-            </li>
+                    </li>
             <a class="nav-link" href="menuComprasRecepcion.jsp"> 
                 Recepcion
             </a>
