@@ -30,7 +30,12 @@
             suc = "9,13,14,17";
         }
          
-        int idCategoria = 1;
+        int id_categoria = 1;
+        try {
+            id_categoria = Integer.parseInt(request.getParameter("categoria"));
+        } catch (Exception e) {
+
+        }
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -48,7 +53,7 @@
             <jsp:param name="depto" value="<%=idDepto%>" />
         </jsp:include>
 
-        <div class="jumbotron">
+        <div class="container my-5">
             <div class="page-header">
                 <h3>Ordenes de compra</h3>
             </div>
@@ -74,7 +79,7 @@
 
                         ArrayList<OrdenFormato> arrayRequis = new ArrayList<OrdenFormato>();
                         Consultas obj = new Consultas();
-                        arrayRequis = obj.consultarOrdenesProvCompras(suc);
+                        arrayRequis = obj.consultarOrdenesProvCompras(suc, id_categoria);
 
                         if (arrayRequis.size() > 0) {
                             for (int i = 0; i < arrayRequis.size(); i++) {
@@ -94,18 +99,18 @@
                         <td>
                             <div class="row">
                                 <form action="formatos/ordenCompraAcum.jsp" method="post">
-                                    <input type="hidden" name="categoria" value="<%=idCategoria%>" >
+                                    <input type="hidden" name="categoria" value="<%=id_categoria%>" >
                                     <input type="hidden" name="proveedor" value="<%=idP%>" >
                                     <input type="hidden" name="suc" value="<%=idSuc%>" >
                                     <input type="hidden" name="dep" value="<%=idDep%>" >
                                     <button type="submit" class="btn btn-info btn-sm" >Ver Orden</button>
                                 </form>
-                                    <form action="actualizaOrdenCompras.jsp" method="post">
-                                    <input type="hidden" name="categoria" value="<%=idCategoria%>" >
-                                    <input type="hidden" name="proveedor" value="<%=idP%>" >
-                                    <input type="hidden" name="suc" value="<%=idSuc%>" >
-                                    <input type="hidden" name="dep" value="<%=idDep%>" >
-                                    <button type="submit" class="btn btn-success btn-sm" >Guardar Orden</button>
+                                    <form action="detalleComprasOrdenes.jsp" method="post">
+                                    <input type="hidden" name="idCategoria" value="<%=id_categoria%>" >
+                                    <input type="hidden" name="idProveedor" value="<%=idP%>" >
+                                    <input type="hidden" name="idSucursal" value="<%=idSuc%>" >
+                                    <input type="hidden" name="idDepartamento" value="<%=idDep%>" >
+                                    <button type="submit" class="btn btn-success btn-sm" >Detalle</button>
                                 </form>
                             </div>
                         </td>
