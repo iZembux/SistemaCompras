@@ -27,7 +27,12 @@
             suc = "9,13,14,17";
         }
 
-        int id_categoria = 1;
+        int id_categoria = 0;
+        try {
+            id_categoria = Integer.parseInt(request.getParameter("categoria"));
+        } catch (Exception e) {
+
+        }
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
