@@ -42,6 +42,8 @@
                         <th scope="col">Cantidad</th>
                         <th scope="col">Proveedor</th>
                         <th scope="col">Solicitante</th>
+                        <th scope="col">Sucursal</th>
+                        <th scope="col">Depto.</th>
                         <th scope="col"></th>
                     </tr>
                 </thead>
@@ -55,6 +57,8 @@
                         String marca;
                         String proveedor;
                         String solicitante;
+                        String sucursal;
+                        String depto;
 
                         ArrayList<RequisicionProducto> arrayRequis = new ArrayList<RequisicionProducto>();
                         Consultas obj = new Consultas();
@@ -70,6 +74,8 @@
                                 idUsu = arrayRequis.get(i).getIdSolicita();
                                 solicitante = arrayRequis.get(i).getDescripcion();
                                 idOrden = arrayRequis.get(i).getIdOrden();
+                                sucursal = arrayRequis.get(i).getSucursal();
+                                depto = arrayRequis.get(i).getDepartamento();
                     %>
                     <tr>
                         <td><%=idOrden%></td>
@@ -78,6 +84,8 @@
                         <td><%=cantidadRequi%></td> 
                         <td><%=proveedor%></td> 
                         <td><%=solicitante.toUpperCase() %></td> 
+                        <td><%=sucursal%></td> 
+                        <td><%=depto.toUpperCase() %></td> 
                         <td>
                             <form action="actualizaRecibido.jsp" method="post">
                                 <input type="hidden" class="hidden" name="idUsu" value="<%=idUsu%>" >
