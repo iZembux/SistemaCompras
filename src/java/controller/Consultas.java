@@ -1187,7 +1187,7 @@ public class Consultas {
         if (con != null) {
             try {
                 String sql = "SELECT razonSocialProveedor, sum(cantidadProducto) as cant, razonSocialSucursal, departamento,"
-                        + " idCotizacionOrden, fechaOrden FROM scompras.ordenes_compra where idProveedor = " + proveedor + " group by idCotizacionOrden order by fechaOrden desc;";
+                        + " idCotizacionOrden, fechaOrden FROM scompras.ordenes_compra where idProveedor = " + proveedor + " group by idCotizacionOrden order by idCotizacionOrden desc;";
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {

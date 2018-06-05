@@ -111,7 +111,7 @@
                     + "'" + direccionP + "','" + telefonoP + "','" + cantidad + "','" + unidadMedida + "','" + producto + "','" + sku + "','" + descuento + "','" + precio + "','" + subtotal + "','" + usu + "',"
                     + "'" + idOrden + "','" + departamento + "',default)");
 
-        }
+    }
     }
 
     response.sendRedirect("menuComprasOrdenes.jsp");
