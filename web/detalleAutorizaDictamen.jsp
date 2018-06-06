@@ -70,6 +70,8 @@
                         String marca;
                         String justificacion;
                         String descripcion;
+                        String rutaCaratula;
+                        String rutaDictamen;
 
                         ArrayList<RequisicionProducto> arrayRequis = new ArrayList<RequisicionProducto>();
                         Consultas obj = new Consultas();
@@ -85,6 +87,9 @@
                                 justificacion = arrayRequis.get(i).getJustificacion();
                                 descripcion = arrayRequis.get(i).getDescripcion();
                                 categoria = arrayRequis.get(i).getIdCategoria();
+                                rutaCaratula = arrayRequis.get(i).getRutaCaratula();
+                                rutaDictamen = arrayRequis.get(i).getRutaDictamen();
+                                
                     %>
                     <tr>
                         <td><%=producto%></td>
@@ -94,12 +99,23 @@
                         <td><%=descripcion.toUpperCase()%></td>
                         <td>
                             <div class="row">
-                                <form action=".jsp" method="post">
-                                    <button type="submit" class="btn btn-info btn-sm" onclick="alerta()">Ver Caratula</button>
+                                <%
+                                    if (rutaCaratula != null || !rutaCaratula.equals("") ) {
+                                %>
+                                <form name="abreCaratula" action="visor" method="POST" target="_blank">
+                                    <input type="hidden" name="search" id="search" value="<%=rutaCaratula%>" >
+                                    <button type="submit" class="btn btn-dark btn-sm" >Ver Car&aacute;tula</button>
                                 </form>
-                                <form action=".jsp" method="post">
-                                    <button type="submit" class="btn btn-warning btn-sm" onclick="alerta2()">Ver Dictamen</button>
+                                <%} else {%>
+                                    <button type="submit" class="btn btn-dark btn-sm" disabled="true">No disponible</button>
+                                <% }
+                                if (rutaDictamen == null || !rutaDictamen.equals("")) {
+                                %>
+                                <form name="abreDictamen" action="visor" method="POST" target="_blank">
+                                    <input type="hidden" name="search" id="search" value="<%=rutaDictamen%>" >
+                                    <button type="submit" class="btn btn-outline-dark btn-sm" >Ver Dictamen</button>
                                 </form>
+                                <%}%>
                                 <form action="actualizaDictamen.jsp" method="post">
                                     <input type="hidden" class="hidden" name="idReqProd" value="<%=idReqProd%>" >
                                     <input type="hidden" class="hidden" name="nuevoStatus" value="4" >

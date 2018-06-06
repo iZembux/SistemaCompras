@@ -66,6 +66,8 @@
                         String producto;
                         String solicitante;
                         String sucursal;
+                        String rutaCaratula;
+                        String rutaDictamen;
 
                         ArrayList<RequisicionProducto> arrayRequis = new ArrayList<RequisicionProducto>();
                         Consultas obj = new Consultas();
@@ -84,6 +86,8 @@
                                 sucursal = arrayRequis.get(i).getSucursal();
                                 idUsu = arrayRequis.get(i).getIdSolicita();
                                 req2.add(idReqProd);
+                                rutaCaratula = arrayRequis.get(i).getRutaCaratula();
+                                rutaDictamen = arrayRequis.get(i).getRutaDictamen();
                     %>
                     <tr>
                         <td><%=producto%></td>
@@ -94,12 +98,23 @@
                         <td>
                             <% if (idCategoria == 2) { %>
                             <div class="row">
-                                <form action=".jsp" method="post">
-                                    <button type="submit" class="btn btn-info btn-sm" onclick="alerta()">Ver Caratula</button>
+                                <%
+                                    if (rutaCaratula != null || !rutaCaratula.equals("") ) {
+                                %>
+                                <form name="abreCaratula" action="visor" method="POST" target="_blank">
+                                    <input type="hidden" name="search" id="search" value="<%=rutaCaratula%>" >
+                                    <button type="submit" class="btn btn-dark btn-sm" >Ver Car&aacute;tula</button>
                                 </form>
-                                <form action=".jsp" method="post">
-                                    <button type="submit" class="btn btn-warning btn-sm" onclick="alerta2()">Ver Dictamen</button>
+                                <%} else {%>
+                                    <button type="submit" class="btn btn-dark btn-sm" disabled="true">No disponible</button>
+                                <% }
+                                if (rutaDictamen == null || !rutaDictamen.equals("")) {
+                                %>
+                                <form name="abreDictamen" action="visor" method="POST" target="_blank">
+                                    <input type="hidden" name="search" id="search" value="<%=rutaDictamen%>" >
+                                    <button type="submit" class="btn btn-outline-dark btn-sm" >Ver Dictamen</button>
                                 </form>
+                                <%}%>
                             </div>
                             <% } else {%>
                             <form action="actualizaRecibido.jsp" method="post">
