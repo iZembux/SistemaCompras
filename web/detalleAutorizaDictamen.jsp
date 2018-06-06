@@ -109,7 +109,7 @@
                                 <%} else {%>
                                     <button type="submit" class="btn btn-dark btn-sm" disabled="true">No disponible</button>
                                 <% }
-                                if (rutaDictamen == null || !rutaDictamen.equals("")) {
+                                if (rutaDictamen != null || !rutaDictamen.equals("")) {
                                 %>
                                 <form name="abreDictamen" action="visor" method="POST" target="_blank">
                                     <input type="hidden" name="search" id="search" value="<%=rutaDictamen%>" >

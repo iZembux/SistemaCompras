@@ -1109,7 +1109,8 @@ public class Consultas {
                         + "    SUM(rp.cantidad) AS CANTIDAD,\n"
                         + "    r.fecha AS FECHA,\n"
                         + "    rp.id_req_coti AS COTI,\n"
-                        + "    rp.id_status AS STATUS\n"
+                        + "    rp.id_status AS STATUS,\n"
+                        + "    rp.rutaDictamen AS DICTAMEN\n"
                         + "FROM\n"
                         + "    usuario u,\n"
                         + "    requisiciones r,\n"
@@ -1143,6 +1144,7 @@ public class Consultas {
                     obj.setFecha(rs.getString("FECHA"));
                     obj.setIdReqCoti(rs.getInt("COTI"));
                     obj.setIdStatus(rs.getInt("STATUS"));
+                    obj.setRutaDictamen(rs.getString("DICTAMEN"));
                     listaRequi.add(obj);
                 }
             } catch (SQLException ex) {

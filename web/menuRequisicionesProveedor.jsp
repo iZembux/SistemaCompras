@@ -59,6 +59,8 @@
                         int sku;
                         String producto;
                         String marca;
+                        String rutaDictamen;
+
 
                         ArrayList<RequisicionProducto> arrayRequis = new ArrayList<RequisicionProducto>();
                         Consultas obj = new Consultas();
@@ -78,6 +80,7 @@
                                 idReqCoti = arrayRequis.get(i).getIdReqCoti();
                                 status = arrayRequis.get(i).getIdStatus();
                                 sku = arrayRequis.get(i).getSku();
+                                rutaDictamen = arrayRequis.get(i).getRutaDictamen();
 
                     %>
                     <tr>
@@ -89,16 +92,27 @@
                             <div class="row">
                                 <% if (status == 5) {%>
                                 <% if (idCategoria.equals("2")) { %>
-                                <form action=".jsp" method="post">
-                                    <button type="submit" class="btn btn-warning btn-sm" onclick="alerta2()">Caracteristicas</button>
+                                <form name="abreDictamen" action="visor" method="POST" target="_blank">
+                                    <input type="hidden" name="search" id="search" value="<%=rutaDictamen%>" >
+                                    <button type="submit" class="btn btn-warning btn-sm" >Caracteristicas</button>
                                 </form>
                                 <% }%>
+                                <%
+                                if (rutaDictamen != null || !rutaDictamen.equals("")) {
+                                %>
                                 <form action="formCotizacion.jsp" method="post">
                                     <input type="hidden" class="hidden" name="cantidad" value="<%=cantidadRequi%>" >
                                     <input type="hidden" class="hidden" name="idProducto" value="<%=idProducto%>" >
                                     <input type="hidden" class="hidden" name="idReqCoti" value="<%=idReqCoti%>" >
                                     <button type="submit" class="btn btn-info btn-sm" >Hacer Cotizacion</button>
                                 </form>
+                                <%
+                                    } else{
+                                    %>
+                                    <button type="submit" class="btn btn-dark btn-sm" disabled="true">No disponible</button>
+                                    <%
+                                    }
+                                %>
                                 <% } else if (status == 6) {
                                     ArrayList<CotizacionRequisicion> arrayRequis2 = new ArrayList<CotizacionRequisicion>();
                                     Consultas obj2 = new Consultas();

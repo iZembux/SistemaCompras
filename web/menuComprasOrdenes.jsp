@@ -98,7 +98,7 @@
                         <td><%=depto%></td>
                         <td>
                             <div class="row">
-                                <form action="formatos/ordenCompraAcum.jsp" method="post">
+                                <form action="formatos/ordenCompraAcum.jsp" method="post" target="_blank">
                                     <input type="hidden" name="categoria" value="<%=id_categoria%>" >
                                     <input type="hidden" name="proveedor" value="<%=idP%>" >
                                     <input type="hidden" name="suc" value="<%=idSuc%>" >
