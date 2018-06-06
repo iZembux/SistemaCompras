@@ -41,7 +41,6 @@
                             </div>
                         </div>
                     </a>
-                    <%--
                     <a class="dropdown-item" href="menuComprasRequisiciones.jsp?categoria=4"> 
                         <div class="row">
                             <div class="col col-lg-9">
@@ -49,7 +48,13 @@
                             </div>
                         </div>
                     </a>
-                    --%>
+                    <a class="dropdown-item" href="menuComprasRequisiciones.jsp?categoria=2"> 
+                        <div class="row">
+                            <div class="col col-lg-9">
+                                Tecnologia  
+                            </div>
+                        </div>
+                    </a>
                 </div>
             </li>
             <li class="nav-item dropdown">
@@ -64,7 +69,6 @@
                             </div> 
                         </div>
                     </a>
-                    <%--
                     <a class="dropdown-item" href="menuComprasCotizaciones.jsp?categoria=4"> 
                         <div class="row">
                             <div class="col col-lg-9">
@@ -72,7 +76,13 @@
                             </div> 
                         </div>
                     </a>
-                    --%>
+                    <a class="dropdown-item" href="menuComprasCotizaciones.jsp?categoria=2"> 
+                        <div class="row">
+                            <div class="col col-lg-9">
+                                Tecnologia 
+                            </div> 
+                        </div>
+                    </a>
                 </div>
             </li>
             <li class="nav-item dropdown">
@@ -162,7 +172,11 @@
                     </a>
                 </div>
             </li>
-            <% }
+            <% if (depto == 23) {%>
+             <a class="nav-link" href="menuAutorizaDictamen.jsp"> 
+                Dictamenes
+            </a>
+            <% }}
                 if (rol == 4 || rol == 5) {  %>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

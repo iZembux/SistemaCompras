@@ -47,6 +47,7 @@ public class AccesoProveedor extends HttpServlet {
                 String usuario = ListaUsu.get(0).getNombre();
                 int idUsuario = ListaUsu.get(0).getIdProveedor();
                 String password = ListaUsu.get(0).getPassword();
+                String giro = ListaUsu.get(0).getGiro(); 
                 /*
                 System.out.println("idProveedor" + idUsuario);
                 System.out.println("PROVEEDOR: " + usuario);
@@ -65,6 +66,7 @@ public class AccesoProveedor extends HttpServlet {
                     sesion.setAttribute("usuarioIngresado", usuario);
                     sesion.setAttribute("passwordIngresado", password);
                     sesion.setAttribute("idUsuario", "" + idUsuario);
+                    sesion.setAttribute("giro", giro);
 
                     dispatcher = getServletContext().getRequestDispatcher(retorno);
                     dispatcher.forward(request, response);

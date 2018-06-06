@@ -81,7 +81,7 @@
                             <p class="card-text">PC, Mouse, Teclados, Memorias, etc.</p>
                         </div>
                         <div class="card-footer">
-                            <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#modalError">Solicitar</a>
+                            <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#modalTecnologia">Solicitar</a>
                         </div>
                     </div>
                 </div>

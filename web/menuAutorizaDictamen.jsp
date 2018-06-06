@@ -1,11 +1,11 @@
 <%-- 
-    Muestra las requisiciones que ya han sido aprobadas por los gerentes
-    status = 4
+    Muestra las requisiciones disponibles para la autorizacion del gerente por id de departamento
+    status = 3
 --%>
-<%@page import="model.Proveedor"%>
-<%@page import="controller.Consultas"%>
+
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.RequisicionProducto"%>
+<%@page import="controller.Consultas"%>
 <%
     HttpSession sesion = request.getSession();
     String usuarioValidado = (String) sesion.getAttribute("usuarioIngresado");
@@ -14,25 +14,10 @@
     } else {
         String idDepto = (String) sesion.getAttribute("departamento");
         String rol = (String) sesion.getAttribute("rol");
-        String usuario = (String) sesion.getAttribute("idUsuario");
-        String suc = null;
+        String sucursal = (String) sesion.getAttribute("sucursal");
 
-        if (usuario.equals("83")) {       //Valeria
-            suc = "1,2,3,4,6,7,8";
-        } else if (usuario.equals("4")) { //Veronica
-            suc = "1,2,3,4,6,7,8,13,9,14,17,10,11,15,16,18";
-        } else if (usuario.equals("25")) { //Angelica
-            suc = "10,11,15,16,18";
-        } else if (usuario.equals("0")) { //Roberto *Pendiente
-            suc = "9,13,14,17";
-        }
+        
 
-        int id_categoria = 0;
-        try {
-            id_categoria = Integer.parseInt(request.getParameter("categoria"));
-        } catch (Exception e) {
-
-        }
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -40,8 +25,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="css/style.css">
-        <title>Requisiciones</title>
+        <title>Autorizar</title>
     </head>
     <body>
 
@@ -52,45 +36,45 @@
 
         <div class="container my-5">
             <div class="page-header">
-                <h3>Requisiciones Disponibles</h3>
+                <h3>Requisiciones por Autorizar</h3>
             </div>
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
-                        <th scope="col">Producto</th>
-                        <th scope="col">Marca</th>
-                        <th scope="col">Cantidad</th>
+                        <th scope="col">No.</th>
+                        <th scope="col">Solicitante</th>
+                        <th scope="col">Cantidad de Productos</th>
+                        <th scope="col">Fecha</th>
                         <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
                     <%
+
+                        int idRequi;
                         int cantidadRequi;
-                        int idProducto;
-                        int idReqProd;
-                        String producto;
-                        String marca;
+                        String solicitante;
+                        String fecha;
 
                         ArrayList<RequisicionProducto> arrayRequis = new ArrayList<RequisicionProducto>();
                         Consultas obj = new Consultas();
-                        arrayRequis = obj.consultarCompras3(id_categoria, 4, suc);
+                        arrayRequis = obj.consultarDictamenGerente();
+
                         if (arrayRequis.size() > 0) {
                             for (int i = 0; i < arrayRequis.size(); i++) {
-                                idReqProd = arrayRequis.get(i).getIdReqProd();
-                                idProducto = arrayRequis.get(i).getIdProducto();
+                                idRequi = arrayRequis.get(i).getIdRequisicion();
                                 cantidadRequi = arrayRequis.get(i).getCantidad();
-                                producto = arrayRequis.get(i).getProducto();
-                                marca = arrayRequis.get(i).getMarca();
+                                solicitante = arrayRequis.get(i).getSolicitante();
+                                fecha = arrayRequis.get(i).getFecha();
                     %>
                     <tr>
-                        <td><%=producto%></td>
-                        <td><%=marca%></td>
-                        <td><%=cantidadRequi%></td> 
-
+                        <td><%=idRequi%></td>
+                        <td><%=solicitante.toUpperCase() %></td>
+                        <td><%=cantidadRequi%></td>
+                        <td><%=fecha%></td>
                         <td>
-                            <form action="detalleRequisicionCompras.jsp" method="post">
-                                <input type="hidden" class="hidden" name="idCategoria" value="<%=id_categoria %>" >
-                                <input type="hidden" class="hidden" name="idProducto" value="<%=idProducto%>" >
+                            <form action="detalleAutorizaDictamen.jsp" method="post">
+                                <input type="hidden" name="idRequi" value="<%=idRequi%>" >
                                 <button type="submit" class="btn btn-primary btn-sm">Detalle</button>
                             </form>
                         </td>
@@ -100,8 +84,6 @@
                 </tbody>
             </table>
         </div>
-
-
 
         <jsp:include page="frag/footer.jsp" />
 

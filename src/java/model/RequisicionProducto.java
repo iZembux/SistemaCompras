@@ -12,6 +12,7 @@ public class RequisicionProducto {
     private int idDepto;
     private int cantidad;
     private int idOrden;
+    private int idCategoria;
     private int sku;
     private String producto;
     private String marca;
@@ -333,6 +334,20 @@ public class RequisicionProducto {
      */
     public void setDepartamento(String departamento) {
         this.departamento = departamento;
+    }
+
+    /**
+     * @return the idCategoria
+     */
+    public int getIdCategoria() {
+        return idCategoria;
+    }
+
+    /**
+     * @param idCategoria the idCategoria to set
+     */
+    public void setIdCategoria(int idCategoria) {
+        this.idCategoria = idCategoria;
     }
 
     
