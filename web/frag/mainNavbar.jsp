@@ -200,6 +200,17 @@
                 Ordenes de Compra
             </a>
             <% }%>
+            <% if (rol == 2) {  %>
+            <a class="nav-link" href="menuSolicita.jsp"> 
+                Solicitar Producto
+            </a>
+            <a class="nav-link" href="menuSeguimiento.jsp"> 
+                Seguimiento de Solicitud
+            </a>
+            <a class="nav-link" href="menuDictamen.jsp"> 
+                Hacer Dictamen
+            </a>
+            <% }%>
             <a class="nav-link" href="logout.jsp"> 
                 Cerrar Sesión
             </a>
