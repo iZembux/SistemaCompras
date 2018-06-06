@@ -5,6 +5,8 @@ public class RequisicionProducto {
 
     
 
+    
+
     private int idSolicita;
     private int idReqProd;
     private int idRequisicion;
@@ -29,6 +31,7 @@ public class RequisicionProducto {
     private String proveedor;
     private String rutaFactura;
     private String rutaCaratula;
+    private String rutaDictamen;
 
     /**
      * @return the idRequisicion
@@ -365,5 +368,19 @@ public class RequisicionProducto {
      */
     public void setRutaCaratula(String rutaCaratula) {
         this.rutaCaratula = rutaCaratula;
+    }
+    
+    /**
+     * @return the rutaDictamen
+     */
+    public String getRutaDictamen() {
+        return rutaDictamen;
+    }
+
+    /**
+     * @param rutaDictamen the rutaDictamen to set
+     */
+    public void setRutaDictamen(String rutaDictamen) {
+        this.rutaDictamen = rutaDictamen;
     }
 }

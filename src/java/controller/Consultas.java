@@ -221,7 +221,8 @@ public class Consultas {
                         + "    SUM(rp.cantidad) AS CANTIDAD,\n"
                         + "    rp.justificacion AS JUSTIFICACION,\n"
                         + "    rp.descripcion AS DESCRIPCION,\n"
-                        + "    rp.rutaCaratula AS CARATULA\n"
+                        + "    rp.rutaCaratula AS CARATULA,\n"
+                        + "    rp.rutaDictamen AS DICTAMEN\n"
                         + "FROM\n"
                         + "    usuario u,\n"
                         + "    requisiciones r,\n"
@@ -247,6 +248,7 @@ public class Consultas {
                     obj.setDescripcion(rs.getString("DESCRIPCION"));
                     obj.setIdCategoria(rs.getInt("CATE"));
                     obj.setRutaCaratula(rs.getString("CARATULA"));
+                    obj.setRutaDictamen(rs.getString("DICTAMEN"));
                     listaRequi.add(obj);
                 }
             } catch (SQLException ex) {
@@ -273,7 +275,9 @@ public class Consultas {
                         + "    p.id_categoria AS CATE,\n"
                         + "    SUM(rp.cantidad) AS CANTIDAD,\n"
                         + "    rp.justificacion AS JUSTIFICACION,\n"
-                        + "    rp.descripcion AS DESCRIPCION\n"
+                        + "    rp.descripcion AS DESCRIPCION,\n"
+                        + "    rp.rutaCaratula AS CARATULA,\n"
+                        + "    rp.rutaDictamen AS DICTAMEN\n"
                         + "FROM\n"
                         + "    usuario u,\n"
                         + "    requisiciones r,\n"
@@ -298,6 +302,8 @@ public class Consultas {
                     obj.setJustificacion(rs.getString("JUSTIFICACION"));
                     obj.setDescripcion(rs.getString("DESCRIPCION"));
                     obj.setIdCategoria(rs.getInt("CATE"));
+                    obj.setRutaCaratula(rs.getString("CARATULA"));
+                    obj.setRutaDictamen(rs.getString("DICTAMEN"));
                     listaRequi.add(obj);
                 }
             } catch (SQLException ex) {
@@ -879,7 +885,9 @@ public class Consultas {
                         + "    u.apellido as AP,\n"
                         + "    rp.cantidad AS CANTIDAD,\n"
                         + "    r.fecha AS FECHA,\n"
-                        + "    s.sucursal\n"
+                        + "    s.sucursal,\n"
+                        + "    rp.rutaCaratula AS CARATULA,\n"
+                        + "    rp.rutaDictamen AS DICTAMEN\n"
                         + "FROM\n"
                         + "    usuario u,\n"
                         + "    requisiciones r,\n"
@@ -909,6 +917,8 @@ public class Consultas {
                     obj.setCantidad(rs.getInt("CANTIDAD"));
                     obj.setFecha(rs.getString("FECHA"));
                     obj.setSucursal(rs.getString("sucursal"));
+                    obj.setRutaCaratula(rs.getString("CARATULA"));
+                    obj.setRutaDictamen(rs.getString("DICTAMEN"));
                     listaRequi.add(obj);
                 }
             } catch (SQLException ex) {

@@ -46,7 +46,7 @@
         </jsp:include>
 
         <div class="container my-5">
-            <form action="menuAutorizaRequi.jsp" method="post">
+            <form action="menuDictamen.jsp" method="post">
                 <button type="submit" class="btn btn-primary btn-sm ml-auto">Regresar</button>
             </form>
             <table class="table table-striped table-hover">
@@ -71,6 +71,7 @@
                         String justificacion;
                         String descripcion;
                         String rutaCaratula;
+                        String rutaDictamen;
 
                         ArrayList<RequisicionProducto> arrayRequis = new ArrayList<RequisicionProducto>();
                         Consultas obj = new Consultas();
@@ -87,6 +88,7 @@
                                 descripcion = arrayRequis.get(i).getDescripcion();
                                 categoria = arrayRequis.get(i).getIdCategoria();
                                 rutaCaratula = arrayRequis.get(i).getRutaCaratula();
+                                rutaDictamen = arrayRequis.get(i).getRutaDictamen();
                     %>
                     <tr>
                         <td><%=producto%></td>
@@ -97,22 +99,31 @@
                         <td>
                             <div class="row">
                                 <%
-                                    if (rutaCaratula != null || rutaCaratula != "") {
+                                    if (rutaCaratula != null || rutaCaratula.equals("") ) {
                                 %>
                                 <form name="abreCaratula" action="visor" method="POST" target="_blank">
                                     <input type="hidden" name="search" id="search" value="<%=rutaCaratula%>" >
-                                    <button type="submit" class="btn btn-dark btn-sm" >Ver Factura</button>
+                                    <button type="submit" class="btn btn-dark btn-sm" >Ver Car&aacute;tula</button>
                                 </form>
                                 <%} else {%>
                                     <button type="submit" class="btn btn-dark btn-sm" disabled="true">No disponible</button>
-                                <%}%>
-                                <form action=".jsp" method="post">
-                                    <button type="submit" class="btn btn-warning btn-sm" onclick="alerta2()">Subir Dictamen</button>
+                                <% }
+                                System.out.println("Dictamen: " + rutaDictamen);
+                                if (rutaDictamen == null || rutaDictamen.equals("")) {
+                                %>
+                                <button type="submit" class="btn btn-warning btn-sm" value="<%=idReqProd%>" id="idRP" onclick="abre(); mandarDato()">Subir Dictamen</button>
+                                <%
+                                }else{
+                                %>
+                                <form name="abreDictamen" action="visor" method="POST" target="_blank">
+                                    <input type="hidden" name="search" id="search" value="<%=rutaDictamen%>" >
+                                    <button type="submit" class="btn btn-outline-dark btn-sm" >Ver Dictamen</button>
                                 </form>
+                                <%}%>
                                 <form action="actualizaDictamen.jsp" method="post">
-                                    <input type="hidden" class="hidden" name="idReqProd" value="<%=idReqProd%>" >
+                                    <input type="hidden" class="hidden" id="idReqProd" name="idReqProd" value="<%=idReqProd%>" >
                                     <input type="hidden" class="hidden" name="nuevoStatus" value="16" >
-                                    <button type="submit" class="btn btn-success btn-sm" onclick="alerta()">Autorizar</button>
+                                    <button type="submit" class="btn btn-success btn-sm" >Continuar</button>
                                 </form>
                                 <form action="actualizaDictamen.jsp" method="post">
                                     <input type="hidden" class="hidden" name="idReqProd" value="<%=idReqProd%>" >
@@ -130,11 +141,44 @@
 
             </div>
         </div>
+                
+                
+        <!-- Modal Cargar Factura -->
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Subir Dictamen</h4>
+                        <button type="button" class="close" data-dismiss="modal">×</button>
+                    </div>
+                    <div class="modal-body form-control">
+                        <form name="subeDictamen" action="subirDictamen.jsp" method="POST" enctype="multipart/form-data">
+                            <input type="hidden" class="hidden Orden" id="idReqP" name="idReqP" value="">
+                            <input type="file" class="form-control" id="archivo" accept="application/pdf" required="true" name="archivo">
+                            <center><input type="submit" class="btn btn-success" value="GUARDAR"/></center>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
         <jsp:include page="frag/footer.jsp" />
-
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script type="text/javascript">
+            function mandarDato(){
+                    $("#idReqP").val($("#idRP").val());
+                    var b = $("#idReqP").val();
+            }
+            function abre(){
+                $('#myModal').modal({show:true});
+            }
+            function imp(){
+            swal("Picaste el botón 7w7");
+            }
+        </script>
     </body>
 </html>
 <% }%>
