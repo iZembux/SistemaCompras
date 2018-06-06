@@ -21,7 +21,6 @@
     } else {
         String id_usuario = (String) sesion.getAttribute("idUsuario");
         String idCategoria = (String) sesion.getAttribute("giro");
-        System.out.println(idCategoria);
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -87,40 +86,46 @@
                         <td><%=marca%></td>
                         <td><%=cantidadRequi%></td> 
                         <td>
-                            <% if (status == 5) {%>
-
-                            <form action="formCotizacion.jsp" method="post">
-                                <input type="hidden" class="hidden" name="cantidad" value="<%=cantidadRequi%>" >
-                                <input type="hidden" class="hidden" name="idProducto" value="<%=idProducto%>" >
-                                <input type="hidden" class="hidden" name="idReqCoti" value="<%=idReqCoti%>" >
-                                <button type="submit" class="btn btn-info btn-sm" >Hacer Cotizacion</button>
-                            </form>
-                            <% } else if (status == 6) {
-                                ArrayList<CotizacionRequisicion> arrayRequis2 = new ArrayList<CotizacionRequisicion>();
-                                Consultas obj2 = new Consultas();
-                                arrayRequis2 = obj2.consultarProveedorCoti(idReqCoti, id_usuario);
-                                System.out.println(arrayRequis2.size());
-                                /* Consulta si el usuario activo ya realizo una cotizacion,
-                                si es asi, muesta un mensaje, si no, permite hacer una cotizacion
-                                 */
-                                ruta = obj2.consultaArchivo(idReqCoti, Integer.parseInt(id_usuario));
-                                if (arrayRequis2.size() > 0) {%>
                             <div class="row">
-                                <button type="button" class="btn btn-success btn-sm">Cotizacion Realizada</button> 
-                                <form action="visor.jsp" method="post" target="_blank">
-                                    <button type="submit" action="visor.jsp" value="<%=ruta%>" name="search" class="btn btn-dark btn-sm">Ver PDF</button> 
+                                <% if (status == 5) {%>
+                                <% if (idCategoria.equals("2")) { %>
+                                <form action=".jsp" method="post">
+                                    <button type="submit" class="btn btn-warning btn-sm" onclick="alerta2()">Caracteristicas</button>
                                 </form>
+                                <% }%>
+                                <form action="formCotizacion.jsp" method="post">
+                                    <input type="hidden" class="hidden" name="cantidad" value="<%=cantidadRequi%>" >
+                                    <input type="hidden" class="hidden" name="idProducto" value="<%=idProducto%>" >
+                                    <input type="hidden" class="hidden" name="idReqCoti" value="<%=idReqCoti%>" >
+                                    <button type="submit" class="btn btn-info btn-sm" >Hacer Cotizacion</button>
+                                </form>
+                                <% } else if (status == 6) {
+                                    ArrayList<CotizacionRequisicion> arrayRequis2 = new ArrayList<CotizacionRequisicion>();
+                                    Consultas obj2 = new Consultas();
+                                    arrayRequis2 = obj2.consultarProveedorCoti(idReqCoti, id_usuario);
+                                    System.out.println(arrayRequis2.size());
+                                    /* Consulta si el usuario activo ya realizo una cotizacion,
+                                    si es asi, muesta un mensaje, si no, permite hacer una cotizacion
+                                     */
+                                    ruta = obj2.consultaArchivo(idReqCoti, Integer.parseInt(id_usuario));
+                                    if (arrayRequis2.size() > 0) {%>
+                                <div class="row">
+                                    <button type="button" class="btn btn-success btn-sm">Cotizacion Realizada</button> 
+                                    <form action="visor.jsp" method="post" target="_blank">
+                                        <button type="submit" action="visor.jsp" value="<%=ruta%>" name="search" class="btn btn-dark btn-sm">Ver PDF</button> 
+                                    </form>
+                                </div>
+                                <%} else {%>
+                                <form action="formCotizacion.jsp" method="post">
+                                    <input type="hidden" class="hidden" name="cantidad" value="<%=cantidadRequi%>" >
+                                    <input type="hidden" class="hidden" name="idUsuario" value="<%=id_usuario%>" >
+                                    <input type="hidden" class="hidden" name="idProducto" value="<%=idProducto%>" >
+                                    <input type="hidden" class="hidden" name="idReqCoti" value="<%=idReqCoti%>" >
+                                    <button type="submit" class="btn btn-info btn-sm" >Hacer Cotizacion</button>
+                                </form>
+                                <% }
+                                %>
                             </div>
-                            <%} else {%>
-                            <form action="formCotizacion.jsp" method="post">
-                                <input type="hidden" class="hidden" name="cantidad" value="<%=cantidadRequi%>" >
-                                <input type="hidden" class="hidden" name="idUsuario" value="<%=id_usuario%>" >
-                                <input type="hidden" class="hidden" name="idProducto" value="<%=idProducto%>" >
-                                <input type="hidden" class="hidden" name="idReqCoti" value="<%=idReqCoti%>" >
-                                <button type="submit" class="btn btn-info btn-sm" >Hacer Cotizacion</button>
-                            </form>
-                            <% }
-                            %>
                         </td>
                     </tr>
                     <% }
