@@ -186,7 +186,7 @@
                                                 <tr>
                                                     <%
                                                         Consultas obj2 = new Consultas();
-                                                        ArrayList<Proveedor> prov = obj2.consultarProveedor(1);
+                                                        ArrayList<Proveedor> prov = obj2.consultarProveedor(idCategoria);
                                                         for (int j = 0; j < prov.size(); j++) {
                                                     %>
                                                     <td><%= prov.get(j).getRazonSocial()%></td>
