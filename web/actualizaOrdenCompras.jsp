@@ -32,6 +32,9 @@
     int proveedor = 0;
     int suc = 0;
     int dep = 0;
+    
+    int idReqProd = 0;
+    int tam = 0;
 
     Mail objMail = new Mail();
 
@@ -52,6 +55,11 @@
     } catch (Exception e) {
     }
 
+    try {
+        tam = Integer.parseInt(request.getParameter("tam"));
+    } catch (Exception e) {
+    }
+
     ArrayList<OrdenFormato> arrayRequis = new ArrayList<OrdenFormato>();
     Consultas obj = new Consultas();
 
@@ -60,9 +68,17 @@
     Statement st = con.createStatement();
     ResultSet rs;
 
-    rs = st.executeQuery("select max(id_orden) as id from cotizacion;");
+    rs = st.executeQuery("select max(id_orden) as id from req_prod;");
     if (rs.next()) {
         idOrden = rs.getInt("id") + 1;
+    }
+
+    for (int j = 0; j < tam; j++) {
+        try {
+            idReqProd = Integer.parseInt(request.getParameter("idReqProd" + j));
+            st.executeUpdate("update req_prod set id_orden = " + idOrden + " where id_req_prod = " + idReqProd + "");
+        } catch (Exception e) {
+        }
     }
 
     arrayRequis = obj.consultarOrdenesProvAcum(proveedor, suc, categoria, dep);
@@ -89,12 +105,13 @@
             sku = arrayRequis.get(i).getSku();
 
             String usu = obj.consultarUsuarios(idC);
-            System.out.println("RAZON: "+sucursal+" SKU: "+sku);
-            st.executeUpdate("update cotizacion set id_orden = " + idOrden + " where id_cotizacion = " + idCotizacion + "");
+            
+
             st.executeUpdate("insert into ordenes_compra values (default,CURRENT_TIMESTAMP,'" + idSucursal + "','" + sucursal + "','" + rfc + "','" + direccion + "','" + idP + "','" + nombreP + "',"
                     + "'" + direccionP + "','" + telefonoP + "','" + cantidad + "','" + unidadMedida + "','" + producto + "','" + sku + "','" + descuento + "','" + precio + "','" + subtotal + "','" + usu + "',"
-                    + "'" + idOrden + "','" + departamento + "')");
-        }
+                    + "'" + idOrden + "','" + departamento + "',default)");
+
+    }
     }
 
     response.sendRedirect("menuComprasOrdenes.jsp");

@@ -73,7 +73,7 @@
 
                         ArrayList<RequisicionProducto> arrayRequis = new ArrayList<RequisicionProducto>();
                         Consultas obj = new Consultas();
-                        arrayRequis = obj.consultarDetalleRequiGerente(idRequi);
+                        arrayRequis = obj.consultarDetalleAutorizaDictamen(idRequi);
 
                         if (arrayRequis.size() > 0) {
                             for (int i = 0; i < arrayRequis.size(); i++) {
@@ -94,24 +94,20 @@
                         <td><%=descripcion.toUpperCase()%></td>
                         <td>
                             <div class="row">
-                                <form action="actualizaGerente.jsp" method="post">
+                                <form action=".jsp" method="post">
+                                    <button type="submit" class="btn btn-info btn-sm" onclick="alerta()">Ver Caratula</button>
+                                </form>
+                                <form action=".jsp" method="post">
+                                    <button type="submit" class="btn btn-warning btn-sm" onclick="alerta2()">Ver Dictamen</button>
+                                </form>
+                                <form action="actualizaDictamen.jsp" method="post">
                                     <input type="hidden" class="hidden" name="idReqProd" value="<%=idReqProd%>" >
-                                    <input type="hidden" class="hidden" name="idSolicita" value="<%=idSolicita%>" >
-                                    <% if (categoria == 2) { %>
-                                    <input type="hidden" class="hidden" name="nuevoStatus" value="2" > 
-                                    <% } else { %> 
                                     <input type="hidden" class="hidden" name="nuevoStatus" value="4" >
-                                    <% } %>
-                                    <input type="hidden" class="hidden" name="autoriza" value="1" >
-                                    <input type="hidden" class="hidden" name="idUsu" value="<%= idUsu%>" >
                                     <button type="submit" class="btn btn-success btn-sm" onclick="alerta()">Autorizar</button>
                                 </form>
-                                <form action="actualizaGerente.jsp" method="post">
+                                <form action="actualizaDictamen.jsp" method="post">
                                     <input type="hidden" class="hidden" name="idReqProd" value="<%=idReqProd%>" >
-                                    <input type="hidden" class="hidden" name="idSolicita" value="<%=idSolicita%>" >
-                                    <input type="hidden" class="hidden" name="nuevoStatus" value="14" >
-                                    <input type="hidden" class="hidden" name="autoriza" value="2" >
-                                    <input type="hidden" class="hidden" name="idUsu" value="<%= idUsu%>" >
+                                    <input type="hidden" class="hidden" name="nuevoStatus" value="17" >
                                     <button type="submit" class="btn btn-danger btn-sm" onclick="alerta2()">Rechazar</button>
                                 </form>
                             </div>

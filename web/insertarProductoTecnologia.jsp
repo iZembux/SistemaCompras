@@ -26,7 +26,7 @@
     int idProducto = 0;
     int cantidad = 0;
     int idDepto = 0;
-    int activo = 0;
+    int activo = 1;
     int sucursal = 0;
     String descripcion = null;
     String justificacion = null;

@@ -70,10 +70,11 @@
                         String marca;
                         String justificacion;
                         String descripcion;
+                        String rutaCaratula;
 
                         ArrayList<RequisicionProducto> arrayRequis = new ArrayList<RequisicionProducto>();
                         Consultas obj = new Consultas();
-                        arrayRequis = obj.consultarDetalleRequiGerente(idRequi);
+                        arrayRequis = obj.consultarDetalleDictamen(idRequi);
 
                         if (arrayRequis.size() > 0) {
                             for (int i = 0; i < arrayRequis.size(); i++) {
@@ -85,6 +86,7 @@
                                 justificacion = arrayRequis.get(i).getJustificacion();
                                 descripcion = arrayRequis.get(i).getDescripcion();
                                 categoria = arrayRequis.get(i).getIdCategoria();
+                                rutaCaratula = arrayRequis.get(i).getRutaCaratula();
                     %>
                     <tr>
                         <td><%=producto%></td>
@@ -94,24 +96,27 @@
                         <td><%=descripcion.toUpperCase()%></td>
                         <td>
                             <div class="row">
-                                <form action="actualizaGerente.jsp" method="post">
+                                <%
+                                    if (rutaCaratula != null || rutaCaratula != "") {
+                                %>
+                                <form name="abreCaratula" action="visor" method="POST" target="_blank">
+                                    <input type="hidden" name="search" id="search" value="<%=rutaCaratula%>" >
+                                    <button type="submit" class="btn btn-dark btn-sm" >Ver Factura</button>
+                                </form>
+                                <%} else {%>
+                                    <button type="submit" class="btn btn-dark btn-sm" disabled="true">No disponible</button>
+                                <%}%>
+                                <form action=".jsp" method="post">
+                                    <button type="submit" class="btn btn-warning btn-sm" onclick="alerta2()">Subir Dictamen</button>
+                                </form>
+                                <form action="actualizaDictamen.jsp" method="post">
                                     <input type="hidden" class="hidden" name="idReqProd" value="<%=idReqProd%>" >
-                                    <input type="hidden" class="hidden" name="idSolicita" value="<%=idSolicita%>" >
-                                    <% if (categoria == 2) { %>
-                                    <input type="hidden" class="hidden" name="nuevoStatus" value="2" > 
-                                    <% } else { %> 
-                                    <input type="hidden" class="hidden" name="nuevoStatus" value="4" >
-                                    <% } %>
-                                    <input type="hidden" class="hidden" name="autoriza" value="1" >
-                                    <input type="hidden" class="hidden" name="idUsu" value="<%= idUsu%>" >
+                                    <input type="hidden" class="hidden" name="nuevoStatus" value="16" >
                                     <button type="submit" class="btn btn-success btn-sm" onclick="alerta()">Autorizar</button>
                                 </form>
-                                <form action="actualizaGerente.jsp" method="post">
+                                <form action="actualizaDictamen.jsp" method="post">
                                     <input type="hidden" class="hidden" name="idReqProd" value="<%=idReqProd%>" >
-                                    <input type="hidden" class="hidden" name="idSolicita" value="<%=idSolicita%>" >
-                                    <input type="hidden" class="hidden" name="nuevoStatus" value="14" >
-                                    <input type="hidden" class="hidden" name="autoriza" value="2" >
-                                    <input type="hidden" class="hidden" name="idUsu" value="<%= idUsu%>" >
+                                    <input type="hidden" class="hidden" name="nuevoStatus" value="17" >
                                     <button type="submit" class="btn btn-danger btn-sm" onclick="alerta2()">Rechazar</button>
                                 </form>
                             </div>

@@ -34,10 +34,24 @@
                     Requisiciones
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="menuComprasRequisiciones.jsp"> 
+                    <a class="dropdown-item" href="menuComprasRequisiciones.jsp?categoria=1"> 
                         <div class="row">
                             <div class="col col-lg-9">
                                 Papeleria 
+                            </div>
+                        </div>
+                    </a>
+                    <a class="dropdown-item" href="menuComprasRequisiciones.jsp?categoria=4"> 
+                        <div class="row">
+                            <div class="col col-lg-9">
+                                Cafetería  
+                            </div>
+                        </div>
+                    </a>
+                    <a class="dropdown-item" href="menuComprasRequisiciones.jsp?categoria=2"> 
+                        <div class="row">
+                            <div class="col col-lg-9">
+                                Tecnologia  
                             </div>
                         </div>
                     </a>
@@ -48,10 +62,24 @@
                     Cot. Disponibles
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="menuComprasCotizaciones.jsp"> 
+                    <a class="dropdown-item" href="menuComprasCotizaciones.jsp?categoria=1"> 
                         <div class="row">
                             <div class="col col-lg-9">
                                 Papeleria 
+                            </div> 
+                        </div>
+                    </a>
+                    <a class="dropdown-item" href="menuComprasCotizaciones.jsp?categoria=4"> 
+                        <div class="row">
+                            <div class="col col-lg-9">
+                                Cafetería 
+                            </div> 
+                        </div>
+                    </a>
+                    <a class="dropdown-item" href="menuComprasCotizaciones.jsp?categoria=2"> 
+                        <div class="row">
+                            <div class="col col-lg-9">
+                                Tecnologia 
                             </div> 
                         </div>
                     </a>
@@ -62,14 +90,14 @@
                     Cot. Autorizadas
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="menuComprasOrdenes.jsp"> 
+                    <a class="dropdown-item" href="menuComprasOrdenes.jsp?categoria=1"> 
                         Ver Cotizaciones
                     </a>
                     <a class="dropdown-item" href="menuComprasOrdenesHistorial.jsp"> 
                         Historial Ordenes
                     </a>
                 </div>
-            </li>
+                    </li>
             <a class="nav-link" href="menuComprasRecepcion.jsp"> 
                 Recepcion
             </a>
@@ -144,7 +172,11 @@
                     </a>
                 </div>
             </li>
-            <% }
+            <% if (depto == 23) {%>
+             <a class="nav-link" href="menuAutorizaDictamen.jsp"> 
+                Dictamenes
+            </a>
+            <% }}
                 if (rol == 4 || rol == 5) {  %>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

@@ -42,8 +42,6 @@
                         <th scope="col">Cantidad</th>
                         <th scope="col">Proveedor</th>
                         <th scope="col">Solicitante</th>
-                        <th scope="col">Sucursal</th>
-                        <th scope="col">Depto.</th>
                         <th scope="col"></th>
                     </tr>
                 </thead>
@@ -53,12 +51,12 @@
                         int idReqProd;
                         int idUsu;
                         int idOrden;
+                        int idreqcoti;
+                        String idSuc;
                         String producto;
                         String marca;
                         String proveedor;
                         String solicitante;
-                        String sucursal;
-                        String depto;
 
                         ArrayList<RequisicionProducto> arrayRequis = new ArrayList<RequisicionProducto>();
                         Consultas obj = new Consultas();
@@ -74,8 +72,8 @@
                                 idUsu = arrayRequis.get(i).getIdSolicita();
                                 solicitante = arrayRequis.get(i).getDescripcion();
                                 idOrden = arrayRequis.get(i).getIdOrden();
-                                sucursal = arrayRequis.get(i).getSucursal();
-                                depto = arrayRequis.get(i).getDepartamento();
+                                idreqcoti = arrayRequis.get(i).getIdReqCoti();
+                                idSuc = arrayRequis.get(i).getSucursal();
                     %>
                     <tr>
                         <td><%=idOrden%></td>
@@ -84,14 +82,11 @@
                         <td><%=cantidadRequi%></td> 
                         <td><%=proveedor%></td> 
                         <td><%=solicitante.toUpperCase() %></td> 
-                        <td><%=sucursal%></td> 
-                        <td><%=depto.toUpperCase() %></td> 
                         <td>
-                            <form action="actualizaRecibido.jsp" method="post">
-                                <input type="hidden" class="hidden" name="idUsu" value="<%=idUsu%>" >
-                                <input type="hidden" class="hidden" name="idReqProd" value="<%=idReqProd%>" >
-                                    <input type="hidden" class="hidden" name="nuevoStatus" value="12" >
-                                    <button type="submit" class="btn btn-success btn-sm">Recibí Producto</button>
+                            <form action="formatos/ordenCompra.jsp" method="post">
+                                <input type="hidden" class="hidden" name="suc" value="<%=idSuc%>" >
+                                <input type="hidden" class="hidden" name="idReqCoti" value="<%=idreqcoti%>" >
+                                    <button tyFpe="submit" class="btn btn-success btn-sm">Orden</button>
                                 </form>
                         </td>
                     </tr>

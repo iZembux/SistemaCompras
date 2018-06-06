@@ -127,7 +127,7 @@
                         <p><strong><%=nombreP%></strong></p>
                         <p><%=direccionP%></p>
                         <p>Telefono: <%=telefonoP%></p></td>
-                    <td colspan="3"><p>ORDEN No.: AN00000000<%= idCotizacion%>
+                    <td colspan="3"><p>ORDEN No.: 
                         </p>
                         <p><strong>Fecha</strong>: <%=fecha%></p>
                         <p><strong>Entregar a:</strong> COMPRAS</p>

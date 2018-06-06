@@ -38,7 +38,8 @@
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
-                        <th scope="col">Productos</th>
+                        <th scope="col">Orden</th>
+                        <th scope="col">Cant. Productos</th>
                         <th scope="col">Sucursal</th>
                         <th scope="col">Fecha de Autorizacion</th>
                         <th scope="col"></th>
@@ -69,6 +70,7 @@
                                 
                     %>
                     <tr>
+                        <td><%=idP%></td>
                         <td><%=cantidad%></td>
                         <td><%=sucursal%></td>
                         <td><%=fecha%></td> 

@@ -20,7 +20,8 @@
         response.sendRedirect("index.jsp");
     } else {
         String id_usuario = (String) sesion.getAttribute("idUsuario");
-        int idCategoria = 1;
+        String idCategoria = (String) sesion.getAttribute("giro");
+        System.out.println(idCategoria);
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

@@ -3,6 +3,8 @@ package model;
 
 public class RequisicionProducto {
 
+    
+
     private int idSolicita;
     private int idReqProd;
     private int idRequisicion;
@@ -12,6 +14,7 @@ public class RequisicionProducto {
     private int idDepto;
     private int cantidad;
     private int idOrden;
+    private int idCategoria;
     private int sku;
     private String producto;
     private String marca;
@@ -25,6 +28,7 @@ public class RequisicionProducto {
     private String sucursal;
     private String proveedor;
     private String rutaFactura;
+    private String rutaCaratula;
 
     /**
      * @return the idRequisicion
@@ -335,5 +339,31 @@ public class RequisicionProducto {
         this.departamento = departamento;
     }
 
-    
+    /**
+     * @return the idCategoria
+     */
+    public int getIdCategoria() {
+        return idCategoria;
+    }
+
+    /**
+     * @param idCategoria the idCategoria to set
+     */
+    public void setIdCategoria(int idCategoria) {
+        this.idCategoria = idCategoria;
+    }
+
+    /**
+     * @return the rutaCaratula
+     */
+    public String getRutaCaratula() {
+        return rutaCaratula;
+    }
+
+    /**
+     * @param rutaCaratula the rutaCaratula to set
+     */
+    public void setRutaCaratula(String rutaCaratula) {
+        this.rutaCaratula = rutaCaratula;
+    }
 }

@@ -43,7 +43,7 @@
             <jsp:param name="depto" value="<%=idDepto%>" />
         </jsp:include>
 
-        <div class="jumbotron">
+        <div class="container my-5">
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
@@ -52,6 +52,8 @@
                         <th scope="col">Solicitante</th>
                         <th scope="col">Departamento</th>
                         <th scope="col">Sucursal</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
                         <th scope="col"></th>
                     </tr>
                 </thead>
@@ -86,10 +88,20 @@
                     <tr>
                         <td><%=producto%></td>
                         <td><%=cantidadRequi%></td>
-                        <td><%=solicitante.toUpperCase() %></td>
+                        <td><%=solicitante.toUpperCase()%></td>
                         <td><%=departamento%></td>
                         <td><%=sucursal%></td>
                         <td>
+                            <% if (idCategoria == 2) { %>
+                            <div class="row">
+                                <form action=".jsp" method="post">
+                                    <button type="submit" class="btn btn-info btn-sm" onclick="alerta()">Ver Caratula</button>
+                                </form>
+                                <form action=".jsp" method="post">
+                                    <button type="submit" class="btn btn-warning btn-sm" onclick="alerta2()">Ver Dictamen</button>
+                                </form>
+                            </div>
+                            <% } else {%>
                             <form action="actualizaRecibido.jsp" method="post">
                                 <input type="hidden" class="hidden" name="nuevoStatus" value="12" >
                                 <input type="hidden" class="hidden" name="idUsu" value="<%=idUsu%>" >
@@ -99,6 +111,7 @@
                                 <input type="hidden" class="hidden" name="stock" value="1" >
                                 <button type="submit" class="btn btn-success btn-sm">Producto en Stock</button>
                             </form>
+                            <% }%>
                         </td>
                         <td>
                             <form action="formatos/requisicion.jsp" method="post" target="_blank">
@@ -127,9 +140,9 @@
 
                     <input type="hidden" class="hidden" name="categoria" value="<%=id_categoria%>" >
                     <input type="hidden" class="hidden" name="usuario" value="<%=usuario%>" >
-                    <input type="hidden" class="hidden" name="tam" value="<%=req2.size() %>" >
-                    <% for (int i = 0; i < req2.size(); i++) { %>
-                    <input type="hidden" class="hidden" name="idReqProd<%=i%>" value="<%=req2.get(i) %>" >
+                    <input type="hidden" class="hidden" name="tam" value="<%=req2.size()%>" >
+                    <% for (int i = 0; i < req2.size(); i++) {%>
+                    <input type="hidden" class="hidden" name="idReqProd<%=i%>" value="<%=req2.get(i)%>" >
                     <% } %>
                     <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalProveedores">Solicitar Cotizaciones</button>
 
@@ -178,7 +191,7 @@
 
                                     </div>
                                     <div class="modal-footer">
-                                        <input type="hidden" class="hidden" name="idProducto" value="<%= idProducto %>" >
+                                        <input type="hidden" class="hidden" name="idProducto" value="<%= idProducto%>" >
                                         <input type="hidden" class="hidden" name="numProveedores" value="<%=prov.size()%>" >
                                         <input type="submit" class="btn btn-primary" value="Solicitar" />
                                     </div>
