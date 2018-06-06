@@ -13,7 +13,12 @@
         String idDepto = (String) sesion.getAttribute("departamento"); 
         String rol = (String) sesion.getAttribute("rol");
         
-    int id_categoria = 8;
+        int id_categoria = 0;
+        try {
+            id_categoria = Integer.parseInt(request.getParameter("categoria"));
+        } catch (Exception e) {
+
+        }
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -61,7 +66,7 @@
 
                         ArrayList<RequisicionProducto> arrayRequis = new ArrayList<RequisicionProducto>();
                         Consultas obj = new Consultas();
-                        arrayRequis = obj.consultarComprasEntregado(12);
+                        arrayRequis = obj.consultarComprasEntregado(12, id_categoria);
 
                         if (arrayRequis.size() > 0) {
                             for (int i = 0; i < arrayRequis.size(); i++) {

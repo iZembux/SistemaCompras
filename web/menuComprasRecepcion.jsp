@@ -12,6 +12,13 @@
     } else {
         String idDepto = (String) sesion.getAttribute("departamento");
         String rol = (String) sesion.getAttribute("rol");
+
+        int id_categoria = 0;
+        try {
+            id_categoria = Integer.parseInt(request.getParameter("categoria"));
+        } catch (Exception e) {
+
+        }
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -62,7 +69,7 @@
 
                         ArrayList<RequisicionProducto> arrayRequis = new ArrayList<RequisicionProducto>();
                         Consultas obj = new Consultas();
-                        arrayRequis = obj.consultarComprasRecibido(11);
+                        arrayRequis = obj.consultarComprasRecibido(11, id_categoria);
 
                         if (arrayRequis.size() > 0) {
                             for (int i = 0; i < arrayRequis.size(); i++) {
@@ -83,16 +90,16 @@
                         <td><%=marca%></td>
                         <td><%=cantidadRequi%></td> 
                         <td><%=proveedor%></td> 
-                        <td><%=solicitante.toUpperCase() %></td> 
+                        <td><%=solicitante.toUpperCase()%></td> 
                         <td><%=sucursal%></td> 
-                        <td><%=depto.toUpperCase() %></td> 
+                        <td><%=depto.toUpperCase()%></td> 
                         <td>
                             <form action="actualizaRecibido.jsp" method="post">
                                 <input type="hidden" class="hidden" name="idUsu" value="<%=idUsu%>" >
                                 <input type="hidden" class="hidden" name="idReqProd" value="<%=idReqProd%>" >
-                                    <input type="hidden" class="hidden" name="nuevoStatus" value="12" >
-                                    <button type="submit" class="btn btn-success btn-sm">Recibí Producto</button>
-                                </form>
+                                <input type="hidden" class="hidden" name="nuevoStatus" value="12" >
+                                <button type="submit" class="btn btn-success btn-sm">Recibí Producto</button>
+                            </form>
                         </td>
                     </tr>
                     <% }

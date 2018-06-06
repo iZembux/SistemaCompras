@@ -66,7 +66,7 @@ public class Consultas {
         }
         return listaRequi;
     }
-    
+
     public ArrayList<RequisicionProducto> consultarDictamen(String sucursal) {
         ArrayList<RequisicionProducto> listaRequi = new ArrayList<RequisicionProducto>();
         PreparedStatement ps;
@@ -109,7 +109,7 @@ public class Consultas {
         }
         return listaRequi;
     }
-    
+
     public ArrayList<RequisicionProducto> consultarDictamenGerente() {
         ArrayList<RequisicionProducto> listaRequi = new ArrayList<RequisicionProducto>();
         PreparedStatement ps;
@@ -151,7 +151,7 @@ public class Consultas {
         }
         return listaRequi;
     }
-    
+
     public ArrayList<RequisicionProducto> consultarDetalleRequiGerente(int id_requisicion) {
         int cont = 0;
         ArrayList<RequisicionProducto> listaRequi = new ArrayList<RequisicionProducto>();
@@ -202,7 +202,7 @@ public class Consultas {
         }
         return listaRequi;
     }
-    
+
     public ArrayList<RequisicionProducto> consultarDetalleDictamen(int id_requisicion) {
         int cont = 0;
         ArrayList<RequisicionProducto> listaRequi = new ArrayList<RequisicionProducto>();
@@ -257,7 +257,7 @@ public class Consultas {
         }
         return listaRequi;
     }
-    
+
     public ArrayList<RequisicionProducto> consultarDetalleAutorizaDictamen(int id_requisicion) {
         int cont = 0;
         ArrayList<RequisicionProducto> listaRequi = new ArrayList<RequisicionProducto>();
@@ -312,7 +312,7 @@ public class Consultas {
         }
         return listaRequi;
     }
-    
+
     public ArrayList<RequisicionProducto> consultarHistorialGerente(String departamento, String sucursal) {
         ArrayList<RequisicionProducto> listaRequi = new ArrayList<RequisicionProducto>();
         PreparedStatement ps;
@@ -367,7 +367,7 @@ public class Consultas {
         }
         return listaRequi;
     }
-    
+
     public ArrayList<RequisicionProducto> consultarRequiGerenteAdmin(int departamento) {
         int cont = 0;
         ArrayList<RequisicionProducto> listaRequi = new ArrayList<RequisicionProducto>();
@@ -490,7 +490,7 @@ public class Consultas {
         }
         return listaRequi;
     }
-    
+
     public ArrayList<RequisicionProducto> consultarCompras3(int id_categoria, int status, String suc) {
         int cont = 0;
         ArrayList<RequisicionProducto> listaRequi = new ArrayList<RequisicionProducto>();
@@ -551,7 +551,7 @@ public class Consultas {
         }
         return listaRequi;
     }
-    
+
     public ArrayList<RequisicionProducto> consultarComprasCotizaciones(int id_categoria, int status, String usuario) {
         ArrayList<RequisicionProducto> listaRequi = new ArrayList<RequisicionProducto>();
         PreparedStatement ps;
@@ -677,7 +677,7 @@ public class Consultas {
      * @param status El status de la requisicion
      * @return
      */
-    public ArrayList<RequisicionProducto> consultarComprasRecibido(int status) {
+    public ArrayList<RequisicionProducto> consultarComprasRecibido(int status, int categoria) {
         int cont = 0;
         ArrayList<RequisicionProducto> listaRequi = new ArrayList<RequisicionProducto>();
         PreparedStatement ps;
@@ -721,6 +721,7 @@ public class Consultas {
                         + "    and c.id_proveedor = pr.idproveedor\n"
                         + "    AND r.id_requisicion = rp.id_requisicion\n"
                         + "    AND p.id_productos = rp.id_producto\n"
+                        + "    AND p.id_categoria = " + categoria + "\n"
                         + "    AND rp.id_status = " + status + "\n"
                         + "    GROUP BY u.id_sucursal, rp.id_producto, pr.idproveedor, rp.id_req_prod \n"
                         + "    ORDER BY rp.id_orden;";
@@ -752,8 +753,8 @@ public class Consultas {
         }
         return listaRequi;
     }
-    
-    public ArrayList<RequisicionProducto> consultarComprasEntregado(int status) {
+
+    public ArrayList<RequisicionProducto> consultarComprasEntregado(int status, int categoria) {
         int cont = 0;
         ArrayList<RequisicionProducto> listaRequi = new ArrayList<RequisicionProducto>();
         PreparedStatement ps;
@@ -787,6 +788,7 @@ public class Consultas {
                         + "    AND u.id_sucursal = s.id_sucursales\n"
                         + "    AND r.id_requisicion = rp.id_requisicion\n"
                         + "    AND p.id_productos = rp.id_producto\n"
+                        + "    AND p.id_categoria = " + categoria + "\n"
                         + "    AND rp.id_status = " + status + "\n"
                         + "    GROUP BY rp.id_req_prod\n"
                         + "    ORDER BY rp.id_req_prod;";
@@ -815,7 +817,7 @@ public class Consultas {
         }
         return listaRequi;
     }
-    
+
     public ArrayList<CotizacionRequisicion> consultarComprasAdmin() {
         ArrayList<CotizacionRequisicion> listaRequi = new ArrayList<CotizacionRequisicion>();
         PreparedStatement ps;
@@ -864,7 +866,7 @@ public class Consultas {
         }
         return listaRequi;
     }
-    
+
     public ArrayList<RequisicionProducto> consultarComprasDetalle(int categoria, int idProducto) {
         int cont = 0;
         ArrayList<RequisicionProducto> listaRequi = new ArrayList<RequisicionProducto>();
@@ -927,7 +929,7 @@ public class Consultas {
         }
         return listaRequi;
     }
-    
+
     public ArrayList<CotizacionRequisicion> consultarComprasDetalleCoti(int idReqCoti) {
         int cont = 0;
         ArrayList<CotizacionRequisicion> listaRequi = new ArrayList<CotizacionRequisicion>();
@@ -983,7 +985,7 @@ public class Consultas {
         }
         return listaRequi;
     }
-    
+
     public ArrayList<CotizacionRequisicion> consultarProveedorCoti(int idReqCoti, String idProveedor) {
         int cont = 0;
         ArrayList<CotizacionRequisicion> listaRequi = new ArrayList<CotizacionRequisicion>();
@@ -1036,7 +1038,7 @@ public class Consultas {
         }
         return listaRequi;
     }
-    
+
     public ArrayList<CotizacionRequisicion> consultarProveedorCoti2(int idReqCoti, String idProveedor) {
         int cont = 0;
         ArrayList<CotizacionRequisicion> listaRequi = new ArrayList<CotizacionRequisicion>();
@@ -1090,7 +1092,7 @@ public class Consultas {
         }
         return listaRequi;
     }
-    
+
     public ArrayList<RequisicionProducto> consultarComprasProv(String categoria, String status, String idProv) {
         int cont = 0;
         ArrayList<RequisicionProducto> listaRequi = new ArrayList<RequisicionProducto>();
@@ -1153,7 +1155,7 @@ public class Consultas {
         }
         return listaRequi;
     }
-    
+
     public ArrayList<RequisicionProducto> consultarAdministracionRequisiciones() {
         ArrayList<RequisicionProducto> listaRequi = new ArrayList<RequisicionProducto>();
         PreparedStatement ps;
@@ -1192,7 +1194,7 @@ public class Consultas {
                     obj.setProducto(rs.getString("PRODUCTO"));
                     obj.setJustificacion(rs.getString("JUSTIFICACION"));
                     obj.setStatus(rs.getString("ESTATUS"));
-                    
+
                     listaRequi.add(obj);
                 }
             } catch (SQLException ex) {
@@ -1209,7 +1211,7 @@ public class Consultas {
      * @param idProv proveedor que consulta
      * @return
      */
-    public ArrayList<OrdenFormato> consultarOrdenesProv(String idProv) {
+    public ArrayList<OrdenFormato> consultarOrdenesProv(String idProv, String categoria) {
         ArrayList<OrdenFormato> listaRequi = new ArrayList<OrdenFormato>();
         PreparedStatement ps;
         ResultSet rs;
@@ -1237,7 +1239,7 @@ public class Consultas {
                         + "    And u.id_usuario = r.id_usuario\n"
                         + "    AND r.id_requisicion = rp.id_requisicion\n"
                         + "    AND p.id_productos = rp.id_producto\n"
-                        + "    AND p.id_categoria = 1\n"
+                        + "    AND p.id_categoria = " + categoria + "\n"
                         + "    AND pr.idproveedor = " + idProv + "\n"
                         + "    AND rp.id_status = 10\n"
                         + "    and aut_compras > 0\n"
@@ -1258,7 +1260,7 @@ public class Consultas {
         }
         return listaRequi;
     }
-    
+
     public ArrayList<OrdenFormato> consultarOrdenesProvCompras(String sucursal, int cat) {
         ArrayList<OrdenFormato> listaRequi = new ArrayList<OrdenFormato>();
         PreparedStatement ps;
@@ -1321,7 +1323,7 @@ public class Consultas {
         }
         return listaRequi;
     }
-    
+
     public ArrayList<OrdenFormato> consultarOrdenesProvComprasHist(String suc) {
         ArrayList<OrdenFormato> listaRequi = new ArrayList<OrdenFormato>();
         PreparedStatement ps;
@@ -1351,7 +1353,7 @@ public class Consultas {
         }
         return listaRequi;
     }
-    
+
     public ArrayList<OrdenFormato> consultarOrdenesProvContabilidad(String razon) {
         ArrayList<OrdenFormato> listaRequi = new ArrayList<OrdenFormato>();
         PreparedStatement ps;
@@ -1382,7 +1384,7 @@ public class Consultas {
         }
         return listaRequi;
     }
-    
+
     public ArrayList<OrdenFormato> consultarOrdenesProvHist(String proveedor) {
         ArrayList<OrdenFormato> listaRequi = new ArrayList<OrdenFormato>();
         PreparedStatement ps;
@@ -1411,7 +1413,7 @@ public class Consultas {
         }
         return listaRequi;
     }
-    
+
     public ArrayList<RequisicionProducto> consultarProdEnvio(int orden) {
         ArrayList<RequisicionProducto> listaRequi = new ArrayList<RequisicionProducto>();
         PreparedStatement ps;
@@ -1439,7 +1441,7 @@ public class Consultas {
         }
         return listaRequi;
     }
-    
+
     public ArrayList<OrdenFormato> consultarOrdenesProvAcum(int idProv, int idSuc, int cat, int idDep) {
         ArrayList<OrdenFormato> listaRequi = new ArrayList<OrdenFormato>();
         PreparedStatement ps;
@@ -1529,7 +1531,7 @@ public class Consultas {
         }
         return listaRequi;
     }
-    
+
     public ArrayList<RequisicionProducto> consultarOrdenesProvAcumDetalle(int idProv, int idSuc, int cat, int idDep) {
         ArrayList<RequisicionProducto> listaRequi = new ArrayList<RequisicionProducto>();
         PreparedStatement ps;
@@ -1584,7 +1586,7 @@ public class Consultas {
         }
         return listaRequi;
     }
-    
+
     public ArrayList<OrdenFormato> consultarOrdenesFinal(int idOrden) {
         ArrayList<OrdenFormato> listaRequi = new ArrayList<OrdenFormato>();
         PreparedStatement ps;
@@ -1623,7 +1625,7 @@ public class Consultas {
         }
         return listaRequi;
     }
-    
+
     public ArrayList<RequisicionProducto> consultarDetalleComprasProv(int idReqCoti) {
         int cont = 0;
         ArrayList<RequisicionProducto> listaRequi = new ArrayList<RequisicionProducto>();
@@ -1660,7 +1662,7 @@ public class Consultas {
                         + "    AND rp.id_req_coti = " + idReqCoti + "\n"
                         + "    GROUP BY rp.id_producto, s.id_sucursales\n"
                         + "    ORDER BY rp.id_requisicion;";
-                
+
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
@@ -1685,7 +1687,7 @@ public class Consultas {
         }
         return listaRequi;
     }
-    
+
     public ArrayList<RequisicionProducto> consultarStatusProducto(String id_usuario) {
         int cont = 0;
         ArrayList<RequisicionProducto> listaRequi = new ArrayList<RequisicionProducto>();
@@ -1736,7 +1738,7 @@ public class Consultas {
         }
         return listaRequi;
     }
-    
+
     public ArrayList<Item> consultarItems(int categoria) {
         ArrayList<Item> items = new ArrayList<>();
         PreparedStatement ps;
@@ -1756,14 +1758,14 @@ public class Consultas {
                     objItem.setMarca(rs.getString("marca"));
                     items.add(objItem);
                 }
-                
+
             } catch (SQLException e) {
                 System.out.println("ERROR 2 AL CONSULTAR ITEMS SQL: " + e.getMessage());
             }
         }
         return items;
     }
-    
+
     public ArrayList<Item> consultarItems2(String nombre) {
         System.out.println("Entree");
         ArrayList<Item> items = new ArrayList<>();
@@ -1781,14 +1783,14 @@ public class Consultas {
                     objItem.setMarca(rs.getString("marca"));
                     items.add(objItem);
                 }
-                
+
             } catch (SQLException e) {
                 System.out.println("ERROR 2 AL CONSULTAR ITEMS SQL: " + e.getMessage());
             }
         }
         return items;
     }
-    
+
     public ArrayList<Proveedor> consultarProveedor(int giro) {
         ArrayList<Proveedor> proveedor = new ArrayList<>();
         PreparedStatement ps;
@@ -1814,7 +1816,7 @@ public class Consultas {
         }
         return proveedor;
     }
-    
+
     public ArrayList<CotizacionRequisicion> consultarCotizaciones(int idCoti) {
         ArrayList<CotizacionRequisicion> listaRequi = new ArrayList<CotizacionRequisicion>();
         PreparedStatement ps;
@@ -2029,7 +2031,7 @@ public class Consultas {
                         + "        and aut_compras > 0\n"
                         + "        AND c.id_req_coti = " + idReqCoti + "\n"
                         + "        AND s.sucursal = '" + suc + "'";
-                
+
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
@@ -2137,7 +2139,7 @@ public class Consultas {
         }
         return listaRequi;
     }
-    
+
     public int contarSolicitantesCoti(int idReqCoti) {
         int suma = 0;
         PreparedStatement ps;
@@ -2165,14 +2167,14 @@ public class Consultas {
                 if (rs.next()) {
                     suma = rs.getInt("SUMA");
                 }
-                
+
             } catch (SQLException e) {
                 System.out.println("ERROR 2 AL CONSULTAR ITEMS SQL: " + e.getMessage());
             }
         }
         return suma;
     }
-    
+
     public ArrayList<RequisicionFormato> consultarUsuario(int idUsuario) {
         ArrayList<RequisicionFormato> listaRequi = new ArrayList<RequisicionFormato>();
         PreparedStatement ps;
@@ -2257,7 +2259,7 @@ public class Consultas {
         }
         return correo;
     }
-    
+
     public String consultaArchivo(int idReeCoti, int idProv) {
         String ruta = "";
         PreparedStatement ps;
@@ -2279,7 +2281,7 @@ public class Consultas {
         }
         return ruta;
     }
-    
+
     public String consultaArchivoComp(int idReeCoti, int idCotizacion) {
         String ruta = "";
         PreparedStatement ps;
@@ -2300,7 +2302,7 @@ public class Consultas {
         }
         return ruta;
     }
-    
+
     public String consultaRutaFactura(int idOrden) {
         String ruta = "";
         PreparedStatement ps;

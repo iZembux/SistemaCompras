@@ -91,19 +91,51 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="menuComprasOrdenes.jsp?categoria=1"> 
-                        Ver Cotizaciones
+                        Cotizaciones Papeleria
+                    </a>
+                    <a class="dropdown-item" href="menuComprasOrdenes.jsp?categoria=4"> 
+                        Cotizaciones Cafeteria
+                    </a>
+                    <a class="dropdown-item" href="menuComprasOrdenes.jsp?categoria=2"> 
+                        Cotizaciones Tecnologia
                     </a>
                     <a class="dropdown-item" href="menuComprasOrdenesHistorial.jsp"> 
                         Historial Ordenes
                     </a>
                 </div>
-                    </li>
-            <a class="nav-link" href="menuComprasRecepcion.jsp"> 
-                Recepcion
-            </a>
-            <a class="nav-link" href="menuComprasEntrega.jsp"> 
-                Entrega
-            </a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Recepcion
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="menuComprasRecepcion.jsp?categoria=1"> 
+                        Papeleria
+                    </a>
+                    <a class="dropdown-item" href="menuComprasRecepcion.jsp?categoria=4"> 
+                        Cafeteria
+                    </a>
+                    <a class="dropdown-item" href="menuComprasRecepcion.jsp?categoria=2"> 
+                        Tecnologia
+                    </a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Entrega
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="menuComprasEntrega.jsp?categoria=1"> 
+                        Papeleria
+                    </a>
+                    <a class="dropdown-item" href="menuComprasEntrega.jsp?categoria=4"> 
+                        Cafeteria
+                    </a>
+                    <a class="dropdown-item" href="menuComprasEntrega.jsp?categoria=2"> 
+                        Tecnologia
+                    </a>
+                </div>
+            </li>
             <% if (rol == 3) { %>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -173,10 +205,11 @@
                 </div>
             </li>
             <% if (depto == 23) {%>
-             <a class="nav-link" href="menuAutorizaDictamen.jsp"> 
+            <a class="nav-link" href="menuAutorizaDictamen.jsp"> 
                 Dictamenes
             </a>
-            <% }}
+            <% }
+                }
                 if (rol == 4 || rol == 5) {  %>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
