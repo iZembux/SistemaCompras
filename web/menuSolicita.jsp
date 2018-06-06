@@ -81,7 +81,20 @@
                             <p class="card-text">PC, Mouse, Teclados, Memorias, etc.</p>
                         </div>
                         <div class="card-footer">
-                            <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#modalError">Solicitar</a>
+                            <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#modalTecnologia">Solicitar</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card">
+                        <img class="card-img-top" src="img/cafeteria.jpg" alt="">
+                        <div class="card-body">
+                            <h4 class="card-title">Cafetería</h4>
+                            <p class="card-text">Café, Galletas, Té, Servilletas, etc.</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#modalCafeteria">Solicitar</a>
                         </div>
                     </div>
                 </div>
@@ -98,19 +111,7 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="card">
-                        <img class="card-img-top" src="img/cafeteria.jpg" alt="">
-                        <div class="card-body">
-                            <h4 class="card-title">Cafetería</h4>
-                            <p class="card-text">Café, Galletas, Té, Servilletas, etc.</p>
-                        </div>
-                        <div class="card-footer">
-                            <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#modalError">Solicitar</a>
-                        </div>
-                    </div>
-                </div>
+                
             </div>
         </div>
 
@@ -180,11 +181,11 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form method="post" action="insertaProducto.jsp">
+                        <form method="post" action="insertarProductoTecnologia.jsp" enctype="multipart/form-data">
                             <div class="form-group">
                                 <label>Producto <b><FONT COLOR="red" title="Éste campo es obligatorio">*</FONT> </b><span class="badge badge-info" data-toggle="tooltip" title="Si tu producto no se encuentra en la lista favor de contactar al área de compras.">?</span> </label>
                                 <div class="input-group">
-                                    <select id="modelo" name="modelo" class="form-control">
+                                    <select id="modelo" name="modelo"  class="form-control">
                                         <option>Selecciona Producto </option>
                                         <%
                                             ArrayList<Item> items2 = obj.consultarItems(2);
@@ -207,6 +208,10 @@
                             <div for="justificacion" class="form-group">
                                 <label>Motivo de la compra <b><FONT COLOR="red" title="Éste campo es obligatorio">*</FONT> </b></label>
                                 <input type="text" class="form-control" id="justificacion" name="justificacion" required>
+                            </div>
+                            <div for="archivo" style="display: none" id="archivo" class="form-group">
+                                <label>Car&aacute;tula de Contrataci&oacute;n <span class="badge badge-info" data-toggle="tooltip" data-placement="bottom" title="Únicamente para puestos de nueva creación">?</span></label>
+                                <input type="file" class="form-control" id="archivo" accept="application/pdf" name="archivo">
                             </div>
 
                             <div class="modal-footer">
@@ -277,6 +282,7 @@
             </div>
         </div>
 
+        <!--MODAL NO DISPONIBLE-->
         <div class="modal fade" id="modalError" tabindex="-1" role="dialog" aria-labelledby="modalError" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -294,12 +300,22 @@
         </div>
 
         <jsp:include page="frag/footer.jsp" />
-
+        
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script>
 
+            let div1 = document.getElementById('archivo');
+                $('select#modelo').on('change',function(){
+                    let valor = $(this).val();
+                    console.log(valor);
+                    if(valor == "301"){
+                        div1.style.display = 'block';
+                    }
+                });
+        </script>
     </body>
 </html>
 <% }%>

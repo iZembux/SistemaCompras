@@ -39,7 +39,7 @@
         }
         if (idUsu.equals("88")) {
             idDepto2 = "8,10,13";
-			sucursal = "10,18";
+			sucursal = "1,8,10,11";
         }
 		if (idUsu.equals("181")) {
             idDepto2 = "1,14";
