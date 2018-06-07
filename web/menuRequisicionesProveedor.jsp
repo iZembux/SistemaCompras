@@ -128,7 +128,7 @@
                                     if (arrayRequis2.size() > 0) {%>
                                 <div class="row">
                                     <button type="button" class="btn btn-success btn-sm">Cotizacion Realizada</button> 
-                                    <form action="visor.jsp" method="post" target="_blank">
+                                    <form action="visor" method="post" target="_blank">
                                         <button type="submit" action="visor.jsp" value="<%=ruta%>" name="search" class="btn btn-dark btn-sm">Ver PDF</button> 
                                     </form>
                                 </div>

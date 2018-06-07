@@ -677,7 +677,7 @@ public class Consultas {
      * @param status El status de la requisicion
      * @return
      */
-    public ArrayList<RequisicionProducto> consultarComprasRecibido(int status, int categoria) {
+    public ArrayList<RequisicionProducto> consultarComprasRecibido(int status, int categoria, int suc) {
         int cont = 0;
         ArrayList<RequisicionProducto> listaRequi = new ArrayList<RequisicionProducto>();
         PreparedStatement ps;
@@ -723,6 +723,7 @@ public class Consultas {
                         + "    AND p.id_productos = rp.id_producto\n"
                         + "    AND p.id_categoria = " + categoria + "\n"
                         + "    AND rp.id_status = " + status + "\n"
+                        + "    AND u.id_sucursal = " + suc + "\n"
                         + "    GROUP BY u.id_sucursal, rp.id_producto, pr.idproveedor, rp.id_req_prod \n"
                         + "    ORDER BY rp.id_orden;";
                 ps = con.prepareStatement(sql);
