@@ -12,6 +12,18 @@
     } else {
         String idDepto = (String) sesion.getAttribute("departamento"); 
         String rol = (String) sesion.getAttribute("rol");
+        String usuario = (String) sesion.getAttribute("idUsuario");
+        String suc = null;
+        
+        if (usuario.equals("83")) {       //Valeria
+            suc = "1,2,3,4,6,7,8";
+        } else if (usuario.equals("4")) { //Veronica
+            suc = "1,2,3,4,6,7,8,13,9,14,17,10,11,15,16,18";
+        } else if (usuario.equals("25")) { //Angelica
+            suc = "10,11,15,16,18";
+        } else if (usuario.equals("226")) { //Roberto *Pendiente
+            suc = "9,13,14,17";
+        }
         
         int id_categoria = 0;
         try {
@@ -66,7 +78,7 @@
 
                         ArrayList<RequisicionProducto> arrayRequis = new ArrayList<RequisicionProducto>();
                         Consultas obj = new Consultas();
-                        arrayRequis = obj.consultarComprasEntregado(12, id_categoria);
+                        arrayRequis = obj.consultarComprasEntregado(12, id_categoria, suc);
 
                         if (arrayRequis.size() > 0) {
                             for (int i = 0; i < arrayRequis.size(); i++) {
