@@ -526,7 +526,7 @@ public class Consultas {
                         + "    AND rp.id_status = " + status + "\n"
                         + "    AND u.id_sucursal in (" + suc + ")\n"
                         + "    GROUP BY rp.id_producto\n"
-                        + "    ORDER BY rp.id_requisicion;";
+                        + "    ORDER BY rp.id_producto;";
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
@@ -1133,8 +1133,8 @@ public class Consultas {
                         + "    AND rp.id_status in (" + status + ")\n"
                         + "    AND p.id_categoria in (" + categoria + ")\n"
                         + "    GROUP BY rp.id_producto\n"
-                        + "    ORDER BY rp.id_requisicion;";
-                System.out.println(sql);
+                        + "    ORDER BY rp.id_producto;";
+                
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
@@ -1464,7 +1464,7 @@ public class Consultas {
                         + "    pr.telefono AS telefono,\n"
                         + "    s.rfc AS rfc,\n"
                         + "    c.fecha_aut_compras AS fecha,\n"
-                        + "    rp.cantidad AS cantidad,\n"
+                        + "    sum(rp.cantidad) AS cantidad,\n"
                         + "    p.nombre AS producto,\n"
                         + "    p.sku AS sku,\n"
                         + "    um.descripcion AS unidadM,\n"
@@ -1502,8 +1502,10 @@ public class Consultas {
                         + "    AND u.id_sucursal = " + idSuc + "\n"
                         + "    AND u.id_departamento = " + idDep + "\n"
                         + "    AND rp.id_status = 10\n"
-                        + "    and c.id_orden = 0\n"
-                        + "    and aut_compras > 0";
+                        + "    and rp.id_orden = 0\n"
+                        + "    and aut_compras > 0\n"
+                        + "    group by p.nombre";
+                
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {

@@ -32,7 +32,7 @@
     int proveedor = 0;
     int suc = 0;
     int dep = 0;
-    
+
     int idReqProd = 0;
     int tam = 0;
 
@@ -73,14 +73,6 @@
         idOrden = rs.getInt("id") + 1;
     }
 
-    for (int j = 0; j < tam; j++) {
-        try {
-            idReqProd = Integer.parseInt(request.getParameter("idReqProd" + j));
-            st.executeUpdate("update req_prod set id_orden = " + idOrden + " where id_req_prod = " + idReqProd + "");
-        } catch (Exception e) {
-        }
-    }
-
     arrayRequis = obj.consultarOrdenesProvAcum(proveedor, suc, categoria, dep);
     if (!arrayRequis.isEmpty()) {
         for (int i = 0; i < arrayRequis.size(); i++) {
@@ -105,16 +97,22 @@
             sku = arrayRequis.get(i).getSku();
 
             String usu = obj.consultarUsuarios(idC);
-            
 
             st.executeUpdate("insert into ordenes_compra values (default,CURRENT_TIMESTAMP,'" + idSucursal + "','" + sucursal + "','" + rfc + "','" + direccion + "','" + idP + "','" + nombreP + "',"
                     + "'" + direccionP + "','" + telefonoP + "','" + cantidad + "','" + unidadMedida + "','" + producto + "','" + sku + "','" + descuento + "','" + precio + "','" + subtotal + "','" + usu + "',"
                     + "'" + idOrden + "','" + departamento + "',default)");
 
-    }
+            for (int j = 0; j < tam; j++) {
+                try {
+                    idReqProd = Integer.parseInt(request.getParameter("idReqProd" + j));
+                    st.executeUpdate("update req_prod set id_orden = " + idOrden + " where id_req_prod = " + idReqProd + "");
+                } catch (Exception e) {
+                }
+            }
+        }
     }
 
-    response.sendRedirect("menuComprasOrdenes.jsp?categoria="+categoria+""); 
+    response.sendRedirect("menuComprasOrdenes.jsp?categoria=" + categoria + "");
 
 
 %>
