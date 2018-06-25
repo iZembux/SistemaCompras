@@ -2,6 +2,8 @@
 package model;
 
 public class Item {
+
+    
     private int id;
     private String nombre;
     private String categoria;
@@ -9,6 +11,22 @@ public class Item {
     private String marca;
     private String modelo;
     private String medida;
+    private double precio;
+    
+    
+    /**
+     * @return the precio
+     */
+    public double getPrecio() {
+        return precio;
+    }
+
+    /**
+     * @param precio the precio to set
+     */
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }
 
     /**
      * @return the id
