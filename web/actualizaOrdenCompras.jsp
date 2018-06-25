@@ -114,7 +114,7 @@
     }
     }
 
-    response.sendRedirect("menuComprasOrdenes.jsp");
+    response.sendRedirect("menuComprasOrdenes.jsp?categoria="+categoria+""); 
 
 
 %>

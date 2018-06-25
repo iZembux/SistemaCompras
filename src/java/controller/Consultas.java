@@ -777,7 +777,8 @@ public class Consultas {
                         + "    s.sucursal as SUC,\n"
                         + "    SUM(rp.cantidad) AS CANTIDAD,\n"
                         + "    r.fecha AS FECHA,\n"
-                        + "    rp.id_req_coti AS COTI\n"
+                        + "    rp.id_req_coti AS COTI,\n"
+                        + "    rp.id_orden AS ORDEN\n"
                         + "FROM\n"
                         + "    usuario u,\n"
                         + "    requisiciones r,\n"
@@ -793,7 +794,7 @@ public class Consultas {
                         + "    AND rp.id_status = " + status + "\n"
                         + "    AND u.id_sucursal in (" + suc + ")\n"
                         + "    GROUP BY rp.id_req_prod\n"
-                        + "    ORDER BY rp.id_req_prod;";
+                        + "    ORDER BY rp.id_orden, rp.id_req_prod;";
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
@@ -811,6 +812,7 @@ public class Consultas {
                     obj.setFecha(rs.getString("FECHA"));
                     obj.setIdReqCoti(rs.getInt("COTI"));
                     obj.setSucursal(rs.getString("SUC"));
+                    obj.setIdOrden(rs.getInt("ORDEN"));
                     listaRequi.add(obj);
                 }
             } catch (SQLException ex) {

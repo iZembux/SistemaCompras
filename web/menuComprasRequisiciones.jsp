@@ -91,6 +91,7 @@
                             <form action="detalleRequisicionCompras.jsp" method="post">
                                 <input type="hidden" class="hidden" name="idCategoria" value="<%=id_categoria %>" >
                                 <input type="hidden" class="hidden" name="idProducto" value="<%=idProducto%>" >
+                                <input type="hidden" class="hidden" name="categoria" value="<%=id_categoria %>" >
                                 <button type="submit" class="btn btn-primary btn-sm">Detalle</button>
                             </form>
                         </td>

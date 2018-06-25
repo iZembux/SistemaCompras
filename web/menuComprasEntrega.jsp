@@ -21,7 +21,7 @@
             suc = "1,2,3,4,6,7,8,13,9,14,17,10,11,15,16,18";
         } else if (usuario.equals("25")) { //Angelica
             suc = "10,11,15,16,18";
-        } else if (usuario.equals("226")) { //Roberto *Pendiente
+        } else if (usuario.equals("226")) { //Roberto
             suc = "9,13,14,17";
         }
         
@@ -55,7 +55,8 @@
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
-                        <th scope="col">Requisicion</th>
+                        <th scope="col">Orden</th>
+                        <th scope="col">Requi</th>
                         <th scope="col">Producto</th>
                         <th scope="col">Marca</th>
                         <th scope="col">Solicitante</th>
@@ -69,8 +70,8 @@
                     <%
                         int cantidadRequi;
                         int idReqProd;
-                        int idReqCoti;
                         int idUsu;
+                        int idOrden;
                         String producto;
                         String marca;
                         String solicitante;
@@ -82,16 +83,17 @@
 
                         if (arrayRequis.size() > 0) {
                             for (int i = 0; i < arrayRequis.size(); i++) {
+                                idOrden = arrayRequis.get(i).getIdOrden();
                                 idReqProd = arrayRequis.get(i).getIdReqProd();
                                 cantidadRequi = arrayRequis.get(i).getCantidad();
                                 producto = arrayRequis.get(i).getProducto();
                                 marca = arrayRequis.get(i).getMarca();
                                 solicitante = arrayRequis.get(i).getSolicitante();
-                                idReqCoti = arrayRequis.get(i).getIdReqCoti();
                                 sucursal = arrayRequis.get(i).getSucursal();
                                 idUsu = arrayRequis.get(i).getIdSolicita();
                     %>
                     <tr>
+                        <td><%=idOrden%></td>
                         <td><%=idReqProd%></td>
                         <td><%=producto%></td>
                         <td><%=marca%></td>
@@ -104,6 +106,7 @@
                                 <input type="hidden" class="hidden" name="producto" value="<%=producto%>" >
                                 <input type="hidden" class="hidden" name="cantidad" value="<%=cantidadRequi%>" >
                                 <input type="hidden" class="hidden" name="idUsu" value="<%=idUsu%>" >
+                                <input type="hidden" class="hidden" name="categoria" value="<%=id_categoria %>" >
                                 <input type="hidden" class="hidden" name="nuevoStatus" value="13" >
                                 <input type="hidden" class="hidden" name="entrega" value="1" >
                                 <button type="submit" class="btn btn-success btn-sm">Producto Entregado</button>

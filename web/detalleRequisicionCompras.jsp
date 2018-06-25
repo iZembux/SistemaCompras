@@ -134,6 +134,8 @@
                                 <input type="hidden" class="hidden" name="idReqProd" value="<%=idReqProd%>" >
                                 <input type="hidden" class="hidden" name="producto" value="<%=producto%>" >
                                 <input type="hidden" class="hidden" name="cantidad" value="<%=cantidadRequi%>" >
+                                <input type="hidden" class="hidden" name="categoria" value="<%=idCategoria %>" >
+                                <input type="hidden" class="hidden" name="idProducto" value="<%=idProducto %>" >
                                 <input type="hidden" class="hidden" name="stock" value="1" >
                                 <button type="submit" class="btn btn-success btn-sm">Producto en Stock</button>
                             </form>
@@ -161,8 +163,7 @@
             <div >
                 <form action="actualizaCompras.jsp" method="post">
                     <input type="hidden" class="hidden" name="nuevoStatus" value="5" >
-
-                    <input type="hidden" class="hidden" name="categoria" value="<%=id_categoria%>" >
+                    <input type="hidden" class="hidden" name="categoria" value="<%=idCategoria %>" >
                     <input type="hidden" class="hidden" name="usuario" value="<%=usuario%>" >
                     <input type="hidden" class="hidden" name="tam" value="<%=req2.size()%>" >
                     <% for (int i = 0; i < req2.size(); i++) {%>
