@@ -1339,7 +1339,7 @@ public class Consultas {
             try {
                 String sql = "SELECT razonSocialProveedor, sum(cantidadProducto) as cant, razonSocialSucursal, departamento,"
                         + " idCotizacionOrden, fechaOrden FROM scompras.ordenes_compra where idSucursal in (" + suc + ") "
-                        + " group by idCotizacionOrden order by idCotizacionOrden desc;";
+                        + " and idCotizacionOrden > 0 and idCotizacionOrden not in ('2','3','4','5') group by idCotizacionOrden order by idCotizacionOrden desc;";
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
@@ -1399,7 +1399,7 @@ public class Consultas {
         if (con != null) {
             try {
                 String sql = "SELECT razonSocialProveedor, sum(cantidadProducto) as cant, razonSocialSucursal, departamento,"
-                        + " idCotizacionOrden, fechaOrden FROM scompras.ordenes_compra where idProveedor = " + proveedor + " group by idCotizacionOrden order by idCotizacionOrden desc;";
+                        + " idCotizacionOrden, fechaOrden FROM scompras.ordenes_compra where idProveedor = " + proveedor + " and idCotizacionOrden > 0 and idCotizacionOrden not in ('2','3','4','5') group by idCotizacionOrden order by idCotizacionOrden desc;";
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
@@ -1429,8 +1429,10 @@ public class Consultas {
             try {
                 String sql = "select rp.id_req_prod as req, rp.id_status as status, o.rutaFactura from req_prod rp, cotizacion c, ordenes_compra o\n"
                         + "where rp.id_cot_ganadora = c.id_cotizacion\n"
-                        + "and rp.id_orden = o.idOrden\n"
-                        + "and o.idOrden = " + orden + ";";
+                        + "and rp.id_orden = o.idCotizacionOrden\n"
+                        + "and o.idCotizacionOrden = " + orden + " and o.idCotizacionOrden > 0\n"
+                        + "and o.idCotizacionOrden not in ('2','3','4','5')";
+                        
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
