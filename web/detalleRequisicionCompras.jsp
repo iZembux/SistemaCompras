@@ -18,6 +18,17 @@
         String rol = (String) sesion.getAttribute("rol");
         String usuario = (String) sesion.getAttribute("idUsuario");
         int id_categoria = 1;
+        String suc = null;
+
+        if (usuario.equals("83")) {       //Valeria
+            suc = "1,2,3,4,6,7,8";
+        } else if (usuario.equals("4")) { //Veronica
+            suc = "1,2,3,4,6,7,8,13,9,14,17,10,11,15,16,18";
+        } else if (usuario.equals("25")) { //Angelica
+            suc = "10,11,15,16,18";
+        } else if (usuario.equals("226")) { //Roberto *Pendiente
+            suc = "9,13,14,17";
+        }
 
         int idCategoria = 0;
         int idProducto = 0;
@@ -73,7 +84,7 @@
                         Consultas obj = new Consultas();
                         ConsultaBase obCB = new ConsultaBase();
 
-                        arrayRequis = obj.consultarComprasDetalle(idCategoria, idProducto);
+                        arrayRequis = obj.consultarComprasDetalle(idCategoria, idProducto, suc);
                         ArrayList<Integer> req2 = new ArrayList<Integer>();
 
                         if (arrayRequis.size() > 0) {
@@ -123,6 +134,8 @@
                                 <input type="hidden" class="hidden" name="idReqProd" value="<%=idReqProd%>" >
                                 <input type="hidden" class="hidden" name="producto" value="<%=producto%>" >
                                 <input type="hidden" class="hidden" name="cantidad" value="<%=cantidadRequi%>" >
+                                <input type="hidden" class="hidden" name="categoria" value="<%=idCategoria %>" >
+                                <input type="hidden" class="hidden" name="idProducto" value="<%=idProducto %>" >
                                 <input type="hidden" class="hidden" name="stock" value="1" >
                                 <button type="submit" class="btn btn-success btn-sm">Producto en Stock</button>
                             </form>
@@ -134,14 +147,12 @@
                                 <button type="submit" class="btn btn-info btn-sm">Ver Requisicion</button>
                             </form>
                         </td>
-                        <% if (rol.equals("3")) {%>
                         <td>
                             <form action="eliminaRequisicion.jsp" method="post">
                                 <input type="hidden" class="hidden" name="idReqProd" value="<%=idReqProd%>" >
                                 <button type="submit" class="btn btn-danger btn-sm">Rechazar</button>
                             </form>
                         </td>  
-                        <% } %>
                     </tr>
                     <% }
                         }
@@ -152,8 +163,7 @@
             <div >
                 <form action="actualizaCompras.jsp" method="post">
                     <input type="hidden" class="hidden" name="nuevoStatus" value="5" >
-
-                    <input type="hidden" class="hidden" name="categoria" value="<%=id_categoria%>" >
+                    <input type="hidden" class="hidden" name="categoria" value="<%=idCategoria %>" >
                     <input type="hidden" class="hidden" name="usuario" value="<%=usuario%>" >
                     <input type="hidden" class="hidden" name="tam" value="<%=req2.size()%>" >
                     <% for (int i = 0; i < req2.size(); i++) {%>

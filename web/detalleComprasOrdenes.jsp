@@ -16,8 +16,6 @@
     } else {
         String idDepto = (String) sesion.getAttribute("departamento");
         String rol = (String) sesion.getAttribute("rol");
-        String usuario = (String) sesion.getAttribute("idUsuario");
-        int id_categoria = 1;
 
         int idCategoria = 0;
         int idDepartamento = 0;

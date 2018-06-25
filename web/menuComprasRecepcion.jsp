@@ -109,6 +109,9 @@
                             <form action="actualizaRecibido.jsp" method="post">
                                 <input type="hidden" class="hidden" name="idUsu" value="<%=idUsu%>" >
                                 <input type="hidden" class="hidden" name="idReqProd" value="<%=idReqProd%>" >
+                                <input type="hidden" class="hidden" name="categoria" value="<%=id_categoria %>" >
+                                <input type="hidden" class="hidden" name="producto" value="<%=producto %>" >
+                                <input type="hidden" class="hidden" name="cantidad" value="<%=cantidadRequi %>" >
                                 <input type="hidden" class="hidden" name="nuevoStatus" value="12" >
                                 <button type="submit" class="btn btn-success btn-sm">Recibí Producto</button>
                             </form>

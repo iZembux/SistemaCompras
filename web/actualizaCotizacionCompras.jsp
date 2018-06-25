@@ -42,6 +42,13 @@
     } catch (Exception e) {
     }
 
+    int id_categoria = 0;
+    try {
+        id_categoria = Integer.parseInt(request.getParameter("categoria"));
+    } catch (Exception e) {
+
+    }
+
     ArrayList<CotizacionRequisicion> arrayRequis = new ArrayList<CotizacionRequisicion>();
     Consultas obj = new Consultas();
     arrayRequis = obj.consultarCotizaciones(idCotizacion);
@@ -65,7 +72,5 @@
     st.executeUpdate("update req_prod rp, cotizacion c set id_status = " + nuevoStatusRequi + ", id_cot_ganadora = " + idCotizacion + " where c.id_req_coti = rp.id_req_coti and c.id_cotizacion = " + idCotizacion + ";");
 
     //Envia Correo a Gerente Admin
-    
-    
-    response.sendRedirect("menuComprasCotizaciones.jsp");
+    response.sendRedirect("menuComprasCotizaciones.jsp?categoria="+id_categoria+"");
 %>

@@ -38,7 +38,7 @@
         tam = Integer.parseInt(request.getParameter("tam"));
     } catch (Exception e) {
     }
-
+    
     Class.forName("com.mysql.jdbc.Driver");
     Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/scompras", "root", "stmsc0nt");
     Statement st = con.createStatement();
@@ -81,7 +81,7 @@
             objMail.enviarCorreo(correo, "Proveedor", "", "Grupo Continental Automotriz ha solicitado una nueva cotizacion, favor de revisarla en el sistema de compras");
         }
     }
-    response.sendRedirect("menuComprasRequisiciones.jsp");
+    response.sendRedirect("menuComprasRequisiciones.jsp?categoria="+idCategoria+"");
 
 
 %>

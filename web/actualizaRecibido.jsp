@@ -42,6 +42,19 @@
     } catch (Exception e) {
     }
 
+    int id_categoria = 0;
+    try {
+        id_categoria = Integer.parseInt(request.getParameter("categoria"));
+    } catch (Exception e) {
+
+    }
+
+    int id_producto = 0;
+    try {
+        id_producto = Integer.parseInt(request.getParameter("idProducto"));
+    } catch (Exception e) {
+
+    }
     Class.forName("com.mysql.jdbc.Driver");
     Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/scompras", "root", "stmsc0nt");
     Statement st = con.createStatement();
@@ -54,19 +67,19 @@
     if (nuevoStatus == 12) {
         objMail.enviarCorreo(correo, "", "", "Tu producto está en el área de compras, puedes pasar a recogerlo EL PROXIMO DIA LUNES\n"
                 + "Id: " + idReqProd + "\n"
-                + "Producto: " + producto + "\n"        
-                + "Cantidad: " + cantidad +"\n");
+                + "Producto: " + producto + "\n"
+                + "Cantidad: " + cantidad + "\n");
     } else if (nuevoStatus == 13) {
-        objMail.enviarCorreo(correo, "", "", "Requisicion "+idReqProd+" Finalizada");
+        objMail.enviarCorreo(correo, "", "", "Requisicion " + idReqProd + " Finalizada");
     }
 
     if (stock == 1) {
-        response.sendRedirect("menuComprasEntrega.jsp");
+        response.sendRedirect("detalleRequisicionCompras.jsp?idCategoria=" + id_categoria + "&idProducto=" + id_producto + ""); 
     } else {
         if (entrega == 1) {
-            response.sendRedirect("menuComprasEntrega.jsp");
+            response.sendRedirect("menuComprasEntrega.jsp?categoria=" + id_categoria + "");
         } else {
-            response.sendRedirect("menuComprasRecepcion.jsp");
+            response.sendRedirect("menuComprasRecepcion.jsp?categoria=" + id_categoria + "");
         }
     }
 
