@@ -140,7 +140,7 @@
                         <td>
                             <form action="actualizaCotizacionCompras.jsp" method="post">
                                 <input type="hidden" class="hidden" name="nuevoStatusCoti" value="2" >
-                                <input type="hidden" class="hidden" name="nuevoStatusRequi" value="7" >
+                                <input type="hidden" class="hidden" name="nuevoStatusRequi" value="10" >
                                 <input type="hidden" class="hidden" name="idUsu" value="<%=idUsu%>" >
                                 <input type="hidden" class="hidden" name="cotiSelccionada" value="<%=idCoti%>" >
                                 <input type="hidden" class="hidden" name="categoria" value="<%=id_categoria %>" >
