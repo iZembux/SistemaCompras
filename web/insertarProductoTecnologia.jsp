@@ -100,6 +100,12 @@
                 } catch (Exception e) {
                 }
             try {
+                    if (elemento.equals("idStatus")) {
+                        idStatus = Integer.parseInt(item.getString());
+                    }
+                } catch (Exception e) {
+                }
+            try {
                     if (elemento.equals("modelo")) {
                         idProducto = Integer.parseInt(item.getString());
                     }

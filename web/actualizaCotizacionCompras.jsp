@@ -59,10 +59,6 @@
         total = ((precio + iva) * cantidad);
     }
 
-    if (total < 5000) {
-        nuevoStatusRequi = 10;
-    }
-
     Class.forName("com.mysql.jdbc.Driver");
     Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/scompras", "root", "stmsc0nt");
     Statement st = con.createStatement();

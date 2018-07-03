@@ -18,6 +18,7 @@ public class RequisicionProducto {
     private int idOrden;
     private int idCategoria;
     private int sku;
+    private double precio;
     private String producto;
     private String marca;
     private String status;
@@ -382,5 +383,19 @@ public class RequisicionProducto {
      */
     public void setRutaDictamen(String rutaDictamen) {
         this.rutaDictamen = rutaDictamen;
+    }
+
+    /**
+     * @return the precio
+     */
+    public double getPrecio() {
+        return precio;
+    }
+
+    /**
+     * @param precio the precio to set
+     */
+    public void setPrecio(double precio) {
+        this.precio = precio;
     }
 }

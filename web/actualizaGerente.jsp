@@ -11,6 +11,7 @@
     int nuevoStatus = 0;
     int autoriza = 0;
     int idUsu = 0;
+    int admin = 0;
 
     Mail objMail = new Mail();
 
@@ -32,6 +33,10 @@
     }
     try {
         idUsu = Integer.parseInt(request.getParameter("idUsu"));
+    } catch (Exception e) {
+    }
+    try {
+        admin = Integer.parseInt(request.getParameter("admin"));
     } catch (Exception e) {
     }
 
@@ -81,6 +86,11 @@
     } else {
         System.out.println("ERROR AL RECIBIR PARAMETROS");
     }
-    response.sendRedirect("menuAutorizaRequi.jsp");
+
+    if (admin == 1) {
+        response.sendRedirect("menuAutorizaRequiAdmin.jsp");
+    } else {
+        response.sendRedirect("menuAutorizaRequi.jsp");
+    }
 
 %>
