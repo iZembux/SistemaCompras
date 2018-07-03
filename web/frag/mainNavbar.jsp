@@ -171,7 +171,7 @@
                 </div>
             </li>
             <% }
-                if (rol == 3 || rol == 4) {
+                if (rol == 3 || rol == 4 || rol == 5) {
                     if (depto != 7) {
             %>
             <li class="nav-item dropdown">
@@ -195,6 +195,13 @@
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-check-square"></i> Autorizaciones
                 </a>
+                <% if (rol == 5) { %>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="menuAutorizaRequiAdmin.jsp"> 
+                        Autorizar Requisicion
+                    </a>
+                </div>
+                <% } else { %>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="menuAutorizaRequi.jsp"> 
                         Autorizar Requisicion
@@ -203,6 +210,7 @@
                         Historial de Autorizaciones
                     </a>
                 </div>
+                <% } %>
             </li>
             <% if (depto == 23) {%>
             <a class="nav-link" href="menuAutorizaDictamen.jsp"> 

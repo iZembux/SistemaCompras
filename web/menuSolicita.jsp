@@ -21,6 +21,8 @@
         String nombre = (String) sesion.getAttribute("nombre");
         String sucursal = (String) sesion.getAttribute("sucursal");
 
+        int rol2 = Integer.parseInt(rol);
+
         int nuevaRequisicion = 1;
 
         try {
@@ -85,7 +87,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="col-lg-3 col-md-6 mb-4">
                     <div class="card">
                         <img class="card-img-top" src="img/cafeteria.jpg" alt="">
@@ -111,7 +113,7 @@
                         </div>
                     </div>
                 </div>
-                
+
             </div>
         </div>
 
@@ -160,6 +162,9 @@
                                 <input type="submit" class="btn btn-primary" value="Solicitar" />
                             </div>
 
+                            <% if (rol2 >= 3) { %>
+                            <input type="hidden" class="form-control" id="idStatus" name="idStatus" value="8">
+                            <% }%>
                             <input type="hidden" class="form-control" id="nuevaRequisicion" name="nuevaRequisicion" value="<%=nuevaRequisicion%>">
                             <input type="hidden" class="form-control" id="idUsuario" name="idUsuario" value="<%=id_usuario%>">
                             <input type="hidden" class="form-control" id="idDepto" name="idDepto" value="<%=idDepto%>">
@@ -218,6 +223,9 @@
                                 <input type="submit" class="btn btn-primary" value="Solicitar" />
                             </div>
 
+                            <% if (rol2 >= 3) { %>
+                            <input type="hidden" class="form-control" id="idStatus" name="idStatus" value="8">
+                            <% }%>
                             <input type="hidden" class="form-control" id="nuevaRequisicion" name="nuevaRequisicion" value="<%=nuevaRequisicion%>">
                             <input type="hidden" class="form-control" id="idUsuario" name="idUsuario" value="<%=id_usuario%>">
                             <input type="hidden" class="form-control" id="idDepto" name="idDepto" value="<%=idDepto%>">
@@ -300,7 +308,7 @@
         </div>
 
         <jsp:include page="frag/footer.jsp" />
-        
+
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -308,13 +316,13 @@
         <script>
 
             let div1 = document.getElementById('archivo');
-                $('select#modelo').on('change',function(){
-                    let valor = $(this).val();
-                    console.log(valor);
-                    if(valor == "301"){
-                        div1.style.display = 'block';
-                    }
-                });
+            $('select#modelo').on('change', function () {
+                let valor = $(this).val();
+                console.log(valor);
+                if (valor == "301") {
+                    div1.style.display = 'block';
+                }
+            });
         </script>
     </body>
 </html>

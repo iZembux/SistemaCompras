@@ -66,6 +66,52 @@ public class Consultas {
         }
         return listaRequi;
     }
+    
+    public ArrayList<RequisicionProducto> consultarRequiGerenteAdmin(String departamento, String sucursal) {
+        int cont = 0;
+        ArrayList<RequisicionProducto> listaRequi = new ArrayList<RequisicionProducto>();
+        PreparedStatement ps;
+        ResultSet rs;
+        Connection con;
+        con = ConexionMySQL.conectar();
+        if (con != null) {
+            try {
+                String sql = "SELECT \n"
+                        + "    rp.id_requisicion AS IDREQUISICION,\n"
+                        + "    u.nombre AS SOLICITANTE,\n"
+                        + "    SUM(rp.cantidad) AS CANTIDAD,\n"
+                        + "    r.fecha\n"
+                        + "FROM\n"
+                        + "    usuario u,\n"
+                        + "    requisiciones r,\n"
+                        + "    req_prod rp,\n"
+                        + "    productos p\n"
+                        + "WHERE\n"
+                        + "    u.id_usuario = r.id_usuario\n"
+                        + "    AND r.id_requisicion = rp.id_requisicion\n"
+                        + "    AND p.id_productos = rp.id_producto\n"
+                        + "    AND u.id_sucursal in (" + sucursal + ")\n"
+                        + "    AND u.id_departamento in (" + departamento + ")\n"
+                        + "    AND rp.id_status = 8\n"
+                        + "    GROUP BY rp.id_requisicion\n"
+                        + "    ORDER BY rp.id_requisicion;";
+                ps = con.prepareStatement(sql);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    cont++;
+                    RequisicionProducto obj = new RequisicionProducto();
+                    obj.setIdRequisicion(rs.getInt("IDREQUISICION"));
+                    obj.setSolicitante(rs.getString("SOLICITANTE"));
+                    obj.setCantidad(rs.getInt("CANTIDAD"));
+                    obj.setFecha(rs.getString("fecha"));
+                    listaRequi.add(obj);
+                }
+            } catch (SQLException ex) {
+                System.out.println("ERROR: " + ex.getMessage());
+            }
+        }
+        return listaRequi;
+    }
 
     public ArrayList<RequisicionProducto> consultarDictamen(String sucursal) {
         ArrayList<RequisicionProducto> listaRequi = new ArrayList<RequisicionProducto>();
@@ -181,6 +227,57 @@ public class Consultas {
                         + "    AND p.id_productos = rp.id_producto\n"
                         + "    and r.id_requisicion = " + id_requisicion + "\n"
                         + "    AND rp.id_status = 3\n"
+                        + "    group by rp.id_req_prod;";
+                ps = con.prepareStatement(sql);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    RequisicionProducto obj = new RequisicionProducto();
+                    obj.setIdSolicita(rs.getInt("IDSOLICITANTE"));
+                    obj.setIdReqProd(rs.getInt("IDREQUISICION"));
+                    obj.setProducto(rs.getString("PRODUCTO"));
+                    obj.setMarca(rs.getString("MARCA"));
+                    obj.setCantidad(rs.getInt("CANTIDAD"));
+                    obj.setJustificacion(rs.getString("JUSTIFICACION"));
+                    obj.setDescripcion(rs.getString("DESCRIPCION"));
+                    obj.setIdCategoria(rs.getInt("CATE"));
+                    listaRequi.add(obj);
+                }
+            } catch (SQLException ex) {
+                System.out.println("ERROR: " + ex.getMessage());
+            }
+        }
+        return listaRequi;
+    }
+    
+    public ArrayList<RequisicionProducto> consultarDetalleRequiGerenteAdmin(int id_requisicion) {
+        int cont = 0;
+        ArrayList<RequisicionProducto> listaRequi = new ArrayList<RequisicionProducto>();
+        PreparedStatement ps;
+        ResultSet rs;
+        Connection con;
+        con = ConexionMySQL.conectar();
+        if (con != null) {
+            try {
+                String sql = "SELECT \n"
+                        + "    r.id_usuario as IDSOLICITANTE,\n"
+                        + "    rp.id_req_prod AS IDREQUISICION,\n"
+                        + "    p.nombre AS PRODUCTO,\n"
+                        + "    p.marca AS MARCA,\n"
+                        + "    p.id_categoria AS CATE,\n"
+                        + "    SUM(rp.cantidad) AS CANTIDAD,\n"
+                        + "    rp.justificacion AS JUSTIFICACION,\n"
+                        + "    rp.descripcion AS DESCRIPCION\n"
+                        + "FROM\n"
+                        + "    usuario u,\n"
+                        + "    requisiciones r,\n"
+                        + "    req_prod rp,\n"
+                        + "    productos p\n"
+                        + "WHERE\n"
+                        + "    u.id_usuario = r.id_usuario\n"
+                        + "    AND r.id_requisicion = rp.id_requisicion\n"
+                        + "    AND p.id_productos = rp.id_producto\n"
+                        + "    and r.id_requisicion = " + id_requisicion + "\n"
+                        + "    AND rp.id_status = 8\n"
                         + "    group by rp.id_req_prod;";
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
@@ -1134,7 +1231,7 @@ public class Consultas {
                         + "    AND p.id_categoria in (" + categoria + ")\n"
                         + "    GROUP BY rp.id_producto\n"
                         + "    ORDER BY rp.id_producto;";
-                
+
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
@@ -1432,7 +1529,7 @@ public class Consultas {
                         + "and rp.id_orden = o.idCotizacionOrden\n"
                         + "and o.idCotizacionOrden = " + orden + " and o.idCotizacionOrden > 0\n"
                         + "and o.idCotizacionOrden not in ('2','3','4','5')";
-                        
+
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
@@ -1507,7 +1604,7 @@ public class Consultas {
                         + "    and rp.id_orden = 0\n"
                         + "    and aut_compras > 0\n"
                         + "    group by p.nombre";
-                
+
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
@@ -1551,7 +1648,9 @@ public class Consultas {
             try {
                 String sql = "SELECT \n"
                         + "	rp.id_req_prod,\n"
+                        + "    (rp.cantidad*(c.precio + c.iva)) as precio,\n"
                         + "    c.id_cotizacion as idcoti,\n"
+                        + "    c.id_req_coti as idreqcoti,\n"
                         + "    u.nombre as nombre,\n"
                         + "    rp.cantidad AS cant,\n"
                         + "    p.nombre as prod\n"
@@ -1578,12 +1677,15 @@ public class Consultas {
                         + "    AND pr.idproveedor = " + idProv + "\n"
                         + "    AND rp.id_status = 10\n"
                         + "    and rp.id_orden = 0    \n"
+                        + "    group by rp.id_req_prod, c.id_proveedor, s.id_sucursales, d.id_departamentos    \n"
                         + "    ORDER BY c.id_proveedor, s.id_sucursales, d.id_departamentos;";
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
                     RequisicionProducto obj = new RequisicionProducto();
+                    obj.setPrecio(rs.getDouble("precio"));
                     obj.setIdReqProd(rs.getInt("id_req_prod"));
+                    obj.setIdReqCoti(rs.getInt("idreqcoti"));
                     obj.setSolicitante(rs.getString("nombre"));
                     obj.setCantidad(rs.getInt("cant"));
                     obj.setProducto(rs.getString("prod"));
@@ -1594,6 +1696,49 @@ public class Consultas {
             }
         }
         return listaRequi;
+    }
+
+    public int consultarCantidadCot(int reqProd) {
+        int total = 0;
+        PreparedStatement ps;
+        ResultSet rs;
+        Connection con;
+        con = ConexionMySQL.conectar();
+        if (con != null) {
+            try {
+                String sql = "select count(c.id_req_coti) as total from cotizacion c, req_prod r where r.id_req_coti = c.id_req_coti "
+                        + "and r.id_req_prod = " + reqProd + "";
+                ps = con.prepareStatement(sql);
+                rs = ps.executeQuery();
+                if (rs.next()) {
+                    total = rs.getInt("total");
+                }
+            } catch (SQLException ex) {
+                System.out.println("ERROR: " + ex.getMessage());
+            }
+        }
+        return total;
+    }
+
+    public ArrayList<Integer> consultarProvSelec(int reqProd) {
+        ArrayList<Integer> res = new ArrayList<Integer>();
+        PreparedStatement ps;
+        ResultSet rs;
+        Connection con;
+        con = ConexionMySQL.conectar();
+        if (con != null) {
+            try {
+                String sql = "select id_proveedor from proveedores_selec where id_req_prod = "+reqProd+"";
+                ps = con.prepareStatement(sql);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    res.add(rs.getInt("id_proveedor"));
+                }
+            } catch (SQLException ex) {
+                System.out.println("ERROR: " + ex.getMessage());
+            }
+        }
+        return res;
     }
 
     public ArrayList<OrdenFormato> consultarOrdenesFinal(int idOrden) {
