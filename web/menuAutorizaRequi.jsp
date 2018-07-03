@@ -74,7 +74,10 @@
         if (idUsu.equals("258")) {
                 idDepto2 = "26,23";
                 sucursal = "1,9";
-            }
+        }
+        if (idUsu.equals("180")) {
+                idDepto2 = "16,17";
+        }
 
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

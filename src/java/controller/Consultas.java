@@ -1133,7 +1133,7 @@ public class Consultas {
                         + "    AND p.id_productos = rp.id_producto\n"
                         + "    AND rp.id_status in (" + status + ")\n"
                         + "    AND p.id_categoria in (" + categoria + ")\n"
-                        + "    GROUP BY rp.id_producto\n"
+                        + "    GROUP BY rp.id_producto, rp.id_status\n"
                         + "    ORDER BY rp.id_producto;";
                 
                 ps = con.prepareStatement(sql);
@@ -1924,7 +1924,7 @@ public class Consultas {
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
-                    Precio.setPrecio(rs.getDouble("precio"));
+                    Precio.setPrecio(rs.getDouble("precioUnitario"));
                     Precio.setDiasCredito(rs.getInt("diasCredito"));
                     Precio.setTiempoEntrega(rs.getInt("tiempoEntrega"));
                     Precio.setGarantia(rs.getInt("tiempoEntrega"));
