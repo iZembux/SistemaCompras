@@ -52,7 +52,7 @@
     }
 
     st.executeUpdate("UPDATE req_prod SET id_status = " + nuevoStatus + ",\n"
-            + "id_req_coti = " + (id_cotizacion + 1) + ", usu_compras = " + usuarioC + " WHERE id_producto = " + idProducto + "\n"
+            + "id_req_coti = " + (id_cotizacion + 1) + ", usu_compras = " + usuarioC + ", fecha_coti = CURRENT_TIMESTAMP WHERE id_producto = " + idProducto + "\n"
             + "AND id_status = 4;");
 
     //Envia correo a los proveedores seleccionados
