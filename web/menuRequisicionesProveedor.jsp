@@ -43,10 +43,12 @@
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
+                        <th scope="col">Id</th>
                         <th scope="col">Producto</th>
                         <th scope="col">SKU</th>
                         <th scope="col">Marca</th>
                         <th scope="col">Cantidad</th>
+                        <th scope="col">Fecha de Solicitud</th>
                         <th scope="col"></th>
                     </tr>
                 </thead>
@@ -60,6 +62,7 @@
                         String producto;
                         String marca;
                         String rutaDictamen;
+                        String fechaCoti;
 
                         ArrayList<RequisicionProducto> arrayRequis = new ArrayList<RequisicionProducto>();
                         Consultas obj = new Consultas();
@@ -79,6 +82,7 @@
                                 idReqCoti = arrayRequis.get(i).getIdReqCoti();
                                 status = arrayRequis.get(i).getIdStatus();
                                 sku = arrayRequis.get(i).getSku();
+                                fechaCoti = arrayRequis.get(i).getFecha_coti();
                                 if (idCategoria.equals("2")) {
                                     rutaDictamen = arrayRequis.get(i).getRutaDictamen();
                                 } else {
@@ -87,10 +91,12 @@
 
                     %>
                     <tr>
+                        <td><%=idReqCoti%></td>
                         <td><%=producto%></td>
                         <td><%=sku%></td>
                         <td><%=marca%></td>
                         <td><%=cantidadRequi%></td> 
+                        <td><%=fechaCoti%></td> 
                         <td>
                             <div class="row">
                                 <% if (status == 5) {%>
