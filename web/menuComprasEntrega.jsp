@@ -16,13 +16,13 @@
         String suc = null;
         
         if (usuario.equals("83")) {       //Valeria
-            suc = "1,2,3,4,6,7,8";
+            suc = "1,2,3,4,6,7,8,13";
         } else if (usuario.equals("4")) { //Veronica
             suc = "1,2,3,4,6,7,8,13,9,14,17,10,11,15,16,18";
         } else if (usuario.equals("25")) { //Angelica
             suc = "10,11,15,16,18";
         } else if (usuario.equals("226")) { //Roberto
-            suc = "9,13,14,17";
+            suc = "9,14,17";
         }
         
         int id_categoria = 0;
