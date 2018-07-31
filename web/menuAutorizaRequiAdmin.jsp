@@ -1,6 +1,5 @@
 <%-- 
-    Muestra las requisiciones disponibles para la autorizacion del gerente por id de departamento
-    status = 3
+    Muestra las requisiciones disponibles para la autorizacion del Director Administrativo
 --%>
 
 <%@page import="java.util.ArrayList"%>
@@ -18,61 +17,8 @@
 
         String idUsu = (String) sesion.getAttribute("idUsuario");
         String idDepto2 = idDepto;
-        if (idUsu.equals("34")) {
-            idDepto2 = "1,8,10,13";
-        }
-		if (idUsu.equals("210")) {
-            idDepto2 = "1,8,10,13";
-        }
-        if (idUsu.equals("114")) {
-            idDepto2 = "21,26,1,13,18";
-        }
-        if (idUsu.equals("65") || idUsu.equals("133")) {
-            idDepto2 = "1,6,8,9,13,24,25,26";
-        }
-        
-        if (idUsu.equals("14")) {
-            idDepto2 = "1,24,6";
-        }
-		if (idUsu.equals("4")) {
-            idDepto2 = "7,28";
-        }
-        if (idUsu.equals("88")) {
-            idDepto2 = "8,10,13";
-            sucursal = "1,8,10,11";
-        }
-		if (idUsu.equals("181")) {
-            idDepto2 = "1,14";
-        }
-		if (idUsu.equals("153")) {
-            idDepto2 = "3,21";
-			sucursal = "1,2,3,4,6,7";
-        }
-		if (idUsu.equals("173")||idUsu.equals("167")) {
-            idDepto2 = "1,10,12,26";
-        }
-        if (idUsu.equals("57")) {
-            idDepto2 = "18,19,21";
-			sucursal = "8";
-        }
-        
-        if (idUsu.equals("60") || idUsu.equals("4")) {
-            sucursal = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18";
-        }
-		if (idUsu.equals("100")) {
-            sucursal = "1,6";
-        }
-        if (idUsu.equals("126")) {
-            sucursal = "9,14";
-        }
-		if (idUsu.equals("127")) {
-            sucursal = "1,9,10,11";
-        }
-		if (idUsu.equals("138")) {
-            sucursal = "1,9,10,11";
-        }
-                
-if (idUsu.equals("1")) {
+
+        if (idUsu.equals("1")) {
             sucursal = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18";
             idDepto2 = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28";
         }
@@ -128,7 +74,7 @@ if (idUsu.equals("1")) {
                     %>
                     <tr>
                         <td><%=idRequi%></td>
-                        <td><%=solicitante.toUpperCase() %></td>
+                        <td><%=solicitante.toUpperCase()%></td>
                         <td><%=cantidadRequi%></td>
                         <td><%=fecha%></td>
                         <td>
