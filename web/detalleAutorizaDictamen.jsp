@@ -64,8 +64,6 @@
                     <%                //Consulta por idRequi seleccionada
                         int idReqProd;
                         int cantidad;
-                        int idSolicita;
-                        int categoria;
                         String producto;
                         String marca;
                         String justificacion;
@@ -79,17 +77,14 @@
 
                         if (arrayRequis.size() > 0) {
                             for (int i = 0; i < arrayRequis.size(); i++) {
-                                idSolicita = arrayRequis.get(i).getIdSolicita();
                                 idReqProd = arrayRequis.get(i).getIdReqProd();
                                 cantidad = arrayRequis.get(i).getCantidad();
                                 producto = arrayRequis.get(i).getProducto();
                                 marca = arrayRequis.get(i).getMarca();
                                 justificacion = arrayRequis.get(i).getJustificacion();
                                 descripcion = arrayRequis.get(i).getDescripcion();
-                                categoria = arrayRequis.get(i).getIdCategoria();
                                 rutaCaratula = arrayRequis.get(i).getRutaCaratula();
                                 rutaDictamen = arrayRequis.get(i).getRutaDictamen();
-                                
                     %>
                     <tr>
                         <td><%=producto%></td>
@@ -123,7 +118,7 @@
                                 </form>
                                 <form action="actualizaDictamen.jsp" method="post">
                                     <input type="hidden" class="hidden" name="idReqProd" value="<%=idReqProd%>" >
-                                    <input type="hidden" class="hidden" name="nuevoStatus" value="17" >
+                                    <input type="hidden" class="hidden" name="nuevoStatus" value="18" >
                                     <button type="submit" class="btn btn-danger btn-sm" onclick="alerta2()">Rechazar</button>
                                 </form>
                             </div>
