@@ -127,7 +127,7 @@
                                 </form>
                                 <form action="actualizaDictamen.jsp" method="post">
                                     <input type="hidden" class="hidden" name="idReqProd" value="<%=idReqProd%>" >
-                                    <input type="hidden" class="hidden" name="nuevoStatus" value="17" >
+                                    <input type="hidden" class="hidden" name="nuevoStatus" value="18" >
                                     <button type="submit" class="btn btn-danger btn-sm" onclick="alerta2()">Rechazar</button>
                                 </form>
                             </div>
