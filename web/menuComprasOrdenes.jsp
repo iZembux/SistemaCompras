@@ -22,7 +22,7 @@
         
          if (usuario.equals("83")) {                         //Valeria
             suc = "1,2,3,4,6,7,8,13";
-        } else if (usuario.equals("4")) {                    //Veronica
+        } else if (usuario.equals("4") || usuario.equals("268")) {                    //Veronica
             suc = "1,2,3,4,6,7,8,13,9,14,17,10,11,15,16,18";
         } else if (usuario.equals("25")) {                   //Angelica
             suc = "10,11,15,16,18";
