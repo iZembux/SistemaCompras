@@ -108,6 +108,7 @@
                                     <input type="hidden" class="hidden" name="nuevoStatus" value="4" >
                                     <% } %>
                                     <input type="hidden" class="hidden" name="autoriza" value="1" >
+                                    <input type="hidden" class="hidden" name="categoria" value="<%= categoria%>" >
                                     <input type="hidden" class="hidden" name="idUsu" value="<%= idUsu%>" >
                                     <button type="submit" class="btn btn-success btn-sm" onclick="alerta()">Autorizar</button>
                                 </form>
