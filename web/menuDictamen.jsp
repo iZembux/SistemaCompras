@@ -9,12 +9,18 @@
 <%
     HttpSession sesion = request.getSession();
     String usuarioValidado = (String) sesion.getAttribute("usuarioIngresado");
+    String idUsu = (String) sesion.getAttribute("idUsuario");
+    
     if (usuarioValidado == null) {
         response.sendRedirect("index.jsp");
     } else {
         String idDepto = (String) sesion.getAttribute("departamento");
         String rol = (String) sesion.getAttribute("rol");
         String sucursal = (String) sesion.getAttribute("sucursal");
+
+        if (idUsu.equals("267") || idUsu.equals("313")) {
+            sucursal = "1,2,3,4,6,7,8";
+        }
 
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -67,7 +73,7 @@
                     %>
                     <tr>
                         <td><%=idRequi%></td>
-                        <td><%=solicitante.toUpperCase() %></td>
+                        <td><%=solicitante.toUpperCase()%></td>
                         <td><%=cantidadRequi%></td>
                         <td><%=fecha%></td>
                         <td>
