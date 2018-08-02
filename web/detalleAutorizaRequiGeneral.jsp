@@ -1,7 +1,3 @@
-<%-- 
-    Muestra las requisiciones disponibles para la autorizacion del gerente por cada requisicion
-    status = 3
---%>
 
 <%@page import="controller.Consultas"%>
 <%@page import="java.util.ArrayList"%>
@@ -64,27 +60,27 @@
                     <%                //Consulta por idRequi seleccionada
                         int idReqProd;
                         int cantidad;
+                        int idSolicita;
+                        int categoria;
                         String producto;
                         String marca;
                         String justificacion;
                         String descripcion;
-                        String rutaCaratula;
-                        String rutaDictamen;
 
                         ArrayList<RequisicionProducto> arrayRequis = new ArrayList<RequisicionProducto>();
                         Consultas obj = new Consultas();
-                        arrayRequis = obj.consultarDetalleAutorizaDictamen(idRequi);
+                        arrayRequis = obj.consultarDetalleRequiGeneral(idRequi);
 
                         if (arrayRequis.size() > 0) {
                             for (int i = 0; i < arrayRequis.size(); i++) {
+                                idSolicita = arrayRequis.get(i).getIdSolicita();
                                 idReqProd = arrayRequis.get(i).getIdReqProd();
                                 cantidad = arrayRequis.get(i).getCantidad();
                                 producto = arrayRequis.get(i).getProducto();
                                 marca = arrayRequis.get(i).getMarca();
                                 justificacion = arrayRequis.get(i).getJustificacion();
                                 descripcion = arrayRequis.get(i).getDescripcion();
-                                rutaCaratula = arrayRequis.get(i).getRutaCaratula();
-                                rutaDictamen = arrayRequis.get(i).getRutaDictamen();
+                                categoria = arrayRequis.get(i).getIdCategoria();
                     %>
                     <tr>
                         <td><%=producto%></td>
@@ -94,31 +90,20 @@
                         <td><%=descripcion.toUpperCase()%></td>
                         <td>
                             <div class="row">
-                                <%
-                                    if (rutaCaratula != null || !rutaCaratula.equals("") ) {
-                                %>
-                                <form name="abreCaratula" action="visor" method="POST" target="_blank">
-                                    <input type="hidden" name="search" id="search" value="<%=rutaCaratula%>" >
-                                    <button type="submit" class="btn btn-dark btn-sm" >Ver Car&aacute;tula</button>
-                                </form>
-                                <%} else {%>
-                                    <button type="submit" class="btn btn-dark btn-sm" disabled="true">No disponible</button>
-                                <% }
-                                if (rutaDictamen != null || !rutaDictamen.equals("")) {
-                                %>
-                                <form name="abreDictamen" action="visor" method="POST" target="_blank">
-                                    <input type="hidden" name="search" id="search" value="<%=rutaDictamen%>" >
-                                    <button type="submit" class="btn btn-outline-dark btn-sm" >Ver Dictamen</button>
-                                </form>
-                                <%}%>
-                                <form action="actualizaDictamen.jsp" method="post">
+                                <form action="actualizaGerente.jsp" method="post">
                                     <input type="hidden" class="hidden" name="idReqProd" value="<%=idReqProd%>" >
-                                    <input type="hidden" class="hidden" name="nuevoStatus" value="4" >
+                                    <input type="hidden" class="hidden" name="idSolicita" value="<%=idSolicita%>" >
+                                    <input type="hidden" class="hidden" name="nuevoStatus" value="2" >
+                                    <input type="hidden" class="hidden" name="autoriza" value="1" >
+                                    <input type="hidden" class="hidden" name="idUsu" value="<%= idUsu%>" >
                                     <button type="submit" class="btn btn-success btn-sm" onclick="alerta()">Autorizar</button>
                                 </form>
-                                <form action="actualizaDictamen.jsp" method="post">
+                                <form action="actualizaGerente.jsp" method="post">
                                     <input type="hidden" class="hidden" name="idReqProd" value="<%=idReqProd%>" >
-                                    <input type="hidden" class="hidden" name="nuevoStatus" value="18" >
+                                    <input type="hidden" class="hidden" name="idSolicita" value="<%=idSolicita%>" >
+                                    <input type="hidden" class="hidden" name="nuevoStatus" value="14" >
+                                    <input type="hidden" class="hidden" name="autoriza" value="2" >
+                                    <input type="hidden" class="hidden" name="idUsu" value="<%= idUsu%>" >
                                     <button type="submit" class="btn btn-danger btn-sm" onclick="alerta2()">Rechazar</button>
                                 </form>
                             </div>

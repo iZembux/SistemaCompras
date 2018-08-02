@@ -12,6 +12,7 @@
     int autoriza = 0;
     int idUsu = 0;
     int admin = 0;
+    int categoria = 0;
 
     Mail objMail = new Mail();
 
@@ -39,6 +40,10 @@
         admin = Integer.parseInt(request.getParameter("admin"));
     } catch (Exception e) {
     }
+    try {
+        categoria = Integer.parseInt(request.getParameter("categoria"));
+    } catch (Exception e) {
+    }
 
     Class.forName("com.mysql.jdbc.Driver");
     Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/scompras", "root", "stmsc0nt");
@@ -60,6 +65,17 @@
             String nombre = rs.getString("nombre");
             String apellido = rs.getString("apellido");
             objMail.enviarCorreo(correo, nombre, apellido, "Tu requisicion ha sido aprobada por tu gerente");
+        }
+        if (categoria == 2) {
+            String sql2 = "SELECT correo, nombre, apellido FROM scompras.usuario where id_rol = 2;";
+            ps = con.prepareStatement(sql2);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                String correo = rs.getString("correo");
+                String nombre = rs.getString("nombre");
+                String apellido = rs.getString("apellido");
+                objMail.enviarCorreo(correo, nombre, apellido, "Hay un nuevo dictamen por realizar");
+            }
         }
         //Depto. Compras
         /*String sql2 = "SELECT correo, nombre, apellido FROM scompras.usuario where id_departamento = 7;";

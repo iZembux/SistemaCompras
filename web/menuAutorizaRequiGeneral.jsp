@@ -1,6 +1,6 @@
 <%-- 
-    Muestra las requisiciones disponibles para la autorizacion del gerente por id de departamento
-    status = 3
+    Muestra las requisiciones disponibles del area de tecnologia para
+    la autorizacion del gerente administrativo
 --%>
 
 <%@page import="java.util.ArrayList"%>
@@ -9,8 +9,6 @@
 <%
     HttpSession sesion = request.getSession();
     String usuarioValidado = (String) sesion.getAttribute("usuarioIngresado");
-    String idUsu = (String) sesion.getAttribute("idUsuario");
-    
     if (usuarioValidado == null) {
         response.sendRedirect("index.jsp");
     } else {
@@ -18,9 +16,12 @@
         String rol = (String) sesion.getAttribute("rol");
         String sucursal = (String) sesion.getAttribute("sucursal");
 
-        if (idUsu.equals("267") || idUsu.equals("313")) {
-            sucursal = "1,2,3,4,6,7,8";
+        String idUsu = (String) sesion.getAttribute("idUsuario");
+        String idDepto2 = idDepto;
+        if (idUsu.equals("34")) {
+            idDepto2 = "1,8,10,13";
         }
+        
 
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -40,7 +41,7 @@
 
         <div class="container my-5">
             <div class="page-header">
-                <h3>Dictamen</h3>
+                <h3>Requisiciones por Autorizar</h3>
             </div>
             <table class="table table-striped table-hover">
                 <thead>
@@ -62,7 +63,7 @@
 
                         ArrayList<RequisicionProducto> arrayRequis = new ArrayList<RequisicionProducto>();
                         Consultas obj = new Consultas();
-                        arrayRequis = obj.consultarDictamen(sucursal);
+                        arrayRequis = obj.consultarRequiGeneral(idDepto2, sucursal);
 
                         if (arrayRequis.size() > 0) {
                             for (int i = 0; i < arrayRequis.size(); i++) {
@@ -73,11 +74,11 @@
                     %>
                     <tr>
                         <td><%=idRequi%></td>
-                        <td><%=solicitante.toUpperCase()%></td>
+                        <td><%=solicitante.toUpperCase() %></td>
                         <td><%=cantidadRequi%></td>
                         <td><%=fecha%></td>
                         <td>
-                            <form action="detalleDictamen.jsp" method="post">
+                            <form action="detalleAutorizaRequiGeneral.jsp" method="post">
                                 <input type="hidden" name="idRequi" value="<%=idRequi%>" >
                                 <button type="submit" class="btn btn-primary btn-sm">Detalle</button>
                             </form>

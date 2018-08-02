@@ -16,7 +16,7 @@
         String usu = null;
         usu = usuario;
         if (usuario.equals("4")) {
-                usu = "4,25,83";
+                usu = "4,25,83,226,268";
             }
         
         int id_categoria = 0;
@@ -60,12 +60,13 @@
                         int cantidadRequi;
                         int idProducto;
                         int idReqCoti;
+                        int idStatus;
                         String producto;
                         String marca;
 
                         ArrayList<RequisicionProducto> arrayRequis = new ArrayList<RequisicionProducto>();
                         Consultas obj = new Consultas();
-                        arrayRequis = obj.consultarComprasCotizaciones(id_categoria,6,usu);
+                        arrayRequis = obj.consultarComprasCotizaciones(id_categoria,"6,17",usu);
 
                         if (arrayRequis.size() > 0) {
                             for (int i = 0; i < arrayRequis.size(); i++) {
@@ -74,6 +75,7 @@
                                 producto = arrayRequis.get(i).getProducto();
                                 marca = arrayRequis.get(i).getMarca();
                                 idReqCoti = arrayRequis.get(i).getIdReqCoti();
+                                idStatus = arrayRequis.get(i).getIdStatus();
                     %>
                     <tr>
                         <td><%=producto%></td>

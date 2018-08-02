@@ -66,6 +66,7 @@
                         int cantidad;
                         int idSolicita;
                         int categoria;
+                        int idProducto;
                         String producto;
                         String marca;
                         String justificacion;
@@ -85,6 +86,7 @@
                                 justificacion = arrayRequis.get(i).getJustificacion();
                                 descripcion = arrayRequis.get(i).getDescripcion();
                                 categoria = arrayRequis.get(i).getIdCategoria();
+                                idProducto = arrayRequis.get(i).getIdProducto();
                     %>
                     <tr>
                         <td><%=producto%></td>
@@ -98,11 +100,15 @@
                                     <input type="hidden" class="hidden" name="idReqProd" value="<%=idReqProd%>" >
                                     <input type="hidden" class="hidden" name="idSolicita" value="<%=idSolicita%>" >
                                     <% if (categoria == 2) { %>
-                                    <input type="hidden" class="hidden" name="nuevoStatus" value="2" > 
-                                    <% } else { %> 
+                                   <% if (idProducto == 285 || idProducto == 301) { %>
+                                    <input type="hidden" class="hidden" name="nuevoStatus" value="17" >
+                                    <% } else { %>
+                                    <input type="hidden" class="hidden" name="nuevoStatus" value="2" >
+                                    <% }} else { %> 
                                     <input type="hidden" class="hidden" name="nuevoStatus" value="4" >
                                     <% } %>
                                     <input type="hidden" class="hidden" name="autoriza" value="1" >
+                                    <input type="hidden" class="hidden" name="categoria" value="<%= categoria%>" >
                                     <input type="hidden" class="hidden" name="idUsu" value="<%= idUsu%>" >
                                     <button type="submit" class="btn btn-success btn-sm" onclick="alerta()">Autorizar</button>
                                 </form>

@@ -43,10 +43,12 @@
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
+                        <th scope="col">Id</th>
                         <th scope="col">Producto</th>
                         <th scope="col">SKU</th>
                         <th scope="col">Marca</th>
                         <th scope="col">Cantidad</th>
+                        <th scope="col">Fecha de Solicitud</th>
                         <th scope="col"></th>
                     </tr>
                 </thead>
@@ -60,6 +62,7 @@
                         String producto;
                         String marca;
                         String rutaDictamen;
+                        String fechaCoti;
 
                         ArrayList<RequisicionProducto> arrayRequis = new ArrayList<RequisicionProducto>();
                         Consultas obj = new Consultas();
@@ -68,7 +71,7 @@
                         status 6 - con al menos una cotizacion
                         status 10 - cotizacion autorizada
                          */
-                        arrayRequis = obj.consultarComprasProv(idCategoria, "5,6", id_usuario);
+                        arrayRequis = obj.consultarComprasProv(idCategoria, "5,6,16", id_usuario);
 
                         if (arrayRequis.size() > 0) {
                             for (int i = 0; i < arrayRequis.size(); i++) {
@@ -79,6 +82,7 @@
                                 idReqCoti = arrayRequis.get(i).getIdReqCoti();
                                 status = arrayRequis.get(i).getIdStatus();
                                 sku = arrayRequis.get(i).getSku();
+                                fechaCoti = arrayRequis.get(i).getFecha_coti();
                                 if (idCategoria.equals("2")) {
                                     rutaDictamen = arrayRequis.get(i).getRutaDictamen();
                                 } else {
@@ -87,10 +91,12 @@
 
                     %>
                     <tr>
+                        <td><%=idReqCoti%></td>
                         <td><%=producto%></td>
                         <td><%=sku%></td>
                         <td><%=marca%></td>
                         <td><%=cantidadRequi%></td> 
+                        <td><%=fechaCoti%></td> 
                         <td>
                             <div class="row">
                                 <% if (status == 5) {%>
@@ -116,7 +122,13 @@
                                 <%
                                     }
                                 %>
-                                <% } else if (status == 6) {
+                                <% } else if (status == 6 || status == 16) {
+                                    if (idCategoria.equals("2")) {%>
+                                <form name="abreDictamen" action="visor" method="POST" target="_blank">
+                                    <input type="hidden" name="search" id="search" value="<%=rutaDictamen%>" >
+                                    <button type="submit" class="btn btn-warning btn-sm" >Caracteristicas</button>
+                                </form>
+                                <% }
                                     ArrayList<CotizacionRequisicion> arrayRequis2 = new ArrayList<CotizacionRequisicion>();
                                     Consultas obj2 = new Consultas();
                                     arrayRequis2 = obj2.consultarProveedorCoti(idReqCoti, id_usuario);
@@ -141,11 +153,12 @@
                                     <button type="submit" class="btn btn-info btn-sm" >Hacer Cotizacion</button>
                                 </form>
                                 <% }
+                                    }
                                 %>
                             </div>
                         </td>
                     </tr>
-                    <% }
+                    <%
                             }
                         }%>
                 </tbody>

@@ -193,7 +193,7 @@
             <% } %>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-check-square"></i> Autorizaciones
+                    <i class="fas fa-check-square"></i> Autorizaciones Depto.
                 </a>
                 <% if (rol == 5) { %>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -218,13 +218,27 @@
             </a>
             <% }
                 }
-                if (rol == 4 || rol == 5) {  %>
+                if (rol == 4) {  %>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-check-square"></i> Autorizaciones Generales
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="menuAutorizaRequiGeneral.jsp"> 
+                        Autorizar Requisicion
+                    </a>
+                    <a class="dropdown-item" href="menuHistorialAutorizaRequi.jsp"> 
+                        Historial de Autorizaciones
+                    </a>
+                </div>
+            </li> 
+            <% } if(rol == 5){ %>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-dollar-sign"></i> Cotizaciones
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="menuAutorizaCoti.jsp"> 
+                    <a class="dropdown-item" href="menuComprasOrdenesAdmin.jsp"> 
                         Autorizar Cotizacion
                     </a>
                     <a class="dropdown-item" href="menuHistorialAutorizaCoti.jsp"> 

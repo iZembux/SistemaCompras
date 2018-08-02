@@ -22,7 +22,7 @@
             idDepto2 = "1,8,10,13";
         }
 		if (idUsu.equals("210")) {
-            idDepto2 = "1,8,10,13";
+            idDepto2 = "1,8,10,13,29";
         }
         if (idUsu.equals("114")) {
             idDepto2 = "21,26,1,13,18";

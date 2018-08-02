@@ -1,8 +1,6 @@
-<%-- 
-    Actualiza el status de la requisicion cuando compras solicita una cotizacion
-    status 4 ---> status 5
---%>
-
+<%  
+    // Solicita cotizaciones a proveedores que faltan en el comparativo 
+  %>
 <%@page import="controller.Consultas"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="controller.Mail"%>
@@ -17,11 +15,16 @@
     Mail objMail = new Mail();
 
     try {
+        nuevoStatus = Integer.parseInt(request.getParameter("nuevoStatus"));
+    } catch (Exception e) {
+    }
+    try {
         idCategoria = Integer.parseInt(request.getParameter("categoria"));
     } catch (Exception e) {
     }
     try {
         numProveedores = Integer.parseInt(request.getParameter("numProveedores"));
+        System.out.println("Proveedores seleccionados: " + numProveedores);
     } catch (Exception e) {
     }
     try {
@@ -54,18 +57,11 @@
         } catch (Exception e) {
         }
     }
-    Consultas obj = new Consultas();
-    ArrayList<Integer> res = new ArrayList<Integer>();
     for (int i = 0; i < idProv.size(); i++) {
         for (int j = 0; j < tam; j++) {
             try {
                 idReqProd = Integer.parseInt(request.getParameter("idReqProd" + j));
-                res = obj.consultarProvSelec(idReqProd);
-                for (int k = 0; k < res.size(); k++) {
-                    if (idProv.get(i) != res.get(k)) {
-                            st.executeUpdate("insert into proveedores_selec (id_req_prod, id_proveedor) values (" + idReqProd + "," + idProv.get(i) + ")");
-                        }
-                }
+                st.executeUpdate("insert into proveedores_selec (id_req_prod, id_proveedor) values (" + idReqProd + "," + idProv.get(i) + ")");
             } catch (Exception e) {
             }
         }

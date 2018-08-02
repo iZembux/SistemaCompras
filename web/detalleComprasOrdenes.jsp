@@ -78,6 +78,7 @@
 
                         arrayRequis = obj.consultarOrdenesProvAcumDetalle(idProveedor, idSucursal, idCategoria, idDepartamento);
                         ArrayList<Integer> req2 = new ArrayList<Integer>();
+                        ArrayList<Integer> req3 = new ArrayList<Integer>();
 
                         if (arrayRequis.size() > 0) {
                             for (int i = 0; i < arrayRequis.size(); i++) {
@@ -92,7 +93,7 @@
                     %>
                     <tr>
                         <td><%=idReqProd%></td>
-                        <td><%=solicitante.toUpperCase() %></td>
+                        <td><%=solicitante.toUpperCase()%></td>
                         <td><%=cantidadRequi%></td>
                         <td><%=producto%></td>
                         <td>$ <%=precio%></td>
@@ -106,8 +107,10 @@
                 <h5> Precio Total: $<%=total%></h5>
                 <br />
                 <form action="actualizaOrdenCompras.jsp" method="post">
-                    <% if (total >= 5000) { %>
-                    <span>*Monto de la compra mayor a $5000.00, es necesario generar un cuadro comparativo</span>
+                    
+                    
+                    <% if (total >= 7500) { %>
+                    <span>*Monto de la compra mayor a $7500.00, es necesario generar un cuadro comparativo</span>
                     <br />
                     <br />
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cuadro" >Generar Comparativo</button>
@@ -126,58 +129,86 @@
             </div>
         </div>
 
+        <%
+            boolean b = false;
+            for (int i = 0; i < req2.size(); i++) {
+                int totalCotizaciones = obj.consultarCantidadCot(req2.get(i));
+                if (totalCotizaciones < 3) {
+                    req3.add(req2.get(i));
+                    b = true;
+                }
+            }
+        %>
         <div class="modal fade" id="cuadro" tabindex="-1" role="dialog" aria-labelledby="cuadro" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <div class="modal-body">
-                        <% if (false) { %>
-                        <input type="text" name="observaciones" />
-                        <% } else { %>
-                        <h5>Cotizaciones insuficientes</h5>
-                        <p>
-                            Para generar el cuador comparativo es necesario tener al menos tres cotizaciones, 
-                            favor de solicitar cotizaciones para los siguientes productos.
-                        </p>
-                        <table class="table table-striped table-hover">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Requisicion</th>
-                                    <th scope="col">Producto</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <%
-                                    ArrayList<Integer> req3 = new ArrayList<Integer>();
-                                    for (int i = 0; i < req2.size(); i++) {
-                                        int totalCotizaciones = obj.consultarCantidadCot(req2.get(i));
-                                        if (totalCotizaciones < 3) {
-                                            req3.add(req2.get(i));
-                                %>
-                                <tr>
-                                    <td><%=req2.get(i)%></td>
-                                </tr>
-                                <% }
+                    <form action="formatos/comparativo_1.jsp" method="post" name="formulario" id="formulario">
+                        <div class="modal-body">
+                            <% if (!b) {%>
+                            <h5>Observaciones</h5>
+                            <p>
+                                Introduzca las observaciones que se mostrarán en el cuadro comparativo (Opcional):
+                            </p>
+                            <div class="form-group">
+                                <textarea class="form-control" id="observaciones" name="observaciones" rows="3"></textarea>
+                            </div>
+                            <input type="hidden" class="hidden" name="tam" value="<%=req2.size()%>" >
+                            <% for (int i = 0; i < req2.size(); i++) {%>
+                            <input type="hidden" class="hidden" name="idReqProd<%=i%>" value="<%=req2.get(i)%>" >
+                            <% } %>
+                            <% } else { %>
+                            <h5>Cotizaciones insuficientes</h5>
+                            <p>
+                                Para generar el cuador comparativo es necesario tener al menos tres cotizaciones, 
+                                favor de solicitar cotizaciones para las siguientes requisiciones:
+                            </p>
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Requisicion</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <%
+
+                                        for (int i = 0; i < req2.size(); i++) {
+                                            int totalCotizaciones = obj.consultarCantidadCot(req2.get(i));
+                                            if (totalCotizaciones < 3) {
+                                                req3.add(req2.get(i));
+                                    %>
+
+                                    <tr>
+                                        <td><%=req2.get(i)%></td>
+                                    </tr>
+                                    <% }
                                     } %>
-                            </tbody>
-                        </table>
-                        <% }%>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalProveedores">Solicitar Cotizaciones</button>
-                    </div>
+                                </tbody>
+                            </table>
+                            <% }%>
+                        </div>
+                        <% if (!b) { %>
+                        <div class="modal-footer">
+                            <button type="submit">Aceptar</button>
+                        </div>
+                        <% } else { %>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalProveedores">Solicitar Cotizaciones</button>
+                        </div>
+                        <% }%> 
+                    </form>
                 </div>
             </div>
         </div>
 
         <div>
             <form action="actualizaCompras_1.jsp" method="post">
-                <input type="hidden" class="hidden" name="nuevoStatus" value="6" >
+                <input type="hidden" class="hidden" name="nuevoStatus" value="16">
                 <input type="hidden" class="hidden" name="categoria" value="<%=idCategoria%>" >
-                <input type="hidden" class="hidden" name="tam" value="<%=req2.size()%>" >
-                <% for (int i = 0; i < req2.size(); i++) {%>
-                <input type="hidden" class="hidden" name="idReqProd<%=i%>" value="<%=req2.get(i)%>" >
+                <input type="hidden" class="hidden" name="tam" value="<%=req3.size()%>" >
+                <% for (int i = 0; i < req3.size(); i++) {%>
+                <input type="hidden" class="hidden" name="idReqProd<%=i%>" value="<%=req3.get(i)%>" >
                 <% } %>
-                
+
                 <div class="modal fade" id="modalProveedores" tabindex="-1" role="dialog" aria-labelledby="modalProveedores" aria-hidden="true">
                     <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
@@ -190,6 +221,7 @@
                             <div class="modal-body">
                                 <div class="form-group">
                                     <label>Selecciona los proveedores a los que se les enviará una solicitud de cotización</label>
+                                    <label>No incluir a los proveedores seleccionados en la primer cotización</label>
                                     <table class="table table-striped table-hover">
                                         <thead>
                                             <tr>

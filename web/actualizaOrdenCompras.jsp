@@ -67,6 +67,7 @@
     Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/scompras", "root", "stmsc0nt");
     Statement st = con.createStatement();
     ResultSet rs;
+    PreparedStatement ps;
 
     rs = st.executeQuery("select max(id_orden) as id from req_prod;");
     if (rs.next()) {
@@ -110,6 +111,15 @@
                 }
             }
         }
+        
+        String sql2 = "SELECT email FROM scompras.proveedores where giro = " + categoria + " and idproveedor = " + proveedor + ";";
+        ps = con.prepareStatement(sql2);
+        rs = ps.executeQuery();
+        while (rs.next()) {
+            String correo = rs.getString("email");
+            objMail.enviarCorreo(correo, "Proveedor", "", "Grupo Continental Automotriz ha autorizado una nueva orden de compra, favor de revisarla en el sistema");
+        }
+        
     }
 
     response.sendRedirect("menuComprasOrdenes.jsp?categoria=" + categoria + "");
