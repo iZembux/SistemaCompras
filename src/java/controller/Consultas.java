@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import model.CotizacionRequisicion;
 import model.Item;
@@ -2485,6 +2486,12 @@ public class Consultas {
         return ruta;
     }
 
+    /**
+     * Obvio, consulta la jodida ruta de la factura
+     *
+     * @param idOrden
+     * 
+     */
     public String consultaRutaFactura(int idOrden) {
         String ruta = "";
         PreparedStatement ps;
@@ -2504,5 +2511,37 @@ public class Consultas {
             }
         }
         return ruta;
+    }
+    
+    /**
+     * Regitra el historial de entregas
+     *
+     * @param idReqProd
+     * @param idCompras
+     * @param idUsuario
+     * @param fehaEntregaCompras
+     * 
+     */
+    public void insertaEntregaCompras(int idReqProd, int idCompras, int idUsuario, Timestamp fechaEntregaCompras){
+        String ruta = "";
+        PreparedStatement ps;
+        ResultSet rs;
+        Connection con;
+        String sql = "";
+        con = ConexionMySQL.conectar();
+        if (con != null) {
+            try {
+                sql = "INSERT INTO scompras.entregas (id_req_prod,idCompras,idUsuario,fechaEntregaCompras) VALUES (?,?,?,?);";
+                ps = con.prepareStatement(sql);
+                ps.setInt(1, idReqProd);
+                ps.setInt(2, idCompras);
+                ps.setInt(3, idUsuario);
+                ps.setTimestamp(4, fechaEntregaCompras);
+                ps.executeUpdate();
+                con.close();
+            } catch (SQLException e) {
+                System.out.println("ERROR SQL-1 " + e.getSQLState() + ": " + e.getMessage());
+            } 
+        }
     }
 }
