@@ -33,6 +33,7 @@ public class RequisicionProducto {
     private String rutaFactura;
     private String rutaCaratula;
     private String rutaDictamen;
+    private String fecha_coti;
 
     /**
      * @return the idRequisicion
@@ -397,5 +398,19 @@ public class RequisicionProducto {
      */
     public void setPrecio(double precio) {
         this.precio = precio;
+    }
+
+    /**
+     * @return the fecha_coti
+     */
+    public String getFecha_coti() {
+        return fecha_coti;
+    }
+
+    /**
+     * @param fecha_coti the fecha_coti to set
+     */
+    public void setFecha_coti(String fecha_coti) {
+        this.fecha_coti = fecha_coti;
     }
 }
