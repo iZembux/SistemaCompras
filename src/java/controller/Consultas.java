@@ -1023,7 +1023,7 @@ public class Consultas {
         return listaRequi;
     }
 
-    public ArrayList<CotizacionRequisicion> consultarComprasAdmin() {
+    public ArrayList<CotizacionRequisicion> consultarComprasAdmin(String sucursal, String categoria) {
         ArrayList<CotizacionRequisicion> listaRequi = new ArrayList<CotizacionRequisicion>();
         PreparedStatement ps;
         ResultSet rs;
@@ -1052,6 +1052,8 @@ public class Consultas {
                         + "and rp.id_status = s.id_status\n"
                         + "and u.id_usuario = c.aut_compras\n"
                         + "and rp.id_status in (5,6,7,8,9,10,11,12)\n"
+                        + "AND u.id_sucursal in (" + sucursal + ")\n"
+                        + "AND pr.id_categoria in (" + categoria + ")\n"
                         + "group by pr.nombre, p.razonsocial, u.nombre\n"
                         + "order by pr.nombre";
                 ps = con.prepareStatement(sql);
@@ -1533,7 +1535,7 @@ public class Consultas {
         return listaRequi;
     }
 
-    public ArrayList<OrdenFormato> consultarOrdenesProvComprasHist(String suc) {
+    public ArrayList<OrdenFormato> consultarOrdenesProvComprasHist(String suc, int cat) {
         ArrayList<OrdenFormato> listaRequi = new ArrayList<OrdenFormato>();
         PreparedStatement ps;
         ResultSet rs;
@@ -1541,9 +1543,24 @@ public class Consultas {
         con = ConexionMySQL.conectar();
         if (con != null) {
             try {
-                String sql = "SELECT razonSocialProveedor, sum(cantidadProducto) as cant, razonSocialSucursal, departamento,"
-                        + " idCotizacionOrden, fechaOrden FROM scompras.ordenes_compra where idSucursal in (" + suc + ") "
-                        + " and idCotizacionOrden > 0 and idCotizacionOrden not in ('2','3','4','5') group by idCotizacionOrden order by idCotizacionOrden desc;";
+                String sql = "SELECT \n"
+                        + "    o.razonSocialProveedor,\n"
+                        + "    SUM(o.cantidadProducto) AS cant,\n"
+                        + "    o.razonSocialSucursal,\n"
+                        + "    o.departamento,\n"
+                        + "    o.idCotizacionOrden,\n"
+                        + "    o.fechaOrden\n"
+                        + " FROM\n"
+                        + "    scompras.ordenes_compra o,\n"
+                        + "    scompras.productos p\n"
+                        + " WHERE\n"
+                        + "  idSucursal IN ('"+ suc +"')\n"
+                        + "    AND idCotizacionOrden > 0\n"
+                        + "    AND idCotizacionOrden NOT IN ('2' , '3', '4', '5')\n"
+                        + "    AND o.nombreProducto = p.nombre\n"
+                        + "    AND p.id_categoria = "+ cat +"\n"
+                        + " GROUP BY idCotizacionOrden\n"
+                        + " ORDER BY idCotizacionOrden DESC;";
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {

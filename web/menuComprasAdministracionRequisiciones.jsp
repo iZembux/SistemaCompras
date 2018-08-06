@@ -25,7 +25,7 @@
         } else if (usuario.equals("25")) { //Angelica
             suc = "10,11,15,16,18";
             cat = "1";
-        } else if (usuario.equals("226")) { //Roberto *Pendiente
+        } else if (usuario.equals("226")) { //Roberto 
             suc = "9,14,17";
             cat = "1";
         } else if (usuario.equals("268")) { //Victor Peralta
