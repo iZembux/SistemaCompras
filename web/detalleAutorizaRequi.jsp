@@ -43,6 +43,7 @@
         <jsp:include page="frag/mainNavbar.jsp">
             <jsp:param name="rol" value="<%=rol%>" />  
             <jsp:param name="depto" value="<%=idDepto%>" />
+            <jsp:param name="idUsu" value="<%=idUsu%>" />
         </jsp:include>
 
         <div class="container my-5">

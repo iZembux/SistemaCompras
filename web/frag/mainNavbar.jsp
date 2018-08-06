@@ -2,6 +2,13 @@
 <%
     int rol = Integer.parseInt(request.getParameter("rol"));
     int depto = Integer.parseInt(request.getParameter("depto"));
+    int idUsu = 0;
+    try {
+        idUsu = Integer.parseInt(request.getParameter("idUsu"));
+        System.out.println(idUsu);
+    } catch (Exception e) {
+
+    }
 
 %>
 <head>
@@ -195,13 +202,6 @@
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-check-square"></i> Autorizaciones Depto.
                 </a>
-                <% if (rol == 5) { %>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="menuAutorizaRequiAdmin.jsp"> 
-                        Autorizar Requisicion
-                    </a>
-                </div>
-                <% } else { %>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="menuAutorizaRequi.jsp"> 
                         Autorizar Requisicion
@@ -210,8 +210,21 @@
                         Historial de Autorizaciones
                     </a>
                 </div>
-                <% } %>
+
+
             </li>
+            <% if (idUsu == 282) { %>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-check-square"></i> Autorizaciones Gerentes.
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="menuAutorizaRequiAdmin.jsp"> 
+                        Autorizar Requisicion
+                    </a>
+                </div>
+            </li>
+            <% } %>
             <% if (depto == 23) {%>
             <a class="nav-link" href="menuAutorizaDictamen.jsp"> 
                 Dictamenes
@@ -232,7 +245,8 @@
                     </a>
                 </div>
             </li> 
-            <% } if(rol == 5){ %>
+            <% }
+                if (rol == 5) { %>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-dollar-sign"></i> Cotizaciones

@@ -9,6 +9,7 @@
     } else {
         String idDepto = (String) sesion.getAttribute("departamento"); 
         String rol = (String) sesion.getAttribute("rol");
+        String idUsu = (String) sesion.getAttribute("idUsuario");
 
     int id_requi = 0;
 %>
@@ -25,6 +26,7 @@
         <jsp:include page="frag/mainNavbar.jsp">
             <jsp:param name="rol" value="<%=rol%>" />  
             <jsp:param name="depto" value="<%=idDepto%>" />
+            <jsp:param name="idUsu" value="<%=idUsu%>" />
         </jsp:include>
 
         <div class="container my-5">

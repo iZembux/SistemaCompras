@@ -18,7 +18,7 @@
         String idUsu = (String) sesion.getAttribute("idUsuario");
         String idDepto2 = idDepto;
 
-        if (idUsu.equals("1")) {
+        if (idUsu.equals("282") || idUsu.equals("1")) {
             sucursal = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18";
             idDepto2 = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28";
         }
@@ -37,6 +37,7 @@
         <jsp:include page="frag/mainNavbar.jsp">
             <jsp:param name="rol" value="<%=rol%>" />  
             <jsp:param name="depto" value="<%=idDepto%>" />
+            <jsp:param name="idUsu" value="<%=idUsu%>" />
         </jsp:include>
 
         <div class="container my-5">

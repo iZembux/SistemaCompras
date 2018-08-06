@@ -1,6 +1,7 @@
 <%-- 
     Autorizacion de comparativos por parte del director administrativo
 --%>
+<%@page import="model.Comparativo"%>
 <%@page import="model.OrdenFormato"%>
 <%@page import="model.CotizacionRequisicion"%>
 <%@page import="controller.Consultas"%>
@@ -17,16 +18,6 @@
         String rol = (String) sesion.getAttribute("rol");
         String usuario = (String) sesion.getAttribute("idUsuario");
         String suc = null;
-        
-         if (usuario.equals("83")) {                         //Valeria
-            suc = "1,2,3,4,6,7,8,13";
-        } else if (usuario.equals("4") || usuario.equals("268")) {                    //Veronica
-            suc = "1,2,3,4,6,7,8,13,9,14,17,10,11,15,16,18";
-        } else if (usuario.equals("25")) {                   //Angelica
-            suc = "10,11,15,16,18";
-        } else if (usuario.equals("226")) {                    //Roberto *Pendiente
-            suc = "9,14,17";
-        }
          
         int id_categoria = 1;
         try {
@@ -53,62 +44,42 @@
 
         <div class="container my-5">
             <div class="page-header">
-                <h3>Cuadro Comparativo</h3>
+                <h3>Comparativos por revisar</h3>
             </div>
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
-                        <th scope="col">Proveedor</th>
-                        <th scope="col">Productos</th>
-                        <th scope="col">Sucursal</th>
-                        <th scope="col">Departamento</th>
+                        <th scope="col">Id Cuadro</th>
+                        <th scope="col">Departamento Solicitante</th>
+                        <th scope="col">Cantidad de Productos</th>
                         <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
                     <%
+                        int idCuadro;
                         int cantidad;
-                        int idSuc;
-                        int idP;
-                        int idDep; 
-                        String razonsocial;
-                        String sucursal;
                         String depto; 
 
-                        ArrayList<OrdenFormato> arrayRequis = new ArrayList<OrdenFormato>();
+                        ArrayList<Comparativo> arrayRequis = new ArrayList<Comparativo>();
                         Consultas obj = new Consultas();
-                        arrayRequis = obj.consultarOrdenesProvCompras(suc, id_categoria);
+                        arrayRequis = obj.consultarCuadrosComparativos();
 
                         if (arrayRequis.size() > 0) {
                             for (int i = 0; i < arrayRequis.size(); i++) {
-                                idP = arrayRequis.get(i).getUsuCompras();
-                                razonsocial = arrayRequis.get(i).getNombreP();
+                                idCuadro = arrayRequis.get(i).getIdCuadro();
+                                depto = arrayRequis.get(i).getDepartamento();
                                 cantidad = arrayRequis.get(i).getCantidad();
-                                sucursal = arrayRequis.get(i).getSucursal();
-                                idSuc = arrayRequis.get(i).getIdP();
-                                depto = arrayRequis.get(i).getDescripcion();
-                                idDep = arrayRequis.get(i).getIdDepto();
                     %>
                     <tr>
-                        <td><%=razonsocial%></td>
-                        <td><%=cantidad%></td>
-                        <td><%=sucursal%></td>
+                        <td><%=idCuadro%></td>
                         <td><%=depto%></td>
+                        <td><%=cantidad%></td>
                         <td>
                             <div class="row">
-                                <form action="formatos/ordenCompraAcum.jsp" method="post" target="_blank">
-                                    <input type="hidden" name="categoria" value="<%=id_categoria%>" >
-                                    <input type="hidden" name="proveedor" value="<%=idP%>" >
-                                    <input type="hidden" name="suc" value="<%=idSuc%>" >
-                                    <input type="hidden" name="dep" value="<%=idDep%>" >
-                                    <button type="submit" class="btn btn-info btn-sm" >Ver Orden</button>
-                                </form>
-                                    <form action="detalleComprasOrdenes.jsp" method="post">
-                                    <input type="hidden" name="idCategoria" value="<%=id_categoria%>" >
-                                    <input type="hidden" name="idProveedor" value="<%=idP%>" >
-                                    <input type="hidden" name="idSucursal" value="<%=idSuc%>" >
-                                    <input type="hidden" name="idDepartamento" value="<%=idDep%>" >
-                                    <button type="submit" class="btn btn-success btn-sm" >Detalle</button>
+                                <form action="formatos/comparativo_2.jsp" method="post" target="_blank">
+                                    <input type="hidden" name="cuadro" value="<%=idCuadro%>" >
+                                    <button type="submit" class="btn btn-info btn-sm" >Ver Cuadro</button>
                                 </form>
                             </div>
                         </td>
