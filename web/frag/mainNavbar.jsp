@@ -224,6 +224,38 @@
                     </a>
                 </div>
             </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-dollar-sign"></i> Comparativos
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="menuComprasOrdenesAdmin.jsp"> 
+                        Autorizar Comparativo
+                    </a>
+                    <!--
+                    <a class="dropdown-item" href="menuHistorialAutorizaCoti.jsp"> 
+                        Historial de Comparativos
+                    </a>
+                    -->
+                </div>
+            </li>   
+            <% } %>
+            <% if (idUsu == 294) { %>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-dollar-sign"></i> Comparativos
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="menuComprasOrdenesAdminDir.jsp"> 
+                        Autorizar Comparativo
+                    </a>
+                    <!--
+                    <a class="dropdown-item" href="menuHistorialAutorizaCoti.jsp"> 
+                        Historial de Comparativos
+                    </a>
+                    -->
+                </div>
+            </li>   
             <% } %>
             <% if (depto == 23) {%>
             <a class="nav-link" href="menuAutorizaDictamen.jsp"> 
@@ -247,19 +279,7 @@
             </li> 
             <% }
                 if (rol == 5) { %>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-dollar-sign"></i> Cotizaciones
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="menuComprasOrdenesAdmin.jsp"> 
-                        Autorizar Cotizacion
-                    </a>
-                    <a class="dropdown-item" href="menuHistorialAutorizaCoti.jsp"> 
-                        Historial de Cotizaciones
-                    </a>
-                </div>
-            </li>   
+            
 
             <% }
 

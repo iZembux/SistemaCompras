@@ -30,6 +30,7 @@ public class CotizacionRequisicion {
     private int idGerenteA = 0;
     private int idDirectorA = 0;
     private int idDirectorG = 0;
+    private int idGanadora;
 
     /**
      * @return the proveedor
@@ -351,5 +352,19 @@ public class CotizacionRequisicion {
      */
     public void setIdDirectorG(int idDirectorG) {
         this.idDirectorG = idDirectorG;
+    }
+
+    /**
+     * @return the idGanadora
+     */
+    public int getIdGanadora() {
+        return idGanadora;
+    }
+
+    /**
+     * @param idGanadora the idGanadora to set
+     */
+    public void setIdGanadora(int idGanadora) {
+        this.idGanadora = idGanadora;
     }
 }

@@ -10,7 +10,6 @@
     int idCotizacion = 0;
     int idCotizaciones = 0;
     int idRP = 0;
-    int idUsu = 0;
     int idComparativo = 0;
     double cantidad = 0;
     double precio = 0;
@@ -26,10 +25,6 @@
 
     try {
         nuevoStatusRequi = Integer.parseInt(request.getParameter("nuevoStatusRequi"));
-    } catch (Exception e) {
-    }
-    try {
-        idUsu = Integer.parseInt(request.getParameter("idUsu"));
     } catch (Exception e) {
     }
     try {
@@ -56,6 +51,7 @@
 
     try {
         seleccionada = Integer.parseInt(request.getParameter("sel"));
+        System.out.println("seleccionada: " + seleccionada);
     } catch (Exception e) {
     }
 
@@ -88,7 +84,7 @@
 
             System.out.println("Cotizacion ganadora: " + idCotizacion);
             st.executeUpdate("update cotizacion set id_status_cotizacion = " + nuevoStatusCoti + ", observaciones = '" + observaciones + "',\n"
-                    + "aut_compras = " + idUsu + ", fecha_aut_compras = CURRENT_TIMESTAMP where id_cotizacion = " + idCotizacion + ";");
+                    + "fecha_aut_compras = CURRENT_TIMESTAMP where id_cotizacion = " + idCotizacion + ";");
 
             idRP = Integer.parseInt(request.getParameter("idRP" + j));
             System.out.println("*Requisicion " + idRP + " Nuevo staus ==> " + nuevoStatusRequi);

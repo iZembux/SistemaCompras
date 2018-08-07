@@ -58,7 +58,7 @@
 
     System.out.println("-----------GENERACION DE CUADRO COMPARATIVO-----------------");
 
-    cotizaciones = obj.consultarCotizacionesCuadroAdmin(7, cuadro);
+    cotizaciones = obj.consultarCotizacionesCuadroAdmin(9, cuadro);
     if (cotizaciones.size() > 0) {
         departamento = cotizaciones.get(0).getDepto();
         sucursal = cotizaciones.get(0).getSucursal();
@@ -202,9 +202,9 @@
     <body>
         <div class="container">
             <div class="card mx-auto w-50">
-                <h5 class="card-header">Cotizacion propuesta por compras:</h5>
+                <h5 class="card-header">Cotizacion aprobada por Director Administrativo:</h5>
                 <div class="card-body" style="text-align: center;">
-                    <form action="../actualizaCotizacionCompras_2.jsp" method="post">
+                    <form action="../actualizaCotizacionCompras_3.jsp" method="post">
                         <div>
                             <label><h4><%=nombreProveedor%></h4></label>
                         </div>
@@ -257,8 +257,7 @@
                         <input type="hidden" class="hidden" name="tam2" value="<%=idCoti.size()%>">
                         <input type="hidden" class="hidden" name="tamano" value="<%=lista1.size()%>">
                         <input type="hidden" class="hidden" name="nuevoStatusCoti" value="2" >
-                        <input type="hidden" class="hidden" name="nuevoStatusRequi" value="9" >
-                        <input type="hidden" class="hidden" name="observaciones" value="<%= observaciones%>" >
+                        <input type="hidden" class="hidden" name="nuevoStatusRequi" value="10" >
                         <input type="hidden" class="hidden" name="idUsu" value="<%=idUsu%>" >
                         <input type="hidden" class="hidden" name="idCuadro" value="<%=cuadro%>" >
                         <br/>
@@ -485,7 +484,7 @@
             </table>
             <br>
             <br>
-            
+           
         </div>
         <br>
         <br>

@@ -19,9 +19,11 @@ public class Comparativo {
     private int anticipo;
     private int garantia;
     private double total;
-    
+    private int idCuadro;
+    private int idReqProd;
     private int cantidad;
     private String producto;
+    private String departamento;
 
     /**
      * @return the idCotizacion
@@ -161,5 +163,47 @@ public class Comparativo {
      */
     public void setProducto(String producto) {
         this.producto = producto;
+    }
+
+    /**
+     * @return the idCuadro
+     */
+    public int getIdCuadro() {
+        return idCuadro;
+    }
+
+    /**
+     * @param idCuadro the idCuadro to set
+     */
+    public void setIdCuadro(int idCuadro) {
+        this.idCuadro = idCuadro;
+    }
+
+    /**
+     * @return the departamento
+     */
+    public String getDepartamento() {
+        return departamento;
+    }
+
+    /**
+     * @param departamento the departamento to set
+     */
+    public void setDepartamento(String departamento) {
+        this.departamento = departamento;
+    }
+
+    /**
+     * @return the idReqProd
+     */
+    public int getIdReqProd() {
+        return idReqProd;
+    }
+
+    /**
+     * @param idReqProd the idReqProd to set
+     */
+    public void setIdReqProd(int idReqProd) {
+        this.idReqProd = idReqProd;
     }
 }

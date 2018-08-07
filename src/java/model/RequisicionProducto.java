@@ -17,6 +17,7 @@ public class RequisicionProducto {
     private int cantidad;
     private int idOrden;
     private int idCategoria;
+    private int idCuadro;
     private int sku;
     private double precio;
     private String producto;
@@ -412,5 +413,19 @@ public class RequisicionProducto {
      */
     public void setFecha_coti(String fecha_coti) {
         this.fecha_coti = fecha_coti;
+    }
+
+    /**
+     * @return the idCuadro
+     */
+    public int getIdCuadro() {
+        return idCuadro;
+    }
+
+    /**
+     * @param idCuadro the idCuadro to set
+     */
+    public void setIdCuadro(int idCuadro) {
+        this.idCuadro = idCuadro;
     }
 }

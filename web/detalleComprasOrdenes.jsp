@@ -68,6 +68,7 @@
                         int cantidadRequi;
                         int idReqProd;
                         int idReqCoti;
+                        int idCuadro = 0;
                         double precio;
                         double total = 0;
                         String producto;
@@ -88,6 +89,7 @@
                                 cantidadRequi = arrayRequis.get(i).getCantidad();
                                 producto = arrayRequis.get(i).getProducto();
                                 solicitante = arrayRequis.get(i).getSolicitante();
+                                idCuadro = arrayRequis.get(i).getIdCuadro();
                                 req2.add(idReqProd);
                                 total += precio;
                     %>
@@ -105,11 +107,15 @@
             </table>
             <div>
                 <h5> Precio Total: $<%=total%></h5>
+                <% if (idCuadro > 0) { %>
+                <hr>
+                <h6> Comparativo Aprobado </h6>
+                <% } %>
                 <br />
                 <form action="actualizaOrdenCompras.jsp" method="post">
-                    
-                    
-                    <% if (total >= 7500) { %>
+
+
+                    <% if (total >= 7500 && idCuadro == 0) { %> 
                     <span>*Monto de la compra mayor a $7500.00, es necesario generar un cuadro comparativo</span>
                     <br />
                     <br />
@@ -181,7 +187,7 @@
                                         <td><%=req2.get(i)%></td>
                                     </tr>
                                     <% }
-                                    } %>
+                                        } %>
                                 </tbody>
                             </table>
                             <% }%>
@@ -202,7 +208,7 @@
 
         <div>
             <form action="actualizaCompras_1.jsp" method="post">
-                <input type="hidden" class="hidden" name="nuevoStatus" value="16">
+                <input type="hidden" class="hidden" name="nuevoStatus" value="19">
                 <input type="hidden" class="hidden" name="categoria" value="<%=idCategoria%>" >
                 <input type="hidden" class="hidden" name="tam" value="<%=req3.size()%>" >
                 <% for (int i = 0; i < req3.size(); i++) {%>

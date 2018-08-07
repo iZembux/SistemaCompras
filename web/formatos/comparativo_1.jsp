@@ -37,7 +37,6 @@
     int garantia = 0, garantia2 = 0, garantia3 = 0;
     int activo = 0;
     int solicitantes = 0;
-    int idUsu = 0;
 
     ArrayList<Integer> idCoti = new ArrayList<Integer>();
     ArrayList<Integer> idRP = new ArrayList<Integer>();
@@ -150,10 +149,6 @@
         solicitantes = obj2.contarSolicitantesCoti(idCoti.get(0));
     } catch (Exception e) {
     }
-    try {
-        idUsu = Integer.parseInt(request.getParameter("idUsu"));
-    } catch (Exception e) {
-    }
 
     if (activo == 1) {
         cActivo = "X";
@@ -228,7 +223,6 @@
                         <input type="hidden" class="hidden" name="nuevoStatusCoti" value="2" >
                         <input type="hidden" class="hidden" name="nuevoStatusRequi" value="7" >
                         <input type="hidden" class="hidden" name="observaciones" value="<%= observaciones%>" >
-                        <input type="hidden" class="hidden" name="idUsu" value="<%=idUsu%>" >
                         <button type="submit" class="btn btn-success btn-sm">Solicitar Autorizaciones</button>
                     </form>
                 </div>
@@ -451,27 +445,7 @@
             </table>
             <br>
             <br>
-            <table width="100%" style="border-collapse: collapse; font-size: 10px">
-                <tbody>
-                    <tr>
-                        <td>ELABORÓ</td>
-                        <td>Nivel 1</td>
-                        <td>Nivel 2</td>
-                        <td>Nivel 3</td>
-                        <td>Nivel 4</td>
-                    </tr>
-                    <tr>
-                        <td>&nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td>GERENCIA DE COMPRAS</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
+            
         </div>
         <br>
         <br>
