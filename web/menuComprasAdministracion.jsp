@@ -13,8 +13,26 @@
     } else {
         String idDepto = (String) sesion.getAttribute("departamento"); 
         String rol = (String) sesion.getAttribute("rol");
-        
-    int id_categoria = 8;
+        String usuario = (String) sesion.getAttribute("idUsuario");
+        String suc = null;
+        String cat = null;
+
+        if (usuario.equals("83")) {       //Valeria
+            suc = "1,2,3,4,6,7,8,13";
+            cat = "1";
+        } else if (usuario.equals("4")) { //Veronica
+            suc = "1,2,3,4,6,7,8,13,9,14,17,10,11,15,16,18";
+            cat = "1,2,3,4";
+        } else if (usuario.equals("25")) { //Angelica
+            suc = "10,11,15,16,18";
+            cat = "1";
+        } else if (usuario.equals("226")) { //Roberto *Pendiente
+            suc = "9,14,17";
+            cat = "1";
+        } else if (usuario.equals("268")) { //Victor Peralta
+            suc = "1,2,3,4,6,7,8,13,9,14,17,10,11,15,16,18";
+            cat = "2";  
+        }
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -58,7 +76,7 @@
 
                         ArrayList<CotizacionRequisicion> arrayRequis = new ArrayList<CotizacionRequisicion>();
                         Consultas obj = new Consultas();
-                        arrayRequis = obj.consultarComprasAdmin();
+                        arrayRequis = obj.consultarComprasAdmin(suc,cat);
 
                         if (arrayRequis.size() > 0) {
                             for (int i = 0; i < arrayRequis.size(); i++) {

@@ -10,7 +10,7 @@
     int entrega = 0;
     int cantidad = 0;
     String producto = " ";
-
+    Consultas consultor = new Consultas();
     Mail objMail = new Mail();
 
     try {
@@ -71,6 +71,9 @@
                 + "Cantidad: " + cantidad + "\n");
     } else if (nuevoStatus == 13) {
         objMail.enviarCorreo(correo, "", "", "Requisicion " + idReqProd + " Finalizada");
+    } else if (nuevoStatus == 16) {
+        objMail.enviarCorreo(correo, "", "", "Por favor, confirma tu entrega: " + idReqProd);
+        //consultor.insertaEntregaCompras(idReqProd, idCompras, idUsuario, fechaEntregaCompras);
     }
 
     if (stock == 1) {

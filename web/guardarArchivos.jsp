@@ -175,7 +175,8 @@
     st.executeUpdate(sql); 
     // --- Actualiza estatus ---
     st.executeUpdate("UPDATE req_prod SET id_status = " + nuevoStatus + " where id_req_coti = "+ idReqCoti +"");
-    // --- Inserta Multimedia ---
+    // --- Inserta Precio Producto --
+    st.executeUpdate("call insertaPrecios("+idProducto+","+idUsuario+","+precio+","+credito+","+entrega+","+garantia+","+descuento+","+anticipo+")");
     /*
     sqlM = "Insert into scompras.multimedia (id_coti,id_proveedor,ruta) values ("+idReqCoti+","+idUsuario+",'"+Ruta+"');";
     st.executeUpdate(sqlM);

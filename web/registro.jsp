@@ -32,7 +32,7 @@
     </head>
     <body>
         <!-- multistep form -->
-        <form id="msform" action="SignUp" method="post">
+        <form id="msform" action="SignUp" method="post" onKeypress="if(event.keyCode == 13) event.returnValue = false;">
             <!-- progressbar -->
             <ul id="progressbar">
                 <li class="active">Datos de Cuenta</li>

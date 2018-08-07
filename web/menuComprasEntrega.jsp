@@ -23,6 +23,8 @@
             suc = "10,11,15,16,18";
         } else if (usuario.equals("226")) { //Roberto
             suc = "9,14,17";
+        } else if (usuario.equals("268")) { //Victor Peralta
+            suc = "1,2,3,4,6,7,8,13,9,14,17,10,11,15,16,18";
         }
         
         int id_categoria = 0;
@@ -101,15 +103,15 @@
                         <td><%=sucursal%></td>
                         <td><%=cantidadRequi%></td> 
                         <td>
-                            <form action="actualizaRecibido.jsp" method="post">
+                            <form action="actualizaRecibido.jsp" method="post" id="formActualiza" onsubmit="return confirm('Desea entregar el producto? \n Se requiere confirmación del usuario')">
                                 <input type="hidden" class="hidden" name="idReqProd" value="<%=idReqProd%>" >
                                 <input type="hidden" class="hidden" name="producto" value="<%=producto%>" >
                                 <input type="hidden" class="hidden" name="cantidad" value="<%=cantidadRequi%>" >
                                 <input type="hidden" class="hidden" name="idUsu" value="<%=idUsu%>" >
                                 <input type="hidden" class="hidden" name="categoria" value="<%=id_categoria %>" >
-                                <input type="hidden" class="hidden" name="nuevoStatus" value="13" >
+                                <input type="hidden" class="hidden" name="nuevoStatus" value="16" >
                                 <input type="hidden" class="hidden" name="entrega" value="1" >
-                                <button type="submit" class="btn btn-success btn-sm">Producto Entregado</button>
+                                <button type="submit" class="btn btn-success btn-sm">Entregar Producto</button>
                             </form>
                         </td>
                     </tr>
@@ -120,7 +122,8 @@
         </div>
 
         <jsp:include page="frag/footer.jsp" />
-
+        <script src="js/swal.js"></script>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

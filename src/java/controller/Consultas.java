@@ -4,11 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import model.Comparativo;
 import model.CotizacionRequisicion;
 import model.Item;
 import model.OrdenFormato;
+import model.Precios;
 import model.Proveedor;
 import model.RequisicionFormato;
 import model.RequisicionProducto;
@@ -1022,7 +1024,7 @@ public class Consultas {
         return listaRequi;
     }
 
-    public ArrayList<CotizacionRequisicion> consultarComprasAdmin() {
+    public ArrayList<CotizacionRequisicion> consultarComprasAdmin(String sucursal, String categoria) {
         ArrayList<CotizacionRequisicion> listaRequi = new ArrayList<CotizacionRequisicion>();
         PreparedStatement ps;
         ResultSet rs;
@@ -1051,6 +1053,8 @@ public class Consultas {
                         + "and rp.id_status = s.id_status\n"
                         + "and u.id_usuario = c.aut_compras\n"
                         + "and rp.id_status in (5,6,7,8,9,10,11,12)\n"
+                        + "AND u.id_sucursal in (" + sucursal + ")\n"
+                        + "AND pr.id_categoria in (" + categoria + ")\n"
                         + "group by pr.nombre, p.razonsocial, u.nombre\n"
                         + "order by pr.nombre";
                 ps = con.prepareStatement(sql);
@@ -1333,7 +1337,7 @@ public class Consultas {
                         + "    AND p.id_productos = rp.id_producto\n"
                         + "    AND rp.id_status in (" + status + ")\n"
                         + "    AND p.id_categoria in (" + categoria + ")\n"
-                        + "    GROUP BY rp.id_producto\n"
+                        + "    GROUP BY rp.id_producto, rp.id_status\n"
                         + "    ORDER BY rp.id_producto;";
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
@@ -1586,7 +1590,7 @@ public class Consultas {
         return requis;
     }
 
-    public ArrayList<OrdenFormato> consultarOrdenesProvComprasHist(String suc) {
+    public ArrayList<OrdenFormato> consultarOrdenesProvComprasHist(String suc, int cat) {
         ArrayList<OrdenFormato> listaRequi = new ArrayList<OrdenFormato>();
         PreparedStatement ps;
         ResultSet rs;
@@ -1594,9 +1598,24 @@ public class Consultas {
         con = ConexionMySQL.conectar();
         if (con != null) {
             try {
-                String sql = "SELECT razonSocialProveedor, sum(cantidadProducto) as cant, razonSocialSucursal, departamento,"
-                        + " idCotizacionOrden, fechaOrden FROM scompras.ordenes_compra where idSucursal in (" + suc + ") "
-                        + " and idCotizacionOrden > 0 and idCotizacionOrden not in ('2','3','4','5') group by idCotizacionOrden order by idCotizacionOrden desc;";
+                String sql = "SELECT \n"
+                        + "    o.razonSocialProveedor,\n"
+                        + "    SUM(o.cantidadProducto) AS cant,\n"
+                        + "    o.razonSocialSucursal,\n"
+                        + "    o.departamento,\n"
+                        + "    o.idCotizacionOrden,\n"
+                        + "    o.fechaOrden\n"
+                        + " FROM\n"
+                        + "    scompras.ordenes_compra o,\n"
+                        + "    scompras.productos p\n"
+                        + " WHERE\n"
+                        + "  idSucursal IN ('"+ suc +"')\n"
+                        + "    AND idCotizacionOrden > 0\n"
+                        + "    AND idCotizacionOrden NOT IN ('2' , '3', '4', '5')\n"
+                        + "    AND o.nombreProducto = p.nombre\n"
+                        + "    AND p.id_categoria = "+ cat +"\n"
+                        + " GROUP BY idCotizacionOrden\n"
+                        + " ORDER BY idCotizacionOrden DESC;";
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
@@ -2220,6 +2239,33 @@ public class Consultas {
         }
         return listaRequi;
     }
+    
+    public Precios consultaItemsCotizacion(int idProducto, int idProveedor) {
+        Precios Precio = new Precios();
+        PreparedStatement ps;
+        ResultSet rs;
+        Connection con;
+        con = ConexionMySQL.conectar();
+        if (con != null) {
+            try {
+                String sql = "SELECT * FROM scompras.precios where idProducto = "+idProducto+" and idProveedor = "+idProveedor+";";
+                ps = con.prepareStatement(sql);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    Precio.setPrecio(rs.getDouble("precioUnitario"));
+                    Precio.setDiasCredito(rs.getInt("diasCredito"));
+                    Precio.setTiempoEntrega(rs.getInt("tiempoEntrega"));
+                    Precio.setGarantia(rs.getInt("tiempoEntrega"));
+                    Precio.setDescuento(rs.getInt("descuento"));
+                    Precio.setAnticipo(rs.getInt("anticipo"));
+                }
+
+            } catch (SQLException e) {
+                System.out.println("ERROR 2 AL CONSULTAR PRECIOS - ITEMS SQL: " + e.getMessage());
+            }
+        }
+        return Precio;
+    }
 
     public ArrayList<CotizacionRequisicion> consultarCotizacionesCuadro(int idReqProd) {
         ArrayList<CotizacionRequisicion> listaRequi = new ArrayList<CotizacionRequisicion>();
@@ -2838,6 +2884,12 @@ public class Consultas {
         return ruta;
     }
 
+    /**
+     * Obvio, consulta la jodida ruta de la factura
+     *
+     * @param idOrden
+     * 
+     */
     public String consultaRutaFactura(int idOrden) {
         String ruta = "";
         PreparedStatement ps;
@@ -2857,5 +2909,37 @@ public class Consultas {
             }
         }
         return ruta;
+    }
+    
+    /**
+     * Regitra el historial de entregas
+     *
+     * @param idReqProd
+     * @param idCompras
+     * @param idUsuario
+     * @param fehaEntregaCompras
+     * 
+     */
+    public void insertaEntregaCompras(int idReqProd, int idCompras, int idUsuario, Timestamp fechaEntregaCompras){
+        String ruta = "";
+        PreparedStatement ps;
+        ResultSet rs;
+        Connection con;
+        String sql = "";
+        con = ConexionMySQL.conectar();
+        if (con != null) {
+            try {
+                sql = "INSERT INTO scompras.entregas (id_req_prod,idCompras,idUsuario,fechaEntregaCompras) VALUES (?,?,?,?);";
+                ps = con.prepareStatement(sql);
+                ps.setInt(1, idReqProd);
+                ps.setInt(2, idCompras);
+                ps.setInt(3, idUsuario);
+                ps.setTimestamp(4, fechaEntregaCompras);
+                ps.executeUpdate();
+                con.close();
+            } catch (SQLException e) {
+                System.out.println("ERROR SQL-1 " + e.getSQLState() + ": " + e.getMessage());
+            } 
+        }
     }
 }

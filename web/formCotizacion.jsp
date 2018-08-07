@@ -4,6 +4,9 @@
     Author     : JefeDesarrollo
 --%>
 
+<%@page import="controller.Consultas"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="model.Precios"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
     HttpSession sesion = request.getSession();
@@ -16,6 +19,10 @@
         int idProducto = 0;
         int idReqCoti = 0;
         int cantidad = 0;
+        Consultas obConsultas = new Consultas();
+        Precios obPrecio = new Precios();
+        ArrayList<Precios> PreciosCotizacion = new ArrayList<Precios>();
+        
 
         try {
             idProducto = Integer.parseInt(request.getParameter("idProducto"));
@@ -31,7 +38,7 @@
             cantidad = Integer.parseInt(request.getParameter("cantidad"));
         } catch (Exception e) {
         }
-
+        obPrecio = obConsultas.consultaItemsCotizacion(idProducto, Integer.parseInt(idUsuario));
 %>
 <!DOCTYPE html>
 <html>
@@ -106,27 +113,27 @@
                         </div>
                         <div for="precio" class="form-group">
                             <label>Precio Unitario Sin IVA <b><FONT COLOR="red" title="Éste campo es obligatorio">*</FONT></b></label>
-                            <input type="double" class="form-control" id="precio" required="true" name="precio">
+                            <input type="double" class="form-control" id="precio" required="true" name="precio" value="<%= obPrecio.getPrecio() %>">
                         </div>
                         <div for="credito" class="form-group">
                             <label>Dias de Crédito <b><FONT COLOR="red" title="Éste campo es obligatorio">*</FONT></b></label>
-                            <input type="number" class="form-control" id="credito" required="true" name="credito">
+                            <input type="number" class="form-control" id="credito" required="true" name="credito" value="<%= obPrecio.getDiasCredito() %>">
                         </div>
                         <div for="entrega" class="form-group">
                             <label>Tiempo de Entrega (Días) <b><FONT COLOR="red" title="Éste campo es obligatorio">*</FONT></b></label>
-                            <input type="number" class="form-control" id="entrega" required="true" name="entrega">
+                            <input type="number" class="form-control" id="entrega" required="true" name="entrega" value="<%= obPrecio.getTiempoEntrega() %>">
                         </div>
                         <div for="garantia" class="form-group">
                             <label>Garantía (Días) <b><FONT COLOR="red" title="Éste campo es obligatorio">*</FONT></b></label>
-                            <input type="number" class="form-control" id="garantia" required="true" name="garantia">
+                            <input type="number" class="form-control" id="garantia" required="true" name="garantia" value="<%= obPrecio.getGarantia() %>">
                         </div>
                         <div for="descuento" class="form-group">
                             <label>% Descuento</label>
-                            <input type="number" class="form-control" id="descuento"  name="descuento">
+                            <input type="number" class="form-control" id="descuento"  name="descuento" value="<%= obPrecio.getDescuento() %>">
                         </div>
                         <div for="anticipo" class="form-group">
                             <label> % Anticipo</label>
-                            <input type="number" class="form-control" id="anticipo"  name="anticipo">
+                            <input type="number" class="form-control" id="anticipo"  name="anticipo" value="<%= obPrecio.getAnticipo() %>">
                         </div>
                         <div for="archivo" class="form-group">
                             <label> Subir Archivo <b><span class="badge badge-info" data-toggle="tooltip" data-placement="bottom"  title="Deberá adjuntar un PDF">?</span><FONT COLOR="red" title="Éste campo es obligatorio">*</FONT></b></label>

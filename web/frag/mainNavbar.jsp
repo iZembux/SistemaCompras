@@ -2,13 +2,7 @@
 <%
     int rol = Integer.parseInt(request.getParameter("rol"));
     int depto = Integer.parseInt(request.getParameter("depto"));
-    int idUsu = 0;
-    try {
-        idUsu = Integer.parseInt(request.getParameter("idUsu"));
-        System.out.println(idUsu);
-    } catch (Exception e) {
-
-    }
+    int idUsuario = Integer.parseInt((String) session.getAttribute("idUsuario"));
 
 %>
 <head>
@@ -41,6 +35,9 @@
                     Requisiciones
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <%
+                        if (idUsuario == 226 || idUsuario == 25 || idUsuario == 4 || idUsuario == 83) {
+                    %>
                     <a class="dropdown-item" href="menuComprasRequisiciones.jsp?categoria=1"> 
                         <div class="row">
                             <div class="col col-lg-9">
@@ -48,6 +45,9 @@
                             </div>
                         </div>
                     </a>
+                    <%  }
+                        if (idUsuario == 83 || idUsuario == 4) {
+                    %>
                     <a class="dropdown-item" href="menuComprasRequisiciones.jsp?categoria=4"> 
                         <div class="row">
                             <div class="col col-lg-9">
@@ -55,6 +55,10 @@
                             </div>
                         </div>
                     </a>
+                    <%
+                        }
+                        if (idUsuario == 268 || idUsuario == 4) {
+                    %> 
                     <a class="dropdown-item" href="menuComprasRequisiciones.jsp?categoria=2"> 
                         <div class="row">
                             <div class="col col-lg-9">
@@ -62,6 +66,9 @@
                             </div>
                         </div>
                     </a>
+                    <%
+                        }
+                    %>
                 </div>
             </li>
             <li class="nav-item dropdown">
@@ -69,6 +76,9 @@
                     Cot. Disponibles
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <%
+                        if (idUsuario == 226 || idUsuario == 25 || idUsuario == 4 || idUsuario == 83) {
+                    %>
                     <a class="dropdown-item" href="menuComprasCotizaciones.jsp?categoria=1"> 
                         <div class="row">
                             <div class="col col-lg-9">
@@ -76,6 +86,9 @@
                             </div> 
                         </div>
                     </a>
+                    <%  }
+                        if (idUsuario == 83 || idUsuario == 4) {
+                    %>
                     <a class="dropdown-item" href="menuComprasCotizaciones.jsp?categoria=4"> 
                         <div class="row">
                             <div class="col col-lg-9">
@@ -83,6 +96,10 @@
                             </div> 
                         </div>
                     </a>
+                    <%
+                        }
+                        if (idUsuario == 268 || idUsuario == 4) {
+                    %> 
                     <a class="dropdown-item" href="menuComprasCotizaciones.jsp?categoria=2"> 
                         <div class="row">
                             <div class="col col-lg-9">
@@ -90,6 +107,9 @@
                             </div> 
                         </div>
                     </a>
+                    <%
+                        }
+                    %>
                 </div>
             </li>
             <li class="nav-item dropdown">
@@ -97,18 +117,48 @@
                     Cot. Autorizadas
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <%
+                        if (idUsuario == 226 || idUsuario == 25 || idUsuario == 4 || idUsuario == 83) {
+                    %>
                     <a class="dropdown-item" href="menuComprasOrdenes.jsp?categoria=1"> 
                         Cotizaciones Papeleria
                     </a>
+                    <%  }
+                        if (idUsuario == 83 || idUsuario == 4) {
+                    %>
                     <a class="dropdown-item" href="menuComprasOrdenes.jsp?categoria=4"> 
                         Cotizaciones Cafeteria
                     </a>
+                    <%
+                        }
+                        if (idUsuario == 268 || idUsuario == 4) {
+                    %> 
                     <a class="dropdown-item" href="menuComprasOrdenes.jsp?categoria=2"> 
                         Cotizaciones Tecnologia
                     </a>
-                    <a class="dropdown-item" href="menuComprasOrdenesHistorial.jsp"> 
-                        Historial Ordenes
+                    <%
+                        }
+                        if (idUsuario == 226 || idUsuario == 25 || idUsuario == 4 || idUsuario == 83) {
+                    %>
+                    <a class="dropdown-item" href="menuComprasOrdenesHistorial.jsp?categoria=1"> 
+                        Historial Ordenes Papeleria
                     </a>
+                    <%  }
+                        if (idUsuario == 83 || idUsuario == 4) {
+                    %>
+                    <a class="dropdown-item" href="menuComprasOrdenesHistorial.jsp?categoria=4"> 
+                        Historial Ordenes Cafeteria
+                    </a>
+                    <%
+                        }
+                        if (idUsuario == 268 || idUsuario == 4) {
+                    %> 
+                    <a class="dropdown-item" href="menuComprasOrdenesHistorial.jsp?categoria=2"> 
+                        Historial Ordenes Tecnología
+                    </a>
+                    <%
+                        }
+                    %>
                 </div>
             </li>
             <li class="nav-item dropdown">
@@ -116,15 +166,28 @@
                     Recepcion
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <%
+                        if (idUsuario == 226 || idUsuario == 25 || idUsuario == 4 || idUsuario == 83) {
+                    %>
                     <a class="dropdown-item" href="menuComprasRecepcion.jsp?categoria=1"> 
                         Papeleria
                     </a>
+                    <%  }
+                        if (idUsuario == 83 || idUsuario == 4) {
+                    %>
                     <a class="dropdown-item" href="menuComprasRecepcion.jsp?categoria=4"> 
                         Cafeteria
                     </a>
+                    <%
+                        }
+                        if (idUsuario == 268 || idUsuario == 4) {
+                    %>
                     <a class="dropdown-item" href="menuComprasRecepcion.jsp?categoria=2"> 
                         Tecnologia
                     </a>
+                    <%
+                        }
+                    %>
                 </div>
             </li>
             <li class="nav-item dropdown">
@@ -132,15 +195,28 @@
                     Entrega
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <%
+                        if (idUsuario == 226 || idUsuario == 25 || idUsuario == 4 || idUsuario == 83) {
+                    %>
                     <a class="dropdown-item" href="menuComprasEntrega.jsp?categoria=1"> 
                         Papeleria
                     </a>
+                    <%  }
+                        if (idUsuario == 83 || idUsuario == 4) {
+                    %>
                     <a class="dropdown-item" href="menuComprasEntrega.jsp?categoria=4"> 
                         Cafeteria
                     </a>
+                    <%
+                        }
+                        if (idUsuario == 268 || idUsuario == 4) {
+                    %>
                     <a class="dropdown-item" href="menuComprasEntrega.jsp?categoria=2"> 
                         Tecnologia
                     </a>
+                    <%
+                        }
+                    %>
                 </div>
             </li>
             <%-- <% if (rol == 3) { %> --%>

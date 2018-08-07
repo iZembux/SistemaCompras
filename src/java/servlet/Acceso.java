@@ -53,14 +53,7 @@ public class Acceso extends HttpServlet {
                 String nombreU = ListaUsu.get(0).getNombre();
                 String sucursal = ListaUsu.get(0).getId_sucursal();
                 
-                /*
-                System.out.println("ID USUARIO: " + idUsuario);
-                System.out.println("USUARIO: " + usuario);
-                //System.out.println("PASSWORD: " + password);
-                System.out.println("ROL: " + rol);
-                System.out.println("DEPARTAMENTO: " + depto);
-                System.out.println("SUCURSAL: " + sucursal);
-                */
+                
                 System.out.println("Acceso Compras: "+ usuario);
                 String retorno1 = "";
                 if (password.equals(pass)) {
