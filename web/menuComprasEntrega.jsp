@@ -109,7 +109,7 @@
                                 <input type="hidden" class="hidden" name="cantidad" value="<%=cantidadRequi%>" >
                                 <input type="hidden" class="hidden" name="idUsu" value="<%=idUsu%>" >
                                 <input type="hidden" class="hidden" name="categoria" value="<%=id_categoria %>" >
-                                <input type="hidden" class="hidden" name="nuevoStatus" value="16" >
+                                <input type="hidden" class="hidden" name="nuevoStatus" value="13" >
                                 <input type="hidden" class="hidden" name="entrega" value="1" >
                                 <button type="submit" class="btn btn-success btn-sm">Entregar Producto</button>
                             </form>
