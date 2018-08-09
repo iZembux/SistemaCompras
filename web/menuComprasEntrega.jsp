@@ -93,6 +93,7 @@
                                 solicitante = arrayRequis.get(i).getSolicitante();
                                 sucursal = arrayRequis.get(i).getSucursal();
                                 idUsu = arrayRequis.get(i).getIdSolicita();
+                                //onsubmit="return confirm('Desea entregar el producto? \n Se requiere confirmación del usuario')"
                     %>
                     <tr>
                         <td><%=idOrden%></td>
@@ -103,7 +104,7 @@
                         <td><%=sucursal%></td>
                         <td><%=cantidadRequi%></td> 
                         <td>
-                            <form action="actualizaRecibido.jsp" method="post" id="formActualiza" onsubmit="return confirm('Desea entregar el producto? \n Se requiere confirmación del usuario')">
+                            <form action="actualizaRecibido.jsp" method="post" id="formActualiza">
                                 <input type="hidden" class="hidden" name="idReqProd" value="<%=idReqProd%>" >
                                 <input type="hidden" class="hidden" name="producto" value="<%=producto%>" >
                                 <input type="hidden" class="hidden" name="cantidad" value="<%=cantidadRequi%>" >
