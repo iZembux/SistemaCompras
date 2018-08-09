@@ -83,7 +83,7 @@
         String correo = rs.getString("correo");
         String nombre = rs.getString("nombre");
         String apellido = rs.getString("apellido");
-        objMail.enviarCorreo(correo, nombre, apellido, "Comparativo autorizado");
+        objMail.enviarCorreo(correo, nombre, apellido, "Hay un nuevo cuadro comparativo por revisar");
     }
     
     System.out.println("------------------------------------------------------------");

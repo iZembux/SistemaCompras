@@ -4,6 +4,8 @@
     Author     : JefeDesarrollo
 --%>
 
+<%@page import="java.text.DecimalFormat"%>
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="model.Comparativo"%>
 <%@page import="model.RequisicionFormato"%>
 <%@page import="java.sql.Statement"%>
@@ -177,6 +179,7 @@
             break;
         }
     }
+    DecimalFormat formateador = new DecimalFormat("###,###,###.##");
 %>
 <!doctype html>
 <html>
@@ -397,31 +400,31 @@
                         <td width="10%" style="border-left: hidden; border-top: hidden">&nbsp;</td>
                         <td width="30%">SUBTOTAL</td>
                         <td width="10%" style="border-top: hidden">&nbsp;</td>
-                        <td width="10%">$<%=total%></td>
+                        <td width="10%">$<%=formateador.format(total)%></td>
                         <td width="10%" style="border-top: hidden">&nbsp;</td>
-                        <td width="10%">$<%=total2%></td>
+                        <td width="10%">$<%=formateador.format(total2)%></td>
                         <td width="10%" style="border-top: hidden">&nbsp;</td>
-                        <td width="10%">$<%=total3%></td>
+                        <td width="10%">$<%=formateador.format(total3)%></td>
                     </tr>
                     <tr>
                         <td style="border-left: hidden; border-top: hidden">&nbsp;</td>
                         <td>IVA</td>
                         <td style="border-top: hidden">&nbsp;</td>
-                        <td>$<%=iva%></td>
+                        <td>$<%=formateador.format(iva)%></td>
                         <td style="border-top: hidden">&nbsp;</td>
-                        <td>$<%=iva2%></td>
+                        <td>$<%=formateador.format(iva2)%></td>
                         <td style="border-top: hidden">&nbsp;</td>
-                        <td>$<%=iva3%></td>
+                        <td>$<%=formateador.format(iva3)%></td>
                     </tr>
                     <tr>
                         <td style="border-left: hidden; border-top: hidden; border-bottom: hidden">&nbsp;</td>
                         <td>TOTAL EN PESOS</td>
                         <td style="border-top: hidden; border-bottom: hidden">&nbsp;</td>
-                        <td>$<%=total + iva%></td>
+                        <td>$<%=formateador.format(total + iva)%></td>
                         <td style="border-top: hidden; border-bottom: hidden">&nbsp;</td>
-                        <td>$<%=total2 + iva2%></td>
+                        <td>$<%=formateador.format(total2 + iva2)%></td>
                         <td style="border-top: hidden; border-bottom: hidden">&nbsp;</td>
-                        <td>$<%=total3 + iva3%></td>
+                        <td>$<%=formateador.format(total3 + iva3)%></td>
                     </tr>
                 </tbody>
             </table>
