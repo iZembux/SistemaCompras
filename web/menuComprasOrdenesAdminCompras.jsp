@@ -1,27 +1,30 @@
 <%-- 
-    Muestra las requisiciones disponibles para la autorizacion del gerente por id de departamento
-    status = 3
+    Autorizacion de comparativos por parte del director administrativo
 --%>
-
+<%@page import="model.Comparativo"%>
+<%@page import="model.OrdenFormato"%>
+<%@page import="model.CotizacionRequisicion"%>
+<%@page import="controller.Consultas"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.RequisicionProducto"%>
-<%@page import="controller.Consultas"%>
 <%
     HttpSession sesion = request.getSession();
     String usuarioValidado = (String) sesion.getAttribute("usuarioIngresado");
-    String idUsu = (String) sesion.getAttribute("idUsuario");
-    
+
     if (usuarioValidado == null) {
         response.sendRedirect("index.jsp");
     } else {
         String idDepto = (String) sesion.getAttribute("departamento");
         String rol = (String) sesion.getAttribute("rol");
-        String sucursal = (String) sesion.getAttribute("sucursal");
+        String usuario = (String) sesion.getAttribute("idUsuario");
+        String suc = null;
+         
+        int id_categoria = 1;
+        try {
+            id_categoria = Integer.parseInt(request.getParameter("categoria"));
+        } catch (Exception e) {
 
-        if (idUsu.equals("267") || idUsu.equals("313")) {
-            sucursal = "1,2,3,4,6,7,8,9,10,11,12,13,14,15,16,17";
         }
-
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -29,7 +32,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <title>Autorizar</title>
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <title>Comparativos</title>
     </head>
     <body>
 
@@ -40,47 +44,45 @@
 
         <div class="container my-5">
             <div class="page-header">
-                <h3>Dictamen</h3>
+                <h3>Comparativos por revisar</h3>
             </div>
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
-                        <th scope="col">No.</th>
-                        <th scope="col">Solicitante</th>
+                        <th scope="col">Id Cuadro</th>
+                        <th scope="col">Departamento Solicitante</th>
                         <th scope="col">Cantidad de Productos</th>
-                        <th scope="col">Fecha</th>
                         <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
                     <%
+                        int idCuadro;
+                        int cantidad;
+                        String depto; 
 
-                        int idRequi;
-                        int cantidadRequi;
-                        String solicitante;
-                        String fecha;
-
-                        ArrayList<RequisicionProducto> arrayRequis = new ArrayList<RequisicionProducto>();
+                        ArrayList<Comparativo> arrayRequis = new ArrayList<Comparativo>();
                         Consultas obj = new Consultas();
-                        arrayRequis = obj.consultarDictamen(sucursal);
+                        arrayRequis = obj.consultarCuadrosComparativos(7);
 
                         if (arrayRequis.size() > 0) {
                             for (int i = 0; i < arrayRequis.size(); i++) {
-                                idRequi = arrayRequis.get(i).getIdRequisicion();
-                                cantidadRequi = arrayRequis.get(i).getCantidad();
-                                solicitante = arrayRequis.get(i).getSolicitante();
-                                fecha = arrayRequis.get(i).getFecha();
+                                idCuadro = arrayRequis.get(i).getIdCuadro();
+                                depto = arrayRequis.get(i).getDepartamento();
+                                cantidad = arrayRequis.get(i).getCantidad();
                     %>
                     <tr>
-                        <td><%=idRequi%></td>
-                        <td><%=solicitante.toUpperCase()%></td>
-                        <td><%=cantidadRequi%></td>
-                        <td><%=fecha%></td>
+                        <td><%=idCuadro%></td>
+                        <td><%=depto%></td>
+                        <td><%=cantidad%></td>
                         <td>
-                            <form action="detalleDictamen.jsp" method="post">
-                                <input type="hidden" name="idRequi" value="<%=idRequi%>" >
-                                <button type="submit" class="btn btn-primary btn-sm">Detalle</button>
-                            </form>
+                            <div class="row">
+                                <form action="formatos/comparativo_2.jsp" method="post" target="_blank">
+                                    <input type="hidden" name="cuadro" value="<%=idCuadro%>" >
+                                    <input type="hidden" name="idUsu" value="<%=usuario%>" >
+                                    <button type="submit" class="btn btn-info btn-sm" >Ver Cuadro</button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                     <% }

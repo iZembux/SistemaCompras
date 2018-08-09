@@ -53,6 +53,7 @@
     Class.forName("com.mysql.jdbc.Driver");
     Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/scompras", "root", "stmsc0nt");
     Statement st = con.createStatement();
+    PreparedStatement ps;
     ResultSet rs;
 
     System.out.println("------------------COTIZACIONES GANADORAS--------------------");
@@ -75,7 +76,17 @@
         System.out.println("Requisicion actualizadas: " + totalRequis.get(j));
     }
 
+    String sql2 = "SELECT correo, nombre, apellido FROM scompras.usuario where id_usuario = 294;";
+    ps = con.prepareStatement(sql2);
+    rs = ps.executeQuery();
+    while (rs.next()) {
+        String correo = rs.getString("correo");
+        String nombre = rs.getString("nombre");
+        String apellido = rs.getString("apellido");
+        objMail.enviarCorreo(correo, nombre, apellido, "Comparativo autorizado");
+    }
+    
     System.out.println("------------------------------------------------------------");
     //Envia Correo a Gerente Admin
-    response.sendRedirect("menuComprasCotizaciones.jsp?categoria=" + id_categoria + "");
+    response.sendRedirect("menuComprasOrdenesAdmin.jsp");
 %>

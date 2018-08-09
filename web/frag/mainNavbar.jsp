@@ -253,7 +253,25 @@
                     </a>-->
                 </div>
             </li>
+            <% if (idUsuario == 4) { %>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-dollar-sign"></i> Comparativos
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="menuComprasOrdenesAdminCompras.jsp"> 
+                        Autorizar Comparativo
+                    </a>
+                    <!--
+                    <a class="dropdown-item" href="menuHistorialAutorizaCoti.jsp"> 
+                        Historial de Comparativos
+                    </a>
+                    -->
+                </div>
+            </li>   
+
             <% }
+                }
                 if (rol == 3 || rol == 4 || rol == 5) {
                     if (depto != 7) {
             %>
@@ -355,7 +373,7 @@
             </li> 
             <% }
                 if (rol == 5) { %>
-            
+
 
             <% }
 

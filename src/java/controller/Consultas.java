@@ -1515,7 +1515,7 @@ public class Consultas {
                         + "    and rp.id_orden = 0    \n"
                         + "    GROUP BY c.id_proveedor, s.id_sucursales, d.id_departamentos\n"
                         + "    ORDER BY c.id_proveedor, s.id_sucursales, d.id_departamentos;";
-                System.out.println(sql);
+                
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
@@ -1678,7 +1678,7 @@ public class Consultas {
                         + " idCotizacionOrden, fechaOrden FROM scompras.ordenes_compra where idProveedor = " + proveedor + " "
                         + "and idCotizacionOrden > 0 and idCotizacionOrden not in ('2','3','4','5') "
                         + "group by idCotizacionOrden order by idCotizacionOrden desc;";
-                System.out.println(sql);
+                
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
@@ -1862,6 +1862,8 @@ public class Consultas {
                         + "    and rp.id_orden = 0    \n"
                         + "    group by rp.id_req_prod, c.id_proveedor, s.id_sucursales, d.id_departamentos    \n"
                         + "    ORDER BY c.id_proveedor, s.id_sucursales, d.id_departamentos;";
+                
+                
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
@@ -2316,6 +2318,7 @@ public class Consultas {
                         + "AND p.id_productos = c.id_producto\n"
                         + "AND id_req_prod = " + idReqProd + "\n"
                         + "group by c.id_cotizacion";
+                
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {

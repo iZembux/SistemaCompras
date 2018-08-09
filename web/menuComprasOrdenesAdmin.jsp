@@ -63,7 +63,7 @@
 
                         ArrayList<Comparativo> arrayRequis = new ArrayList<Comparativo>();
                         Consultas obj = new Consultas();
-                        arrayRequis = obj.consultarCuadrosComparativos(7);
+                        arrayRequis = obj.consultarCuadrosComparativos(9);
 
                         if (arrayRequis.size() > 0) {
                             for (int i = 0; i < arrayRequis.size(); i++) {
@@ -77,7 +77,7 @@
                         <td><%=cantidad%></td>
                         <td>
                             <div class="row">
-                                <form action="formatos/comparativo_2.jsp" method="post" target="_blank">
+                                <form action="formatos/comparativo_3.jsp" method="post" target="_blank">
                                     <input type="hidden" name="cuadro" value="<%=idCuadro%>" >
                                     <input type="hidden" name="idUsu" value="<%=usuario%>" >
                                     <button type="submit" class="btn btn-info btn-sm" >Ver Cuadro</button>

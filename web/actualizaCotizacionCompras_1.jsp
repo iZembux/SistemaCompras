@@ -68,6 +68,7 @@
     Class.forName("com.mysql.jdbc.Driver");
     Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/scompras", "root", "stmsc0nt");
     Statement st = con.createStatement();
+    PreparedStatement ps;
     ResultSet rs;
 
     rs = st.executeQuery("SELECT  max(idcuadro) as id from comparativos;");
@@ -80,19 +81,18 @@
     System.out.println("Numero de cotizaciones: " + tam);
     System.out.println("Comparativo: " + idComparativo);
     for (int j = 0; j < tam; j++) {
-            idCotizacion = Integer.parseInt(request.getParameter("cotiSelccionada" + seleccionada + j));
+        idCotizacion = Integer.parseInt(request.getParameter("cotiSelccionada" + seleccionada + j));
 
-            System.out.println("Cotizacion ganadora: " + idCotizacion);
-            st.executeUpdate("update cotizacion set id_status_cotizacion = " + nuevoStatusCoti + ", observaciones = '" + observaciones + "',\n"
-                    + "fecha_aut_compras = CURRENT_TIMESTAMP where id_cotizacion = " + idCotizacion + ";");
+        System.out.println("Cotizacion ganadora: " + idCotizacion);
+        st.executeUpdate("update cotizacion set id_status_cotizacion = " + nuevoStatusCoti + ", observaciones = '" + observaciones + "',\n"
+                + "fecha_aut_compras = CURRENT_TIMESTAMP where id_cotizacion = " + idCotizacion + ";");
 
-            idRP = Integer.parseInt(request.getParameter("idRP" + j));
-            System.out.println("*Requisicion " + idRP + " Nuevo staus ==> " + nuevoStatusRequi);
-            st.executeUpdate("update req_prod rp, cotizacion c set id_status = " + nuevoStatusRequi + ", id_cot_ganadora = " + idCotizacion + ", "
-                    + "id_cuadro = " + idComparativo + " "
-                    + "where c.id_req_coti = rp.id_req_coti and c.id_cotizacion = " + idCotizacion + " and id_req_prod = " + idRP + ";");
+        idRP = Integer.parseInt(request.getParameter("idRP" + j));
+        System.out.println("*Requisicion " + idRP + " Nuevo staus ==> " + nuevoStatusRequi);
+        st.executeUpdate("update req_prod rp, cotizacion c set id_status = " + nuevoStatusRequi + ", id_cot_ganadora = " + idCotizacion + ", "
+                + "id_cuadro = " + idComparativo + " "
+                + "where c.id_req_coti = rp.id_req_coti and c.id_cotizacion = " + idCotizacion + " and id_req_prod = " + idRP + ";");
 
-        
     }
 
     for (int i = 0; i < tam2; i++) {
@@ -107,7 +107,18 @@
             System.out.println("Error :( ");
         }
     }
+
+    String sql2 = "SELECT correo, nombre, apellido FROM scompras.usuario where id_usuario = 4;";
+    ps = con.prepareStatement(sql2);
+    rs = ps.executeQuery();
+    while (rs.next()) {
+        String correo = rs.getString("correo");
+        String nombre = rs.getString("nombre");
+        String apellido = rs.getString("apellido");
+        objMail.enviarCorreo(correo, nombre, apellido, "Hay un nuevo cuadro comparativo por revisar");
+    }
+
     System.out.println("------------------------------------------------------------");
     //Envia Correo a Gerente Admin
-    response.sendRedirect("menuComprasCotizaciones.jsp?categoria=" + id_categoria + "");
+    response.sendRedirect("menuComprasOrdenes.jsp?categoria="+id_categoria+"");
 %>

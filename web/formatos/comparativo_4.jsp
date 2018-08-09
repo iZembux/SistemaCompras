@@ -14,7 +14,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-    int tam = 0;
+    int cuadro = 0;
     int idReqProd = 0;
 
     String proveedor = "N/A", proveedor2 = "N/A", proveedor3 = "N/A";
@@ -37,6 +37,9 @@
     int garantia = 0, garantia2 = 0, garantia3 = 0;
     int activo = 0;
     int solicitantes = 0;
+    int idUsu = 0;
+    int idGanadora = 0;
+    int idCuadro = 0;
 
     ArrayList<Integer> idCoti = new ArrayList<Integer>();
     ArrayList<Integer> idRP = new ArrayList<Integer>();
@@ -49,94 +52,87 @@
     ArrayList<CotizacionRequisicion> cotizaciones = new ArrayList<CotizacionRequisicion>();
     Consultas obj = new Consultas();
 
-    tam = Integer.parseInt(request.getParameter("tam"));
+    cuadro = Integer.parseInt(request.getParameter("cuadro"));
 
     ArrayList<Integer> req = new ArrayList<Integer>();
 
     System.out.println("-----------GENERACION DE CUADRO COMPARATIVO-----------------");
 
-    for (int j = 0; j < tam; j++) {
-        try {
-            idReqProd = Integer.parseInt(request.getParameter("idReqProd" + j));
-            idRP.add(idReqProd);
-            System.out.println("Requisicion: " + idReqProd);
-            cotizaciones = obj.consultarCotizacionesCuadro(idReqProd);
-            if (cotizaciones.size() > 0) {
-                departamento = cotizaciones.get(0).getDepto();
-                sucursal = cotizaciones.get(0).getSucursal();
-                fecha = cotizaciones.get(0).getFecha();
-                activo = cotizaciones.get(0).getActivo();
-                proveedor = cotizaciones.get(0).getProveedor();
+    cotizaciones = obj.consultarCotizacionesCuadroAdmin(19, cuadro);
+    if (cotizaciones.size() > 0) {
+        departamento = cotizaciones.get(0).getDepto();
+        sucursal = cotizaciones.get(0).getSucursal();
+        fecha = cotizaciones.get(0).getFecha();
+        activo = cotizaciones.get(0).getActivo();
+        proveedor = cotizaciones.get(0).getProveedor();
+        idGanadora = cotizaciones.get(0).getIdGanadora();
 
-                Comparativo obj4 = new Comparativo();
-                obj4.setCantidad(cotizaciones.get(0).getCantidad());
-                obj4.setProducto(cotizaciones.get(0).getProducto());
-                System.out.println("Articulo: " + cotizaciones.get(0).getProducto());
+        Comparativo obj4 = new Comparativo();
+        obj4.setCantidad(cotizaciones.get(0).getCantidad());
+        obj4.setProducto(cotizaciones.get(0).getProducto());
+        System.out.println("Articulo: " + cotizaciones.get(0).getProducto());
 
-                lista4.add(obj4);
+        lista4.add(obj4);
 
-                Comparativo obj1 = new Comparativo();
-                obj1.setIdCotizacion(cotizaciones.get(0).getIdC());
-                System.out.println("Cotizacion 1: " + cotizaciones.get(0).getIdC());
-                idCoti.add(cotizaciones.get(0).getIdC());
+        Comparativo obj1 = new Comparativo();
+        obj1.setIdCotizacion(cotizaciones.get(0).getIdC());
+        System.out.println("Cotizacion 1: " + cotizaciones.get(0).getIdC());
+        idCoti.add(cotizaciones.get(0).getIdC());
 
-                obj1.setCantidad(cotizaciones.get(0).getCantidad());
-                credito = (cotizaciones.get(0).getCredito());
-                entrega = (entrega = cotizaciones.get(0).getEntrega());
-                anticipo = (cotizaciones.get(0).getAnticipo());
-                garantia = (cotizaciones.get(0).getGarantia());
-                obj1.setPrecio(cotizaciones.get(0).getPrecio());
+        obj1.setCantidad(cotizaciones.get(0).getCantidad());
+        credito = (cotizaciones.get(0).getCredito());
+        entrega = (entrega = cotizaciones.get(0).getEntrega());
+        anticipo = (cotizaciones.get(0).getAnticipo());
+        garantia = (cotizaciones.get(0).getGarantia());
+        obj1.setPrecio(cotizaciones.get(0).getPrecio());
 
-                iva += cotizaciones.get(0).getIva();
-                obj1.setIva(iva);
-                total += ((cotizaciones.get(0).getPrecio()) * cotizaciones.get(0).getCantidad());
-                obj1.setTotal(total);
+        iva += cotizaciones.get(0).getIva();
+        obj1.setIva(iva);
+        total += ((cotizaciones.get(0).getPrecio()) * cotizaciones.get(0).getCantidad());
+        obj1.setTotal(total);
 
-                lista1.add(obj1);
-                if (cotizaciones.size() >= 2) {
-                    proveedor2 = cotizaciones.get(1).getProveedor();
-                    cantidad2 = cotizaciones.get(1).getCantidad();
+        lista1.add(obj1);
+        if (cotizaciones.size() >= 2) {
+            proveedor2 = cotizaciones.get(1).getProveedor();
+            cantidad2 = cotizaciones.get(1).getCantidad();
 
-                    Comparativo obj2 = new Comparativo();
-                    obj2.setIdCotizacion(cotizaciones.get(1).getIdC());
-                    System.out.println("Cotizacion 2: " + cotizaciones.get(1).getIdC());
-                    idCoti.add(cotizaciones.get(1).getIdC());
+            Comparativo obj2 = new Comparativo();
+            obj2.setIdCotizacion(cotizaciones.get(1).getIdC());
+            System.out.println("Cotizacion 2: " + cotizaciones.get(1).getIdC());
+            idCoti.add(cotizaciones.get(1).getIdC());
 
-                    obj2.setCantidad(cotizaciones.get(1).getCantidad());
-                    credito2 = (cotizaciones.get(1).getCredito());
-                    entrega2 = (entrega = cotizaciones.get(1).getEntrega());
-                    anticipo2 = (cotizaciones.get(1).getAnticipo());
-                    garantia2 = (cotizaciones.get(1).getGarantia());
-                    obj2.setPrecio(cotizaciones.get(1).getPrecio());
-                    iva2 += cotizaciones.get(1).getIva();
-                    obj2.setIva(iva2);
-                    total2 += ((cotizaciones.get(1).getPrecio()) * cotizaciones.get(1).getCantidad());
-                    obj2.setTotal(total2);
-                    lista2.add(obj2);
-                }
-                if (cotizaciones.size() >= 3) {
-                    proveedor3 = cotizaciones.get(2).getProveedor();
-                    cantidad3 = cotizaciones.get(2).getCantidad();
+            obj2.setCantidad(cotizaciones.get(1).getCantidad());
+            credito2 = (cotizaciones.get(1).getCredito());
+            entrega2 = (entrega = cotizaciones.get(1).getEntrega());
+            anticipo2 = (cotizaciones.get(1).getAnticipo());
+            garantia2 = (cotizaciones.get(1).getGarantia());
+            obj2.setPrecio(cotizaciones.get(1).getPrecio());
+            iva2 += cotizaciones.get(1).getIva();
+            obj2.setIva(iva2);
+            total2 += ((cotizaciones.get(1).getPrecio()) * cotizaciones.get(1).getCantidad());
+            obj2.setTotal(total2);
+            lista2.add(obj2);
+        }
+        if (cotizaciones.size() == 3) {
+            proveedor3 = cotizaciones.get(2).getProveedor();
+            cantidad3 = cotizaciones.get(2).getCantidad();
 
-                    Comparativo obj3 = new Comparativo();
-                    obj3.setIdCotizacion(cotizaciones.get(2).getIdC());
-                    System.out.println("Cotizacion 3: " + cotizaciones.get(2).getIdC());
-                    idCoti.add(cotizaciones.get(2).getIdC());
+            Comparativo obj3 = new Comparativo();
+            obj3.setIdCotizacion(cotizaciones.get(2).getIdC());
+            System.out.println("Cotizacion 3: " + cotizaciones.get(2).getIdC());
+            idCoti.add(cotizaciones.get(2).getIdC());
 
-                    obj3.setCantidad(cotizaciones.get(2).getCantidad());
-                    credito3 = (cotizaciones.get(2).getCredito());
-                    entrega3 = (entrega = cotizaciones.get(2).getEntrega());
-                    anticipo3 = (cotizaciones.get(2).getAnticipo());
-                    garantia3 = (cotizaciones.get(2).getGarantia());
-                    obj3.setPrecio(cotizaciones.get(2).getPrecio());
-                    iva3 += cotizaciones.get(2).getIva();
-                    obj3.setIva(iva3);
-                    total3 += ((cotizaciones.get(2).getPrecio()) * cotizaciones.get(2).getCantidad());
-                    obj3.setTotal(total3);
-                    lista3.add(obj3);
-                }
-            }
-        } catch (Exception e) {
+            obj3.setCantidad(cotizaciones.get(2).getCantidad());
+            credito3 = (cotizaciones.get(2).getCredito());
+            entrega3 = (entrega = cotizaciones.get(2).getEntrega());
+            anticipo3 = (cotizaciones.get(2).getAnticipo());
+            garantia3 = (cotizaciones.get(2).getGarantia());
+            obj3.setPrecio(cotizaciones.get(2).getPrecio());
+            iva3 += cotizaciones.get(2).getIva();
+            obj3.setIva(iva3);
+            total3 += ((cotizaciones.get(2).getPrecio()) * cotizaciones.get(2).getCantidad());
+            obj3.setTotal(total3);
+            lista3.add(obj3);
         }
     }
 
@@ -149,6 +145,10 @@
         solicitantes = obj2.contarSolicitantesCoti(idCoti.get(0));
     } catch (Exception e) {
     }
+    try {
+        idUsu = Integer.parseInt(request.getParameter("idUsu"));
+    } catch (Exception e) {
+    }
 
     if (activo == 1) {
         cActivo = "X";
@@ -156,6 +156,26 @@
     } else if (activo == 0) {
         cActivo = "&nbsp;";
         cGeneral = "X";
+    }
+
+    int provGanador = obj.consultarProveedorGanador(idGanadora);
+    String nombreProveedor = obj.consultarNombreProveedor(provGanador);
+
+    boolean uno = false;
+    boolean dos = false;
+    boolean tres = false;
+    System.out.println("Cotizacion propuesta " + idGanadora);
+    for (int i = 0; i < lista1.size(); i++) {
+        if (lista1.get(i).getIdCotizacion() == idGanadora) {
+            uno = true;
+            break;
+        } else if (lista2.get(i).getIdCotizacion() == idGanadora) {
+            dos = true;
+            break;
+        } else if (lista3.get(i).getIdCotizacion() == idGanadora) {
+            tres = true;
+            break;
+        }
     }
 %>
 <!doctype html>
@@ -182,12 +202,20 @@
     <body>
         <div class="container">
             <div class="card mx-auto w-50">
-                <h5 class="card-header">Seleccionar Mejor Cotizacion</h5>
+                <h5 class="card-header">Cotizacion aprobada por Director Administrativo:</h5>
                 <div class="card-body" style="text-align: center;">
-                    <form action="../actualizaCotizacionCompras_1.jsp" method="post">
+                    <form action="../actualizaCotizacionCompras_4.jsp" method="post">
+                        <div>
+                            <label><h4><%=nombreProveedor%></h4></label>
+                        </div>
+                        <hr>
                         <div class="form-check form-check-inline">
+                            <%if (uno) {%>
+                            <input class="form-check-input" type="radio" name="sel" id="exampleRadios1" value="1" required="true" checked="true">
+                            <%} else {%>
                             <input class="form-check-input" type="radio" name="sel" id="exampleRadios1" value="1" required="true"> 
-                            <% for (int i = 0; i < lista1.size(); i++) {%>
+                            <% }
+                                for (int i = 0; i < lista1.size(); i++) {%>
                             <input type="hidden" class="hidden" name="cotiSelccionada1<%=i%>" value="<%=lista1.get(i).getIdCotizacion()%>" >
                             <% } %>
                             <label class="form-check-label" for="exampleRadios1">
@@ -195,8 +223,12 @@
                             </label>
                         </div>
                         <div class="form-check form-check-inline">
+                            <%if (dos) {%>
+                            <input class="form-check-input" type="radio" name="sel" id="exampleRadios1" value="2" required="true" checked="true"> 
+                            <%} else {%>
                             <input class="form-check-input" type="radio" name="sel" id="exampleRadios1" value="2" required="true"> 
-                            <% for (int i = 0; i < lista2.size(); i++) {%>
+                            <%}
+                                for (int i = 0; i < lista2.size(); i++) {%>
                             <input type="hidden" class="hidden" name="cotiSelccionada2<%=i%>" value="<%=lista2.get(i).getIdCotizacion()%>" >
                             <% } %>
                             <label class="form-check-label" for="exampleRadios2">
@@ -204,8 +236,12 @@
                             </label>
                         </div>
                         <div class="form-check form-check-inline">
+                            <%if (tres) {%>
+                            <input class="form-check-input" type="radio" name="sel" id="exampleRadios1" value="3" required="true" checked="true"> 
+                            <%} else {%>
                             <input class="form-check-input" type="radio" name="sel" id="exampleRadios1" value="3" required="true"> 
-                            <% for (int i = 0; i < lista3.size(); i++) {%>
+                            <% }
+                                for (int i = 0; i < lista3.size(); i++) {%>
                             <input type="hidden" class="hidden" name="cotiSelccionada3<%=i%>" value="<%=lista3.get(i).getIdCotizacion()%>" >
                             <% } %>
                             <label class="form-check-label" for="exampleRadios3">
@@ -221,10 +257,12 @@
                         <input type="hidden" class="hidden" name="tam2" value="<%=idCoti.size()%>">
                         <input type="hidden" class="hidden" name="tamano" value="<%=lista1.size()%>">
                         <input type="hidden" class="hidden" name="nuevoStatusCoti" value="2" >
-                        <input type="hidden" class="hidden" name="nuevoStatusRequi" value="7" >
-                        <input type="hidden" class="hidden" name="categoria" value="2" >
-                        <input type="hidden" class="hidden" name="observaciones" value="<%= observaciones%>" >
-                        <button type="submit" class="btn btn-success btn-sm">Solicitar Autorizaciones</button>
+                        <input type="hidden" class="hidden" name="nuevoStatusRequi" value="10" >
+                        <input type="hidden" class="hidden" name="idUsu" value="<%=idUsu%>" >
+                        <input type="hidden" class="hidden" name="idCuadro" value="<%=cuadro%>" >
+                        <br/>
+                        <br/>
+                        <button type="submit" class="btn btn-success btn-sm">Aceptar o Modificar Proveedor</button>
                     </form>
                 </div>
             </div>
@@ -446,7 +484,7 @@
             </table>
             <br>
             <br>
-            
+           
         </div>
         <br>
         <br>

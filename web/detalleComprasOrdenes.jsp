@@ -113,8 +113,6 @@
                 <% } %>
                 <br />
                 <form action="actualizaOrdenCompras.jsp" method="post">
-
-
                     <% if (total >= 7500 && idCuadro == 0) { %> 
                     <span>*Monto de la compra mayor a $7500.00, es necesario generar un cuadro comparativo</span>
                     <br />

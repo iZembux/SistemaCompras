@@ -202,7 +202,7 @@
     <body>
         <div class="container">
             <div class="card mx-auto w-50">
-                <h5 class="card-header">Cotizacion propuesta por compras:</h5>
+                <h5 class="card-header">Cotizacion propuesta:</h5>
                 <div class="card-body" style="text-align: center;">
                     <form action="../actualizaCotizacionCompras_2.jsp" method="post">
                         <div>

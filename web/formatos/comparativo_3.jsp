@@ -202,7 +202,7 @@
     <body>
         <div class="container">
             <div class="card mx-auto w-50">
-                <h5 class="card-header">Cotizacion aprobada por Director Administrativo:</h5>
+                <h5 class="card-header">Cotizacion aprobada por Compras:</h5>
                 <div class="card-body" style="text-align: center;">
                     <form action="../actualizaCotizacionCompras_3.jsp" method="post">
                         <div>
@@ -257,7 +257,7 @@
                         <input type="hidden" class="hidden" name="tam2" value="<%=idCoti.size()%>">
                         <input type="hidden" class="hidden" name="tamano" value="<%=lista1.size()%>">
                         <input type="hidden" class="hidden" name="nuevoStatusCoti" value="2" >
-                        <input type="hidden" class="hidden" name="nuevoStatusRequi" value="10" >
+                        <input type="hidden" class="hidden" name="nuevoStatusRequi" value="19" >
                         <input type="hidden" class="hidden" name="idUsu" value="<%=idUsu%>" >
                         <input type="hidden" class="hidden" name="idCuadro" value="<%=cuadro%>" >
                         <br/>

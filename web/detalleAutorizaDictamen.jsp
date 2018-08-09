@@ -46,7 +46,7 @@
         </jsp:include>
 
         <div class="container my-5">
-            <form action="menuAutorizaRequi.jsp" method="post">
+            <form action="menuAutorizaDictamen.jsp" method="post">
                 <button type="submit" class="btn btn-primary btn-sm ml-auto">Regresar</button>
             </form>
             <table class="table table-striped table-hover">
@@ -114,9 +114,11 @@
                                 <form action="actualizaDictamen.jsp" method="post">
                                     <input type="hidden" class="hidden" name="idReqProd" value="<%=idReqProd%>" >
                                     <input type="hidden" class="hidden" name="nuevoStatus" value="4" >
+                                    <input type="hidden" class="hidden" name="redic" value="1" >
                                     <button type="submit" class="btn btn-success btn-sm" onclick="alerta()">Autorizar</button>
                                 </form>
                                 <form action="actualizaDictamen.jsp" method="post">
+                                    <input type="hidden" class="hidden" name="redic" value="1" >
                                     <input type="hidden" class="hidden" name="idReqProd" value="<%=idReqProd%>" >
                                     <input type="hidden" class="hidden" name="nuevoStatus" value="18" >
                                     <button type="submit" class="btn btn-danger btn-sm" onclick="alerta2()">Rechazar</button>

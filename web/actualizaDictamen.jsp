@@ -4,6 +4,7 @@
 <%
     int idReqProd = 0;
     int nuevoStatus = 0;
+    int redic = 0;
 
     try {
         idReqProd = Integer.parseInt(request.getParameter("idReqProd"));
@@ -11,6 +12,10 @@
     }
     try {
         nuevoStatus = Integer.parseInt(request.getParameter("nuevoStatus"));
+    } catch (Exception e) {
+    }
+    try {
+        redic = Integer.parseInt(request.getParameter("redic"));
     } catch (Exception e) {
     }
 
@@ -36,6 +41,9 @@
         }
     }
 
-    response.sendRedirect("menuDictamen.jsp");
-
+    if (redic == 1) {
+        response.sendRedirect("menuAutorizaDictamen.jsp");
+    } else {
+        response.sendRedirect("menuDictamen.jsp");
+    }
 %>

@@ -69,24 +69,24 @@
 
         System.out.println("Cotizacion ganadora: " + idCotizacion);
         st.executeUpdate("update cotizacion set id_status_cotizacion = " + nuevoStatusCoti + ",\n"
-                + "aut_nivel1 = " + idUsu + ", fecha_aut_nivel1 = CURRENT_TIMESTAMP where id_cotizacion = " + idCotizacion + ";");
+                + "aut_nivel3 = " + idUsu + ", fecha_aut_nivel3 = CURRENT_TIMESTAMP where id_cotizacion = " + idCotizacion + ";");
         
         st.executeUpdate("update req_prod rp, cotizacion c set id_status = " + nuevoStatusRequi + ", id_cot_ganadora = " + idCotizacion + " "
                 + "where c.id_req_coti = rp.id_req_coti and rp.id_req_prod = " + totalRequis.get(j) + ";");
         System.out.println("Requisicion actualizadas: " + totalRequis.get(j));
     }
 
-    String sql2 = "SELECT correo, nombre, apellido FROM scompras.usuario where id_usuario = 282;";
+    String sql2 = "SELECT correo, nombre, apellido FROM scompras.usuario where id_usuario = 268;";
     ps = con.prepareStatement(sql2);
     rs = ps.executeQuery();
     while (rs.next()) {
         String correo = rs.getString("correo");
         String nombre = rs.getString("nombre");
         String apellido = rs.getString("apellido");
-        objMail.enviarCorreo(correo, nombre, apellido, "Hay un nuevo cuadro comparativo por revisar");
+        objMail.enviarCorreo(correo, nombre, apellido, "Comparativo autorizado");
     }
     
     System.out.println("------------------------------------------------------------");
     //Envia Correo a Gerente Admin
-    response.sendRedirect("menuComprasOrdenesAdminCompras.jsp");
+    response.sendRedirect("menuComprasOrdenesAdminDir.jsp");
 %>
