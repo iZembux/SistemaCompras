@@ -786,6 +786,7 @@ public class Consultas {
                         + "    AND rp.usu_compras in (" + usuario + ")\n"
                         + "    GROUP BY rp.id_producto, rp.id_status\n"
                         + "    ORDER BY rp.id_producto;";
+                
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
@@ -1169,6 +1170,7 @@ public class Consultas {
                         + "    pr.idproveedor = c.id_proveedor\n"
                         + "        AND p.id_productos = c.id_producto\n"
                         + "        AND c.id_req_coti = " + idReqCoti + "";
+                
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
@@ -1339,6 +1341,7 @@ public class Consultas {
                         + "    AND p.id_categoria in (" + categoria + ")\n"
                         + "    GROUP BY rp.id_producto, rp.id_status\n"
                         + "    ORDER BY rp.id_producto;";
+                
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {

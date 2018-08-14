@@ -164,6 +164,7 @@
                 <form action="actualizaCompras.jsp" method="post">
                     <input type="hidden" class="hidden" name="nuevoStatus" value="5" >
                     <input type="hidden" class="hidden" name="categoria" value="<%=idCategoria %>" >
+                    <input type="hidden" class="hidden" name="suc" value="<%=suc %>" >
                     <input type="hidden" class="hidden" name="usuario" value="<%=usuario%>" >
                     <input type="hidden" class="hidden" name="tam" value="<%=req2.size()%>" >
                     <% for (int i = 0; i < req2.size(); i++) {%>

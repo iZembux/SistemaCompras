@@ -78,6 +78,9 @@
         if (idUsu.equals("180")) {
                 idDepto2 = "16,17";
         }
+        if (idUsu.equals("180")) {
+                idDepto2 = "16,17";
+        }
 
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

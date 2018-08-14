@@ -16,6 +16,8 @@
     int idReqProd = 0;
     int tam = 0;
 
+    String suc = null;
+
     Mail objMail = new Mail();
 
     try {
@@ -38,7 +40,13 @@
         tam = Integer.parseInt(request.getParameter("tam"));
     } catch (Exception e) {
     }
-    
+    try {
+        suc = request.getParameter("suc");
+    } catch (Exception e) {
+    }
+
+System.out.println("------------------PRODUCTOS PARA COTIZACION-----------------");
+
     Class.forName("com.mysql.jdbc.Driver");
     Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/scompras", "root", "stmsc0nt");
     Statement st = con.createStatement();
@@ -51,9 +59,18 @@
         id_cotizacion = rs.getInt("id");
     }
 
-    st.executeUpdate("UPDATE req_prod SET id_status = " + nuevoStatus + ",\n"
-            + "id_req_coti = " + (id_cotizacion + 1) + ", usu_compras = " + usuarioC + ", fecha_coti = CURRENT_TIMESTAMP WHERE id_producto = " + idProducto + "\n"
-            + "AND id_status = 4;");
+    System.out.println("Usuario: " + usuarioC);
+    System.out.println("Sucursales: " + suc);
+    System.out.println("Producto: " + idProducto);
+    st.executeUpdate("UPDATE req_prod rp, requisiciones r, usuario u SET rp.id_status = " + nuevoStatus + ",\n"
+            + "rp.id_req_coti = " + (id_cotizacion + 1) + ", rp.usu_compras = " + usuarioC + ", rp.fecha_coti = CURRENT_TIMESTAMP WHERE\n"
+            + "rp.id_requisicion = r.id_requisicion\n"
+            + "AND r.id_usuario = u.id_usuario\n"
+            + "AND u.id_sucursal in (" + suc + ")\n"
+            + "AND rp.id_producto = " + idProducto + "\n"
+            + "AND rp.id_status = 4;");
+    
+System.out.println("------------------------------------------------------------");
 
     //Envia correo a los proveedores seleccionados
     ArrayList<Integer> idProv = new ArrayList<Integer>();
@@ -81,7 +98,7 @@
             objMail.enviarCorreo(correo, "Proveedor", "", "Grupo Continental Automotriz ha solicitado una nueva cotizacion, favor de revisarla en el sistema de compras");
         }
     }
-    response.sendRedirect("menuComprasRequisiciones.jsp?categoria="+idCategoria+"");
+    response.sendRedirect("menuComprasRequisiciones.jsp?categoria=" + idCategoria + "");
 
 
 %>
