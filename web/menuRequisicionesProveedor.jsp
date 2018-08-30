@@ -71,7 +71,7 @@
                         status 6 - con al menos una cotizacion
                         status 10 - cotizacion autorizada
                          */
-                        arrayRequis = obj.consultarComprasProv(idCategoria, "5,6,16", id_usuario);
+                        arrayRequis = obj.consultarComprasProv(idCategoria, "5,6", id_usuario);
 
                         if (arrayRequis.size() > 0) {
                             for (int i = 0; i < arrayRequis.size(); i++) {
