@@ -11,6 +11,8 @@ package model;
  */
 public class Comparativo {
 
+    
+
     private int idCotizacion;
     private double precio;
     private double iva;
@@ -24,6 +26,22 @@ public class Comparativo {
     private int cantidad;
     private String producto;
     private String departamento;
+    private String observaciones;
+    
+    
+    /**
+     * @return the observaciones
+     */
+    public String getObservaciones() {
+        return observaciones;
+    }
+
+    /**
+     * @param observaciones the observaciones to set
+     */
+    public void setObservaciones(String observaciones) {
+        this.observaciones = observaciones;
+    }
 
     /**
      * @return the idCotizacion

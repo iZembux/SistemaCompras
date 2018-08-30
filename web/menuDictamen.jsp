@@ -21,6 +21,9 @@
         if (idUsu.equals("267") || idUsu.equals("313")) {
             sucursal = "1,2,3,4,6,7,8,9,10,11,12,13,14,15,16,17";
         }
+		if (idUsu.equals("339")) {
+            sucursal = "9,14,17";
+        }
 
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

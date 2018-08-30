@@ -60,6 +60,7 @@
                         int idCuadro;
                         int cantidad;
                         String depto; 
+                        String observaciones = "";
 
                         ArrayList<Comparativo> arrayRequis = new ArrayList<Comparativo>();
                         Consultas obj = new Consultas();
@@ -70,6 +71,7 @@
                                 idCuadro = arrayRequis.get(i).getIdCuadro();
                                 depto = arrayRequis.get(i).getDepartamento();
                                 cantidad = arrayRequis.get(i).getCantidad();
+                                observaciones = arrayRequis.get(i).getObservaciones();
                     %>
                     <tr>
                         <td><%=idCuadro%></td>
@@ -80,6 +82,7 @@
                                 <form action="formatos/comparativo_2.jsp" method="post" target="_blank">
                                     <input type="hidden" name="cuadro" value="<%=idCuadro%>" >
                                     <input type="hidden" name="idUsu" value="<%=usuario%>" >
+                                    <input type="hidden" name="observaciones" value="<%=observaciones%>" >
                                     <button type="submit" class="btn btn-info btn-sm" >Ver Cuadro</button>
                                 </form>
                             </div>

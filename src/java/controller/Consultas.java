@@ -1545,7 +1545,7 @@ public class Consultas {
         con = ConexionMySQL.conectar();
         if (con != null) {
             try {
-                String sql = "select rp.id_req_prod, rp.id_cuadro, d.departamento, rp.cantidad \n"
+                String sql = "select rp.id_req_prod, rp.id_cuadro, d.departamento, rp.cantidad, c.observaciones \n"
                         + "from req_prod rp, departamentos d, usuario u , requisiciones r, cotizacion c\n"
                         + "where u.id_usuario = r.id_usuario\n"
                         + "and r.id_requisicion = rp.id_requisicion\n"
@@ -1560,6 +1560,7 @@ public class Consultas {
                     obj.setIdCuadro(rs.getInt("rp.id_cuadro"));
                     obj.setDepartamento(rs.getString("d.departamento"));
                     obj.setCantidad(rs.getInt("rp.cantidad"));
+                    obj.setObservaciones(rs.getString("c.observaciones"));
                     listaRequi.add(obj);
                 }
             } catch (SQLException ex) {

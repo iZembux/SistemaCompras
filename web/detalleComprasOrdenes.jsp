@@ -137,7 +137,7 @@
             boolean b = false;
             for (int i = 0; i < req2.size(); i++) {
                 int totalCotizaciones = obj.consultarCantidadCot(req2.get(i));
-                if (totalCotizaciones < 3) {
+                if (totalCotizaciones < 1) {
                     req3.add(req2.get(i));
                     b = true;
                 }
