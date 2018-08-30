@@ -53,6 +53,9 @@
                         <th scope="col">Departamento Solicitante</th>
                         <th scope="col">Cantidad de Productos</th>
                         <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -60,6 +63,10 @@
                         int idCuadro;
                         int cantidad;
                         String depto; 
+                        String observaciones = "";
+                        int idReqProd;
+                        String rutaDictamen;
+                        String rutaCotizacion;
 
                         ArrayList<Comparativo> arrayRequis = new ArrayList<Comparativo>();
                         Consultas obj = new Consultas();
@@ -70,16 +77,43 @@
                                 idCuadro = arrayRequis.get(i).getIdCuadro();
                                 depto = arrayRequis.get(i).getDepartamento();
                                 cantidad = arrayRequis.get(i).getCantidad();
+                                observaciones = arrayRequis.get(i).getObservaciones();
+                                idReqProd = arrayRequis.get(i).getIdReqProd();
+                                rutaDictamen = arrayRequis.get(i).getRutaDictamen();
+                                rutaCotizacion = arrayRequis.get(i).getRutaCotizacion();
                     %>
                     <tr>
                         <td><%=idCuadro%></td>
                         <td><%=depto%></td>
                         <td><%=cantidad%></td>
                         <td>
+                            <form action="formatos/requisicion.jsp" method="post" target="_blank">
+                                <input type="hidden" class="hidden" name="idReqProd" value="<%=idReqProd%>" >
+                                <button type="submit" class="btn btn-default btn-sm">Ver Requisicion</button>
+                            </form>
+                        </td>
+                        <td>
+                            <%
+                                if (rutaDictamen == null || !rutaDictamen.equals("")) {
+                            %>
+                            <form name="abreDictamen" action="visor" method="POST" target="_blank">
+                                <input type="hidden" name="search" id="search" value="<%=rutaDictamen%>" >
+                                <button type="submit" class="btn btn-outline-dark btn-sm" >Ver Dictamen</button>
+                            </form>
+                            <%}%>
+                        </td>
+                        <td>
+                            <form name="abrePDF" action="visor" method="POST" target="_blank">
+                                <input type="hidden" name="search" id="search" value="<%=rutaCotizacion%>" >
+                                <button type="submit" class="btn btn-default btn-sm" >Ver Cotizacion</button>
+                            </form>
+                        </td>
+                        <td>
                             <div class="row">
-                                <form action="formatos/comparativo_4.jsp" method="post" target="_blank">
+                                <form action="formatos/comparativo_4.jsp" method="post">
                                     <input type="hidden" name="cuadro" value="<%=idCuadro%>" >
                                     <input type="hidden" name="idUsu" value="<%=usuario%>" >
+                                    <input type="hidden" name="observaciones" value="<%=observaciones%>" >
                                     <button type="submit" class="btn btn-info btn-sm" >Ver Cuadro</button>
                                 </form>
                             </div>

@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author aBIMAEL
+ * @author LuisMtz
  */
 public class visor extends HttpServlet {
 

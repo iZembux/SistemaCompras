@@ -99,14 +99,14 @@
                         <td>
                             <div class="row">
                                 <%
-                                    if (rutaCaratula != null || rutaCaratula.equals("") ) {
+                                    if (rutaCaratula == null || rutaCaratula.equals("") ) {
                                 %>
-                                <form name="abreCaratula" action="visor" method="POST" target="_blank">
+                                    <button type="submit" class="btn btn-dark btn-sm" disabled="true">No disponible</button>
+                                <%} else {%>
+                                    <form name="abreCaratula" action="visor" method="POST" target="_blank">
                                     <input type="hidden" name="search" id="search" value="<%=rutaCaratula%>" >
                                     <button type="submit" class="btn btn-dark btn-sm" >Ver Car&aacute;tula</button>
                                 </form>
-                                <%} else {%>
-                                    <button type="submit" class="btn btn-dark btn-sm" disabled="true">No disponible</button>
                                 <% }
                                 System.out.println("Dictamen: " + rutaDictamen);
                                 if (rutaDictamen == null || rutaDictamen.equals("")) {

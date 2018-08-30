@@ -99,6 +99,7 @@
                                 req2.add(idReqProd);
                                 rutaCaratula = arrayRequis.get(i).getRutaCaratula();
                                 rutaDictamen = arrayRequis.get(i).getRutaDictamen();
+                                System.out.println(idReqProd);
                     %>
                     <tr>
                         <td><%=producto%></td>
@@ -110,14 +111,13 @@
                             <% if (idCategoria == 2) { %>
                             <div class="row">
                                 <%
-                                    if (rutaCaratula != null || !rutaCaratula.equals("") ) {
+                                    if (rutaCaratula == null || rutaCaratula.equals("") || rutaCaratula.equals("*")) {
+                                    }else{
                                 %>
                                 <form name="abreCaratula" action="visor" method="POST" target="_blank">
                                     <input type="hidden" name="search" id="search" value="<%=rutaCaratula%>" >
                                     <button type="submit" class="btn btn-dark btn-sm" >Ver Car&aacute;tula</button>
                                 </form>
-                                <%} else {%>
-                                    <button type="submit" class="btn btn-dark btn-sm" disabled="true">No disponible</button>
                                 <% }
                                 if (rutaDictamen == null || !rutaDictamen.equals("")) {
                                 %>

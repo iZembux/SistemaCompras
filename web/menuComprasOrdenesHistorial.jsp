@@ -3,6 +3,7 @@
     Created on : Mar 5, 2018, 7:55:17 AM
     Author     : user
 --%>
+<%@page import="java.io.FileNotFoundException"%>
 <%@page import="model.OrdenFormato"%>
 <%@page import="model.CotizacionRequisicion"%>
 <%@page import="controller.Consultas"%>
@@ -19,8 +20,8 @@
         String rol = (String) sesion.getAttribute("rol");
         String usuario = (String) sesion.getAttribute("idUsuario");
         String suc = null;
-        
-         if (usuario.equals("83")) {       //Valeria
+
+        if (usuario.equals("83")) {       //Valeria
             suc = "1,2,3,4,6,7,8,13";
         } else if (usuario.equals("4") || usuario.equals("268")) { //Veronica
             suc = "1,2,3,4,6,7,8,13,9,14,17,10,11,15,16,18";
@@ -31,7 +32,6 @@
         } else if (usuario.equals("268")) { //Victor Peralta
             suc = "1,2,3,4,6,7,8,13,9,14,17,10,11,15,16,18";
         }
-         
 
         int id_categoria = 1;
         try {
@@ -86,7 +86,7 @@
 
                         ArrayList<OrdenFormato> arrayRequis = new ArrayList<OrdenFormato>();
                         Consultas obj = new Consultas();
-                        arrayRequis = obj.consultarOrdenesProvComprasHist(suc,id_categoria); 
+                        arrayRequis = obj.consultarOrdenesProvComprasHist(suc, id_categoria);
 
                         if (arrayRequis.size() > 0) {
                             for (int i = 0; i < arrayRequis.size(); i++) {
@@ -115,6 +115,7 @@
                         </td>
                         <%
                             if (rutaFactura != null) {
+                                try {
                         %>
                         <td>
                             <div class="row">
@@ -125,16 +126,21 @@
                             </div>
                         </td>
                         <%
-                        } else {
+                        } catch (Exception e) {
                         %>
-                        <td>
-                            <div class="row">
-                                <button type="submit" class="btn btn-dark btn-sm" disabled="true">No disponible</button>
-                            </div>
-                        </td>
-                        <%}%>
-                    </tr>
-                    <% }
+                <script> alert('No se encontró la factura');</script>
+                <%
+                    }
+                } else {
+                %>
+                <td>
+                    <div class="row">
+                        <button type="submit" class="btn btn-dark btn-sm" disabled="true">No disponible</button>
+                    </div>
+                </td>
+                <%}%>
+                </tr>
+                <% }
                         }%>
                 </tbody>
             </table>

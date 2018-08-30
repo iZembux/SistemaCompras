@@ -302,7 +302,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        Por el momento solo puedes solicitar productos de papeleria.
+                        Esta categoría no está disponible.
                     </div>
                 </div>
             </div>

@@ -12,6 +12,7 @@ package model;
 public class Comparativo {
 
     
+    
 
     private int idCotizacion;
     private double precio;
@@ -27,7 +28,53 @@ public class Comparativo {
     private String producto;
     private String departamento;
     private String observaciones;
+    private String rutaDictamen;
+    private String rutaCotizacion;
+    private String rutaCaratula;
     
+    
+    
+    /**
+     * @return the rutaDictamen
+     */
+    public String getRutaDictamen() {
+        return rutaDictamen;
+    }
+
+    /**
+     * @param rutaDictamen the rutaDictamen to set
+     */
+    public void setRutaDictamen(String rutaDictamen) {
+        this.rutaDictamen = rutaDictamen;
+    }
+
+    /**
+     * @return the rutaCotizacion
+     */
+    public String getRutaCotizacion() {
+        return rutaCotizacion;
+    }
+
+    /**
+     * @param rutaCotizacion the rutaCotizacion to set
+     */
+    public void setRutaCotizacion(String rutaCotizacion) {
+        this.rutaCotizacion = rutaCotizacion;
+    }
+
+    /**
+     * @return the rutaCaratula
+     */
+    public String getRutaCaratula() {
+        return rutaCaratula;
+    }
+
+    /**
+     * @param rutaCaratula the rutaCaratula to set
+     */
+    public void setRutaCaratula(String rutaCaratula) {
+        this.rutaCaratula = rutaCaratula;
+    }
     
     /**
      * @return the observaciones
