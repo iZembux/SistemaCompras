@@ -26,8 +26,12 @@
             suc = "1,2,3,4,6,7,8,13,9,14,17,10,11,15,16,18";
         } else if (usuario.equals("25")) { //Angelica
             suc = "10,11,15,16,18";
-        } else if (usuario.equals("226")) { //Roberto *Pendiente
+        } else if (usuario.equals("226")) { //Roberto
             suc = "9,14,17";
+        } else if (usuario.equals("268")) { //Victor Peralta
+            suc = "1,2,3,4,6,7,8,13,9,14,17,10,11,15,16,18";
+        } else if (usuario.equals("48")) { //Esau
+            suc = "1,2,3,4,6,7,8,13,9,14,17,10,11,15,16,18";
         }
 
         int idCategoria = 0;
@@ -110,16 +114,16 @@
                             <% if (idCategoria == 2) { %>
                             <div class="row">
                                 <%
-                                    if (rutaCaratula != null || !rutaCaratula.equals("") ) {
+                                    if (rutaCaratula != null || !rutaCaratula.equals("")) {
                                 %>
                                 <form name="abreCaratula" action="visor" method="POST" target="_blank">
                                     <input type="hidden" name="search" id="search" value="<%=rutaCaratula%>" >
                                     <button type="submit" class="btn btn-dark btn-sm" >Ver Car&aacute;tula</button>
                                 </form>
                                 <%} else {%>
-                                    <button type="submit" class="btn btn-dark btn-sm" disabled="true">No disponible</button>
+                                <button type="submit" class="btn btn-dark btn-sm" disabled="true">No disponible</button>
                                 <% }
-                                if (rutaDictamen == null || !rutaDictamen.equals("")) {
+                                    if (rutaDictamen == null || !rutaDictamen.equals("")) {
                                 %>
                                 <form name="abreDictamen" action="visor" method="POST" target="_blank">
                                     <input type="hidden" name="search" id="search" value="<%=rutaDictamen%>" >
@@ -127,19 +131,22 @@
                                 </form>
                                 <%}%>
                             </div>
-                            <% } else {%>
+                            <% } else {
+                                if (idCategoria != 7) {
+                            %>
                             <form action="actualizaRecibido.jsp" method="post">
                                 <input type="hidden" class="hidden" name="nuevoStatus" value="12" >
                                 <input type="hidden" class="hidden" name="idUsu" value="<%=idUsu%>" >
                                 <input type="hidden" class="hidden" name="idReqProd" value="<%=idReqProd%>" >
                                 <input type="hidden" class="hidden" name="producto" value="<%=producto%>" >
                                 <input type="hidden" class="hidden" name="cantidad" value="<%=cantidadRequi%>" >
-                                <input type="hidden" class="hidden" name="categoria" value="<%=idCategoria %>" >
-                                <input type="hidden" class="hidden" name="idProducto" value="<%=idProducto %>" >
+                                <input type="hidden" class="hidden" name="categoria" value="<%=idCategoria%>" >
+                                <input type="hidden" class="hidden" name="idProducto" value="<%=idProducto%>" >
                                 <input type="hidden" class="hidden" name="stock" value="1" >
                                 <button type="submit" class="btn btn-success btn-sm">Producto en Stock</button>
                             </form>
-                            <% }%>
+                            <% }
+                                }%>
                         </td>
                         <td>
                             <form action="formatos/requisicion.jsp" method="post" target="_blank">
@@ -163,8 +170,8 @@
             <div >
                 <form action="actualizaCompras.jsp" method="post">
                     <input type="hidden" class="hidden" name="nuevoStatus" value="5" >
-                    <input type="hidden" class="hidden" name="categoria" value="<%=idCategoria %>" >
-                    <input type="hidden" class="hidden" name="suc" value="<%=suc %>" >
+                    <input type="hidden" class="hidden" name="categoria" value="<%=idCategoria%>" >
+                    <input type="hidden" class="hidden" name="suc" value="<%=suc%>" >
                     <input type="hidden" class="hidden" name="usuario" value="<%=usuario%>" >
                     <input type="hidden" class="hidden" name="tam" value="<%=req2.size()%>" >
                     <% for (int i = 0; i < req2.size(); i++) {%>

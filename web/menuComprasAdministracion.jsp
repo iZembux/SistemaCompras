@@ -32,6 +32,9 @@
         } else if (usuario.equals("268")) { //Victor Peralta
             suc = "1,2,3,4,6,7,8,13,9,14,17,10,11,15,16,18";
             cat = "2";  
+        } else if (usuario.equals("48")) { //Victor Peralta
+            suc = "1,2,3,4,6,7,8,13,9,14,17,10,11,15,16,18";
+            cat = "7";  
         }
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

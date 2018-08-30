@@ -3,6 +3,7 @@
     status 4
 --%>
 
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="model.Proveedor"%>
 <%@page import="controller.ConsultaBase"%>
 <%@page import="controller.Consultas"%>
@@ -38,6 +39,8 @@
             idProveedor = Integer.parseInt(request.getParameter("idProveedor"));
         } catch (Exception e) {
         }
+        
+        DecimalFormat formateador = new DecimalFormat("###,###,###.##");
 %>
 <html>
     <head>
@@ -98,7 +101,7 @@
                         <td><%=solicitante.toUpperCase()%></td>
                         <td><%=cantidadRequi%></td>
                         <td><%=producto%></td>
-                        <td>$ <%=precio%></td>
+                        <td>$ <%= formateador.format(precio) %></td>
                     </tr>
                     <% }
                         }
@@ -106,7 +109,7 @@
                 </tbody>
             </table>
             <div>
-                <h5> Precio Total: $<%=total%></h5>
+                <h5> Precio Total: $<%= formateador.format(total)%></h5>
                 <% if (idCuadro > 0) { %>
                 <hr>
                 <h6> Comparativo Aprobado </h6>
@@ -137,7 +140,7 @@
             boolean b = false;
             for (int i = 0; i < req2.size(); i++) {
                 int totalCotizaciones = obj.consultarCantidadCot(req2.get(i));
-                if (totalCotizaciones < 3) {
+                if (totalCotizaciones < 1) {
                     req3.add(req2.get(i));
                     b = true;
                 }

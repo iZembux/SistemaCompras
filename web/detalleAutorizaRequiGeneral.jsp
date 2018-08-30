@@ -94,7 +94,11 @@
                                 <form action="actualizaGerente.jsp" method="post">
                                     <input type="hidden" class="hidden" name="idReqProd" value="<%=idReqProd%>" >
                                     <input type="hidden" class="hidden" name="idSolicita" value="<%=idSolicita%>" >
+                                    <% if(categoria == 2){ %>
                                     <input type="hidden" class="hidden" name="nuevoStatus" value="2" >
+                                    <% } else { %>
+                                    <input type="hidden" class="hidden" name="nuevoStatus" value="4" >
+                                    <% } %>
                                     <input type="hidden" class="hidden" name="autoriza" value="1" >
                                     <input type="hidden" class="hidden" name="idUsu" value="<%= idUsu%>" >
                                     <button type="submit" class="btn btn-success btn-sm" onclick="alerta()">Autorizar</button>

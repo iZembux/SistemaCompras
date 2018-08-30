@@ -47,7 +47,9 @@
                     <tr>
                         <th scope="col">No.</th>
                         <th scope="col">Solicitante</th>
-                        <th scope="col">Cantidad de Productos</th>
+                        <th scope="col">Sucursal</th>
+                        <th scope="col">Departamento</th>
+                        <th scope="col">Productos</th>
                         <th scope="col">Fecha</th>
                         <th scope="col"></th>
                     </tr>
@@ -59,6 +61,8 @@
                         int cantidadRequi;
                         String solicitante;
                         String fecha;
+                        String depto;
+                        String suc; 
 
                         ArrayList<RequisicionProducto> arrayRequis = new ArrayList<RequisicionProducto>();
                         Consultas obj = new Consultas();
@@ -70,10 +74,14 @@
                                 cantidadRequi = arrayRequis.get(i).getCantidad();
                                 solicitante = arrayRequis.get(i).getSolicitante();
                                 fecha = arrayRequis.get(i).getFecha();
+                                depto = arrayRequis.get(i).getDepartamento();
+                                suc = arrayRequis.get(i).getSucursal();
                     %>
                     <tr>
                         <td><%=idRequi%></td>
                         <td><%=solicitante.toUpperCase()%></td>
+                        <td><%=suc.toUpperCase()%></td>
+                        <td><%=depto.toUpperCase()%></td>
                         <td><%=cantidadRequi%></td>
                         <td><%=fecha%></td>
                         <td>

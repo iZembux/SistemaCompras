@@ -100,14 +100,19 @@
                                 <form action="actualizaGerente.jsp" method="post">
                                     <input type="hidden" class="hidden" name="idReqProd" value="<%=idReqProd%>" >
                                     <input type="hidden" class="hidden" name="idSolicita" value="<%=idSolicita%>" >
-                                    <% if (categoria == 2) { %>
-                                   <% if (idProducto == 285 || idProducto == 301) { %>
+                                    <% if (categoria == 2 || categoria == 7) { %>
+                                    <% if (categoria == 7) { %>
+                                    <input type="hidden" class="hidden" name="nuevoStatus" value="17" >  
+                                    <%} else {
+                                        if (idProducto == 285 || idProducto == 301) { %>
                                     <input type="hidden" class="hidden" name="nuevoStatus" value="17" >
                                     <% } else { %>
                                     <input type="hidden" class="hidden" name="nuevoStatus" value="2" >
-                                    <% }} else { %> 
+                                    <% }
+                                        }
+                                    } else { %> 
                                     <input type="hidden" class="hidden" name="nuevoStatus" value="4" >
-                                    <% } %>
+                                    <% }%>
                                     <input type="hidden" class="hidden" name="autoriza" value="1" >
                                     <input type="hidden" class="hidden" name="categoria" value="<%= categoria%>" >
                                     <input type="hidden" class="hidden" name="idUsu" value="<%= idUsu%>" >

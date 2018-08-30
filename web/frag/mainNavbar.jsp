@@ -69,6 +69,45 @@
                     <%
                         }
                     %>
+                    <%
+                        if (idUsuario == 83 || idUsuario == 4) {
+                    %> 
+                    <a class="dropdown-item" href="menuComprasRequisiciones.jsp?categoria=5"> 
+                        <div class="row">
+                            <div class="col col-lg-9">
+                                Jarceria  
+                            </div>
+                        </div>
+                    </a>
+                    <%
+                        }
+                    %>
+                    <%
+                        if (idUsuario == 83 || idUsuario == 4) {
+                    %> 
+                    <a class="dropdown-item" href="menuComprasRequisiciones.jsp?categoria=6"> 
+                        <div class="row">
+                            <div class="col col-lg-9">
+                                Ferreteria  
+                            </div>
+                        </div>
+                    </a>
+                    <%
+                        }
+                    %>
+                    <%
+                        if (idUsuario == 48 || idUsuario == 4) {
+                    %> 
+                    <a class="dropdown-item" href="menuComprasRequisiciones.jsp?categoria=7"> 
+                        <div class="row">
+                            <div class="col col-lg-9">
+                                Servicios
+                            </div>
+                        </div>
+                    </a>
+                    <%
+                        }
+                    %>
                 </div>
             </li>
             <li class="nav-item dropdown">
@@ -110,6 +149,45 @@
                     <%
                         }
                     %>
+                    <%
+                        if (idUsuario == 83 || idUsuario == 4) {
+                    %> 
+                    <a class="dropdown-item" href="menuComprasCotizaciones.jsp?categoria=5"> 
+                        <div class="row">
+                            <div class="col col-lg-9">
+                                Jarceria 
+                            </div> 
+                        </div>
+                    </a>
+                    <%
+                        }
+                    %>
+                    <%
+                        if (idUsuario == 83 || idUsuario == 4) {
+                    %> 
+                    <a class="dropdown-item" href="menuComprasCotizaciones.jsp?categoria=6"> 
+                        <div class="row">
+                            <div class="col col-lg-9">
+                                Ferreteria 
+                            </div> 
+                        </div>
+                    </a>
+                    <%
+                        }
+                    %>
+                    <%
+                        if (idUsuario == 48 || idUsuario == 4) {
+                    %> 
+                    <a class="dropdown-item" href="menuComprasCotizaciones.jsp?categoria=7"> 
+                        <div class="row">
+                            <div class="col col-lg-9">
+                                Servicios 
+                            </div> 
+                        </div>
+                    </a>
+                    <%
+                        }
+                    %>
                 </div>
             </li>
             <li class="nav-item dropdown">
@@ -138,6 +216,36 @@
                     </a>
                     <%
                         }
+                    %>
+
+                    <%
+                        if (idUsuario == 83 || idUsuario == 4) {
+                    %> 
+                    <a class="dropdown-item" href="menuComprasOrdenes.jsp?categoria=5"> 
+                        Cotizaciones Jarceria
+                    </a>
+                    <%
+                        }
+                    %>
+                    <%
+                        if (idUsuario == 83 || idUsuario == 4) {
+                    %> 
+                    <a class="dropdown-item" href="menuComprasOrdenes.jsp?categoria=6"> 
+                        Cotizaciones Ferreteria
+                    </a>
+                    <%
+                        }
+                    %>
+                     <%
+                        if (idUsuario == 48 || idUsuario == 4) {
+                    %> 
+                    <a class="dropdown-item" href="menuComprasOrdenes.jsp?categoria=7"> 
+                        Cotizaciones Servicios
+                    </a>
+                    <%
+                        }
+                    %>
+                    <%
                         if (idUsuario == 226 || idUsuario == 25 || idUsuario == 4 || idUsuario == 83) {
                     %>
                     <a class="dropdown-item" href="menuComprasOrdenesHistorial.jsp?categoria=1"> 
@@ -155,6 +263,34 @@
                     %> 
                     <a class="dropdown-item" href="menuComprasOrdenesHistorial.jsp?categoria=2"> 
                         Historial Ordenes Tecnología
+                    </a>
+                    <%
+                        }
+                    %>
+                    
+                    <%
+                        if (idUsuario == 83 || idUsuario == 4) {
+                    %> 
+                    <a class="dropdown-item" href="menuComprasOrdenesHistorial.jsp?categoria=5"> 
+                        Historial Ordenes Jarceria
+                    </a>
+                    <%
+                        }
+                    %>
+                    <%
+                        if (idUsuario == 83 || idUsuario == 4) {
+                    %> 
+                    <a class="dropdown-item" href="menuComprasOrdenesHistorial.jsp?categoria=6"> 
+                        Historial Ordenes Ferreteria
+                    </a>
+                    <%
+                        }
+                    %>
+                    <%
+                        if (idUsuario == 48 || idUsuario == 4) {
+                    %> 
+                    <a class="dropdown-item" href="menuComprasOrdenesHistorial.jsp?categoria=7"> 
+                        Historial Ordenes Servicios
                     </a>
                     <%
                         }
@@ -188,6 +324,34 @@
                     <%
                         }
                     %>
+                    
+                    <%
+                    if (idUsuario == 83 || idUsuario == 4) {
+                    %> 
+                    <a class="dropdown-item" href="menuComprasRecepcion.jsp?categoria=5"> 
+                        Jarceria
+                    </a>
+                    <%
+                        }
+                    %>
+                     <%
+                    if (idUsuario == 83 || idUsuario == 4) {
+                    %> 
+                    <a class="dropdown-item" href="menuComprasRecepcion.jsp?categoria=6"> 
+                        Ferreteria
+                    </a>
+                    <%
+                        }
+                    %>
+                     <%
+                    if (idUsuario == 48 || idUsuario == 4) {
+                    %> 
+                    <a class="dropdown-item" href="menuComprasRecepcion.jsp?categoria=7"> 
+                        Servicios
+                    </a>
+                    <%
+                        }
+                    %>
                 </div>
             </li>
             <li class="nav-item dropdown">
@@ -213,6 +377,33 @@
                     %>
                     <a class="dropdown-item" href="menuComprasEntrega.jsp?categoria=2"> 
                         Tecnologia
+                    </a>
+                    <%
+                        }
+                    %>
+                    <%
+                        if (idUsuario == 83 || idUsuario == 4) {
+                    %> 
+                    <a class="dropdown-item" href="menuComprasEntrega.jsp?categoria=5">
+                        Jarceria  
+                    </a>
+                    <%
+                        }
+                    %>
+                    <%
+                        if (idUsuario == 83 || idUsuario == 4) {
+                    %> 
+                    <a class="dropdown-item" href="menuComprasEntrega.jsp?categoria=6">
+                        Ferreteria  
+                    </a>
+                    <%
+                        }
+                    %>
+                    <%
+                        if (idUsuario == 48 || idUsuario == 4) {
+                    %> 
+                    <a class="dropdown-item" href="menuComprasEntrega.jsp?categoria=7">
+                        Servicios  
                     </a>
                     <%
                         }

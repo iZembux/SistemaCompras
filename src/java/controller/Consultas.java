@@ -35,7 +35,7 @@ public class Consultas {
             try {
                 String sql = "SELECT \n"
                         + "    rp.id_requisicion AS IDREQUISICION,\n"
-                        + "    u.nombre AS SOLICITANTE,\n"
+                        + "    concat(u.nombre,' ',u.apellido) AS SOLICITANTE,\n"
                         + "    SUM(rp.cantidad) AS CANTIDAD,\n"
                         + "    r.fecha\n"
                         + "FROM\n"
@@ -171,18 +171,24 @@ public class Consultas {
             try {
                 String sql = "SELECT \n"
                         + "    rp.id_requisicion AS IDREQUISICION,\n"
-                        + "    u.nombre AS SOLICITANTE,\n"
+                        + "    concat(u.nombre,' ',u.apellido) AS SOLICITANTE,\n"
+                        + "    d.departamento as depto,\n"
+                        + "    s.sucursal as suc,\n"
                         + "    SUM(rp.cantidad) AS CANTIDAD,\n"
                         + "    r.fecha\n"
                         + "FROM\n"
                         + "    usuario u,\n"
                         + "    requisiciones r,\n"
                         + "    req_prod rp,\n"
-                        + "    productos p\n"
+                        + "    productos p,\n"
+                        + "    sucursales s,\n"
+                        + "    departamentos d\n"
                         + "WHERE\n"
                         + "    u.id_usuario = r.id_usuario\n"
                         + "    AND r.id_requisicion = rp.id_requisicion\n"
                         + "    AND p.id_productos = rp.id_producto\n"
+                        + "    AND u.id_departamento = d.id_departamentos\n"
+                        + "    AND u.id_sucursal = s.id_sucursales\n"
                         + "    AND u.id_sucursal in (" + sucursal + ")\n"
                         + "    AND rp.id_status = 2\n"
                         + "    GROUP BY rp.id_requisicion\n"
@@ -193,6 +199,8 @@ public class Consultas {
                     RequisicionProducto obj = new RequisicionProducto();
                     obj.setIdRequisicion(rs.getInt("IDREQUISICION"));
                     obj.setSolicitante(rs.getString("SOLICITANTE"));
+                    obj.setDepartamento(rs.getString("depto"));
+                    obj.setSucursal(rs.getString("suc"));
                     obj.setCantidad(rs.getInt("CANTIDAD"));
                     obj.setFecha(rs.getString("fecha"));
                     listaRequi.add(obj);
@@ -2060,7 +2068,8 @@ public class Consultas {
                         + "        AND r.id_requisicion = rp.id_requisicion\n"
                         + "        AND p.id_productos = rp.id_producto\n"
                         + "        AND rp.id_status =  s.id_status\n"
-                        + "        AND u.id_usuario = " + id_usuario + ";";
+                        + "        AND u.id_usuario = " + id_usuario + "\n"
+                        + "        ORDER BY rp.id_req_prod desc";
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {

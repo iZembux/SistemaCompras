@@ -53,7 +53,6 @@
                 <thead>
                     <tr>
                         <th scope="col">Producto</th>
-                        <th scope="col">Marca</th>
                         <th scope="col">Cantidad</th>
                         <th scope="col">Justificación</th>
                         <th scope="col">Descripcion</th>
@@ -92,7 +91,6 @@
                     %>
                     <tr>
                         <td><%=producto%></td>
-                        <td><%=marca%></td>
                         <td><%=cantidad%></td>
                         <td><%=justificacion.toUpperCase()%></td>
                         <td><%=descripcion.toUpperCase()%></td>
