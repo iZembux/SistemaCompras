@@ -154,7 +154,16 @@
             </div>
         </div>
 
-
+        <%
+            boolean b = false;
+            for (int i = 0; i < req2.size(); i++) {
+                int totalCotizaciones = obj.consultarCantidadCot(req2.get(i));
+                if (totalCotizaciones < 1) {
+                    req3.add(req2.get(i));
+                    b = true;
+                }
+            }
+        %>
         <div class="modal fade" id="cuadro" tabindex="-1" role="dialog" aria-labelledby="cuadro" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
