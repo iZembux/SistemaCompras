@@ -58,6 +58,7 @@
                         <th scope="col">Justificación</th>
                         <th scope="col">Descripcion</th>
                         <th scope="col"></th>
+                        <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -95,22 +96,29 @@
                         <td>
                             <div class="row">
                                 <%
-                                    if (rutaCaratula != null || !rutaCaratula.equals("") ) {
+                                    if (rutaCaratula == null || rutaCaratula.equals("") ) {
                                 %>
+                                <button type="submit" class="btn btn-dark btn-sm" disabled="true">No disponible</button>
+                                <%} else {%>
                                 <form name="abreCaratula" action="visor" method="POST" target="_blank">
                                     <input type="hidden" name="search" id="search" value="<%=rutaCaratula%>" >
                                     <button type="submit" class="btn btn-dark btn-sm" >Ver Car&aacute;tula</button>
                                 </form>
-                                <%} else {%>
-                                    <button type="submit" class="btn btn-dark btn-sm" disabled="true">No disponible</button>
                                 <% }
-                                if (rutaDictamen != null || !rutaDictamen.equals("")) {
+                                if (rutaDictamen == null || rutaDictamen.equals("")) {
                                 %>
+                                <button type="submit" class="btn btn-dark btn-sm" disabled="true">No disponible</button>
+                                <%}else{%>
                                 <form name="abreDictamen" action="visor" method="POST" target="_blank">
                                     <input type="hidden" name="search" id="search" value="<%=rutaDictamen%>" >
-                                    <button type="submit" class="btn btn-outline-dark btn-sm" >Ver Dictamen</button>
+                                    <button type="submit" class="btn btn-info btn-sm" >Ver Dictamen</button>
                                 </form>
                                 <%}%>
+                                
+                            </div>
+                        </td>
+                        <td>
+                            <div class="row">
                                 <form action="actualizaDictamen.jsp" method="post">
                                     <input type="hidden" class="hidden" name="idReqProd" value="<%=idReqProd%>" >
                                     <input type="hidden" class="hidden" name="nuevoStatus" value="4" >
