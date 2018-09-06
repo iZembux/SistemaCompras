@@ -75,7 +75,7 @@
                         double precio;
                         double total = 0;
                         String producto;
-                        String solicitante;
+                        String solicitante = " ";
 
                         ArrayList<RequisicionProducto> arrayRequis = new ArrayList<RequisicionProducto>();
                         Consultas obj = new Consultas();
@@ -281,20 +281,73 @@
             </form>
         </div>
 
+        <%
+            String depto = obj.verDepartamento(idDepartamento); 
+            String proveedor = obj.verProveedor(idProveedor);
+        %>
         <div class="modal fade" id="unico" tabindex="-1" role="dialog" aria-labelledby="unico" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <form action="formatos/provUnico.jsp" method="post" name="formulario" id="formulario">
+                    <form action="formatos/proveedorUnico.jsp" method="post" name="formulario" id="formulario">
                         <div class="modal-body">
-                            <h5>Observaciones</h5>
-                            <p>
-                                Introduzca las observaciones que se mostrarán en el formato:
-                            </p>
+                            <label>Criterios de seleccion</label>
+                            <div class="row"> 
+                                <div class="col-lg-6">
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" class="form-check-input" value="">Ahorro en costo
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" class="form-check-input" value="">Mejor calidad
+                                        </label>
+                                    </div>
+                                    <div class="form-check disabled">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" class="form-check-input" value="">Menor tiempo de entrega
+                                        </label>
+                                    </div>
+                                    <div class="form-check disabled">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" class="form-check-input" value="">Proyecto especial
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" class="form-check-input" value="">Compra urgente
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" class="form-check-input" value="">Unico fabricante
+                                        </label>
+                                    </div>
+                                    <div class="form-check disabled">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" class="form-check-input" value="">Mejores condiciones de pago
+                                        </label>
+                                    </div>
+                                    <div class="form-check disabled">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" class="form-check-input" value="">Otro
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <label>Justificacion <b><FONT COLOR="red" title="Éste campo es obligatorio">*</FONT></b></label>
                             <div class="form-group">
-                                <textarea class="form-control" id="observaciones" name="observaciones" rows="3"></textarea>
+                                <textarea class="form-control" id="justificacion" name="justificacion" rows="3"></textarea>
                             </div>
                         </div>
                         <div class="modal-footer">
+                            <input type="hidden" class="hidden" name="solicitante" value="<%= solicitante%>" >
+                            <input type="hidden" class="hidden" name="monto" value="<%= total%>" >
+                            <input type="hidden" class="hidden" name="departamento" value="<%= depto%>" >
+                            <input type="hidden" class="hidden" name="proveedor" value="<%= proveedor%>" >
                             <button type="submit" class="btn btn-primary btn-sm">Generar</button>
                         </div>
                     </form>

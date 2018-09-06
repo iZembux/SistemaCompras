@@ -1877,7 +1877,6 @@ public class Consultas {
                         + "    group by rp.id_req_prod, c.id_proveedor, s.id_sucursales, d.id_departamentos    \n"
                         + "    ORDER BY c.id_proveedor, s.id_sucursales, d.id_departamentos;";
                 
-                
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
@@ -2960,4 +2959,46 @@ public class Consultas {
             } 
         }
     }
+    
+    public String verDepartamento (int id){
+        String depto = "";
+        PreparedStatement ps;
+        ResultSet rs;
+        Connection con;
+        con = ConexionMySQL.conectar();
+        if (con != null) {
+            try {
+                String sql = " select departamento from departamentos where id_departamentos = "+id+";";
+                ps = con.prepareStatement(sql);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    depto = rs.getString("departamento");
+                }
+            } catch (SQLException e) {
+                System.out.println("ERROR SQL-1 " + e.getSQLState() + ": " + e.getMessage());
+            } 
+        }
+        return depto;
+    } 
+    
+    public String verProveedor (int id){
+        String proveedor = "";
+        PreparedStatement ps;
+        ResultSet rs;
+        Connection con;
+        con = ConexionMySQL.conectar();
+        if (con != null) {
+            try {
+                String sql = " select razonsocial from proveedores where idproveedor = "+id+";";
+                ps = con.prepareStatement(sql);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    proveedor = rs.getString("departamento");
+                }
+            } catch (SQLException e) {
+                System.out.println("ERROR SQL-1 " + e.getSQLState() + ": " + e.getMessage());
+            } 
+        }
+        return proveedor;
+    } 
 }

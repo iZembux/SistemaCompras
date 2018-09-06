@@ -4,8 +4,39 @@
     Author     : fer_k
 --%>
 
+<%@page import="java.text.DecimalFormat"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%
+    String solicitante = " ";
+    String departamento = " ";
+    String proveedor = " ";
+    String justificacion = " ";
+    double monto = 0;
+    
+    DecimalFormat formateador = new DecimalFormat("###,###,###.##");
+    
+    try {
+        solicitante = request.getParameter("solicitante").toUpperCase();
+    } catch (Exception e) {
+    }
+    try {
+        departamento = request.getParameter("departamento").toUpperCase();
+    } catch (Exception e) {
+    }
+    try {
+        proveedor = request.getParameter("proveedor").toUpperCase();
+    } catch (Exception e) {
+    }
+    try {
+        justificacion = request.getParameter("justificacion").toUpperCase();
+    } catch (Exception e) {
+    }
+    try {
+        monto = Double.parseDouble(request.getParameter("monto"));
+    } catch (Exception e) {
+    }
+%>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -34,9 +65,7 @@
                     <tr>
                         <td width="20%">Departamento</td>
                         <td width="30%">
-                            <form>
-                                <input type="text">
-                            </form>
+                            <%= departamento %>
                         </td>
                         <td width="20%">&nbsp;</td>
                         <td width="30%">&nbsp;</td>
@@ -54,9 +83,7 @@
                     <tr>
                         <td width="20%">Proveedor</td>
                         <td width="30%">
-                            <form>
-                                <input type="text">
-                            </form>
+                            <%= proveedor %>
                         </td>
                         <td width="20%">Fecha</td>
                         <td width="30%">
@@ -68,9 +95,7 @@
                     <tr>
                         <td width="20%">Monto de compra</td>
                         <td width="30%">
-                            <form>
-                                <input type="number" align="right">
-                            </form>
+                            <%= formateador.format(monto) %> 
                         </td>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
@@ -145,9 +170,7 @@
             <table width="90%">
                 <tr>
                     <td width="100%">
-                        <form>
-                            <textarea rows="5" cols="85"></textarea>
-                        </form>
+                        <%= justificacion %>
                     </td>
                 </tr>
             </table>
@@ -155,9 +178,7 @@
             <table width="100%">
                 <tr>
                     <td width="33%">
-                        <form>
-                            <input type="text">
-                        </form>
+                        <%= solicitante %>
                     </td>
                     <td width="33%">
                         <form>
