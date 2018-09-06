@@ -11,6 +11,7 @@
     HttpSession sesion = request.getSession();
     String ruta;
     String usuarioValidado = (String) sesion.getAttribute("usuarioIngresado");
+    Consultas obj2 = new Consultas();
     try {
 
     } catch (Exception e) {
@@ -99,15 +100,18 @@
                         <td><%=fechaCoti%></td> 
                         <td>
                             <div class="row">
-                                <% if (status == 5) {%>
-                                <% if (idCategoria.equals("2")) {%>
+                                <% if (status == 5) {
+                                        if (idCategoria.equals("2")) {
+                                            if (rutaDictamen == null || rutaDictamen.equals("")) {
+                                %>
+                                <button type="submit" class="btn btn-dark btn-sm" disabled="true">No disponible</button>
+                                <% } else {%>
                                 <form name="abreDictamen" action="visor" method="POST" target="_blank">
                                     <input type="hidden" name="search" id="search" value="<%=rutaDictamen%>" >
                                     <button type="submit" class="btn btn-warning btn-sm" >Caracteristicas</button>
                                 </form>
-                                <% }%>
                                 <%
-                                    if (rutaDictamen != null || !rutaDictamen.equals("")) {
+                                    }
                                 %>
                                 <form action="formCotizacion.jsp" method="post">
                                     <input type="hidden" class="hidden" name="cantidad" value="<%=cantidadRequi%>" >
@@ -118,7 +122,12 @@
                                 <%
                                 } else {
                                 %>
-                                <button type="submit" class="btn btn-dark btn-sm" disabled="true">No disponible</button>
+                                <form action="formCotizacion.jsp" method="post">
+                                    <input type="hidden" class="hidden" name="cantidad" value="<%=cantidadRequi%>" >
+                                    <input type="hidden" class="hidden" name="idProducto" value="<%=idProducto%>" >
+                                    <input type="hidden" class="hidden" name="idReqCoti" value="<%=idReqCoti%>" >
+                                    <button type="submit" class="btn btn-info btn-sm" >Hacer Cotizacion</button>
+                                </form>
                                 <%
                                     }
                                 %>
@@ -130,7 +139,7 @@
                                 </form>
                                 <% }
                                     ArrayList<CotizacionRequisicion> arrayRequis2 = new ArrayList<CotizacionRequisicion>();
-                                    Consultas obj2 = new Consultas();
+
                                     arrayRequis2 = obj2.consultarProveedorCoti(idReqCoti, id_usuario);
                                     System.out.println(arrayRequis2.size());
                                     /* Consulta si el usuario activo ya realizo una cotizacion,

@@ -113,19 +113,19 @@
                         </div>
                         <div for="precio" class="form-group">
                             <label>Precio Unitario Sin IVA <b><FONT COLOR="red" title="Éste campo es obligatorio">*</FONT></b></label>
-                            <input type="double" class="form-control" id="precio" required="true" name="precio" value="<%= obPrecio.getPrecio() %>">
+                            <input type="double" class="form-control" id="precio" required="true" name="precio" value="">
                         </div>
                         <div for="credito" class="form-group">
                             <label>Dias de Crédito <b><FONT COLOR="red" title="Éste campo es obligatorio">*</FONT></b></label>
-                            <input type="number" class="form-control" id="credito" required="true" name="credito" value="<%= obPrecio.getDiasCredito() %>">
+                            <input type="number" class="form-control" id="credito" required="true" name="credito" value="">
                         </div>
                         <div for="entrega" class="form-group">
                             <label>Tiempo de Entrega (Días) <b><FONT COLOR="red" title="Éste campo es obligatorio">*</FONT></b></label>
-                            <input type="number" class="form-control" id="entrega" required="true" name="entrega" value="<%= obPrecio.getTiempoEntrega() %>">
+                            <input type="number" class="form-control" id="entrega" required="true" name="entrega" value="">
                         </div>
                         <div for="garantia" class="form-group">
                             <label>Garantía (Días) <b><FONT COLOR="red" title="Éste campo es obligatorio">*</FONT></b></label>
-                            <input type="number" class="form-control" id="garantia" required="true" name="garantia" value="<%= obPrecio.getGarantia() %>">
+                            <input type="number" class="form-control" id="garantia" required="true" name="garantia" value="">
                         </div>
                         <div for="descuento" class="form-group">
                             <label>% Descuento</label>

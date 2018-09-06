@@ -525,6 +525,7 @@
                 </div>
             </li>   
             <% } %>
+            <%-- 
             <% if ( idUsuario == 122) { %>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -537,6 +538,7 @@
                 </div>
             </li>  
             <% } %>
+            --%>
             <% if (idUsuario == 294) { %>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

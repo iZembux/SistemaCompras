@@ -119,7 +119,7 @@
                 // init the plugin and hold a reference to the instance
                 var ft = FooTable.init('#load-example', {
                     // we only load the column definitions as the row data is loaded through the button clicks
-                    "rows": $.get('<%=json%>')
+                    "columns": $.get('<%=json%>')
                 });
 
                 // bind the buttons to load the rows
