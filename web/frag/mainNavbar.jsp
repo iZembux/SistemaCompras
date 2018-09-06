@@ -525,6 +525,20 @@
                 </div>
             </li>   
             <% } %>
+            <%-- 
+            <% if ( idUsuario == 122) { %>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-check-square"></i> Autorizaciones Gerentes.
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="menuAutorizaRequiAdmin.jsp"> 
+                        Autorizar Requisicion
+                    </a>
+                </div>
+            </li>  
+            <% } %>
+            --%>
             <% if (idUsuario == 294) { %>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
