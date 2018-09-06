@@ -123,10 +123,10 @@
                         <img class="card-img-top" src="img/jarceria.jpg" alt="" style="height: 180px">
                         <div class="card-body">
                             <h4 class="card-title">Jarceria</h4>
-                            <p class="card-text">...</p>
+                            <p class="card-text">Escobas, Trapeadores, Cubetas, etc.</p>
                         </div>
                         <div class="card-footer">
-                            <a href="#" class="btn btn-success" data-toggle="modal" data-target="#modalError">Proximamente</a>
+                            <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#modalJarceria">Solicitar</a>
                         </div>
                     </div>
                 </div>
@@ -136,10 +136,10 @@
                         <img class="card-img-top" src="img/herramientas.jpg" alt="" style="height: 180px">
                         <div class="card-body">
                             <h4 class="card-title">Ferreteria</h4>
-                            <p class="card-text">...</p>
+                            <p class="card-text">Pinzas, Desarmadores, Martillos, etc.</p>
                         </div>
                         <div class="card-footer">
-                            <a href="#" class="btn btn-success" data-toggle="modal" data-target="#modalError">Proximamente</a>
+                            <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#modalFerreteria">Solicitar</a>
                         </div>
                     </div>
                 </div>
@@ -354,7 +354,7 @@
                             <div class="modal-footer">
                                 <input type="submit" class="btn btn-primary" value="Solicitar" />
                             </div>
-
+                            <input type="hidden" class="form-control" id="categoria" name="categoria" value="7">
                             <input type="hidden" class="form-control" id="nuevaRequisicion" name="nuevaRequisicion" value="<%=nuevaRequisicion%>">
                             <input type="hidden" class="form-control" id="idUsuario" name="idUsuario" value="<%=id_usuario%>">
                             <input type="hidden" class="form-control" id="idDepto" name="idDepto" value="<%=idDepto%>">
@@ -443,7 +443,7 @@
                                         <option value="<%= items6.get(i).getId()%>" id="modelo" name="modelo"><%= items6.get(i).getNombre()%></option>
                                         <% }%> 
                                     </select>
-                                </div>
+                            </div>
                             </div>
                             <div class="form-group">
                                 <label for="cantidad">Cantidad <b><FONT COLOR="red" title="Éste campo es obligatorio">*</FONT></b></label>

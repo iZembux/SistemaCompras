@@ -116,7 +116,7 @@
                             <div class="row">
                                 <%
                                     if (rutaCaratula == null || rutaCaratula.equals("") || rutaCaratula.equals("*")) {
-                                    }else{
+                                    } else {
                                 %>
                                 <form name="abreCaratula" action="visor" method="POST" target="_blank">
                                     <input type="hidden" name="search" id="search" value="<%=rutaCaratula%>" >
@@ -226,6 +226,14 @@
                                     <div class="modal-footer">
                                         <input type="hidden" class="hidden" name="idProducto" value="<%= idProducto%>" >
                                         <input type="hidden" class="hidden" name="numProveedores" value="<%=prov.size()%>" >
+                                        <% if(idCategoria == 7){ %>
+                                        <div class="form-check">
+                                            <label>
+                                                <input class="form-check-input" type="checkbox" name="checkboxCont" value="1">
+                                                <b>Requiere intervencion legal (contrato, asesoría, etc.)</b>
+                                            </label>
+                                        </div>
+                                        <% } %>
                                         <input type="submit" class="btn btn-primary" value="Solicitar" />
                                     </div>
                                 </div>

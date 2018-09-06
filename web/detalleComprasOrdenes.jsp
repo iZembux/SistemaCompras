@@ -39,7 +39,7 @@
             idProveedor = Integer.parseInt(request.getParameter("idProveedor"));
         } catch (Exception e) {
         }
-        
+
         DecimalFormat formateador = new DecimalFormat("###,###,###.##");
 %>
 <html>
@@ -101,13 +101,24 @@
                         <td><%=solicitante.toUpperCase()%></td>
                         <td><%=cantidadRequi%></td>
                         <td><%=producto%></td>
-                        <td>$ <%= formateador.format(precio) %></td>
+                        <td>$ <%= formateador.format(precio)%></td>
                     </tr>
                     <% }
                         }
                     %>
                 </tbody>
             </table>
+            <%
+                boolean b = false;
+                int totalCotizaciones = 0;
+                for (int i = 0; i < req2.size(); i++) {
+                    totalCotizaciones = obj.consultarCantidadCot(req2.get(i));
+                    if (totalCotizaciones < 1) {
+                        req3.add(req2.get(i));
+                        b = true;
+                    }
+                }
+            %>
             <div>
                 <h5> Precio Total: $<%= formateador.format(total)%></h5>
                 <% if (idCuadro > 0) { %>
@@ -116,12 +127,19 @@
                 <% } %>
                 <br />
                 <form action="actualizaOrdenCompras.jsp" method="post">
-                    <% if (total >= 7500 && idCuadro == 0) { %> 
+                    <% if (total >= 7500 && idCuadro == 0) {
+                            if (totalCotizaciones == 1) { %>
+                    <span>*Solo se tiene una cotizacion para esta orden, es necesario generar formato de proveedor unico</span>
+                    <br />
+                    <br />
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#unico" >Generar Formato</button> 
+                    <% } else { %>
                     <span>*Monto de la compra mayor a $7500.00, es necesario generar un cuadro comparativo</span>
                     <br />
                     <br />
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cuadro" >Generar Comparativo</button>
-                    <% } else {%>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cuadro" >Generar Comparativo</button> 
+                    <% }
+                    } else {%>
                     <input type="hidden" class="hidden" name="categoria" value="<%=idCategoria%>" >
                     <input type="hidden" class="hidden" name="proveedor" value="<%=idProveedor%>" >
                     <input type="hidden" class="hidden" name="suc" value="<%=idSucursal%>" >
@@ -136,16 +154,7 @@
             </div>
         </div>
 
-        <%
-            boolean b = false;
-            for (int i = 0; i < req2.size(); i++) {
-                int totalCotizaciones = obj.consultarCantidadCot(req2.get(i));
-                if (totalCotizaciones < 1) {
-                    req3.add(req2.get(i));
-                    b = true;
-                }
-            }
-        %>
+
         <div class="modal fade" id="cuadro" tabindex="-1" role="dialog" aria-labelledby="cuadro" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -179,7 +188,7 @@
                                     <%
 
                                         for (int i = 0; i < req2.size(); i++) {
-                                            int totalCotizaciones = obj.consultarCantidadCot(req2.get(i));
+                                            totalCotizaciones = obj.consultarCantidadCot(req2.get(i));
                                             if (totalCotizaciones < 3) {
                                                 req3.add(req2.get(i));
                                     %>
@@ -270,6 +279,27 @@
                     </div>
                 </div>
             </form>
+        </div>
+
+        <div class="modal fade" id="unico" tabindex="-1" role="dialog" aria-labelledby="unico" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <form action="formatos/provUnico.jsp" method="post" name="formulario" id="formulario">
+                        <div class="modal-body">
+                            <h5>Observaciones</h5>
+                            <p>
+                                Introduzca las observaciones que se mostrarán en el formato:
+                            </p>
+                            <div class="form-group">
+                                <textarea class="form-control" id="observaciones" name="observaciones" rows="3"></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary btn-sm">Generar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
 
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

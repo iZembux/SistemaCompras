@@ -19,7 +19,11 @@
         String idUsu = (String) sesion.getAttribute("idUsuario");
         String idDepto2 = idDepto;
         if (idUsu.equals("34")) {
-            idDepto2 = "1,8,10,13";
+            idDepto2 = "1,2,3,4,5,6,7";
+        } else if (idUsu.equals("210")) {
+            idDepto2 = "9,14";
+        } else if (idUsu.equals("97")) {
+            idDepto2 = "8,13,17";
         }
         
 

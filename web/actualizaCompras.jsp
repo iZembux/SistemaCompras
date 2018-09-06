@@ -15,6 +15,7 @@
     int numProveedores = 0;
     int idReqProd = 0;
     int tam = 0;
+    int contrato = 0;
 
     String suc = null;
 
@@ -44,8 +45,11 @@
         suc = request.getParameter("suc");
     } catch (Exception e) {
     }
-
-System.out.println("------------------PRODUCTOS PARA COTIZACION-----------------");
+    try {
+        contrato = Integer.parseInt(request.getParameter("checkboxCont"));
+    } catch (Exception e) {
+    }
+    System.out.println("------------------PRODUCTOS PARA COTIZACION-----------------");
 
     Class.forName("com.mysql.jdbc.Driver");
     Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/scompras", "root", "stmsc0nt");
@@ -60,7 +64,6 @@ System.out.println("------------------PRODUCTOS PARA COTIZACION-----------------
     }
 
     System.out.println("Usuario: " + usuarioC);
-    System.out.println("Sucursales: " + suc);
     System.out.println("Producto: " + idProducto);
     st.executeUpdate("UPDATE req_prod rp, requisiciones r, usuario u SET rp.id_status = " + nuevoStatus + ",\n"
             + "rp.id_req_coti = " + (id_cotizacion + 1) + ", rp.usu_compras = " + usuarioC + ", rp.fecha_coti = CURRENT_TIMESTAMP WHERE\n"
@@ -69,11 +72,10 @@ System.out.println("------------------PRODUCTOS PARA COTIZACION-----------------
             + "AND u.id_sucursal in (" + suc + ")\n"
             + "AND rp.id_producto = " + idProducto + "\n"
             + "AND rp.id_status = 4;");
-    
-System.out.println("------------------------------------------------------------");
 
     //Envia correo a los proveedores seleccionados
     ArrayList<Integer> idProv = new ArrayList<Integer>();
+    System.out.println("Numero de proveedores: " + numProveedores);
     for (int i = 0; i < numProveedores; i++) {
         try {
             int aux = Integer.parseInt(request.getParameter("checkbox" + i));
@@ -81,6 +83,7 @@ System.out.println("------------------------------------------------------------
         } catch (Exception e) {
         }
     }
+    System.out.println("Numero de requisiciones: " + tam);
     for (int i = 0; i < idProv.size(); i++) {
         for (int j = 0; j < tam; j++) {
             try {
@@ -96,8 +99,23 @@ System.out.println("------------------------------------------------------------
         while (rs.next()) {
             String correo = rs.getString("email");
             objMail.enviarCorreo(correo, "Proveedor", "", "Grupo Continental Automotriz ha solicitado una nueva cotizacion, favor de revisarla en el sistema de compras");
+            System.out.println("Email a proveedor: " + idProv.get(i) + " " + correo);
         }
     }
+
+    if (contrato == 1) {
+        String sql2 = "SELECT correo FROM scompras.usuario where id_departamento = 27 and id_rol = 3;";
+        ps = con.prepareStatement(sql2);
+        rs = ps.executeQuery();
+        while (rs.next()) {
+            String correo = rs.getString("correo");
+            objMail.enviarCorreo(correo, "", "", "Grupo Continental Automotriz ha solicitado un nuevo servicio y se requiere de apoyo legal, "
+                    + "favor de comunicarse con el departamento de compras, gracias.");
+            System.out.println("Email a Juridico");
+        }
+    }
+
+    System.out.println("------------------------------------------------------------");
     response.sendRedirect("menuComprasRequisiciones.jsp?categoria=" + idCategoria + "");
 
 
