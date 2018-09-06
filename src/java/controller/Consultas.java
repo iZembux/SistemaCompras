@@ -2969,6 +2969,7 @@ public class Consultas {
         if (con != null) {
             try {
                 String sql = " select departamento from departamentos where id_departamentos = "+id+";";
+                System.out.println(sql);
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
@@ -2993,7 +2994,7 @@ public class Consultas {
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
-                    proveedor = rs.getString("departamento");
+                    proveedor = rs.getString("razonsocial");
                 }
             } catch (SQLException e) {
                 System.out.println("ERROR SQL-1 " + e.getSQLState() + ": " + e.getMessage());
