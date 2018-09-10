@@ -110,7 +110,7 @@
                             <p class="card-text">Eventos, Hoteles, Servicios Generales, etc.</p>
                         </div>
                         <div class="card-footer">
-                            <a href="#" class="btn btn-success" data-toggle="modal" data-target="#modalError">Proximamente</a>
+                            <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#modalServicios">Solicitar</a>
                         </div>
                     </div>
                 </div>

@@ -49,9 +49,9 @@
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
-                        <th scope="col">Id Cuadro</th>
+                        <th scope="col">Id Cuadro/Formato</th>
                         <th scope="col">Departamento Solicitante</th>
-                        <th scope="col">Cantidad de Productos</th>
+                        <th scope="col"></th>
                         <th scope="col"></th>
                         <th scope="col"></th>
                         <th scope="col"></th>
@@ -61,6 +61,7 @@
                 <tbody>
                     <%
                         int idCuadro;
+                        int idFormatoUnico;
                         int cantidad;
                         String depto;
                         String observaciones = "";
@@ -75,6 +76,7 @@
                         if (arrayRequis.size() > 0) {
                             for (int i = 0; i < arrayRequis.size(); i++) {
                                 idCuadro = arrayRequis.get(i).getIdCuadro();
+                                idFormatoUnico = arrayRequis.get(i).getIdFormatoUnico();
                                 depto = arrayRequis.get(i).getDepartamento();
                                 cantidad = arrayRequis.get(i).getCantidad();
                                 observaciones = arrayRequis.get(i).getObservaciones();
@@ -83,9 +85,13 @@
                                 rutaCotizacion = arrayRequis.get(i).getRutaCotizacion();
                     %>
                     <tr>
+                        <% if (idFormatoUnico == 0 && idCuadro > 0) {%>
                         <td><%=idCuadro%></td>
+                        <% } else {%>
+                        <td><%=idFormatoUnico%></td>
+                        <% }%>
                         <td><%=depto%></td>
-                        <td><%=cantidad%></td>
+                        <td></td>
                         <td>
                             <form action="formatos/requisicion.jsp" method="post" target="_blank">
                                 <input type="hidden" class="hidden" name="idReqProd" value="<%=idReqProd%>" >
@@ -110,12 +116,20 @@
                         </td>
                         <td>
                             <div class="row">
+                                <% if (idFormatoUnico == 0 && idCuadro > 0) {%>
                                 <form action="formatos/comparativo_2.jsp" method="post">
                                     <input type="hidden" name="cuadro" value="<%=idCuadro%>" >
                                     <input type="hidden" name="idUsu" value="<%=usuario%>" >
                                     <input type="hidden" name="observaciones" value="<%=observaciones%>" >
                                     <button type="submit" class="btn btn-info btn-sm" >Ver Cuadro</button>
                                 </form>
+                                <% } else {%>
+                                <form action="formatos/proveedorUnico_1.jsp" method="post">
+                                    <input type="hidden" name="idFormato" value="<%=idFormatoUnico %>" >
+                                    <input type="hidden" name="idUsu" value="<%=usuario%>" > 
+                                    <button type="submit" class="btn btn-info btn-sm" >Ver Formato</button>
+                                </form>
+                                <% } %>
                             </div>
                         </td>
                     </tr>

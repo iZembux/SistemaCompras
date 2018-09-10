@@ -76,7 +76,7 @@
     }
 
     st.executeUpdate("insert into productos (id_productos,id_unidadmedida,id_categoria,sku,nombre,serie,marca,modelo,status) "
-            + "values ('" + idProducto + "',0,"+categoria+",0,'" + servicio + "',0,'NA','NA',1)");
+            + "values ('" + idProducto + "',6,"+categoria+",0,'" + servicio + "',0,'NA','NA',1)");
     System.out.println("Nuevo servicio creado: " + servicio);
 
     //Pregunta si es una requisicion nueva (1) o si es continuacion de otra (0)

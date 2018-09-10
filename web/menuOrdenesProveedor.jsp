@@ -16,6 +16,7 @@
         response.sendRedirect("index.jsp");
     } else {
         String id_usuario = (String) sesion.getAttribute("idUsuario");
+        String giro = (String) sesion.getAttribute("giro");
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -100,11 +101,17 @@
                                 <%}%>
                                 <form action="actualizaProveedor.jsp" method="post">
                                     <input type="hidden" class="hidden" name="tam" value="<%=arrayRequis2.size()%>" >
-                                    <input type="hidden" class="hidden" name="nuevoStatus" value="11" >
+                                    
                                     <% for (int j = 0; j < arrayRequis2.size(); j++) {%>
                                     <input type="hidden" class="hidden" name="idReqProd<%=j%>" value="<%=arrayRequis2.get(j).getIdReqProd()%>" >
                                     <% } %>
+                                    <%if (giro.equals("7")) { %>
+                                    <input type="hidden" class="hidden" name="nuevoStatus" value="12" >
+                                    <button type="submit" class="btn btn-success btn-sm" >Continuar</button>
+                                    <% } else { %>
+                                    <input type="hidden" class="hidden" name="nuevoStatus" value="11" >
                                     <button type="submit" class="btn btn-success btn-sm" >Iniciar Envío</button>
+                                    <% } %>
                                 </form>
                                 <% } else {%>
                                 <button type="button" class="btn btn-warning btn-sm" >Producto enviado</button>
