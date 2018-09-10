@@ -43,10 +43,11 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.css"/>
         <link rel="stylesheet" type="text/css" href="css/style.css">
-        <script type=”text/javascript” src=”js/stacktable.js”></script>
+        <script type="text/javascript" src="js/stacktable.js"></script>
         <title>Administracion</title>
-        <script type=”text/javascript”>
+        <script type="text/javascript">
             $(document).ready(function () {
                 $('#t1').stacktable();
             });
@@ -63,7 +64,7 @@
             <div class="page-header">
                 <h3>Seguimiento de Cotizaciones</h3>
             </div>
-            <table id="t1" class="table">
+            <table id="t1" class="table stacktable" border="0">
                 <thead>
                     <tr>
                         <th scope="col">No</th>
