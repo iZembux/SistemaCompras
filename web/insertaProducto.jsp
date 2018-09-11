@@ -67,6 +67,7 @@
     } catch (Exception e) {
     }
 
+    
     Class.forName("com.mysql.jdbc.Driver");
     Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/scompras", "root", "stmsc0nt");
     Statement st = con.createStatement();
@@ -79,19 +80,28 @@
                 + "values ('" + idRequisicion + "','" + idUsuario + "',CURRENT_TIMESTAMP)");
 
         //Envia correo al gerente del area
+        String sql = null;
         if (idRol >= 3) {
-
-        } else {
-            String sql = "SELECT correo, nombre, apellido FROM scompras.usuario where id_rol = 3 and id_departamento = " + idDepto + " and id_sucursal = " + sucursal + ";";
-            ps = con.prepareStatement(sql);
-            rs = ps.executeQuery();
-            if (rs.next()) {
-                String correo = rs.getString("correo");
-                String nombre = rs.getString("nombre");
-                String apellido = rs.getString("apellido");
-                objMail.enviarCorreo(correo, nombre, apellido, "Tiene una nueva requisicion por revisar");
+            if (sucursal == 1 || sucursal == 2 || sucursal == 3 || sucursal == 4 || sucursal == 6 || sucursal == 7 || sucursal == 8) {
+                sucursal = 1;
+            } else if (sucursal == 10 || sucursal == 11 || sucursal == 15 || sucursal == 16) {
+                sucursal = 10;
+            } else if (sucursal == 9 || sucursal == 14) {
+                sucursal = 9;
             }
+            sql = "SELECT correo, nombre, apellido FROM scompras.usuario where id_rol = 4 and id_sucursal in (" + sucursal + ");";
+        } else {
+            sql = "SELECT correo, nombre, apellido FROM scompras.usuario where id_rol = 3 and id_departamento = " + idDepto + " and id_sucursal = " + sucursal + ";";
         }
+        ps = con.prepareStatement(sql);
+        rs = ps.executeQuery();
+        if (rs.next()) {
+            String correo = rs.getString("correo");
+            String nombre = rs.getString("nombre");
+            String apellido = rs.getString("apellido");
+            objMail.enviarCorreo(correo, nombre, apellido, "Tiene una nueva requisicion por revisar");
+        }
+
     }
 
     rs = st.executeQuery("SELECT  max(id_requisicion) as id from requisiciones where id_usuario = " + idUsuario + ";");
