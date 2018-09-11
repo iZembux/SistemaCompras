@@ -16,6 +16,7 @@
     int idDepto = 0;
     int activo = 0;
     int sucursal = 0;
+    int idRol = 0;
     String descripcion = null;
     String justificacion = null;
 
@@ -57,6 +58,14 @@
         sucursal = Integer.parseInt(request.getParameter("sucursal"));
     } catch (Exception e) {
     }
+    try {
+        idRol = Integer.parseInt(request.getParameter("idRol"));
+    } catch (Exception e) {
+    }
+    try {
+        idStatus = Integer.parseInt(request.getParameter("idStatus"));
+    } catch (Exception e) {
+    }
 
     Class.forName("com.mysql.jdbc.Driver");
     Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/scompras", "root", "stmsc0nt");
@@ -70,16 +79,19 @@
                 + "values ('" + idRequisicion + "','" + idUsuario + "',CURRENT_TIMESTAMP)");
 
         //Envia correo al gerente del area
-        String sql = "SELECT correo, nombre, apellido FROM scompras.usuario where id_rol = 3 and id_departamento = " + idDepto + " and id_sucursal = "+sucursal+";"; 
-        ps = con.prepareStatement(sql);
-        rs = ps.executeQuery();
-        if (rs.next()) {
-            String correo = rs.getString("correo");
-            String nombre = rs.getString("nombre");
-            String apellido = rs.getString("apellido");
-            objMail.enviarCorreo(correo, nombre, apellido, "Tiene una nueva requisicion por revisar");
-        }
+        if (idRol >= 3) {
 
+        } else {
+            String sql = "SELECT correo, nombre, apellido FROM scompras.usuario where id_rol = 3 and id_departamento = " + idDepto + " and id_sucursal = " + sucursal + ";";
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                String correo = rs.getString("correo");
+                String nombre = rs.getString("nombre");
+                String apellido = rs.getString("apellido");
+                objMail.enviarCorreo(correo, nombre, apellido, "Tiene una nueva requisicion por revisar");
+            }
+        }
     }
 
     rs = st.executeQuery("SELECT  max(id_requisicion) as id from requisiciones where id_usuario = " + idUsuario + ";");

@@ -127,7 +127,7 @@ public class Consultas {
             try {
                 String sql = "SELECT \n"
                         + "    rp.id_requisicion AS IDREQUISICION,\n"
-                        + "    u.nombre AS SOLICITANTE,\n"
+                        + "    concat(u.nombre,' ',u.apellido)  AS SOLICITANTE,\n"
                         + "    SUM(rp.cantidad) AS CANTIDAD,\n"
                         + "    r.fecha\n"
                         + "FROM\n"

@@ -43,7 +43,7 @@
         <jsp:include page="frag/mainNavbar.jsp">
             <jsp:param name="rol" value="<%=rol%>" />  
             <jsp:param name="depto" value="<%=idDepto%>" />
-            <jsp:param name="idUsu" value="<%=id_usuario %>" />
+            <jsp:param name="idUsu" value="<%=id_usuario%>" />
         </jsp:include>
 
         <div class="container">
@@ -144,7 +144,7 @@
                     </div>
                 </div>
 
-                
+
             </div>
         </div>
 
@@ -193,8 +193,9 @@
                                 <input type="submit" class="btn btn-primary" value="Solicitar" />
                             </div>
 
-                            <% if (rol2 >= 3) { %>
+                            <% if (rol2 >= 3) {%>
                             <input type="hidden" class="form-control" id="idStatus" name="idStatus" value="8">
+                            <input type="hidden" class="form-control" id="idRol" name="idRol" value="<%= rol2%>"> 
                             <% }%>
                             <input type="hidden" class="form-control" id="nuevaRequisicion" name="nuevaRequisicion" value="<%=nuevaRequisicion%>">
                             <input type="hidden" class="form-control" id="idUsuario" name="idUsuario" value="<%=id_usuario%>">
@@ -254,8 +255,9 @@
                                 <input type="submit" class="btn btn-primary" value="Solicitar" />
                             </div>
 
-                            <% if (rol2 >= 3) { %>
+                            <% if (rol2 >= 3) {%>
                             <input type="hidden" class="form-control" id="idStatus" name="idStatus" value="8">
+                            <input type="hidden" class="form-control" id="idRol" name="idRol" value="<%= rol2%>"> 
                             <% }%>
                             <input type="hidden" class="form-control" id="nuevaRequisicion" name="nuevaRequisicion" value="<%=nuevaRequisicion%>">
                             <input type="hidden" class="form-control" id="idUsuario" name="idUsuario" value="<%=id_usuario%>">
@@ -311,6 +313,10 @@
                                 <input type="submit" class="btn btn-primary" value="Solicitar" />
                             </div>
 
+                            <% if (rol2 >= 3) {%>
+                            <input type="hidden" class="form-control" id="idStatus" name="idStatus" value="8">
+                            <input type="hidden" class="form-control" id="idRol" name="idRol" value="<%= rol2%>"> 
+                            <% }%>
                             <input type="hidden" class="form-control" id="nuevaRequisicion" name="nuevaRequisicion" value="<%=nuevaRequisicion%>">
                             <input type="hidden" class="form-control" id="idUsuario" name="idUsuario" value="<%=id_usuario%>">
                             <input type="hidden" class="form-control" id="idDepto" name="idDepto" value="<%=idDepto%>">
@@ -320,7 +326,7 @@
                 </div>
             </div>
         </div>
-                        
+
         <!--MODAL SERVICIOS-->
         <div class="modal fade" id="modalServicios" tabindex="-1" role="dialog" aria-labelledby="modalServicios" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -354,6 +360,10 @@
                             <div class="modal-footer">
                                 <input type="submit" class="btn btn-primary" value="Solicitar" />
                             </div>
+                            <% if (rol2 >= 3) {%>
+                            <input type="hidden" class="form-control" id="idStatus" name="idStatus" value="8">
+                            <input type="hidden" class="form-control" id="idRol" name="idRol" value="<%= rol2%>"> 
+                            <% }%>
                             <input type="hidden" class="form-control" id="categoria" name="categoria" value="7">
                             <input type="hidden" class="form-control" id="nuevaRequisicion" name="nuevaRequisicion" value="<%=nuevaRequisicion%>">
                             <input type="hidden" class="form-control" id="idUsuario" name="idUsuario" value="<%=id_usuario%>">
@@ -364,7 +374,7 @@
                 </div>
             </div>
         </div>
-                        
+
         <!--MODAL JARCERIA-->
         <div class="modal fade" id="modalJarceria" tabindex="-1" role="dialog" aria-labelledby="modalJarceria" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -408,7 +418,10 @@
                             <div class="modal-footer">
                                 <input type="submit" class="btn btn-primary" value="Solicitar" />
                             </div>
-
+                            <% if (rol2 >= 3) {%>
+                            <input type="hidden" class="form-control" id="idStatus" name="idStatus" value="8">
+                            <input type="hidden" class="form-control" id="idRol" name="idRol" value="<%= rol2%>"> 
+                            <% }%>
                             <input type="hidden" class="form-control" id="nuevaRequisicion" name="nuevaRequisicion" value="<%=nuevaRequisicion%>">
                             <input type="hidden" class="form-control" id="idUsuario" name="idUsuario" value="<%=id_usuario%>">
                             <input type="hidden" class="form-control" id="idDepto" name="idDepto" value="<%=idDepto%>">
@@ -418,7 +431,7 @@
                 </div>
             </div>
         </div>
-                        
+
         <!--MODAL FERRETERIA-->
         <div class="modal fade" id="modalFerreteria" tabindex="-1" role="dialog" aria-labelledby="modalFerreteria" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -443,7 +456,7 @@
                                         <option value="<%= items6.get(i).getId()%>" id="modelo" name="modelo"><%= items6.get(i).getNombre()%></option>
                                         <% }%> 
                                     </select>
-                            </div>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="cantidad">Cantidad <b><FONT COLOR="red" title="Éste campo es obligatorio">*</FONT></b></label>
@@ -462,7 +475,10 @@
                             <div class="modal-footer">
                                 <input type="submit" class="btn btn-primary" value="Solicitar" />
                             </div>
-
+                            <% if (rol2 >= 3) {%>
+                            <input type="hidden" class="form-control" id="idStatus" name="idStatus" value="8">
+                            <input type="hidden" class="form-control" id="idRol" name="idRol" value="<%= rol2%>"> 
+                            <% }%>
                             <input type="hidden" class="form-control" id="nuevaRequisicion" name="nuevaRequisicion" value="<%=nuevaRequisicion%>">
                             <input type="hidden" class="form-control" id="idUsuario" name="idUsuario" value="<%=id_usuario%>">
                             <input type="hidden" class="form-control" id="idDepto" name="idDepto" value="<%=idDepto%>">
@@ -472,7 +488,7 @@
                 </div>
             </div>
         </div>
-                        
+
         <!--MODAL NO DISPONIBLE-->
         <div class="modal fade" id="modalError" tabindex="-1" role="dialog" aria-labelledby="modalError" aria-hidden="true">
             <div class="modal-dialog" role="document">
