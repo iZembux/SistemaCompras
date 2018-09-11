@@ -130,6 +130,7 @@
                 <br />
                 <form action="actualizaOrdenCompras.jsp" method="post">
                     <input type="hidden" class="hidden" name="categoria" value="<%=idCategoria%>" >
+                    <input type="hidden" class="hidden" name="nuevoStatus" value="20" >
                     <input type="hidden" class="hidden" name="proveedor" value="<%=idProveedor%>" >
                     <input type="hidden" class="hidden" name="suc" value="<%=idSucursal%>" >
                     <input type="hidden" class="hidden" name="dep" value="<%=idDepartamento%>" >

@@ -1714,6 +1714,39 @@ public class Consultas {
         return listaRequi;
     }
 
+    public ArrayList<OrdenFormato> consultarOrdenesGerenteCompras() {
+        ArrayList<OrdenFormato> listaRequi = new ArrayList<OrdenFormato>();
+        PreparedStatement ps;
+        ResultSet rs;
+        Connection con;
+        con = ConexionMySQL.conectar();
+        if (con != null) {
+            try {
+                String sql = "SELECT razonSocialProveedor, sum(cantidadProducto) as cant, razonSocialSucursal, \n"
+                        + "departamento, idCotizacionOrden, fechaOrden FROM scompras.ordenes_compra oc, req_prod rp \n"
+                        + "where idCotizacionOrden > 0 and idCotizacionOrden not in ('2','3','4','5') and idCotizacionOrden = id_orden\n"
+                        + "and id_status = 20\n"
+                        + "group by idCotizacionOrden order by idCotizacionOrden desc;";
+                System.out.println(sql);
+                ps = con.prepareStatement(sql);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    OrdenFormato obj = new OrdenFormato();
+                    obj.setNombreP(rs.getString("razonSocialProveedor"));
+                    obj.setCantidad(rs.getInt("cant"));
+                    obj.setSucursal(rs.getString("razonSocialSucursal"));
+                    obj.setDepto(rs.getString("departamento"));
+                    obj.setIdP(rs.getInt("idCotizacionOrden"));
+                    obj.setFecha(rs.getString("fechaOrden"));
+                    listaRequi.add(obj);
+                }
+            } catch (SQLException ex) {
+                System.out.println("ERROR: " + ex.getMessage());
+            }
+        }
+        return listaRequi;
+    }
+
     public ArrayList<RequisicionProducto> consultarProdEnvio(int orden) {
         ArrayList<RequisicionProducto> listaRequi = new ArrayList<RequisicionProducto>();
         PreparedStatement ps;
@@ -1802,7 +1835,7 @@ public class Consultas {
                         + "    and rp.id_orden = 0\n"
                         + "    and aut_compras > 0\n"
                         + "    group by p.nombre";
-                
+
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {

@@ -37,6 +37,7 @@
     int idReqProd = 0;
     int tam = 0;
     int idFormato = 0;
+    int nuevoStatus = 0;
 
     Mail objMail = new Mail();
 
@@ -65,9 +66,14 @@
         tam = Integer.parseInt(request.getParameter("tam"));
     } catch (Exception e) {
     }
-    
+
     try {
         idFormato = Integer.parseInt(request.getParameter("idFormato"));
+    } catch (Exception e) {
+    }
+
+    try {
+        nuevoStatus = Integer.parseInt(request.getParameter("nuevoStatus"));
     } catch (Exception e) {
     }
 
@@ -118,25 +124,25 @@
             for (int j = 0; j < tam; j++) {
                 try {
                     idReqProd = Integer.parseInt(request.getParameter("idReqProd" + j));
-                    st.executeUpdate("update req_prod set id_orden = " + idOrden + " where id_req_prod = " + idReqProd + "");
+                    st.executeUpdate("update req_prod set id_orden = " + idOrden + ", id_status = " + nuevoStatus + " where id_req_prod = " + idReqProd + "");
                 } catch (Exception e) {
                 }
             }
         }
-        
+
         if (idFormato > 0) {
-                st.executeUpdate("update formatounico set idOrden = " + idOrden + " where idformatounico = " + idFormato + "");
-                System.out.println("Id Formato: " + idFormato);
-            }
-        
-        String sql2 = "SELECT email FROM scompras.proveedores where giro = " + categoria + " and idproveedor = " + proveedor + ";";
+            st.executeUpdate("update formatounico set idOrden = " + idOrden + " where idformatounico = " + idFormato + "");
+            System.out.println("Id Formato: " + idFormato);
+        }
+
+        String sql2 = "SELECT correo FROM scompras.usuario where id_rol = 3 and id_departamento = 7;";
         ps = con.prepareStatement(sql2);
         rs = ps.executeQuery();
         while (rs.next()) {
-            String correo = rs.getString("email");
-            objMail.enviarCorreo(correo, "Proveedor", "", "Grupo Continental Automotriz ha autorizado una nueva orden de compra, favor de revisarla en el sistema");
+            String correo = rs.getString("correo");
+            objMail.enviarCorreo(correo, "", "", "Se ha generado una nueva orden de compra, favor de revisarla en el sistama para su aprobacion.");
         }
-        
+
     }
 
     response.sendRedirect("menuComprasOrdenes.jsp?categoria=" + categoria + "");
