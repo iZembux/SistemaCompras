@@ -1727,7 +1727,7 @@ public class Consultas {
                         + "where idCotizacionOrden > 0 and idCotizacionOrden not in ('2','3','4','5') and idCotizacionOrden = id_orden\n"
                         + "and id_status = 20\n"
                         + "group by idCotizacionOrden order by idCotizacionOrden desc;";
-                System.out.println(sql);
+                
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {

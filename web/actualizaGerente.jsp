@@ -13,6 +13,7 @@
     int idUsu = 0;
     int admin = 0;
     int categoria = 0;
+    int idGerenteAdmin = 0;
 
     Mail objMail = new Mail();
 
@@ -77,17 +78,45 @@
                 objMail.enviarCorreo(correo, nombre, apellido, "Hay un nuevo dictamen por realizar");
             }
         }
-        //Depto. Compras
-        /*String sql2 = "SELECT correo, nombre, apellido FROM scompras.usuario where id_departamento = 7;";
-        ps = con.prepareStatement(sql2);
-        rs = ps.executeQuery();
-        while (rs.next()) {
-            String correo = rs.getString("correo");
-            String nombre = rs.getString("nombre");
-            String apellido = rs.getString("apellido");
-            objMail.enviarCorreo(correo, nombre, apellido, "Hay una nueva requisicion por revisar");
+        if (nuevoStatus == 17) {
+            String sql3 = "SELECT id_sucursal FROM scompras.usuario where id_usuario = " + idSolicita + ";";
+            ps = con.prepareStatement(sql3);
+            rs = ps.executeQuery();
+            int suc = 0;
+            int suc2 = 0;
+            int arrCont[] = {1, 2, 3, 4, 6, 7};
+            int arrNihon[] = {14, 9, 0, 0, 0};
+            int arrKorean[] = {8, 13, 17, 0, 0};
+            int arrAuto[] = {10, 11, 15, 16, 18};
+            if (rs.next()) {
+                suc = rs.getInt("id_sucursal");
+            }
+            for (int i = 0; i < arrCont.length; i++) {
+                if (suc == arrCont[i]) {
+                    suc2 = 1;
+                    break;
+                } else if (suc == arrNihon[i]) {
+                    suc2 = 9;
+                    break;
+                } else if (suc == arrKorean[i]) {
+                    suc2 = 8;
+                    break;
+                } else if (suc == arrAuto[i]) {
+                    suc2 = 10;
+                    break;
+                }
+            }
+
+            String sql2 = "SELECT correo, nombre, apellido FROM scompras.usuario where id_rol = 4 and id_sucursal = " + suc2 + ";";
+            ps = con.prepareStatement(sql2);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                String correo = rs.getString("correo");
+                String nombre = rs.getString("nombre");
+                String apellido = rs.getString("apellido");
+                objMail.enviarCorreo(correo, nombre, apellido, "Hay una nueva requisicion, favor de revisar en la seccion 'Autorizaciones generales'");
+            }
         }
-         */
     } else if (autoriza == 2) {
         //Usuario solicitante
         String sql = "SELECT correo, nombre, apellido FROM scompras.usuario where id_usuario = " + idSolicita + ";";

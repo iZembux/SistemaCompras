@@ -149,11 +149,12 @@
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#unico" >Generar Formato</button> 
                     <% } else { %>
                     <span>Formato de proveedor único aprobado</span>
-                    <% } %>
                     <br />
                     <br />
                     <input type="hidden" class="hidden" name="idFormato" value="<%= idFormato %>" >
                     <button type="submit" class="btn btn-success btn-sm" >Guardar Orden</button> 
+                    <% } %>
+                    
                     <% } else { %>
                     <span>*Monto de la compra mayor a $7500.00, es necesario generar un cuadro comparativo</span>
                     <br />

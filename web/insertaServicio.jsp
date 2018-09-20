@@ -17,7 +17,7 @@
     int activo = 0;
     int sucursal = 0;
     int categoria = 0;
-    String descripcion = null;
+    String descripcion = null;   
     String justificacion = null;
     String servicio = null;
 

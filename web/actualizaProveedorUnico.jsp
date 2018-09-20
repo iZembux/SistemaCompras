@@ -108,11 +108,11 @@
     }
 
     st.executeUpdate("insert into formatounico values (default,'" + departamento + "',0,'" + proveedor + "',CURRENT_TIMESTAMP," + monto + ","
-            + "" + check1 + "," + check2 + "," + check3 + "," + check4 + "," + check5 + "," + check6 + "," + check7 + "," + check8 + ",'" + justificacion + "','" + solicitante + "',default,default)");
+            + "" + check1 + "," + check2 + "," + check3 + "," + check4 + "," + check5 + "," + check6 + "," + check7 + "," + check8 + ",'" + justificacion + "','" + solicitante + "',default,default,default)");
 
     st.executeUpdate("update req_prod rp set id_status = " + nuevoStatus + ", id_formato_unico = " + idFormatoUnico + " where id_req_prod = " + idReqProd + ";");
 
     System.out.println("------------------------------------------------------------");
     //Envia Correo a Gerente Admin
-    response.sendRedirect("menuComprasCotizaciones.jsp?categoria=" + idCategoria + "");
+    response.sendRedirect("menuComprasOrdenes.jsp?categoria=" + idCategoria + "");
 %>
