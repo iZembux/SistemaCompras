@@ -23,6 +23,7 @@ public class Comparativo {
     private int garantia;
     private double total;
     private int idCuadro;
+    private int idFormatoUnico;
     private int idReqProd;
     private int cantidad;
     private String producto;
@@ -270,5 +271,19 @@ public class Comparativo {
      */
     public void setIdReqProd(int idReqProd) {
         this.idReqProd = idReqProd;
+    }
+
+    /**
+     * @return the idFormatoUnico
+     */
+    public int getIdFormatoUnico() {
+        return idFormatoUnico;
+    }
+
+    /**
+     * @param idFormatoUnico the idFormatoUnico to set
+     */
+    public void setIdFormatoUnico(int idFormatoUnico) {
+        this.idFormatoUnico = idFormatoUnico;
     }
 }

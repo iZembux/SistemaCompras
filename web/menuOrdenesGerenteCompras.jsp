@@ -15,8 +15,9 @@
     if (usuarioValidado == null) {
         response.sendRedirect("index.jsp");
     } else {
-        String id_usuario = (String) sesion.getAttribute("idUsuario");
-        String giro = (String) sesion.getAttribute("giro");
+        String idDepto = (String) sesion.getAttribute("departamento"); 
+        String rol = (String) sesion.getAttribute("rol");
+        String usuario = (String) sesion.getAttribute("idUsuario");
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -30,7 +31,11 @@
     </head>
     <body>
 
-        <jsp:include page="frag/mainNavbarProveedor.jsp"/> 
+        <jsp:include page="frag/mainNavbar.jsp">
+            <jsp:param name="rol" value="<%=rol%>" />  
+            <jsp:param name="depto" value="<%=idDepto%>" />
+        </jsp:include>
+
 
         <div class="container my-5">
             <div class="page-header">
@@ -40,7 +45,6 @@
                 <thead>
                     <tr>
                         <th scope="col">Orden</th>
-                        <th scope="col">Cant. Productos</th>
                         <th scope="col">Sucursal</th>
                         <th scope="col">Fecha de Autorizacion</th>
                         <th scope="col"></th>
@@ -52,15 +56,11 @@
                         int idP;
                         String sucursal;
                         String fecha;
-                        int idOrden;
-                        String rutaFactura;
-
-                        int status;
 
                         ArrayList<OrdenFormato> arrayRequis = new ArrayList<OrdenFormato>();
                         ArrayList<RequisicionProducto> arrayRequis2 = new ArrayList<RequisicionProducto>();
                         Consultas obj = new Consultas();
-                        arrayRequis = obj.consultarOrdenesProvHist(id_usuario);
+                        arrayRequis = obj.consultarOrdenesGerenteCompras();
 
                         if (arrayRequis.size() > 0) {
                             for (int i = 0; i < arrayRequis.size(); i++) {
@@ -72,7 +72,6 @@
                     %>
                     <tr>
                         <td><%=idP%></td>
-                        <td><%=cantidad%></td>
                         <td><%=sucursal%></td>
                         <td><%=fecha%></td> 
                         <td>
@@ -81,72 +80,26 @@
                                     <input type="hidden" name="idOrden" id="idOrden" value="<%=idP%>" >
                                     <button type="submit" class="btn btn-info btn-sm" >Ver Orden</button>
                                 </form>
-                                <%
-                                    arrayRequis2 = obj.consultarProdEnvio(idP);
-                                    rutaFactura = obj.consultaRutaFactura(idP);
-                                    if (arrayRequis2.size() > 0) {
-                                        status = arrayRequis2.get(0).getIdStatus();
-                                        if (status == 10) {
-                                            
-                                            if (rutaFactura == null || rutaFactura.equals("")) {
-                                %>
-                                <button type="button" onclick="abre(); mandarDato()" value="<%=idP%>" id="btnID" class="btn btn-dark btn-sm">Subir Factura</button>
-                                <%} else {
-                                    //System.out.println(rutaFactura);
-                                %>
-                                <form name="abreFactura" action="visor" method="POST" target="_blank">
-                                    <input type="hidden" name="search" id="search" value="<%=rutaFactura%>" >
-                                    <button type="submit" class="btn btn-outline-dark btn-sm" >Ver Factura</button>
+                                
+                                <form action="actualizaOrdenComprasGerente.jsp" method="post">
+                                    <input type="hidden" class="hidden" name="idOrden" value="<%=idP%>" > 
+                                    <input type="hidden" class="hidden" name="nuevoStatus" value="10" >
+                                    <button type="submit" class="btn btn-success btn-sm" >Aceptar</button>
                                 </form>
-                                <%}%>
-                                <form action="actualizaProveedor.jsp" method="post">
-                                    <input type="hidden" class="hidden" name="tam" value="<%=arrayRequis2.size()%>" >
-                                    
-                                    <% for (int j = 0; j < arrayRequis2.size(); j++) {%>
-                                    <input type="hidden" class="hidden" name="idReqProd<%=j%>" value="<%=arrayRequis2.get(j).getIdReqProd()%>" >
-                                    <% } %>
-                                    <%if (giro.equals("7")) { %>
-                                    <input type="hidden" class="hidden" name="nuevoStatus" value="12" >
-                                    <button type="submit" class="btn btn-success btn-sm" >Continuar</button>
-                                    <% } else { %>
-                                    <input type="hidden" class="hidden" name="nuevoStatus" value="11" >
-                                    <button type="submit" class="btn btn-success btn-sm" >Iniciar Envío</button>
-                                    <% } %>
+                                    <form action="actualizaOrdenComprasGerente.jsp" method="post">
+                                    <input type="hidden" class="hidden" name="idOrden" value="<%=idP%>" > 
+                                    <input type="hidden" class="hidden" name="nuevoStatus" value="14" >
+                                    <button type="submit" class="btn btn-danger btn-sm" >Rechazar</button>
                                 </form>
-                                <% } else {%>
-                                <button type="button" class="btn btn-warning btn-sm" >Producto enviado</button>
                                 <% }
                                     }%>
                             </div>
                         </td>
                     </tr>
-                    <% }
-                        }%>
                 </tbody>
             </table>
         </div>
-        <!-- Modal Cargar Factura -->
-        <div class="modal fade" id="myModal" role="dialog">
-            <div class="modal-dialog">
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Subir Factura</h4>
-                        <button type="button" class="close" data-dismiss="modal">×</button>
-                    </div>
-                    <div class="modal-body form-control">
-                        <form name="subeFactura" action="subirFactura.jsp" method="POST" enctype="multipart/form-data">
-                            <input type="hidden" class="hidden Orden" id="Orden" name="Orden" value="">
-                            <input type="file" class="form-control" id="archivo" accept="application/pdf" required="true" name="archivo">
-                            <center><input type="submit" class="btn btn-success" value="GUARDAR"/></center>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
         <jsp:include page="frag/footer.jsp" />
         
         <!-- ===============================================================    FUNCIONES JAVASCRIPT =============================================================== -->

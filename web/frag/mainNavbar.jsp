@@ -70,7 +70,7 @@
                         }
                     %>
                     <%
-                        if (idUsuario == 83 || idUsuario == 4) {
+                        if (idUsuario == 83 || idUsuario == 4 || idUsuario == 25) {
                     %> 
                     <a class="dropdown-item" href="menuComprasRequisiciones.jsp?categoria=5"> 
                         <div class="row">
@@ -83,7 +83,7 @@
                         }
                     %>
                     <%
-                        if (idUsuario == 83 || idUsuario == 4) {
+                        if (idUsuario == 83 || idUsuario == 4 || idUsuario == 25) {
                     %> 
                     <a class="dropdown-item" href="menuComprasRequisiciones.jsp?categoria=6"> 
                         <div class="row">
@@ -150,7 +150,7 @@
                         }
                     %>
                     <%
-                        if (idUsuario == 83 || idUsuario == 4) {
+                        if (idUsuario == 83 || idUsuario == 4 || idUsuario == 25) {
                     %> 
                     <a class="dropdown-item" href="menuComprasCotizaciones.jsp?categoria=5"> 
                         <div class="row">
@@ -163,7 +163,7 @@
                         }
                     %>
                     <%
-                        if (idUsuario == 83 || idUsuario == 4) {
+                        if (idUsuario == 83 || idUsuario == 4 || idUsuario == 25) {
                     %> 
                     <a class="dropdown-item" href="menuComprasCotizaciones.jsp?categoria=6"> 
                         <div class="row">
@@ -219,7 +219,7 @@
                     %>
 
                     <%
-                        if (idUsuario == 83 || idUsuario == 4) {
+                        if (idUsuario == 83 || idUsuario == 4 || idUsuario == 25) {
                     %> 
                     <a class="dropdown-item" href="menuComprasOrdenes.jsp?categoria=5"> 
                         Cotizaciones Jarceria
@@ -228,7 +228,7 @@
                         }
                     %>
                     <%
-                        if (idUsuario == 83 || idUsuario == 4) {
+                        if (idUsuario == 83 || idUsuario == 4 || idUsuario == 25) {
                     %> 
                     <a class="dropdown-item" href="menuComprasOrdenes.jsp?categoria=6"> 
                         Cotizaciones Ferreteria
@@ -269,7 +269,7 @@
                     %>
                     
                     <%
-                        if (idUsuario == 83 || idUsuario == 4) {
+                        if (idUsuario == 83 || idUsuario == 4 || idUsuario == 25) {
                     %> 
                     <a class="dropdown-item" href="menuComprasOrdenesHistorial.jsp?categoria=5"> 
                         Historial Ordenes Jarceria
@@ -278,7 +278,7 @@
                         }
                     %>
                     <%
-                        if (idUsuario == 83 || idUsuario == 4) {
+                        if (idUsuario == 83 || idUsuario == 4 || idUsuario == 25) {
                     %> 
                     <a class="dropdown-item" href="menuComprasOrdenesHistorial.jsp?categoria=6"> 
                         Historial Ordenes Ferreteria
@@ -326,7 +326,7 @@
                     %>
                     
                     <%
-                    if (idUsuario == 83 || idUsuario == 4) {
+                    if (idUsuario == 83 || idUsuario == 4 || idUsuario == 25) {
                     %> 
                     <a class="dropdown-item" href="menuComprasRecepcion.jsp?categoria=5"> 
                         Jarceria
@@ -335,7 +335,7 @@
                         }
                     %>
                      <%
-                    if (idUsuario == 83 || idUsuario == 4) {
+                    if (idUsuario == 83 || idUsuario == 4 || idUsuario == 25) {
                     %> 
                     <a class="dropdown-item" href="menuComprasRecepcion.jsp?categoria=6"> 
                         Ferreteria
@@ -382,7 +382,7 @@
                         }
                     %>
                     <%
-                        if (idUsuario == 83 || idUsuario == 4) {
+                        if (idUsuario == 83 || idUsuario == 4 || idUsuario == 25) {
                     %> 
                     <a class="dropdown-item" href="menuComprasEntrega.jsp?categoria=5">
                         Jarceria  
@@ -391,7 +391,7 @@
                         }
                     %>
                     <%
-                        if (idUsuario == 83 || idUsuario == 4) {
+                        if (idUsuario == 83 || idUsuario == 4 || idUsuario == 25)  {
                     %> 
                     <a class="dropdown-item" href="menuComprasEntrega.jsp?categoria=6">
                         Ferreteria  
@@ -413,7 +413,7 @@
             <%-- <% if (rol == 3) { %> --%>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Administracion
+                    Admin
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="menuComprasAdministracionRequisiciones.jsp"> 
@@ -430,7 +430,7 @@
 
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-shopping-cart"></i> Pedidos
+                    Pedidos
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="menuSolicita.jsp"> 
@@ -447,7 +447,7 @@
             <% if (idUsuario == 4) { %>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-dollar-sign"></i> Comparativos
+                    Comparativos/ordenes
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="menuComprasOrdenesAdminCompras.jsp"> 
@@ -458,6 +458,9 @@
                         Historial de Comparativos
                     </a>
                     -->
+                    <a class="dropdown-item" href="menuOrdenesGerenteCompras.jsp"> 
+                        Autorizar Ordenes
+                    </a>
                 </div>
             </li>   
 
@@ -468,7 +471,7 @@
             %>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-shopping-cart"></i> Pedidos
+                    Pedidos
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="menuSolicita.jsp"> 
@@ -485,7 +488,7 @@
             <% } %>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-check-square"></i> Autorizaciones Depto.
+                    Autorizaciones Depto.
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="menuAutorizaRequi.jsp"> 
@@ -498,7 +501,7 @@
 
 
             </li>
-            <% if (idUsuario == 282) { %>
+            <% if (idUsuario == 282 || idUsuario == 34 || idUsuario == 210 || idUsuario == 122) { %>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-check-square"></i> Autorizaciones Gerentes.
@@ -509,6 +512,7 @@
                     </a>
                 </div>
             </li>
+            <% if (idUsuario == 282) { %>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-dollar-sign"></i> Comparativos
@@ -524,7 +528,7 @@
                     -->
                 </div>
             </li>   
-            <% } %>
+            <% } }%>
             <%-- 
             <% if ( idUsuario == 122) { %>
             <li class="nav-item dropdown">

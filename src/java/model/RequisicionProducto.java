@@ -18,6 +18,7 @@ public class RequisicionProducto {
     private int idOrden;
     private int idCategoria;
     private int idCuadro;
+    private int idFormato;
     private int sku;
     private double precio;
     private String producto;
@@ -427,5 +428,19 @@ public class RequisicionProducto {
      */
     public void setIdCuadro(int idCuadro) {
         this.idCuadro = idCuadro;
+    }
+
+    /**
+     * @return the idFormato
+     */
+    public int getIdFormato() {
+        return idFormato;
+    }
+
+    /**
+     * @param idFormato the idFormato to set
+     */
+    public void setIdFormato(int idFormato) {
+        this.idFormato = idFormato;
     }
 }

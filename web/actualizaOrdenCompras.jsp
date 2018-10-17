@@ -7,6 +7,7 @@
 <%@page import="controller.Mail"%>
 <%@ page import ="java.sql.*" %>
 <%
+    System.out.println("Inicia creacion de ordenes");
     int cantidad = 0;
     String producto = " ";
     String sucursal = " ";
@@ -35,28 +36,44 @@
 
     int idReqProd = 0;
     int tam = 0;
+    int idFormato = 0;
+    int nuevoStatus = 0;
 
     Mail objMail = new Mail();
 
     try {
         categoria = Integer.parseInt(request.getParameter("categoria"));
+        System.out.println("Categoria: " + categoria);
     } catch (Exception e) {
     }
     try {
         proveedor = Integer.parseInt(request.getParameter("proveedor"));
+        System.out.println("Proveedor " + proveedor);
     } catch (Exception e) {
     }
     try {
         suc = Integer.parseInt(request.getParameter("suc"));
+        System.out.println("Sucursal " + suc);
     } catch (Exception e) {
     }
     try {
         dep = Integer.parseInt(request.getParameter("dep"));
+        System.out.println("Departamento " + dep);
     } catch (Exception e) {
     }
 
     try {
         tam = Integer.parseInt(request.getParameter("tam"));
+    } catch (Exception e) {
+    }
+
+    try {
+        idFormato = Integer.parseInt(request.getParameter("idFormato"));
+    } catch (Exception e) {
+    }
+
+    try {
+        nuevoStatus = Integer.parseInt(request.getParameter("nuevoStatus"));
     } catch (Exception e) {
     }
 
@@ -72,6 +89,7 @@
     rs = st.executeQuery("select max(id_orden) as id from req_prod;");
     if (rs.next()) {
         idOrden = rs.getInt("id") + 1;
+        System.out.println("Numero de Orden: " + idOrden);
     }
 
     arrayRequis = obj.consultarOrdenesProvAcum(proveedor, suc, categoria, dep);
@@ -106,20 +124,25 @@
             for (int j = 0; j < tam; j++) {
                 try {
                     idReqProd = Integer.parseInt(request.getParameter("idReqProd" + j));
-                    st.executeUpdate("update req_prod set id_orden = " + idOrden + " where id_req_prod = " + idReqProd + "");
+                    st.executeUpdate("update req_prod set id_orden = " + idOrden + ", id_status = " + nuevoStatus + " where id_req_prod = " + idReqProd + "");
                 } catch (Exception e) {
                 }
             }
         }
-        
-        String sql2 = "SELECT email FROM scompras.proveedores where giro = " + categoria + " and idproveedor = " + proveedor + ";";
+
+        if (idFormato > 0) {
+            st.executeUpdate("update formatounico set idOrden = " + idOrden + " where idformatounico = " + idFormato + "");
+            System.out.println("Id Formato: " + idFormato);
+        }
+
+        String sql2 = "SELECT correo FROM scompras.usuario where id_rol = 3 and id_departamento = 7;";
         ps = con.prepareStatement(sql2);
         rs = ps.executeQuery();
         while (rs.next()) {
-            String correo = rs.getString("email");
-            objMail.enviarCorreo(correo, "Proveedor", "", "Grupo Continental Automotriz ha autorizado una nueva orden de compra, favor de revisarla en el sistema");
+            String correo = rs.getString("correo");
+            objMail.enviarCorreo(correo, "", "", "Se ha generado una nueva orden de compra, favor de revisarla en el sistama para su aprobacion.");
         }
-        
+
     }
 
     response.sendRedirect("menuComprasOrdenes.jsp?categoria=" + categoria + "");

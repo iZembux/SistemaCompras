@@ -21,7 +21,7 @@
             cat = "1,4,5,6";
         } else if (usuario.equals("4")) { //Veronica
             suc = "1,2,3,4,6,7,8,13,9,14,17,10,11,15,16,18";
-            cat = "1,2,3,4";
+            cat = "1,2,3,4,5,6,7";
         } else if (usuario.equals("25")) { //Angelica
             suc = "10,11,15,16,18";
             cat = "1";
@@ -62,7 +62,7 @@
 
         <div class="container my-5">
             <div class="page-header">
-                <h3>Seguimiento de Cotizaciones</h3>
+                <h3>Seguimiento de Requisiciones</h3>
             </div>
             <table id="t1" class="table table-striped stacktable" border="0">
                 <thead>

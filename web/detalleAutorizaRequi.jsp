@@ -110,9 +110,13 @@
                                     <input type="hidden" class="hidden" name="nuevoStatus" value="2" >
                                     <% }
                                         }
-                                    } else { %> 
+                                    } else {
+                                        if (idProducto == 281) { %>
+                                    <input type="hidden" class="hidden" name="nuevoStatus" value="17" >
+                                    <% } else { %>%> 
                                     <input type="hidden" class="hidden" name="nuevoStatus" value="4" >
-                                    <% }%>
+                                    <% }
+                                        }%>
                                     <input type="hidden" class="hidden" name="autoriza" value="1" >
                                     <input type="hidden" class="hidden" name="categoria" value="<%= categoria%>" >
                                     <input type="hidden" class="hidden" name="idUsu" value="<%= idUsu%>" >

@@ -16,6 +16,7 @@
     int idDepto = 0;
     int activo = 0;
     int sucursal = 0;
+    int idRol = 0;
     String descripcion = null;
     String justificacion = null;
 
@@ -57,7 +58,16 @@
         sucursal = Integer.parseInt(request.getParameter("sucursal"));
     } catch (Exception e) {
     }
+    try {
+        idRol = Integer.parseInt(request.getParameter("idRol"));
+    } catch (Exception e) {
+    }
+    try {
+        idStatus = Integer.parseInt(request.getParameter("idStatus"));
+    } catch (Exception e) {
+    }
 
+    
     Class.forName("com.mysql.jdbc.Driver");
     Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/scompras", "root", "stmsc0nt");
     Statement st = con.createStatement();
@@ -70,7 +80,19 @@
                 + "values ('" + idRequisicion + "','" + idUsuario + "',CURRENT_TIMESTAMP)");
 
         //Envia correo al gerente del area
-        String sql = "SELECT correo, nombre, apellido FROM scompras.usuario where id_rol = 3 and id_departamento = " + idDepto + " and id_sucursal = "+sucursal+";"; 
+        String sql = null;
+        if (idRol >= 3) {
+            if (sucursal == 1 || sucursal == 2 || sucursal == 3 || sucursal == 4 || sucursal == 6 || sucursal == 7 || sucursal == 8) {
+                sucursal = 1;
+            } else if (sucursal == 10 || sucursal == 11 || sucursal == 15 || sucursal == 16) {
+                sucursal = 10;
+            } else if (sucursal == 9 || sucursal == 14) {
+                sucursal = 9;
+            }
+            sql = "SELECT correo, nombre, apellido FROM scompras.usuario where id_rol = 4 and id_sucursal in (" + sucursal + ");";
+        } else {
+            sql = "SELECT correo, nombre, apellido FROM scompras.usuario where id_rol = 3 and id_departamento = " + idDepto + " and id_sucursal = " + sucursal + ";";
+        }
         ps = con.prepareStatement(sql);
         rs = ps.executeQuery();
         if (rs.next()) {

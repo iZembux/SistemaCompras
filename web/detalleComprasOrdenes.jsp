@@ -69,9 +69,10 @@
                 <tbody>
                     <%
                         int cantidadRequi;
-                        int idReqProd;
+                        int idReqProd = 0;
                         int idReqCoti;
                         int idCuadro = 0;
+                        int idFormato = 0;
                         double precio;
                         double total = 0;
                         String producto;
@@ -93,6 +94,7 @@
                                 producto = arrayRequis.get(i).getProducto();
                                 solicitante = arrayRequis.get(i).getSolicitante();
                                 idCuadro = arrayRequis.get(i).getIdCuadro();
+                                idFormato = arrayRequis.get(i).getIdFormato();
                                 req2.add(idReqProd);
                                 total += precio;
                     %>
@@ -124,23 +126,11 @@
                 <% if (idCuadro > 0) { %>
                 <hr>
                 <h6> Comparativo Aprobado </h6>
-                <% } %>
+                <% }%>
                 <br />
                 <form action="actualizaOrdenCompras.jsp" method="post">
-                    <% if (total >= 7500 && idCuadro == 0) {
-                            if (totalCotizaciones == 1) { %>
-                    <span>*Solo se tiene una cotizacion para esta orden, es necesario generar formato de proveedor unico</span>
-                    <br />
-                    <br />
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#unico" >Generar Formato</button> 
-                    <% } else { %>
-                    <span>*Monto de la compra mayor a $7500.00, es necesario generar un cuadro comparativo</span>
-                    <br />
-                    <br />
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cuadro" >Generar Comparativo</button> 
-                    <% }
-                    } else {%>
                     <input type="hidden" class="hidden" name="categoria" value="<%=idCategoria%>" >
+                    <input type="hidden" class="hidden" name="nuevoStatus" value="20" >
                     <input type="hidden" class="hidden" name="proveedor" value="<%=idProveedor%>" >
                     <input type="hidden" class="hidden" name="suc" value="<%=idSucursal%>" >
                     <input type="hidden" class="hidden" name="dep" value="<%=idDepartamento%>" >
@@ -148,6 +138,31 @@
                     <% for (int i = 0; i < req2.size(); i++) {%>
                     <input type="hidden" class="hidden" name="idReqProd<%=i%>" value="<%=req2.get(i)%>" >
                     <% } %>
+
+
+                    <% if (total >= 7500 && idCuadro == 0) {
+                            if (totalCotizaciones == 1) {
+                                if (idFormato == 0) {%>
+                    <span>*Solo se tiene una cotizacion para esta orden, es necesario generar formato de proveedor unico</span>
+                    <br />
+                    <br />
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#unico" >Generar Formato</button> 
+                    <% } else { %>
+                    <span>Formato de proveedor único aprobado</span>
+                    <br />
+                    <br />
+                    <input type="hidden" class="hidden" name="idFormato" value="<%= idFormato %>" >
+                    <button type="submit" class="btn btn-success btn-sm" >Guardar Orden</button> 
+                    <% } %>
+                    
+                    <% } else { %>
+                    <span>*Monto de la compra mayor a $7500.00, es necesario generar un cuadro comparativo</span>
+                    <br />
+                    <br />
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cuadro" >Generar Comparativo</button> 
+                    <% }
+                    } else {%>
+
                     <button type="submit" class="btn btn-success btn-sm" >Guardar Orden</button>  
                     <% } %>
                 </form>
@@ -280,7 +295,7 @@
         </div>
 
         <%
-            String depto = obj.verDepartamento(idDepartamento); 
+            String depto = obj.verDepartamento(idDepartamento);
             String proveedor = obj.verProveedor(idProveedor);
         %>
         <div class="modal fade" id="unico" tabindex="-1" role="dialog" aria-labelledby="unico" aria-hidden="true">
@@ -293,44 +308,44 @@
                                 <div class="col-lg-6">
                                     <div class="form-check">
                                         <label class="form-check-label">
-                                            <input type="checkbox" class="form-check-input" value="">Ahorro en costo
+                                            <input type="checkbox" class="form-check-input" name="check1" value="1">Ahorro en costo
                                         </label>
                                     </div>
                                     <div class="form-check">
                                         <label class="form-check-label">
-                                            <input type="checkbox" class="form-check-input" value="">Mejor calidad
+                                            <input type="checkbox" class="form-check-input" name="check2" value="1">Mejor calidad
                                         </label>
                                     </div>
                                     <div class="form-check disabled">
                                         <label class="form-check-label">
-                                            <input type="checkbox" class="form-check-input" value="">Menor tiempo de entrega
+                                            <input type="checkbox" class="form-check-input" name="check3" value="1">Menor tiempo de entrega
                                         </label>
                                     </div>
                                     <div class="form-check disabled">
                                         <label class="form-check-label">
-                                            <input type="checkbox" class="form-check-input" value="">Proyecto especial
+                                            <input type="checkbox" class="form-check-input" name="check4" value="1">Proyecto especial
                                         </label>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-check">
                                         <label class="form-check-label">
-                                            <input type="checkbox" class="form-check-input" value="">Compra urgente
+                                            <input type="checkbox" class="form-check-input" name="check5" value="1">Compra urgente
                                         </label>
                                     </div>
                                     <div class="form-check">
                                         <label class="form-check-label">
-                                            <input type="checkbox" class="form-check-input" value="">Unico fabricante
+                                            <input type="checkbox" class="form-check-input" name="check6" value="1">Unico fabricante
                                         </label>
                                     </div>
                                     <div class="form-check disabled">
                                         <label class="form-check-label">
-                                            <input type="checkbox" class="form-check-input" value="">Mejores condiciones de pago
+                                            <input type="checkbox" class="form-check-input" name="check7" value="1">Mejores condiciones de pago
                                         </label>
                                     </div>
                                     <div class="form-check disabled">
                                         <label class="form-check-label">
-                                            <input type="checkbox" class="form-check-input" value="">Otro
+                                            <input type="checkbox" class="form-check-input" name="check8" value="1">Otro
                                         </label>
                                     </div>
                                 </div>
@@ -346,6 +361,9 @@
                             <input type="hidden" class="hidden" name="monto" value="<%= total%>" >
                             <input type="hidden" class="hidden" name="departamento" value="<%= depto%>" >
                             <input type="hidden" class="hidden" name="proveedor" value="<%= proveedor%>" >
+                            <input type="hidden" class="hidden" name="idReqProd" value="<%= idReqProd%>" >
+                            <input type="hidden" class="hidden" name="idCategoria" value="<%= idCategoria%>" >
+                            <input type="hidden" class="hidden" name="nuevoStatus" value="7" >
                             <button type="submit" class="btn btn-primary btn-sm">Generar</button>
                         </div>
                     </form>

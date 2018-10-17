@@ -18,14 +18,17 @@
 
         String idUsu = (String) sesion.getAttribute("idUsuario");
         String idDepto2 = idDepto;
+        String suc = "0";
         if (idUsu.equals("34")) {
-            idDepto2 = "1,2,3,4,5,6,7";
+            suc = "1,2,3,4,5,6,7";
         } else if (idUsu.equals("210")) {
-            idDepto2 = "9,14";
+            suc = "9,14";
         } else if (idUsu.equals("97")) {
-            idDepto2 = "8,13,17";
+            suc = "8,13,17";
+        } else if (idUsu.equals("88")) {
+            suc = "10,11,15,16,18";
         }
-        
+
 
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -68,7 +71,7 @@
 
                         ArrayList<RequisicionProducto> arrayRequis = new ArrayList<RequisicionProducto>();
                         Consultas obj = new Consultas();
-                        arrayRequis = obj.consultarRequiGeneral(idDepto2, sucursal);
+                        arrayRequis = obj.consultarRequiGeneral(idDepto2, suc);
 
                         if (arrayRequis.size() > 0) {
                             for (int i = 0; i < arrayRequis.size(); i++) {
@@ -79,7 +82,7 @@
                     %>
                     <tr>
                         <td><%=idRequi%></td>
-                        <td><%=solicitante.toUpperCase() %></td>
+                        <td><%=solicitante.toUpperCase()%></td>
                         <td><%=cantidadRequi%></td>
                         <td><%=fecha%></td>
                         <td>

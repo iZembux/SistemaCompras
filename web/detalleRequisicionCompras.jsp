@@ -155,15 +155,36 @@
                             </form>
                         </td>
                         <td>
-                            <form action="eliminaRequisicion.jsp" method="post">
-                                <input type="hidden" class="hidden" name="idReqProd" value="<%=idReqProd%>" >
-                                <button type="submit" class="btn btn-danger btn-sm">Rechazar</button>
-                            </form>
+                            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal<%=i%>">
+                                Rechazar
+                            </button>
                         </td>  
                     </tr>
-                    <% }
-                        }
-                    %>
+                <div class="modal fade" id="modal<%=i%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Motivo de Rechazo Id <%=idReqProd%></h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <form action="eliminaRequisicion.jsp" method="post">
+                                <div class="modal-body">
+                                    <textarea class="form-control" rows="5" id="rechazo" name="rechazo"></textarea>
+                                </div>
+                                <div class="modal-footer">
+                                    <input type="hidden" class="hidden" name="idUsu" value="<%=idUsu%>" >
+                                    <input type="hidden" class="hidden" name="idReqProd" value="<%=idReqProd%>" >
+                                    <button type="submit" class="btn btn-primary">Continuar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <% }
+                    }
+                %>
                 </tbody>
             </table>
 
@@ -226,7 +247,7 @@
                                     <div class="modal-footer">
                                         <input type="hidden" class="hidden" name="idProducto" value="<%= idProducto%>" >
                                         <input type="hidden" class="hidden" name="numProveedores" value="<%=prov.size()%>" >
-                                        <% if(idCategoria == 7){ %>
+                                        <% if (idCategoria == 7) { %>
                                         <div class="form-check">
                                             <label>
                                                 <input class="form-check-input" type="checkbox" name="checkboxCont" value="1">
