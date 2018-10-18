@@ -153,7 +153,12 @@
                     <div class="modal-body form-control">
                         <form name="subeDictamen" action="subirDictamen.jsp" method="POST" enctype="multipart/form-data">
                             <input type="hidden" class="hidden Orden" id="idReqP" name="idReqP" value="">
+                            <label for="caracteristicas">Caracteristicas del producto</label>
+                            <textarea class="form-control" rows="6" id="datosProducto" name="datosProducto" required="true" style="resize: none;"></textarea>
+                            <br>
+                            <label for="archivo">Dictamen en formato PDF</label>
                             <input type="file" class="form-control" id="archivo" accept="application/pdf" required="true" name="archivo">
+                            <br>
                             <center><input type="submit" class="btn btn-success" value="GUARDAR"/></center>
                         </form>
                     </div>

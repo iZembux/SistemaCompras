@@ -20,7 +20,7 @@
     }
 
     Class.forName("com.mysql.jdbc.Driver");
-    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/scompras", "root", "stmsc0nt");
+    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/scompras", "root", "system");
     Statement st = con.createStatement();
     PreparedStatement ps;
     ResultSet rs;
