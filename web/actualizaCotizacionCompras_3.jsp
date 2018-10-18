@@ -73,6 +73,18 @@
         
         st.executeUpdate("update req_prod rp, cotizacion c set id_status = " + nuevoStatusRequi + ", id_cot_ganadora = " + idCotizacion + " "
                 + "where c.id_req_coti = rp.id_req_coti and rp.id_req_prod = " + totalRequis.get(j) + ";");
+         /**/
+        if (totalRequis.get(j) == 3766) {
+             st.executeUpdate("update req_prod rp, cotizacion c set id_status = " + nuevoStatusRequi + ", id_cot_ganadora = " + idCotizacion + " "
+                + "where c.id_req_coti = rp.id_req_coti and rp.id_req_prod = 3767;");   
+        }else if (totalRequis.get(j) == 4044) {
+             st.executeUpdate("update req_prod rp, cotizacion c set id_status = " + nuevoStatusRequi + ", id_cot_ganadora = " + idCotizacion + " "
+                + "where c.id_req_coti = rp.id_req_coti and rp.id_req_prod = 4046;");     
+        }else if (totalRequis.get(j) == 4082) {
+             st.executeUpdate("update req_prod rp, cotizacion c set id_status = " + nuevoStatusRequi + ", id_cot_ganadora = " + idCotizacion + " "
+                + "where c.id_req_coti = rp.id_req_coti and rp.id_req_prod = 4083;");     
+        }
+        
         System.out.println("Requisicion actualizadas: " + totalRequis.get(j));
     }
 

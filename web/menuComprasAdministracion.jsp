@@ -17,7 +17,7 @@
         String suc = null;
         String cat = null;
 
-        if (usuario.equals("83")) {       //Valeria
+        if (usuario.equals("83")) {       //Carlos
             suc = "1,2,3,4,6,7,8,13";
             cat = "1";
         } else if (usuario.equals("4")) { //Veronica
@@ -32,7 +32,7 @@
         } else if (usuario.equals("268")) { //Victor Peralta
             suc = "1,2,3,4,6,7,8,13,9,14,17,10,11,15,16,18";
             cat = "2";  
-        } else if (usuario.equals("48")) { //Victor Peralta
+        } else if (usuario.equals("48")) { //Esau
             suc = "1,2,3,4,6,7,8,13,9,14,17,10,11,15,16,18";
             cat = "7";  
         }

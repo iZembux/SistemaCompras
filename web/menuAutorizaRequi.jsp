@@ -72,8 +72,8 @@
             sucursal = "1,9,10,11";
         }
         if (idUsu.equals("258")) {
-            idDepto2 = "26,23";
-            sucursal = "1,9";
+            idDepto2 = "26,23,14,9,29";
+            sucursal = "1,9,3,23";
         }
         if (idUsu.equals("180")) {
             idDepto2 = "16,17";
@@ -82,6 +82,9 @@
             idDepto2 = "16,17";
         }
         if (idUsu.equals("309")) {
+            sucursal = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18";
+        }
+        if (idUsu.equals("370")) {
             sucursal = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18";
         }
 

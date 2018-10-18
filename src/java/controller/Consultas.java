@@ -1067,6 +1067,7 @@ public class Consultas {
                         + "AND pr.id_categoria in (" + categoria + ")\n"
                         + "group by pr.nombre, p.razonsocial, u.nombre\n"
                         + "order by pr.nombre";
+                //System.out.println(sql);
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
@@ -1527,7 +1528,7 @@ public class Consultas {
                         + "    and rp.id_orden = 0    \n"
                         + "    GROUP BY c.id_proveedor, s.id_sucursales, d.id_departamentos\n"
                         + "    ORDER BY c.id_proveedor, s.id_sucursales, d.id_departamentos;";
-
+                System.out.println("SQL: "+sql);
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
@@ -1563,7 +1564,8 @@ public class Consultas {
                         + "and r.id_requisicion = rp.id_requisicion\n"
                         + "and u.id_departamento = d.id_departamentos\n"
                         + "and c.id_cotizacion = rp.id_cot_ganadora \n"
-                        + "and rp.id_status = " + status + ";";
+                        + "and rp.id_status = " + status +";";
+                //System.out.println("SQL: "+sql);
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
@@ -1625,13 +1627,14 @@ public class Consultas {
                         + "    scompras.ordenes_compra o,\n"
                         + "    scompras.productos p\n"
                         + " WHERE\n"
-                        + "  idSucursal IN ('" + suc + "')\n"
+                        + "  idSucursal IN (" + suc + ")\n"
                         + "    AND idCotizacionOrden > 0\n"
                         + "    AND idCotizacionOrden NOT IN ('2' , '3', '4', '5')\n"
                         + "    AND o.nombreProducto = p.nombre\n"
                         + "    AND p.id_categoria = " + cat + "\n"
                         + " GROUP BY idCotizacionOrden\n"
                         + " ORDER BY idCotizacionOrden DESC;";
+                System.out.println("SQL HISTORIAL: " + sql);
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
@@ -1912,7 +1915,7 @@ public class Consultas {
                         + "    and rp.id_orden = 0    \n"
                         + "    group by rp.id_req_prod, c.id_proveedor, s.id_sucursales, d.id_departamentos    \n"
                         + "    ORDER BY c.id_proveedor, s.id_sucursales, d.id_departamentos;";
-
+                //System.out.println("SQL: "+sql);
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
@@ -2336,7 +2339,7 @@ public class Consultas {
                         + "r.fecha AS FECHA,\n"
                         + "p.nombre AS PRODUCTO,\n"
                         + "c.id_proveedor AS IDP,\n"
-                        + "c.cantidad AS CANTIDAD,\n"
+                        + "rp.cantidad AS CANTIDAD,\n"
                         + "c.precio AS PRECIO,\n"
                         + "c.iva AS IVA,\n"
                         + "c.descuento AS DESCUENTO,\n"
@@ -2368,7 +2371,9 @@ public class Consultas {
                         + "AND u.id_sucursal = s.id_sucursales\n"
                         + "AND p.id_productos = c.id_producto\n"
                         + "AND id_req_prod = " + idReqProd + "\n"
-                        + "group by c.id_cotizacion";
+                        + "group by c.id_cotizacion \n"
+                        + "ORDER BY c.precio \n"
+                        + "LIMIT 3";
 
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
@@ -2420,7 +2425,7 @@ public class Consultas {
                         + "r.fecha AS FECHA,\n"
                         + "p.nombre AS PRODUCTO,\n"
                         + "c.id_proveedor AS IDP,\n"
-                        + "c.cantidad AS CANTIDAD,\n"
+                        + "rp.cantidad AS CANTIDAD,\n"
                         + "c.precio AS PRECIO,\n"
                         + "c.iva AS IVA,\n"
                         + "c.descuento AS DESCUENTO,\n"
@@ -2459,7 +2464,8 @@ public class Consultas {
                         + "and co.idcuadro = rp.id_cuadro\n"
                         + "AND rp.id_status = " + status + "\n"
                         + "and rp.id_cuadro = " + cuadro + "\n"
-                        + "group by c.id_cotizacion";
+                        + "GROUP BY c.id_proveedor;";
+                System.out.println("CUADRO 2: "+sql);
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {

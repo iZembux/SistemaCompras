@@ -140,7 +140,7 @@
                     <% } %>
 
 
-                    <% if (total >= 7500 && idCuadro == 0) {
+                    <% if (total >= 7800 && idCuadro == 0) {
                             if (totalCotizaciones == 1) {
                                 if (idFormato == 0) {%>
                     <span>*Solo se tiene una cotizacion para esta orden, es necesario generar formato de proveedor unico</span>

@@ -21,7 +21,7 @@
         String usuario = (String) sesion.getAttribute("idUsuario");
         String suc = null;
 
-        if (usuario.equals("83")) {       //Valeria
+        if (usuario.equals("83")) {       //Carlos
             suc = "1,2,3,4,6,7,8,13";
         } else if (usuario.equals("4") || usuario.equals("268")) { //Veronica
             suc = "1,2,3,4,6,7,8,13,9,14,17,10,11,15,16,18";

@@ -94,7 +94,9 @@
                 obj1.setTotal(total);
 
                 lista1.add(obj1);
+                
                 if (cotizaciones.size() >= 2) {
+                    try{
                     proveedor2 = cotizaciones.get(1).getProveedor();
                     cantidad2 = cotizaciones.get(1).getCantidad();
 
@@ -114,8 +116,13 @@
                     total2 += ((cotizaciones.get(1).getPrecio()) * cotizaciones.get(1).getCantidad());
                     obj2.setTotal(total2);
                     lista2.add(obj2);
+                     }catch (Exception e) {
+                    out.print("<td></td>");
+                    out.print("<td></td>");
+                }
                 }
                 if (cotizaciones.size() >= 3) {
+                    try{
                     proveedor3 = cotizaciones.get(2).getProveedor();
                     cantidad3 = cotizaciones.get(2).getCantidad();
 
@@ -135,7 +142,12 @@
                     total3 += ((cotizaciones.get(2).getPrecio()) * cotizaciones.get(2).getCantidad());
                     obj3.setTotal(total3);
                     lista3.add(obj3);
+                    }catch (Exception e) {
+                    out.print("<td></td>");
+                    out.print("<td></td>");
                 }
+                }
+               
             }
         } catch (Exception e) {
         }
@@ -334,20 +346,32 @@
                         <td><%=lista4.get(j).getProducto()%></td>
                         <td><%=lista1.get(j).getPrecio()%></td>
                         <td><%=lista1.get(j).getPrecio() * lista1.get(j).getCantidad()%></td>
+                        <%try{%>
                         <% if (lista2.size() > 0) {%>
+                        
                         <td><%=lista2.get(j).getPrecio()%></td>
                         <td><%=lista2.get(j).getPrecio() * lista2.get(j).getCantidad()%></td>
                         <% } else { %>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
-                        <% } %>
+                        <% } 
+                            }catch(Exception e){
+                        %>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <%}%>
+                        <%try{%>
                         <% if (lista3.size() > 0) {%>
                         <td><%=lista3.get(j).getPrecio()%></td>
                         <td><%=lista3.get(j).getPrecio() * lista3.get(j).getCantidad()%></td>
                         <% } else { %>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
-                        <% } %>
+                        <% } 
+                            }catch(Exception e){
+                        %>
+                        <td>&nbsp;</td>
+                        <%}%>
                     </tr>
                     <% }%>
                 </tbody>
