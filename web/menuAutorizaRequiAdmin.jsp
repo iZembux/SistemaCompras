@@ -65,6 +65,9 @@
                     <tr>
                         <th scope="col">No.</th>
                         <th scope="col">Solicitante</th>
+                        <th scope="col">Correo</th>
+                        <th scope="col">Sucursal</th>
+                        <th scope="col">Producto</th>
                         <th scope="col">Cantidad de Productos</th>
                         <th scope="col">Fecha</th>
                         <th scope="col"></th>
@@ -92,6 +95,9 @@
                     <tr>
                         <td><%=idRequi%></td>
                         <td><%=solicitante.toUpperCase()%></td>
+                        <td><%=arrayRequis.get(i).getEmailSolicitante()%></td>
+                        <td><%=arrayRequis.get(i).getSucursal()%></td>
+                        <td><%=arrayRequis.get(i).getProducto()%></td>
                         <td><%=cantidadRequi%></td>
                         <td><%=fecha%></td>
                         <td>

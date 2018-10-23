@@ -36,12 +36,21 @@ public class RequisicionProducto {
     private String rutaCaratula;
     private String rutaDictamen;
     private String fecha_coti;
+    private String emailSolicitante;
 
     /**
      * @return the idRequisicion
      */
     public int getIdRequisicion() {
         return idRequisicion;
+    }
+
+    public String getEmailSolicitante() {
+        return emailSolicitante;
+    }
+
+    public void setEmailSolicitante(String emailSolicitante) {
+        this.emailSolicitante = emailSolicitante;
     }
 
     /**
