@@ -140,9 +140,6 @@
             function abre(){
                 $('#myModal').modal({show:true});
             }
-            function imp(){
-            swal("Picaste el botón 7w7");
-            }
         </script>
     </body>
 </html>
