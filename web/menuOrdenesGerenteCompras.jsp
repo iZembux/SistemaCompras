@@ -86,10 +86,15 @@
                                     <input type="hidden" class="hidden" name="nuevoStatus" value="10" >
                                     <button type="submit" class="btn btn-success btn-sm" >Aceptar</button>
                                 </form>
-                                    <form action="actualizaOrdenComprasGerente.jsp" method="post">
+                                <form action="actualizaOrdenComprasGerente.jsp" method="post">
                                     <input type="hidden" class="hidden" name="idOrden" value="<%=idP%>" > 
                                     <input type="hidden" class="hidden" name="nuevoStatus" value="14" >
                                     <button type="submit" class="btn btn-danger btn-sm" >Rechazar</button>
+                                </form>
+                                <form action="actualizaOrdenComprasGerente.jsp" method="post">
+                                    <input type="hidden" class="hidden" name="idOrden" value="<%=idP%>" > 
+                                    <input type="hidden" class="hidden" name="nuevoStatus" value="5" >
+                                    <button type="submit" class="btn btn-warning btn-sm" >Volver a Cotizar</button>
                                 </form>
                                 <% }
                                     }%>
