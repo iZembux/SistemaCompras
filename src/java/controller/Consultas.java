@@ -422,7 +422,7 @@ public class Consultas {
                 String sql = "SELECT \n"
                         + "    r.id_usuario as IDSOLICITANTE,\n"
                         + "    rp.id_req_prod AS IDREQUISICION,\n"
-                        + "    p.nombre AS PRODUCTO,\n"
+                        + "    concat_ws(':  ',p.nombre, (SELECT caracteristicas FROM scompras.dictamenes WHERE dictamenes.id_req_prod = rp.id_req_prod)) AS PRODUCTO,\n"
                         + "    p.marca AS MARCA,\n"
                         + "    p.id_categoria AS CATE,\n"
                         + "    SUM(rp.cantidad) AS CANTIDAD,\n"
@@ -712,7 +712,8 @@ public class Consultas {
                 String sql = "SELECT \n"
                         + "    rp.id_req_prod as IDREQPROD,\n"
                         + "    rp.id_requisicion AS IDREQUISICION,\n"
-                        + "    rp.id_producto AS IDPRODUCTO,    p.nombre AS PRODUCTO,\n"
+                        + "    rp.id_producto AS IDPRODUCTO, \n"
+                        + "    concat_ws(':  ',p.nombre, (SELECT caracteristicas FROM scompras.dictamenes WHERE dictamenes.id_req_prod = rp.id_req_prod)) AS PRODUCTO,\n"
                         + "    p.marca AS MARCA,    u.nombre AS SOLICITANTE,\n"
                         + "    u.id_departamento as DEPTO,\n"
                         + "    u.id_sucursal as ID_SUC,\n"
@@ -771,7 +772,8 @@ public class Consultas {
             try {
                 String sql = "SELECT \n"
                         + "    rp.id_requisicion AS IDREQUISICION,\n"
-                        + "    rp.id_producto AS IDPRODUCTO,    p.nombre AS PRODUCTO,\n"
+                        + "    rp.id_producto AS IDPRODUCTO,    "
+                        + "    concat_ws(':  ',p.nombre, (SELECT caracteristicas FROM scompras.dictamenes WHERE dictamenes.id_req_prod = rp.id_req_prod)) AS PRODUCTO,\n"
                         + "    rp.id_status as status,\n"
                         + "    p.marca AS MARCA,    u.nombre AS SOLICITANTE,\n"
                         + "    u.id_departamento as DEPTO,\n"
@@ -1097,7 +1099,7 @@ public class Consultas {
                 String sql = "SELECT \n"
                         + "    rp.id_req_prod as REQPROD,\n"
                         + "    rp.id_requisicion AS IDREQUISICION,\n"
-                        + "    p.nombre AS PRODUCTO,\n"
+                        + "    concat_ws(':  ',p.nombre, (SELECT caracteristicas FROM scompras.dictamenes WHERE dictamenes.id_req_prod = rp.id_req_prod)) AS PRODUCTO,\n"
                         + "    p.marca AS MARCA,\n"
                         + "    u.id_usuario AS IDUSU,\n"
                         + "    u.nombre AS SOLICITANTE,\n"
@@ -1324,7 +1326,8 @@ public class Consultas {
             try {
                 String sql = "SELECT \n"
                         + "    rp.id_requisicion AS IDREQUISICION,\n"
-                        + "    rp.id_producto AS IDPRODUCTO,    p.nombre AS PRODUCTO,\n"
+                        + "    rp.id_producto AS IDPRODUCTO,    "
+                        + "    concat_ws(':  ',p.nombre, (SELECT caracteristicas FROM scompras.dictamenes WHERE dictamenes.id_req_prod = rp.id_req_prod)) AS PRODUCTO,\n"
                         + "    p.marca AS MARCA,    u.nombre AS SOLICITANTE,\n"
                         + "    p.sku as SKU,\n"
                         + "    u.id_departamento as DEPTO,\n"
@@ -1557,13 +1560,26 @@ public class Consultas {
         con = ConexionMySQL.conectar();
         if (con != null) {
             try {
-                String sql = "select rp.id_req_prod, rp.id_cuadro, rp.id_formato_unico, d.departamento, rp.cantidad, c.observaciones, rp.rutaDictamen, c.rutaPDF \n"
-                        + "from req_prod rp, departamentos d, usuario u , requisiciones r, cotizacion c\n"
+                String sql = "select "
+                            + "rp.id_req_prod, "
+                            + "rp.id_cuadro, "
+                            + "rp.id_formato_unico, "
+                            + "d.departamento, "
+                            + "rp.cantidad, "
+                            + "c.observaciones, "
+                            + "rp.rutaDictamen, "
+                            + "c.rutaPDF \n"
+                        + "from "
+                            + "req_prod rp, "
+                            + "departamentos d, "
+                            + "usuario u , "
+                            + "requisiciones r, "
+                            + "cotizacion c\n"
                         + "where u.id_usuario = r.id_usuario\n"
-                        + "and r.id_requisicion = rp.id_requisicion\n"
-                        + "and u.id_departamento = d.id_departamentos\n"
-                        + "and c.id_cotizacion = rp.id_cot_ganadora \n"
-                        + "and rp.id_status = " + status + ";";
+                            + "and r.id_requisicion = rp.id_requisicion\n"
+                            + "and u.id_departamento = d.id_departamentos\n"
+                            + "and c.id_cotizacion = rp.id_cot_ganadora \n"
+                            + "and rp.id_status = " + status + ";";
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
@@ -1722,8 +1738,14 @@ public class Consultas {
         con = ConexionMySQL.conectar();
         if (con != null) {
             try {
-                String sql = "SELECT razonSocialProveedor, sum(cantidadProducto) as cant, razonSocialSucursal, \n"
-                        + "departamento, idCotizacionOrden, fechaOrden FROM scompras.ordenes_compra oc, req_prod rp \n"
+                String sql = "SELECT "
+                        + "razonSocialProveedor, "
+                        + "sum(cantidadProducto) as cant, "
+                        + "razonSocialSucursal, \n"
+                        + "departamento, "
+                        + "idCotizacionOrden, "
+                        + "fechaOrden "
+                        + "FROM scompras.ordenes_compra oc, req_prod rp \n"
                         + "where idCotizacionOrden > 0 and idCotizacionOrden not in ('2','3','4','5') and idCotizacionOrden = id_orden\n"
                         + "and id_status = 20\n"
                         + "group by idCotizacionOrden order by idCotizacionOrden desc;";
@@ -1795,7 +1817,7 @@ public class Consultas {
                         + "    s.rfc AS rfc,\n"
                         + "    c.fecha_aut_compras AS fecha,\n"
                         + "    sum(rp.cantidad) AS cantidad,\n"
-                        + "    p.nombre AS producto,\n"
+                        + "    concat_ws(':  ',p.nombre, (SELECT caracteristicas FROM scompras.dictamenes WHERE dictamenes.id_req_prod = rp.id_req_prod)) AS producto,\n"
                         + "    p.sku AS sku,\n"
                         + "    um.descripcion AS unidadM,\n"
                         + "    rp.descripcion AS descripcion,\n"
@@ -2334,7 +2356,7 @@ public class Consultas {
                         + "d.departamento AS DEPTO,\n"
                         + "s.sucursal AS SUCURSAL,\n"
                         + "r.fecha AS FECHA,\n"
-                        + "p.nombre AS PRODUCTO,\n"
+                        + "concat_ws(':  ',p.nombre, (SELECT caracteristicas FROM scompras.dictamenes WHERE dictamenes.id_req_prod = rp.id_req_prod)) AS PRODUCTO,\n"
                         + "c.id_proveedor AS IDP,\n"
                         + "c.cantidad AS CANTIDAD,\n"
                         + "c.precio AS PRECIO,\n"
@@ -2418,7 +2440,7 @@ public class Consultas {
                         + "d.departamento AS DEPTO,\n"
                         + "s.sucursal AS SUCURSAL,\n"
                         + "r.fecha AS FECHA,\n"
-                        + "p.nombre AS PRODUCTO,\n"
+                        + "concat_ws(':  ',p.nombre, (SELECT caracteristicas FROM scompras.dictamenes WHERE dictamenes.id_req_prod = rp.id_req_prod)) AS PRODUCTO,\n"
                         + "c.id_proveedor AS IDP,\n"
                         + "c.cantidad AS CANTIDAD,\n"
                         + "c.precio AS PRECIO,\n"
@@ -2562,7 +2584,7 @@ public class Consultas {
                         + "    rp.justificacion,\n"
                         + "    r.fecha,\n"
                         + "    rp.fecha_usu_gerente,\n"
-                        + "    p.nombre as producto,\n"
+                        + "    concat_ws(': ', p.nombre, (SELECT caracteristicas FROM scompras.dictamenes WHERE dictamenes.id_req_prod = rp.id_req_prod))  AS producto,\n"
                         + "    rp.cantidad,\n"
                         + "    rp.descripcion,\n"
                         + "    rp.activo_fijo,\n"
@@ -3012,7 +3034,7 @@ public class Consultas {
      * @param idReqProd
      * @param idCompras
      * @param idUsuario
-     * @param fehaEntregaCompras
+     * @param fechaEntregaCompras
      *
      */
     public void insertaEntregaCompras(int idReqProd, int idCompras, int idUsuario, Timestamp fechaEntregaCompras) {
@@ -3079,4 +3101,5 @@ public class Consultas {
         }
         return proveedor;
     }
+                
 }
