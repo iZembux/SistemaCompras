@@ -33,7 +33,21 @@
     PreparedStatement ps;
 
     if (idOrden > 0) {
-        st.executeUpdate("update req_prod set id_status = " + nuevoStatus + " where id_orden = " + idOrden + "");
+        if (nuevoStatus == 5) {
+            String sql = "select id_req_prod from req_prod where id_orden = " + idOrden + "";
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                st.executeUpdate("delete from proveedores_selec where id_req_prod = " + rs.getString("id_req_prod") + "");
+                System.out.println("Requisicion Regresada: " + rs.getString("id_req_prod"));
+            }
+            st.executeUpdate("update req_prod set id_status = " + nuevoStatus + ", id_req_coti = 0, id_cot_ganadora = 0,\n"
+                    + "id_orden = 0 where id_orden = " + idOrden + "");
+            st.executeUpdate("delete from ordenes_compra where idCotizacionOrden = " + idOrden + "");
+            System.out.println("Orden Eliminada: " + idOrden);
+        } else {
+            st.executeUpdate("update req_prod set id_status = " + nuevoStatus + " where id_orden = " + idOrden + "");
+        }
     }
 
     int proveedor = 0;
