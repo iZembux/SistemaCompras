@@ -113,7 +113,7 @@
                         </div>
                         <div for="precio" class="form-group">
                             <label>Precio Unitario Sin IVA <b><FONT COLOR="red" title="Éste campo es obligatorio">*</FONT></b></label>
-                            <input type="double" class="form-control" id="precio" required="true" name="precio" value="">
+                            <input type="double" class="form-control" id="precio" required="true" min="1" name="precio" value="">
                         </div>
                         <div for="credito" class="form-group">
                             <label>Dias de Crédito <b><FONT COLOR="red" title="Éste campo es obligatorio">*</FONT></b></label>

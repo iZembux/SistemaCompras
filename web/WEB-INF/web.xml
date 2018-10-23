@@ -24,6 +24,10 @@
         <servlet-name>visor</servlet-name>
         <servlet-class>servlet.visor</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>cancelaComparativo</servlet-name>
+        <servlet-class>servlet.cancelaComparativo</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Acceso</servlet-name>
         <url-pattern>/Acceso/*</url-pattern>
@@ -47,6 +51,10 @@
     <servlet-mapping>
         <servlet-name>visor</servlet-name>
         <url-pattern>/visor</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>cancelaComparativo</servlet-name>
+        <url-pattern>/cancelaComparativo</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

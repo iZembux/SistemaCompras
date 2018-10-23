@@ -5,8 +5,8 @@
  */
 package controller;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
+//import com.google.gson.Gson;
+//import com.google.gson.JsonObject;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -151,10 +151,10 @@ public class ConsultaBase {
         return departamento;
     }
     
-    public String convierteJson(ArrayList a){
-        Gson gson = new Gson();
-        String json = gson.toJson(a);
-        return json;
-    }
+//    public String convierteJson(ArrayList a){
+//        Gson gson = new Gson();
+//        String json = gson.toJson(a);
+//        return json;
+//    }
     
 }

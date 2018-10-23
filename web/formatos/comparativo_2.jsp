@@ -268,7 +268,9 @@
                         <br/>
                         <button type="submit" class="btn btn-success btn-sm">Aceptar o Modificar Proveedor</button>
                     </form>
+                        <button type="submit" class="btn btn-danger btn-sm" value="<%=cuadro%>" id="idCuadro" onclick="abre(); mandarDato()">Rechazar</button>
                 </div>
+
             </div>
         </div>
         <br>
@@ -488,7 +490,7 @@
             </table>
             <br>
             <br>
-            
+
         </div>
         <br>
         <br>
@@ -496,6 +498,44 @@
             <input style="Position:Absolute; left:83%; top:18%; color: #17202A; background-color: #D7DBDD; width:75px; height: 30px; font-size: 12pt;" type='button' onclick='imprimeDiv("imp")' value='Imprimir'  class="oculto"/> 
         </form> 
     </body>
+    <!-- Modal Cancela Cuadro -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Subir Dictamen</h4>
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                </div>
+
+                <div class="modal-body form-control">
+                    <form name="cComparativoN1" action="cancelaComparativo" method="POST">
+                        <input type="hidden" class="hidden" name="nuevoStatusCoti" value="1" >
+                        <input type="hidden" class="hidden" name="nuevoStatusRequi" value="6" >
+                        <input type="hidden" class="hidden" name="id_Cuadro" id="id_Cuadro" value="<%=cuadro%>" >
+
+                        <label for="comentariosCancela">Motivo de la cancelación</label>
+                        <textarea class="form-control" rows="6" id="datosProducto" name="comentariosCancela" required="true" style="resize: none;"></textarea>
+                        <br>
+                        <center><input type="submit" class="btn btn-success" value="CANCELAR"/></center>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        function mandarDato() {
+            $("#id_Cuadro").val($("#idCuadro").val());
+            var b = $("#id_Cuadro").val();
+        }
+        function abre() {
+            $('#myModal').modal({show: true});
+        }
+        function imp() {
+            swal("Picaste el botón 7w7");
+        }
+    </script>
     <%
         System.out.println("------------------------------------------------------------");
     %>
