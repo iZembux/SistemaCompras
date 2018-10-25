@@ -461,6 +461,9 @@
                     <a class="dropdown-item" href="menuOrdenesGerenteCompras.jsp"> 
                         Autorizar Ordenes
                     </a>
+                    <a class="dropdown-item" href="menuComprasHistorialOrdenes.jsp">
+                        Historial Comparativos
+                    </a>
                 </div>
             </li>   
 
@@ -526,6 +529,9 @@
                         Historial de Comparativos
                     </a>
                     -->
+                    <a class="dropdown-item" href="menuComprasHistorialOrdenes.jsp">
+                        Historial de Comparativos
+                    </a>
                 </div>
             </li>   
             <% } }%>
@@ -557,6 +563,9 @@
                         Historial de Comparativos
                     </a>
                     -->
+                    <a class="dropdown-item" href="menuComprasHistorialOrdenes.jsp">
+                        Historial de Comparativos
+                    </a>
                 </div>
             </li>   
             <% } %>
