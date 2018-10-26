@@ -55,9 +55,13 @@
             idDepto2 = "18,19,21";
             sucursal = "8";
         }
-
-        if (idUsu.equals("328") || idUsu.equals("4")) {
+        if (idUsu.equals("328")) {
             sucursal = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18";
+        }
+
+        if (idUsu.equals("4")) {
+            sucursal = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18";
+             idDepto2 = "7,15";
         }
         if (idUsu.equals("100")) {
             sucursal = "1,6";
@@ -71,10 +75,6 @@
         if (idUsu.equals("138")) {
             sucursal = "1,9,10,11";
         }
-        if (idUsu.equals("258")) {
-            idDepto2 = "29";
-            sucursal = "9";
-        }
         if (idUsu.equals("180")) {
             idDepto2 = "16,17";
         }
@@ -86,6 +86,9 @@
         }
         if (idUsu.equals("370")) {
             sucursal = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18";
+        }
+        if (idUsu.equals("402")) {
+            idDepto2 = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,31,32";
         }
 
 %>
@@ -114,9 +117,6 @@
                     <tr>
                         <th scope="col">No.</th>
                         <th scope="col">Solicitante</th>
-                        <th scope="col">Correo</th>
-                        <th scope="col">Sucursal</th>
-                        <th scope="col">Producto</th>
                         <th scope="col">Cantidad de Productos</th>
                         <th scope="col">Fecha</th>
                         <th scope="col"></th>
@@ -144,9 +144,6 @@
                     <tr>
                         <td><%=idRequi%></td>
                         <td><%=solicitante.toUpperCase()%></td>
-                        <td><%=arrayRequis.get(i).getEmailSolicitante()%></td>
-                        <td><%=arrayRequis.get(i).getSucursal()%></td>
-                        <td><%=arrayRequis.get(i).getProducto()%></td>
                         <td><%=cantidadRequi%></td>
                         <td><%=fecha%></td>
                         <td>
