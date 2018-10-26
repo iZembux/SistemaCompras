@@ -19,8 +19,8 @@
         String rol = (String) sesion.getAttribute("rol");
         String usuario = (String) sesion.getAttribute("idUsuario");
         String suc = null;
-        
-         if (usuario.equals("83")) {                         //Valeria
+
+        if (usuario.equals("83")) {                         //Valeria
             suc = "1,2,3,4,6,7,8,13";
         } else if (usuario.equals("4") || usuario.equals("268")) {                    //Veronica
             suc = "1,2,3,4,6,7,8,13,9,14,17,10,11,15,16,18";
@@ -33,7 +33,7 @@
         } else if (usuario.equals("48")) { //Esau
             suc = "1,2,3,4,6,7,8,13,9,14,17,10,11,15,16,18";
         }
-         
+
         int id_categoria = 1;
         try {
             id_categoria = Integer.parseInt(request.getParameter("categoria"));
@@ -68,7 +68,7 @@
                         <th scope="col">Productos</th>
                         <th scope="col">Sucursal</th>
                         <th scope="col">Departamento</th>
-                        <th scope="col"></th>
+                        <th scope="col">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -76,10 +76,11 @@
                         int cantidad;
                         int idSuc;
                         int idP;
-                        int idDep; 
+                        int idDep;
                         String razonsocial;
                         String sucursal;
                         String depto;
+                        String comentario;
 
                         ArrayList<OrdenFormato> arrayRequis = new ArrayList<OrdenFormato>();
                         Consultas obj = new Consultas();
@@ -94,6 +95,7 @@
                                 idSuc = arrayRequis.get(i).getIdP();
                                 depto = arrayRequis.get(i).getDescripcion();
                                 idDep = arrayRequis.get(i).getIdDepto();
+                                comentario = arrayRequis.get(i).getComentarios();
                     %>
                     <tr>
                         <td><%=razonsocial%></td>
@@ -109,17 +111,58 @@
                                     <input type="hidden" name="dep" value="<%=idDep%>" >
                                     <button type="submit" class="btn btn-info btn-sm" >Ver Orden</button>
                                 </form>
-                                    <form action="detalleComprasOrdenes.jsp" method="post">
+                                <form action="detalleComprasOrdenes.jsp" method="post">
                                     <input type="hidden" name="idCategoria" value="<%=id_categoria%>" >
                                     <input type="hidden" name="idProveedor" value="<%=idP%>" >
                                     <input type="hidden" name="idSucursal" value="<%=idSuc%>" >
                                     <input type="hidden" name="idDepartamento" value="<%=idDep%>" >
                                     <button type="submit" class="btn btn-success btn-sm" >Detalle</button>
                                 </form>
+                                <%
+                                    try {
+                                        if (comentario.equals("") || comentario == null) {
+                                        } else {
+                                %>
+                                <button type="button" class="btn btn-danger btn-sm" onclick="abre();">Ver Comentarios</button>
+                                <%
+                                        }
+                                    } catch (Exception e) {
+                                        System.out.println("COMENTARIO: NULL");
+                                    }
+                                %>
                             </div>
                         </td>
-                    </tr>
-                    <% }
+                    </tr>    
+                    <%
+                        try {
+                            if (comentario.equals("") || comentario == null) {
+                            } else {
+                    %>
+                    <!-- Modal Muestra Comentarios -->
+                <div class="modal fade" id="myModal" role="dialog">
+                    <div class="modal-dialog">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Motivo del Rechazo</h4>
+                                <button type="button" class="close" data-dismiss="modal">×</button>
+                            </div>
+                            <div class="modal-body form-control">
+                                <input type="hidden" class="hidden Orden" id="idReqP" name="idReqP" value="">
+                                <label for="comentarios">Comentarios de Cancelación</label>
+                                <textarea class="form-control" rows="6" id="datosProducto" name="comentarios" disabled="true" required="true" style="resize: none;"><%=comentario%></textarea>
+                                <br>
+                                <center><input type="button" data-dismiss="modal" class="btn btn-success" value="CERRAR"/></center>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <%
+                        }
+                    } catch (Exception e) {
+                    }
+                %>
+                <% }
                         }%>
                 </tbody>
             </table>
@@ -130,6 +173,15 @@
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script type="text/javascript">
+            function mandarDato() {
+                $("#idReqP").val($("#idRP").val());
+                var b = $("#idReqP").val();
+            }
+            function abre() {
+                $('#myModal').modal({show: true});
+            }
+        </script>
     </body>
 </html>
 <% }%>

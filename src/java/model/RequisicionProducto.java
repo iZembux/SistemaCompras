@@ -7,6 +7,8 @@ public class RequisicionProducto {
 
     
 
+    
+
     private int idSolicita;
     private int idReqProd;
     private int idRequisicion;
@@ -37,6 +39,7 @@ public class RequisicionProducto {
     private String rutaDictamen;
     private String fecha_coti;
     private String emailSolicitante;
+    private String comentarioCancela;
 
     /**
      * @return the idRequisicion
@@ -451,5 +454,19 @@ public class RequisicionProducto {
      */
     public void setIdFormato(int idFormato) {
         this.idFormato = idFormato;
+    }
+    
+    /**
+     * @return the comentarioCancela
+     */
+    public String getComentarioCancela() {
+        return comentarioCancela;
+    }
+
+    /**
+     * @param comentarioCancela the comentarioCancela to set
+     */
+    public void setComentarioCancela(String comentarioCancela) {
+        this.comentarioCancela = comentarioCancela;
     }
 }

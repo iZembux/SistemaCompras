@@ -236,6 +236,27 @@ public class Consultas {
         }
         return listaRequi;
     }
+    
+    public String consultarComentarios(int idReqProd) {
+        String comentario = "";
+        PreparedStatement ps;
+        ResultSet rs;
+        Connection con;
+        con = ConexionMySQL.conectar();
+        if (con != null) {
+            try {
+                String sql = "SELECT rechazoC FROM scompras.req_prod where id_req_prod = "+idReqProd+";";
+                ps = con.prepareStatement(sql);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    comentario = rs.getString("rechazoC");
+                }
+            } catch (SQLException ex) {
+                System.out.println("ERROR: " + ex.getMessage());
+            }
+        }
+        return comentario;
+    }
 
     public ArrayList<RequisicionProducto> consultarDictamenGerente() {
         ArrayList<RequisicionProducto> listaRequi = new ArrayList<RequisicionProducto>();
@@ -1530,7 +1551,8 @@ public class Consultas {
                         + "    s.sucursal AS suc,\n"
                         + "    s.id_sucursales as idsuc,\n"
                         + "    d.departamento,\n"
-                        + "    d.id_departamentos\n"
+                        + "    d.id_departamentos,\n"
+                        + "    rp.rechazoC\n"
                         + "FROM\n"
                         + "    usuario u,\n"
                         + "    requisiciones r,\n"
@@ -1555,7 +1577,7 @@ public class Consultas {
                         + "    and rp.id_orden = 0    \n"
                         + "    GROUP BY c.id_proveedor, s.id_sucursales, d.id_departamentos\n"
                         + "    ORDER BY c.id_proveedor, s.id_sucursales, d.id_departamentos;";
-                System.out.println("SQL: "+sql);
+                //System.out.println("SQL: "+sql);
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
@@ -1568,6 +1590,7 @@ public class Consultas {
                     obj.setSucursal(rs.getString("suc"));
                     obj.setDescripcion(rs.getString("departamento"));
                     obj.setIdDepto(rs.getInt("id_departamentos"));
+                    obj.setComentarios(rs.getString("rechazoC"));
                     listaRequi.add(obj);
                 }
             } catch (SQLException ex) {
@@ -1961,7 +1984,7 @@ public class Consultas {
                         + "    and rp.id_orden = 0    \n"
                         + "    group by rp.id_req_prod, c.id_proveedor, s.id_sucursales, d.id_departamentos    \n"
                         + "    ORDER BY c.id_proveedor, s.id_sucursales, d.id_departamentos;";
-                //System.out.println("SQL: "+sql);
+                System.out.println("SQL: "+sql);
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {

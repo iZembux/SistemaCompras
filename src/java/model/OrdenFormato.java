@@ -6,6 +6,8 @@ package model;
  * @author JefeDesarrollo
  */
 public class OrdenFormato {
+
+    
     private String sucursal;
     private String rfc;
     private String direccion;
@@ -19,6 +21,7 @@ public class OrdenFormato {
     private String depto;
     private String compras;
     private String sku;
+    private String comentarios;
     private int idCotizacion;
     private int idP;
     private int cantidad;
@@ -29,6 +32,21 @@ public class OrdenFormato {
     private int idDepto;
     private int idOrden;
     private int idSucursal;
+    
+    
+    /**
+     * @return the comentarios
+     */
+    public String getComentarios() {
+        return comentarios;
+    }
+
+    /**
+     * @param comentarios the comentarios to set
+     */
+    public void setComentarios(String comentarios) {
+        this.comentarios = comentarios;
+    }
 
     /**
      * @return the sucursal
