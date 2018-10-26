@@ -2596,6 +2596,96 @@ public class Consultas {
         return listaRequi;
     }
 
+    public ArrayList<CotizacionRequisicion> consultarCotizacionesCuadroAdminHist(int cuadro) {
+        ArrayList<CotizacionRequisicion> listaRequi = new ArrayList<CotizacionRequisicion>();
+        PreparedStatement ps;
+        ResultSet rs;
+        Connection con;
+        con = ConexionMySQL.conectar();
+        if (con != null) {
+            try {
+                String sql = "SELECT\n"
+                        + "c.id_cotizacion AS COTIZACION,\n"
+                        + "pr.razonsocial AS PROVEEDOR,\n"
+                        + "d.departamento AS DEPTO,\n"
+                        + "s.sucursal AS SUCURSAL,\n"
+                        + "r.fecha AS FECHA,\n"
+                        + "concat_ws(':  ',p.nombre, (SELECT caracteristicas FROM scompras.dictamenes WHERE dictamenes.id_req_prod = rp.id_req_prod)) AS PRODUCTO,\n"
+                        + "c.id_proveedor AS IDP,\n"
+                        + "c.cantidad AS CANTIDAD,\n"
+                        + "c.precio AS PRECIO,\n"
+                        + "c.iva AS IVA,\n"
+                        + "c.descuento AS DESCUENTO,\n"
+                        + "c.diascredito AS CREDITO,\n"
+                        + "c.tiempoentrega AS ENTREGA,\n"
+                        + "c.anticipo AS ANTICIPO,\n"
+                        + "c.garantia,\n"
+                        + "c.id_status_cotizacion AS STATUS,\n"
+                        + "c.observaciones,\n"
+                        + "c.aut_compras,\n"
+                        + "c.aut_nivel1,\n"
+                        + "c.aut_nivel2,\n"
+                        + "rp.activo_fijo as ACTIVO,\n"
+                        + "rp.id_cot_ganadora,\n"
+                        + "rp.id_cuadro,\n"
+                        + "rp.id_cot_ganadora\n"
+                        + "FROM\n"
+                        + "usuario u,\n"
+                        + "productos p,\n"
+                        + "cotizacion c,\n"
+                        + "req_prod rp,\n"
+                        + "requisiciones r,\n"
+                        + "departamentos d,\n"
+                        + "sucursales s,\n"
+                        + "proveedores pr,\n"
+                        + "comparativos co\n"
+                        + "WHERE\n"
+                        + "pr.idproveedor = c.id_proveedor\n"
+                        + "AND rp.id_req_coti = c.id_req_coti\n"
+                        + "AND r.id_requisicion = rp.id_requisicion\n"
+                        + "AND r.id_usuario = u.id_usuario\n"
+                        + "AND u.id_departamento = d.id_departamentos\n"
+                        + "AND u.id_sucursal = s.id_sucursales\n"
+                        + "AND p.id_productos = c.id_producto\n"
+                        + "and c.id_cotizacion = co.idcotizacion\n"
+                        + "and co.idcuadro = rp.id_cuadro\n"
+                        + "and rp.id_cuadro = " + cuadro + "\n"
+                        + "group by c.id_cotizacion;";
+                ps = con.prepareStatement(sql);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    CotizacionRequisicion obj = new CotizacionRequisicion();
+                    obj.setIdC(rs.getInt("COTIZACION"));
+                    obj.setProveedor(rs.getString("PROVEEDOR"));
+                    obj.setDepto(rs.getString("DEPTO"));
+                    obj.setSucursal(rs.getString("SUCURSAL"));
+                    obj.setFecha(rs.getString("FECHA"));
+                    obj.setProducto(rs.getString("PRODUCTO"));
+                    obj.setIdP(rs.getInt("IDP"));
+                    obj.setCantidad(rs.getInt("CANTIDAD"));
+                    obj.setPrecio(rs.getDouble("PRECIO"));
+                    obj.setIva(rs.getDouble("IVA"));
+                    obj.setDescuento(rs.getInt("DESCUENTO"));
+                    obj.setCredito(rs.getInt("CREDITO"));
+                    obj.setEntrega(rs.getInt("ENTREGA"));
+                    obj.setAnticipo(rs.getInt("ANTICIPO"));
+                    obj.setGarantia(rs.getInt("garantia"));
+                    obj.setStatus(rs.getInt("STATUS"));
+                    obj.setActivo(rs.getInt("ACTIVO"));
+                    obj.setObservaciones(rs.getString("observaciones"));
+                    obj.setIdGerenteC(rs.getInt("aut_compras"));
+                    obj.setIdGerenteA(rs.getInt("aut_nivel1"));
+                    obj.setIdDirectorA(rs.getInt("aut_nivel2"));
+                    obj.setIdGanadora(rs.getInt("id_cot_ganadora"));
+                    listaRequi.add(obj);
+                }
+            } catch (SQLException ex) {
+                System.out.println("ERROR: " + ex.getMessage());
+            }
+        }
+        return listaRequi;
+    }
+
     public int consultarProveedorGanador(int IdCotizacion) {
         int prov = 0;
         PreparedStatement ps;

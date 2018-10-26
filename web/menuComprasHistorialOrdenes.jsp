@@ -1,5 +1,5 @@
 <%-- 
-    Autorizacion de comparativos por parte del director administrativo
+    Historial autorizacion de comparativos por parte del director administrativo
 --%>
 
 <%@page import="model.Comparativo"%>
@@ -129,7 +129,7 @@
                         <td>
                             <div class="row">
                                 <% if (idFormatoUnico == 0 && idCuadro > 0) { %>
-                                <form action="formatos/comparativo_2.jsp" method="post">
+                                <form action="formatos/comparativo_finalizado.jsp" method="post" target="_blank">
                                     <input type="hidden" name="cuadro" value="<%=idCuadro%>" >
                                     <input type="hidden" name="idUsu" value="<%=usuario%>" >
                                     <input type="hidden" name="observaciones" value="<%=observaciones%>" >
