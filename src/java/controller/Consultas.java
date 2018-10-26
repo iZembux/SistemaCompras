@@ -37,8 +37,8 @@ public class Consultas {
                 String sql = "SELECT \n"
                         + "    rp.id_requisicion AS IDREQUISICION,\n"
                         + "    concat(u.nombre,' ',u.apellido) AS SOLICITANTE,\n"
-                        + "    u.correo AS EMAIL,\n" 
-                        + "    s.sucursal AS SUCURSAL,\n" 
+                        + "    u.correo AS EMAIL,\n"
+                        + "    s.sucursal AS SUCURSAL,\n"
                         + "    p.nombre AS PRODUCTO, \n"
                         + "    SUM(rp.cantidad) AS CANTIDAD,\n"
                         + "    r.fecha\n"
@@ -46,7 +46,7 @@ public class Consultas {
                         + "    usuario u,\n"
                         + "    requisiciones r,\n"
                         + "    req_prod rp,\n"
-                        + "    productos p, \n" 
+                        + "    productos p, \n"
                         + "    sucursales s \n"
                         + "WHERE\n"
                         + "    u.id_usuario = r.id_usuario\n"
@@ -92,8 +92,8 @@ public class Consultas {
                         + "    rp.id_requisicion AS IDREQUISICION,\n"
                         + "    CONCAT(u.nombre, ' ', u.apellido) AS SOLICITANTE,\n"
                         + "    SUM(rp.cantidad) AS CANTIDAD,\n"
-                        + "    u.correo AS EMAIL,\n" 
-                        + "    s.sucursal AS SUCURSAL,\n" 
+                        + "    u.correo AS EMAIL,\n"
+                        + "    s.sucursal AS SUCURSAL,\n"
                         + "    p.nombre AS PRODUCTO ,"
                         + "    r.fecha\n"
                         + "FROM\n"
@@ -144,7 +144,7 @@ public class Consultas {
                 String sql = "SELECT \n"
                         + "    rp.id_requisicion AS IDREQUISICION,\n"
                         + "    concat(u.nombre,' ',u.apellido)  AS SOLICITANTE,\n"
-                        + "    u.correo AS EMAIL,\n" 
+                        + "    u.correo AS EMAIL,\n"
                         + "    s.sucursal AS SUCURSAL,\n"
                         + "    p.nombre AS PRODUCTO ,"
                         + "    SUM(rp.cantidad) AS CANTIDAD,\n"
@@ -825,7 +825,8 @@ public class Consultas {
                         + "    SUM(rp.cantidad) AS CANTIDAD,\n"
                         + "    r.fecha AS FECHA,\n"
                         + "    rp.id_req_coti AS COTI,\n"
-                        + "    s.sucursal AS SUC\n"
+                        + "    s.sucursal AS SUC,\n"
+                        + "    rp.rechazoC\n"
                         + "FROM\n"
                         + "    usuario u,\n"
                         + "    requisiciones r,\n"
@@ -858,6 +859,7 @@ public class Consultas {
                     obj.setIdReqCoti(rs.getInt("COTI"));
                     obj.setSucursal(rs.getString("SUC"));
                     obj.setIdStatus(rs.getInt("status"));
+                    obj.setComentarioCancela(rs.getString("rechazoC"));
                     listaRequi.add(obj);
                 }
             } catch (SQLException ex) {
@@ -1609,20 +1611,20 @@ public class Consultas {
         if (con != null) {
             try {
                 String sql = "select "
-                            + "rp.id_req_prod, "
-                            + "rp.id_cuadro, "
-                            + "rp.id_formato_unico, "
-                            + "d.departamento, "
-                            + "rp.cantidad, "
-                            + "c.observaciones, "
-                            + "rp.rutaDictamen, "
-                            + "c.rutaPDF \n"
+                        + "rp.id_req_prod, "
+                        + "rp.id_cuadro, "
+                        + "rp.id_formato_unico, "
+                        + "d.departamento, "
+                        + "rp.cantidad, "
+                        + "c.observaciones, "
+                        + "rp.rutaDictamen, "
+                        + "c.rutaPDF \n"
                         + "from "
-                            + "req_prod rp, "
-                            + "departamentos d, "
-                            + "usuario u , "
-                            + "requisiciones r, "
-                            + "cotizacion c\n"
+                        + "req_prod rp, "
+                        + "departamentos d, "
+                        + "usuario u , "
+                        + "requisiciones r, "
+                        + "cotizacion c\n"
                         + "where u.id_usuario = r.id_usuario\n"
                         + "and r.id_requisicion = rp.id_requisicion\n"
                         + "and u.id_departamento = d.id_departamentos\n"
@@ -1645,6 +1647,61 @@ public class Consultas {
                 }
             } catch (SQLException ex) {
                 System.out.println("ERROR: " + ex.getMessage());
+            }
+        }
+        return listaRequi;
+    }
+
+    public ArrayList<Comparativo> consultarHistorialCuadrosComparativos(int status) {
+        ArrayList<Comparativo> listaRequi = new ArrayList<Comparativo>();
+        PreparedStatement ps;
+        ResultSet rs;
+        Connection con;
+        con = ConexionMySQL.conectar();
+        if (con != null) {
+            try {
+                String sql = "SELECT \n"
+                        + "    req_prod.id_req_prod,\n"
+                        + "    comparativos.idcomparativos,\n"
+                        + "    req_prod.id_formato_unico,\n"
+                        + "    departamentos.departamento,\n"
+                        + "    req_prod.cantidad,\n"
+                        + "    cotizacion.observaciones,\n"
+                        + "    req_prod.rutaDictamen,\n"
+                        + "    cotizacion.rutaPDF\n"
+                        + "FROM\n"
+                        + "    req_prod,\n"
+                        + "    departamentos,\n"
+                        + "    usuario,\n"
+                        + "    requisiciones,\n"
+                        + "    cotizacion,\n"
+                        + "    comparativos\n"
+                        + "WHERE\n"
+                        + "    usuario.id_usuario = requisiciones.id_usuario\n"
+                        + "        AND requisiciones.id_requisicion = req_prod.id_requisicion\n"
+                        + "        AND usuario.id_departamento = departamentos.id_departamentos\n"
+                        + "        AND cotizacion.id_cotizacion = req_prod.id_cot_ganadora\n"
+                        + "        and req_prod.id_cuadro = comparativos.idcomparativos\n"
+                        + "        AND req_prod.id_status > ?\n"
+                        + "		and req_prod.id_status NOT IN (14,15,18);";
+                ps = con.prepareStatement(sql);
+                ps.setInt(1, status);
+               // System.out.println(ps.toString());
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    Comparativo obj = new Comparativo();
+                    obj.setIdReqProd(rs.getInt("id_req_prod"));
+                    obj.setIdCuadro(rs.getInt("idcomparativos"));
+                    obj.setDepartamento(rs.getString("departamento"));
+                    obj.setCantidad(rs.getInt("cantidad"));
+                    obj.setObservaciones(rs.getString("observaciones"));
+                    obj.setRutaDictamen(rs.getString("rutaDictamen"));
+                    obj.setRutaCotizacion(rs.getString("rutaPDF"));
+                    obj.setIdFormatoUnico(rs.getInt("id_formato_unico"));
+                    listaRequi.add(obj);
+                }
+            } catch (SQLException ex) {
+                // System.out.println("ERROR: " + ex.getMessage());
             }
         }
         return listaRequi;
@@ -1799,7 +1856,7 @@ public class Consultas {
                         + "where idCotizacionOrden > 0 and idCotizacionOrden not in ('2','3','4','5') and idCotizacionOrden = id_orden\n"
                         + "and id_status = 20\n"
                         + "group by idCotizacionOrden order by idCotizacionOrden desc;";
-                
+
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
@@ -3154,5 +3211,5 @@ public class Consultas {
         }
         return proveedor;
     }
-                
+
 }

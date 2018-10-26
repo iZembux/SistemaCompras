@@ -118,52 +118,11 @@
                                     <input type="hidden" name="idDepartamento" value="<%=idDep%>" >
                                     <button type="submit" class="btn btn-success btn-sm" >Detalle</button>
                                 </form>
-                                <%
-                                    try {
-                                        if (comentario.equals("") || comentario == null) {
-                                        } else {
-                                %>
-                                <button type="button" class="btn btn-danger btn-sm" onclick="abre();">Ver Comentarios</button>
-                                <%
-                                        }
-                                    } catch (Exception e) {
-                                        System.out.println("COMENTARIO: NULL");
-                                    }
-                                %>
                             </div>
                         </td>
-                    </tr>    
-                    <%
-                        try {
-                            if (comentario.equals("") || comentario == null) {
-                            } else {
-                    %>
-                    <!-- Modal Muestra Comentarios -->
-                <div class="modal fade" id="myModal" role="dialog">
-                    <div class="modal-dialog">
-                        <!-- Modal content-->
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title">Motivo del Rechazo</h4>
-                                <button type="button" class="close" data-dismiss="modal">×</button>
-                            </div>
-                            <div class="modal-body form-control">
-                                <input type="hidden" class="hidden Orden" id="idReqP" name="idReqP" value="">
-                                <label for="comentarios">Comentarios de Cancelación</label>
-                                <textarea class="form-control" rows="6" id="datosProducto" name="comentarios" disabled="true" required="true" style="resize: none;"><%=comentario%></textarea>
-                                <br>
-                                <center><input type="button" data-dismiss="modal" class="btn btn-success" value="CERRAR"/></center>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <%
-                        }
-                    } catch (Exception e) {
-                    }
-                %>
+                    </tr>                    
                 <% }
-                        }%>
+                    }%>
                 </tbody>
             </table>
         </div>

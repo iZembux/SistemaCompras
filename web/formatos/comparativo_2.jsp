@@ -7,6 +7,7 @@
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="model.Comparativo"%>
+<%@page import="servlet.cancelaComparativo"%>
 <%@page import="model.RequisicionFormato"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.DriverManager"%>
@@ -506,10 +507,8 @@
                         <h4 class="modal-title">Agregar Comentarios</h4>
                         <button type="button" class="close" data-dismiss="modal">×</button>
                     </div>
-                    <div class="modal-body form-control">
-                        <form name="cComparativoN1" action="cancelaComparativo" method="POST">
-                            <input type="hidden" class="hidden" name="nuevoStatusCoti" value="1" >
-                            <input type="hidden" class="hidden" name="nuevoStatusRequi" value="6" >
+                    <div class="modal-body form-control">                        
+                        <form name="cancelaComparativo" action="../rechazaComparativo.jsp" method="POST">
                             <input type="hidden" class="hidden" name="idCuadroCancela" id="idCuadroCancela" value="<%=cuadro%>" >
                             <label for="comentariosCancela">Motivo de la cancelación</label>
                             <textarea class="form-control" rows="6" id="datosProducto" name="comentarioCancela" required="true" style="resize: none;"></textarea>

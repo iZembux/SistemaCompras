@@ -265,6 +265,7 @@
                         <br/>
                         <br/>
                         <button type="submit" class="btn btn-success btn-sm">Aceptar o Modificar Proveedor</button>
+                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalCancela" onclick="abre()">Rechazar</button>
                     </form>
                 </div>
             </div>
@@ -492,7 +493,36 @@
         <br>
         <form> 
             <input style="Position:Absolute; left:83%; top:18%; color: #17202A; background-color: #D7DBDD; width:75px; height: 30px; font-size: 12pt;" type='button' onclick='imprimeDiv("imp")' value='Imprimir'  class="oculto"/> 
-        </form> 
+        </form>
+        <!-- Modal Cancela Cuadro -->
+        <div class="modal fade" id="modalCancela" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Agregar Comentarios</h4>
+                        <button type="button" class="close" data-dismiss="modal">×</button>
+                    </div>
+                    <div class="modal-body form-control">                        
+                        <form name="cancelaComparativo" action="../rechazaComparativo.jsp" method="POST">
+                            <input type="hidden" class="hidden" name="idCuadroCancela" id="idCuadroCancela" value="<%=cuadro%>" >
+                            <label for="comentariosCancela">Motivo de la cancelación</label>
+                            <textarea class="form-control" rows="6" id="datosProducto" name="comentarioCancela" required="true" style="resize: none;"></textarea>
+                            <br>
+                            <center><input type="submit" class="btn btn-alet" value="RECHAZAR"/></center>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script type="text/javascript">
+            function abre() {
+                $('#modalCancela').modal({show: true});
+            }
+        </script>
     </body>
     <%
         System.out.println("------------------------------------------------------------");
