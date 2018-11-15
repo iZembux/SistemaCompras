@@ -118,6 +118,7 @@
                             <div class="row">
                                 <% if (idFormatoUnico == 0 && idCuadro > 0) {%>
                                 <form action="formatos/comparativo_2.jsp" method="post">
+                                    <input type="hidden" name="idReqProd" value="<%=idReqProd%>">
                                     <input type="hidden" name="cuadro" value="<%=idCuadro%>" >
                                     <input type="hidden" name="idUsu" value="<%=usuario%>" >
                                     <input type="hidden" name="observaciones" value="<%=observaciones%>" >

@@ -7,7 +7,7 @@
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="model.Comparativo"%>
-<%@page import="servlet.cancelaComparativo"%>
+<%//@page import="servlet.cancelaComparativo"%>
 <%@page import="model.RequisicionFormato"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.DriverManager"%>
@@ -29,6 +29,7 @@
     String cActivo = null;
     String cGeneral = null;
     String observaciones = " ";
+    String unidadMedida = "";
 
     int cantidad = 0, cantidad2 = 0, cantidad3 = 0;
     double precio = 0, precio2 = 0, precio3 = 0;
@@ -56,7 +57,8 @@
     Consultas obj = new Consultas();
 
     cuadro = Integer.parseInt(request.getParameter("cuadro"));
-
+    idReqProd = Integer.parseInt(request.getParameter("idReqProd"));
+    
     ArrayList<Integer> req = new ArrayList<Integer>();
 
     System.out.println("-----------GENERACION DE CUADRO COMPARATIVO-----------------");
@@ -146,8 +148,15 @@
     }
     try {
         solicitantes = obj2.contarSolicitantesCoti(idCoti.get(0));
-    } catch (Exception e) {
-    }
+        if(solicitantes == 1) {
+            solicitante = obj.consultaSolicitante(idReqProd);
+        }
+    } catch (Exception e) { }
+    
+    try {
+        unidadMedida = obj.consultaUnidadMedida(idReqProd);
+    } catch (Exception e) { }
+    
     try {
         idUsu = Integer.parseInt(request.getParameter("idUsu"));
     } catch (Exception e) {
@@ -373,7 +382,7 @@
                     <% for (int j = 0; j < lista4.size(); j++) {%>
                     <tr height="50px">
                         <td><%=lista4.get(j).getCantidad()%></td>
-                        <td>&nbsp;</td>
+                        <td><%=unidadMedida%></td>
                         <td><%=lista4.get(j).getProducto()%></td>
                         <td><%=lista1.get(j).getPrecio()%></td>
                         <td><%=lista1.get(j).getPrecio() * lista1.get(j).getCantidad()%></td>

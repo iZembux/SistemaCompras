@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Comparativo;
 import model.CotizacionRequisicion;
 import model.FormatoUnico;
@@ -3030,6 +3032,55 @@ public class Consultas {
             }
         }
         return suma;
+    }
+    
+    public String consultaSolicitante(int idReqProd) {
+        String solicitante = "";
+        Connection con = ConexionMySQL.conectar();
+        if(con != null) {
+            try {
+                String sql = "SELECT concat_ws(' ',u.nombre, u.apellido, u.apellidoM) as solicitante\n" 
+                        + "FROM scompras.usuario u, scompras.req_prod rp, scompras.requisiciones r \n" 
+                        + "WHERE u.id_usuario = r.id_usuario\n" 
+                        + "AND rp.id_requisicion = r.id_requisicion\n" 
+                        + "AND rp.id_req_prod = ?;";
+                PreparedStatement ps = con.prepareStatement(sql);
+                ps.setInt(1, idReqProd);
+                ResultSet rs = ps.executeQuery();
+                if(rs.next()) {
+                    solicitante = rs.getString("solicitante").toUpperCase();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(Consultas.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return solicitante;
+    }
+    
+    public String consultaUnidadMedida(int idReqProd) {
+        String unidadMedida = "";
+        Connection con = ConexionMySQL.conectar();
+        if(con != null) {
+            try {
+                String sql = "SELECT um.descripcion as um" 
+                        + " FROM req_prod rp, productos p, " 
+                        + " unidadmedida um " 
+                        + " WHERE " 
+                        + " rp.id_producto = p.id_productos " 
+                        + " AND p.id_unidadmedida = um.id_unidadmedida " 
+                        + " AND rp.id_producto = p.id_productos " 
+                        + " AND rp.id_req_prod = ?;";
+                PreparedStatement ps = con.prepareStatement(sql);
+                ps.setInt(1, idReqProd);
+                ResultSet rs = ps.executeQuery();
+                if(rs.next()) {
+                    unidadMedida = rs.getString("um").toUpperCase();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(Consultas.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return unidadMedida;
     }
 
     public ArrayList<RequisicionFormato> consultarUsuario(int idUsuario) {
