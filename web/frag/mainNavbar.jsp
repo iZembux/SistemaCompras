@@ -489,6 +489,8 @@
                 </div>
             </li>
             <% } %>
+            
+            <% if (idUsuario != 282) { %>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Autorizaciones Depto.
@@ -501,10 +503,10 @@
                         Historial de Autorizaciones
                     </a>
                 </div>
-
-
             </li>
-            <% if (idUsuario == 282 || idUsuario == 34 || idUsuario == 210 || idUsuario == 122) { %>
+            <% } %>
+            
+            <% if (idUsuario == 34 || idUsuario == 210 || idUsuario == 122 || idUsuario == 12) { %>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-check-square"></i> Autorizaciones Gerentes.
@@ -515,7 +517,12 @@
                     </a>
                 </div>
             </li>
-            <% if (idUsuario == 282) { %>
+            
+            <% } %>
+            
+            <% 
+                if (idUsuario == 282) { 
+            %>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-dollar-sign"></i> Comparativos
@@ -534,7 +541,10 @@
                     </a>
                 </div>
             </li>   
-            <% } }%>
+            <% 
+                } 
+            %>
+            
             <%-- 
             <% if ( idUsuario == 122) { %>
             <li class="nav-item dropdown">
