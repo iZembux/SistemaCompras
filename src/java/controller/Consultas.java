@@ -1838,6 +1838,50 @@ public class Consultas {
         }
         return listaRequi;
     }
+    
+    public ArrayList<OrdenFormato> consultarOrdenesProv(String proveedor) {
+        ArrayList<OrdenFormato> listaRequi = new ArrayList<OrdenFormato>();
+        PreparedStatement ps;
+        ResultSet rs;
+        Connection con;
+        con = ConexionMySQL.conectar();
+        if (con != null) {
+            try {
+                String sql = "SELECT \n" +
+                        "    oc.razonSocialProveedor,\n" +
+                        "    SUM(oc.cantidadProducto) AS cant,\n" +
+                        "    oc.razonSocialSucursal,\n" +
+                        "    oc.departamento,\n" +
+                        "    oc.idCotizacionOrden,\n" +
+                        "    oc.fechaOrden\n" +
+                        "FROM\n" +
+                        "    scompras.ordenes_compra oc, scompras.req_prod rp\n" +
+                        "WHERE\n" +
+                        "    idProveedor = " + proveedor + " \n" +
+                        "        AND oc.idCotizacionOrden > 0\n" +
+                        "        AND oc.idCotizacionOrden NOT IN ('2', '3', '4', '5')\n" +
+                        "        AND oc.idCotizacionOrden = rp.id_orden\n" +
+                        "        AND rp.id_status IN (10)\n" +
+                        "GROUP BY idCotizacionOrden\n" +
+                        "ORDER BY idCotizacionOrden DESC;";
+                ps = con.prepareStatement(sql);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    OrdenFormato obj = new OrdenFormato();
+                    obj.setNombreP(rs.getString("razonSocialProveedor"));
+                    obj.setCantidad(rs.getInt("cant"));
+                    obj.setSucursal(rs.getString("razonSocialSucursal"));
+                    obj.setDepto(rs.getString("departamento"));
+                    obj.setIdP(rs.getInt("idCotizacionOrden"));
+                    obj.setFecha(rs.getString("fechaOrden"));
+                    listaRequi.add(obj);
+                }
+            } catch (SQLException ex) {
+                System.out.println("ERROR: " + ex.getMessage());
+            }
+        }
+        return listaRequi;
+    }
 
     public ArrayList<OrdenFormato> consultarOrdenesGerenteCompras() {
         ArrayList<OrdenFormato> listaRequi = new ArrayList<OrdenFormato>();
