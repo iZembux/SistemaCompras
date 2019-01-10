@@ -60,7 +60,7 @@
                         ArrayList<OrdenFormato> arrayRequis = new ArrayList<OrdenFormato>();
                         ArrayList<RequisicionProducto> arrayRequis2 = new ArrayList<RequisicionProducto>();
                         Consultas obj = new Consultas();
-                        arrayRequis = obj.consultarOrdenesProvHist(id_usuario);
+                        arrayRequis = obj.consultarOrdenesProv(id_usuario);
 
                         if (arrayRequis.size() > 0) {
                             for (int i = 0; i < arrayRequis.size(); i++) {
