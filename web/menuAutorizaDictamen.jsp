@@ -36,7 +36,7 @@
 
         <div class="container my-5">
             <div class="page-header">
-                <h3>Requisiciones por Autorizar</h3>
+                <h3>Dict&aacute;menes por Autorizar</h3>
             </div>
             <table class="table table-striped table-hover">
                 <thead>
